@@ -1,0 +1,391 @@
+<link rel="stylesheet" href="content/homepage/homepage.css">
+
+<section>
+
+
+    <img src="dist/icons/home-bg.jpg" alt="background" id="bg" class="backgroundImg">
+    <!-- <video autoplay muted loop id="myVideo">
+    <source src="https://myenovation.com/static-website/assets/videos/enovation-intro.mp4" type="video/mp4">
+    Your browser does not support HTML5 video.
+  </video> -->
+
+    <!-- <div style="    text-align: center;
+  margin-left: 39%;
+  font-size: 15px;
+  position: absolute;
+  color: #e0ded9;
+  top: 33px;">Kuber is available on mobile app
+        <img class="tab blink" src="dist\icons\new.png">
+    </div> -->
+    <div class='selector'>
+        <!-- <div style="    height: 600px;
+      width: 600px;
+      position: relative;
+      bottom: 200px;
+      right: 200px; 
+      border-radius: 50%;
+      border: 50px solid #8c67d85e;">
+      <div style="    height: 500px;
+      width: 500px;
+      position: relative;
+      bottom: 0px;
+      right: 0px;
+      border-radius: 50%;
+      border: 75px solid #8c67d89c;">
+    </div>
+    <div style="height: 355px;
+    width: 355px;
+    position: relative;
+    bottom: 428px;
+    right: -72px;
+    border-radius: 50%;
+    background: #9777dab8;">
+     </div>
+  </div> -->
+
+        <ul>
+            <li ng-repeat="menu in menus | orderBy:'id'" ng-mouseover="hover=true" ng-mouseleave="hover=false"
+                ng-class="{'active':hover}">
+                <div ng-if="menu.id != 2">
+                    <input id="c{{menu.id}}" type='checkbox'>
+                    <!--  ng-style="!checkMenuAccess(menu.linkName) && {'cursor':'not-allowed'}" ng-click="setSelectedMenu(menu)" ng-click="goToPage(menu)"-->
+                    <label for='c{{menu.id}}' class="spanRotate" ng-mouseover="featureDesc(menu,'y')"
+                        ng-mouseleave="featureDesc(menu,'n')"
+                        ng-style="!checkMenuAccess(menu.linkName) && {'cursor':'not-allowed'}"
+                        ng-click="!checkMenuAccess(menu.linkName) ? '' : setSelectedMenu(menu)">
+                        <img src="{{menu.imgUrl}}" style="width:85%;">
+                    </label>
+                    <div class="tooltips spanRotate" ng-style="hover && {'display':'block'}">
+                    </div>
+                </div>
+                <div ng-if="menu.id == 2">
+                    <input id="c{{menu.id}}" type='checkbox'>
+                    <label for='c{{menu.id}}' class="spanRotate" ng-mouseover="featureDesc(menu,'y')"
+                        ng-mouseleave="featureDesc(menu,'n')" ng-click="goSkillMatrixPage()">
+                        <img src="{{menu.imgUrl}}" style="width:85%;">
+                    </label>
+                    <div class="tooltips spanRotate" ng-style="hover && {'display':'block'}">
+                    </div>
+                </div>
+                <div ng-if="menu.id == 3">
+                    <input id="c{{menu.id}}" type='checkbox'>
+                    <!--  ng-style="!checkMenuAccess(menu.linkName) && {'cursor':'not-allowed'}" ng-click="setSelectedMenu(menu)" ng-click="goToPage(menu)"
+                    ng-mouseover="featureDesc(menu,'y')"
+                        ng-mouseleave="featureDesc(menu,'n')"-->
+                    <label for='c{{menu.id}}' class="spanRotate"
+                        ng-style="!checkMenuAccess(menu.linkName) && {'cursor':'not-allowed'}"
+                        ng-click="!checkMenuAccess(menu.linkName) ? '' : setSelectedMenu(menu)">
+                        <img src="{{menu.imgUrl}}" alt="Skill Book" style="margin-top: -1em;">
+                        <span
+                            style="position: absolute;bottom: -1em;left: 0px;font-size: 13px;font-weight: 500;width:100%">Skill
+                            Book</span>
+                    </label>
+                    <div class="tooltips spanRotate" ng-style="hover && {'display':'block'}">
+                    </div>
+                </div>
+                <div ng-if="menu.id == 4">
+                    <input id="c{{menu.id}}" type='checkbox'>
+                    <!--  ng-style="!checkMenuAccess(menu.linkName) && {'cursor':'not-allowed'}" ng-click="setSelectedMenu(menu)" ng-click="goToPage(menu)"
+                     ng-mouseover="featureDesc(menu,'y')"
+                        ng-mouseleave="featureDesc(menu,'n')"-->
+                    <label for='c{{menu.id}}' class="spanRotate"
+                        ng-style="!checkMenuAccess(menu.linkName) && {'cursor':'not-allowed'}"
+                        ng-click="!checkMenuAccess(menu.linkName) ? '' : setSelectedMenu(menu)">
+                        <img src="{{menu.imgUrl}}" alt="PMS" style="margin-top: -1em;">
+                        <span
+                            style="position: absolute;bottom: -1em;left: 0px;font-size: 13px;font-weight: 500;width:100%">PMS</span>
+                    </label>
+                    <div class="tooltips spanRotate" ng-style="hover && {'display':'block'}">
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <!-- <div style="    height: 300px;
+    width: 300px;
+    margin-top: -58px;
+    margin-left: -62px;
+    border-radius: 50%;
+    background: #9777da54;"></div> -->
+        <!-- <div id="footer">
+        <img align="center" src="dist/icons/myEnovationLogo.png" alt="logo" class="logo" style="max-width:100%;height: 70px;">
+        <img src="static-website/images/tredlogo.png" style="height: 15px;width: 15px;position: absolute;top: 41px;right: -5px;">
+    </div> -->
+        <img align="center" src="dist/icons/myEnovationLogo.png" alt="logo" class="logo"
+            style="max-width:100%;top: 25px;">
+        <img src="static-website/images/tredlogo.png"
+            style="height: 15px;width: 15px;position: absolute;right: 0px;bottom: 41px;">
+
+
+        <!-- <div style="width: 100%;height: auto;text-align: center;">
+      <center>
+    <img align="center" src="dist/icons/pencilLogo.png" style="height: 80px;width: 70px;top: 16px;"  alt="logo" class="logo" >
+    <img align="center" src="dist/icons/myenovationNewLogo.png" alt="logo" class="logo" style="max-width:100%;">
+  </center>
+  </div> -->
+        <!-- <img src="static-website/images/tredlogo.png" style="height: 22px;width: 22px;position: absolute;top: 96px;margin-left: 12em;border:1px solid red;"> -->
+        <!-- style="max-width:100%;width:100%;" -->
+    </div>
+    <div class="features-desc" ng-if="menunm == menus[0].menuName && param == 'y'">
+        <h5 style="border-bottom: 2px solid #f2f2f2;">myeNovation - {{menunm}}/Kaizen</h5>
+        <p><b>U</b>nique <b>DIGITAL</b> platform for <b>implementing Suggestion/Kaizen</b> at plant &amp; organization
+            level.</p>
+        <ul class="list-unstyled">
+            <li>
+                <!-- <b>Features &amp; Benefits:</b> -->
+                <ul>
+                    <li><b>Mobile App &amp; Web App</b> for easy user participation</li>
+                    <li><b>Notification &amp; Feedback</b> on every stage of process</li>
+                    <li><b>Rewards &amp; Recognition</b> to keep employees engaged</li>
+                    <li><b>Multi Language</b> support to get suggestions from all levels</li>
+                    <li><b>Analytics &amp; Reports</b> for real time tracking of entire process</li>
+                    <li><b>Workflows</b> to customize processes</li>
+
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="features-desc" ng-if="menunm == menus[1].menuName && param == 'y'">
+        <h5 style="border-bottom: 2px solid #f2f2f2;">myeNovation - {{menunm}}</h5>
+        <p><b>U</b>nique <b>DIGITAL</b> platform for employees to <b>raise concerns/grievances</b> to top management.
+        </p>
+        <ul class="list-unstyled">
+            <li>
+                <!-- <b>Features &amp; Benefits:</b> -->
+                <ul>
+                    <li>Raise complaints to top management,<b> Any Time &amp; Anywhere</b></li>
+                    <li><b>Maintain Anonymity</b> while raising concern</li>
+                    <li><b>Hassle Free Tracking</b> of each complaint</li>
+                    <li><b>Analytics</b> for better understanding of concerning areas</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="features-desc" ng-if="menunm == menus[2].menuName && param == 'y'">
+        <h5 style="border-bottom: 2px solid #f2f2f2;">myeNovation - {{menunm}}</h5>
+        <p><b>U</b>nique <b>DIGITAL</b> platform for <b>managing any type of incident.</b></p>
+        <ul class="list-unstyled">
+            <li>
+                <!-- <b>Features &amp; Benefits:</b> -->
+                <ul>
+                    <li><b>Easy</b> way of capturing incidents</li>
+                    <li><b>Escalate</b> if not timely addressed</li>
+                    <li><b>Historical</b> Record of each incident and action</li>
+                    <li><b>Dashboard</b> analytics for repetitive incidents, problematic areas etc.</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="features-desc" ng-if="menunm == menus[3].menuName && param == 'y'">
+        <h5 style="border-bottom: 2px solid #f2f2f2;">myeNovation - {{menunm}}</h5>
+        <p><b>U</b>nique <b>DIGITAL</b> platform for <b>conducting any surveys</b> like Employee Satisfaction, Customer
+            Satisfaction and many more.</p>
+        <ul class="list-unstyled">
+            <li>
+                <!-- <b>Features &amp; Benefits:</b> -->
+                <ul>
+                    <li><b>Easy tools</b> to create customized surveys</li>
+                    <li>Easy participation through <b>Mobile &amp; Web</b></li>
+                    <li><b>Real time monitoring</b> of survey results</li>
+                    <li><b>Scheduling</b> of surveys</li>
+                    <li><b>Survey bank</b> for securing survey templates</li>
+                    <li>Various ways of publishing surveys i.e through <b>Email, Integrate In Website</b></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="features-desc" ng-if="menunm == menus[4].menuName && param == 'y'">
+        <h5 style="border-bottom: 2px solid #f2f2f2;">myeNovation - {{menunm}}</h5>
+        <p><b>U</b>nique <b>DIGITAL</b> platform to <b>Audit Any Thing, Any Time, Anywhere</b></p>
+        <ul class="list-unstyled">
+            <li>
+                <!-- <b>Features &amp; Benefits:</b> -->
+                <ul>
+                    <li><b>Easy Tool</b> for creating and storing any audit templates</li>
+                    <li><b>Template Bank</b> to secure and re use audit templates</li>
+                    <li>Provision for <b>Scheduling</b> audit/li>
+                    <li>Flexible enough to conduct audit through <b>Mobile App &amp; Web App</b></li>
+                    <li>Certify audit with <b>Digital Signature</b></li>
+                    <li>Various <b>Scoring</b> options</li>
+                    <li><b>Online Tracking</b> of entire audit process</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+
+    <div class="features-desc" ng-if="menunm == menus[5].menuName && param == 'y'">
+        <h5 style="border-bottom: 2px solid #f2f2f2;">myeNovation - {{menunm}}</h5>
+        <p><b>U</b>nique <b>DIGITAL</b> platform for analysis of <b>daily rejection &amp; schedule Vs completion.</b>
+        </p>
+        <ul class="list-unstyled">
+            <li>
+                <!-- <b>Features &amp; Benefits:</b> -->
+                <ul>
+                    <li><b>Threshold Monitoring</b> and automatic issue creation</li>
+                    <li><b>Analytics</b> of rejection and lower production</li>
+                    <li><b>Escalation</b> to next level if SLA is not met</li>
+                    <li><b>Dashboard</b> for monitoring and tracking</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+
+    <div class="features-desc" ng-if="menunm == menus[6].menuName && param == 'y'">
+        <h5 style="border-bottom: 2px solid #f2f2f2;">myeNovation - {{menunm}}</h5>
+        <p><b>U</b>nique <b>DIGITAL</b> platform which automates <b>tagging process</b> right from creation till
+            closure.</p>
+        <ul class="list-unstyled">
+            <li>
+                <!-- <b>Features &amp; Benefits:</b> -->
+                <ul>
+                    <li>Provision for managing
+                        <B>RED, WHITE &amp; BREAKDOWN</B> tags
+                    </li>
+                    <li>
+                        <B>QR Code</B> for tracking tag progress
+                    </li>
+                    <li>
+                        <B>Maintenance History</B> for each machine
+                    </li>
+                    <li>
+                        <B>Graphs</B> highlighting
+                        <B>Repetitive</B> maintenance work
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="features-desc" ng-if="menunm == menus[7].menuName && param == 'y'">
+        <h5 style="border-bottom: 2px solid #f2f2f2;">{{menunm}}</h5>
+        <p><b>U</b>nique <b>DIGITAL</b> platform where people come together for <b>execution of theme based (Cost
+                Saving Themes) projects.</b></p>
+        <ul class="list-unstyled">
+            <li><b>Features &amp; Benefits:</b>
+                <ul>
+                    <li>
+                        <B>Fully Automated</B> processes right from project registration till closure.
+                    </li>
+                    <li>
+                        <B>Dashboard</B> for tracking project execution, investments &amp; savings
+                    </li>
+                    <li>
+                        <B>Consolidated Notifications</B> and update about project pending actions and updates
+                    </li>
+                    <li>
+                        <B>Redemption</B> of benefits
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+
+    <div class="userData">
+        <img src="{{empDetails.profilePic}}" class="userPic" style="max-width:100%;" check-sugg-det-usr-image-loaded />
+        <p class="userDetails">{{empDetails.firstName +' '+empDetails.lastName}}</p>
+        <!-- <p class="userDetails"><strong>Points :</strong> {{empDetails.points}}</p> -->
+        <div class="row">
+            <a class="col-md-6 pad0" href="template.html#!/profile">
+                <span>View Profile</span>
+            </a>
+            <a class="col-md-6 pad0" ng-click="logout()">
+                <span>Logout</span>
+            </a>
+        </div>
+        <p style="margin: 5px;display: inline-block;"> V {{appVersion}}</p>
+    </div>
+
+
+    <div class="modal fade help-modal" id="subscriptionPopDetails" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body" style="padding: 30px; text-align: left;">
+                    <div class="help-icon" style="border: none; display: inline-block;width: 40px;height: 35px;">
+                        <i class="fa fa-exclamation-circle" style="color: #c82229; font-size: 50px;"></i>
+                    </div>
+                    <label class="modal-title text-center" style="color: #c82229; margin-top: 20px; font-size: 30px;">
+                        Subscription Notification
+                    </label>
+                    <div style="font-size: 16px; text-align: center; margin-top: 20px;">
+                        Your subscription will expire in {{subscriptionPopDet.dayLeft}} days. Please renew it to
+                        continue
+                        using our services.
+                    </div>
+                    <div class="help-text"></div>
+                    <div style="text-align: center; margin-top: 20px;">
+                        <div class="btn-ok ok-btn" style="display: inline-block;" data-dismiss="modal">OK</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- <span style="position: absolute;z-index: 999;right: 1em;top: 4em;"><img src="dist/icons/ic_close.png" style="width:35px;" /></span> -->
+
+</section>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
+<script>
+    var nbOptions = 8;
+    var angleStart = -360;
+    // jquery rotate animation
+    function rotate(li, d) {
+        $({
+            d: angleStart
+        }).animate({
+            d: d
+        }, {
+            step: function (now) {
+                $(li)
+                    .css({
+                        transform: 'rotate(' + now + 'deg)'
+                    })
+                    .find('.spanRotate')
+                    .css({
+                        transform: 'rotate(' + (-now) + 'deg)'
+                    })
+            },
+            duration: 0
+        });
+    }
+    // show / hide the options
+    function toggleOptions(s) {
+        console.log('Rotate')
+        $(s).toggleClass('open');
+        var li = $(s).find('li');
+        var deg = $(s).hasClass('half') ? 180 / (li.length - 1) : 360 / li.length;
+        for (var i = 0; i < li.length; i++) {
+            var d = $(s).hasClass('half') ? (i * deg) - 90 : i * deg;
+            $(s).hasClass('open') ? rotate(li[i], d) : rotate(li[i], angleStart);
+        }
+    }
+    $('.selector .logo').click(function (e) {
+        toggleOptions($(this).parent());
+    });
+    setTimeout(function () {
+        toggleOptions('.selector');
+    }, 100); //@ sourceURL=pen.js
+    $(document).ready(function () { });
+    var theWindow = $(window),
+        $bg = $("#bg"),
+        aspectRatio = $bg.width() / $bg.height();
+
+    function resizeBg() {
+        if ((theWindow.width() / theWindow.height()) < aspectRatio) {
+            $bg
+                .removeClass()
+                .addClass('bgheight');
+        } else {
+            $bg
+                .removeClass()
+                .addClass('bgwidth');
+        }
+    }
+    theWindow.resize(resizeBg).trigger("resize");
+</script>

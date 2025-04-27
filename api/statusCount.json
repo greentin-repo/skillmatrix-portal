@@ -1,0 +1,15 @@
+{
+    "suggestionCountList": [
+        {
+            "noOfSugesstion": 1,
+            "filterId": 2,
+            "filterName": "My Pending Actions"
+        },
+        {
+            "noOfSugesstion": 0,
+            "filterId": 1,
+            "filterName": "My Suggestions"
+        }
+    ],
+    "status": "success"
+}

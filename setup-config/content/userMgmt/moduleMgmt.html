@@ -1,0 +1,136 @@
+<link rel="stylesheet" href="content/userMgmt/userMgmt.css">
+<section class="content">
+  <div ng-include="'common/loading_indicator.html'"></div>
+  <div class="container main-container" style="min-height: 656px;width: 99%;padding-left: 27px;">
+      <div class="row" style="margin-top: 44px;">
+          <div class="col-md-6">
+              <label style="font-size: 25px;font-weight: 400;font-family: sans-serif;margin-top: 5px;" class="txt-color-primary">.Module Management</label>
+          </div>
+          <div class="col-md-6">
+              <div class="add-menu" ng-click="showAddMenuModal()"><span><i class="fa fa-plus" aria-hidden="true"></i></span>Add Menu</div>
+          </div>     
+      </div>
+      <div class="row" style="margin-top: 20px;">
+          <div ng-show="menuListLoading" class="loadingIndicatorContainer ldng-ind-sm" style="margin-top: 10px;border: 2px solid lightgray;width: 259px;">
+              <i class="fa fa-bars fa-2x" aria-hidden="true"></i>
+              <div class="msg">Please wait menu list is loading</div>
+              <div style="width: 100px; margin:0 auto;" class="lineLoaderRelative"></div>
+          </div>
+          <div ng-show="!menuListLoading && menuList.length==0" class="loadingIndicatorContainer ldng-ind-sm" style="margin-top: 10px;border: 2px solid lightgray;width: 259px;">
+              <i class="fa fa-bars fa-2x" aria-hidden="true"></i>
+              <div class="msg">Data not found</div>
+          </div>
+          <div ng-if="!menuListLoading && menuList.length>0">
+              <div class="col-md-4" ng-repeat="data in menuList">
+                  <div class="clientListCard">
+                      <div class="checkbox sugg-box">
+                          <label class="sugg-lbl">{{data.menuName}}</label>
+                          <span class="menu-action">
+                              <i class="fa fa-plus" ng-click="showAddSubMenuModal(data)" aria-hidden="true" style="cursor: pointer;"></i>
+                              <i class="fa fa-pencil" ng-click="showUpdateMenuModal(data)"  aria-hidden="true" style="margin-left: 7px;"></i>
+                          </span>
+                      </div>
+                      <ul class="list-group submenu-scroll" ng-if="data.submenuList.length>0">
+                          <li class="list-group-item" ng-repeat="submenuData in data.submenuList">
+                              {{submenuData.subMenuName}} 
+                              <span class="submenu-action"> 
+                                  <i class="fa fa-pencil"  ng-click="showUpdateSubMenuModal(submenuData)" aria-hidden="true" style="margin-left: 7px;"></i>
+                                  <!--<i class="fa fa-trash" aria-hidden="true" style="margin-left: 7px;"></i>-->
+                              </span>
+                          </li>
+                      </ul>
+                      <div ng-if="data.submenuList.length == 0" class="loadingIndicatorContainer ldng-ind-sm" style="margin-top: 10px;border: 2px solid lightgray;width: 259px;">
+                          <i class="fa fa-exclamation-triangle fa-2x" aria-hidden="true"></i>
+                          <div class="msg">Data not found</div>
+                    </div>
+                  </div>
+              </div><!-- end col-md-4-->
+          </div>
+      </div>
+  </div>
+
+  <!-- Menu Modal -->
+  <div class="modal fade addNewMenuModal" id="MenuModal" role="dialog">
+      <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Add Menu</h4>
+              </div>
+              <div class="modal-body">
+                  <label>New Menu Name</label>
+                  <input type="text" class="inputNewMenu" id="inputName" name="name" placeholder="Enter Menu Name" ng-model="selectedMenu.menuName" style="width: 100%">
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-default btn-close" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary btn-update" ng-click="submitMenu()">Submit</button>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <!-- SubMenu Modal -->
+  <div class="modal fade addNewSubMenuModal" id="subMenuModal" role="dialog">
+      <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title txt-color-primary">Add Sub Menu</h4>
+              </div>
+              <div class="modal-body">
+                  <label>Menu Name</label>
+                  <input type="text" class="inputNewSubMenu" id="inputName" name="name"  placeholder="Enter Sub Menu Name" ng-model="selectedSubMenu.subMenuName" style="width: 100%">
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-default btn-close" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary btn-update" ng-click="submitSubMenu()">Submit</button>
+              </div>
+          </div>
+      </div>
+  </div>
+
+    <!-- Menu Modal -->
+    <div class="modal fade updateMenuModal" id="UpdateMenuModal" role="dialog">
+        <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title txt-color-primary">Edit Menu</h4>
+              </div>
+              <div class="modal-body">
+                  <label>Please update menu name</label>
+                  <input type="text" class="inputMenu" id="inputName" name="name"  placeholder="Enter Menu Name" ng-model="selectedMenu.menuName" style="width: 100%">
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-default btn-close" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary btn-update" ng-click="updateMenu()">Submit</button>
+              </div>
+          </div>
+      </div>
+    </div>
+
+    <!-- SubMenu Modal -->
+    <div class="modal fade updateSubMenuModel" id="updateSubMenuModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title txt-color-primary">Update Sub Menu</h4>
+                </div>
+                <div class="modal-body">
+                    <label>Please update submenu name</label>
+                    <input type="text" id="inputName" name="name" class="inputSubMenu"  placeholder="Enter Sub Menu Name" ng-model="selectedSubMenu.subMenuName" style="width: 100%">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-close" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary btn-update" ng-click="submitUpdateSubMenu()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

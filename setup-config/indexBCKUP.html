@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html ng-app="configApp" style="height: 100%" ng-cloak>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="shortcut icon" type="image/x-icon" href="../static-website/images/favicon.ico" />
+  <title>myeNovation - Setup Config</title>
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!--Custom Scrollbar-->
+  <link rel="stylesheet" href="../bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css" type="text/css" />
+  <!-- Bootstrap 3.3.7 -->
+  <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="../bower_components/Ionicons/css/ionicons.min.css">
+  <!-- Jquery-ui -->
+  <link rel="stylesheet" href="../dist/css/jquery-ui.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
+  <!-- AdminLTE Skins. Choose a skin from the css/skins folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
+  <link rel="stylesheet" href="../bower_components/custom/common.css">
+  <link rel="stylesheet" href="dist/css/custom/common.css">
+  <link rel="stylesheet" href="dist/css/custom/custom_navbar.css">
+  <link rel="stylesheet" href="dist/css/custom/style.css">
+  <link rel="stylesheet" href="dist/css/setup-config.css">
+  <link rel="stylesheet" href="dist/css/loading_indicator.css">
+  <link rel="stylesheet" href="../bower_components/snackbar/snackbar.css">
+  <link rel="stylesheet" href="../bower_components/custom/tooltip.css">
+
+  <!-- Spinner -->
+  <link rel="stylesheet" href="../bower_components/spinner/roundSpinner.css">
+  <link rel="stylesheet" href="../bower_components/spinner/hzLineLoadingindicator.css">
+  <link rel="stylesheet" href="../bower_components/spinner/threeDotLoadingIndicator.css">
+  <!-- rzSlider -->
+  <link rel="stylesheet" href="../bower_components/rzSlider/rzslider.css">
+  <!-- datepicker 3 -->
+  <link rel="stylesheet" href="../bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+  <!-- Google Font -->
+  <link rel="stylesheet" href="../dist/fonts/roboto/roboto.css">
+  <!--Material Icons-->
+  <link href="../dist/fonts/google-material-icons/material_icons.css" rel="stylesheet">
+  <style type="text/css">
+    .block-ui-container {
+      position: fixed;
+      z-index: 10000;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      height: 100%;
+      overflow: hidden;
+      opacity: 1;
+      filter: alpha(opacity=00);
+    }
+
+    .block-ui-overlay {
+      width: 100%;
+      height: 100%;
+      opacity: .5;
+      filter: alpha(opacity=50);
+      background-color: #000;
+    }
+
+    .block-ui-message-container {
+      position: absolute;
+      top: 35%;
+      left: 0;
+      right: 0;
+      height: 0;
+      text-align: center;
+      z-index: 10001;
+    }
+
+    .block-ui-message {
+      display: inline-block;
+      text-align: left;
+      background-color: #ffff;
+      color: #26244a;
+      padding: 20px;
+      border-radius: 4px;
+      font-size: 20px;
+      font-weight: 700;
+      filter: alpha(opacity=100);
+      padding-left: 78px;
+      margin-left: 50px;
+      margin-top: 30px;
+      width: 20%;
+    }
+
+  </style>
+</head>
+
+<body style="background-color: #F5F5F5;height: 100%">
+  <div class="block-ui-container" ng-if="flagpageloadindicator">
+    <div class="block-ui-overlay"></div>
+    <div class="lineLoader" style="width: 100%;z-index: 99;"></div>
+    <div class="block-ui-message-container">
+      <div class="block-ui-message">Please wait ...</div>
+    </div>
+  </div>
+  <div class="wrapper" style="overflow-y:hidden;height: 100%">
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper bg-content-wrapper-color" style="width: 100%;">
+      <div ng-view></div>
+    </div>
+    <!-- /.content-wrapper -->
+    <div ng-include="'content/header_side_bar/side_bar.html'"></div>
+    <div class="snackbar-container" data-snackbar="true" data-snackbar-duration="3000" data-snackbar-remove-delay="200"></div>
+  </div>
+
+  <!-- jQuery 3 -->
+  <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="../bower_components/jquery-ui/jquery-ui.min.js"></script>
+
+
+  <!-- Bootstrap 3.3.7-->
+  <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+  <!-- AdminLTE App -->
+  <script src="dist/js/adminlte.js"></script>
+  <!-- AdminLTE for demo purposes -->
+  <script src="../dist/js/demo.js"></script>
+
+  <script src="../dist/ang/angular.min.js"></script>
+  <script src="../dist/ang/angular-route.min.js"></script>
+  <script src="../dist/ang/socket.js"></script>
+  <script src="../bower_components/snackbar/ang.snackbar.js"></script>
+  <script src="../dist/ang/angular-translate.min.js"></script>
+  <script src="../dist/ang/angular-translate-loader-static-files.min.js"></script>
+
+  <!-- Chart.js -->
+  <script src="../bower_components/charts/chart.js/Chart.min.js"></script>
+  <script src="../bower_components/charts/chart.js/angular-chart.min.js"></script>
+
+  <!-- JSPDF - Convert HTML to PDF -->
+  <script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
+  <script src="http://code.angularjs.org/1.2.0rc1/angular-animate.min.js"></script>
+  <script src="http://code.angularjs.org/1.2.0rc1/angular-touch.min.js"></script>
+
+  <script src="../dist/ang/appDomain.js?ver=4.0.0"></script>
+  <script>
+    // document.write('<script src="../dist/ang/appDomain.js?ver=' + appVersion + '"\><\/script>');
+    document.write('<script src="config_app.js?ver=' + appVersion + '"\><\/script>');
+    document.write('<script src="content/benefits/benefits.js?ver=' + appVersion + '"\><\/script>');
+    document.write('<script src="content/branches/branches.js?ver=' + appVersion + '"\><\/script>');
+    document.write('<script src="content/configure/configure.js?ver=' + appVersion + '"\><\/script>');
+    document.write('<script src="content/executive/executive.js?ver=' + appVersion + '"\><\/script>');
+    document.write('<script src="content/controller/controller.js?ver=' + appVersion + '"\><\/script>');
+    document.write('<script src="content/departments/departments.js?ver=' + appVersion + '"\><\/script>');
+    document.write('<script src="content/designation/designation.js?ver=' + appVersion + '"\><\/script>');
+    document.write('<script src="content/suggestionApproach/suggestionApproach.js?ver=' + appVersion + '"\><\/script>');
+    document.write('<script src="content/evaluator/evaluator.js?ver=' + appVersion + '"\><\/script>');
+    document.write('<script src="content/employee/employee.js?ver=' + appVersion + '"\><\/script>');
+    document.write('<script src="content/escalationMailConfig/escalationMailConfig.js?ver=' + appVersion + '"\><\/script>');
+    document.write('<script src="content/userMgmt/userMgmt.js?ver=' + appVersion + '"\><\/script>');
+    document.write('<script src="content/custEvalPointsSetup/custEvalPointsSetup.js?ver=' + appVersion + '"\><\/script>');
+    document.write('<script src="content/docMaster/docMaster.js?ver=' + appVersion + '"\><\/script>');
+    document.write('<script src="content/mandatory/mandatory.js?ver=' + appVersion + '"\><\/script>');
+    document.write('<script src="content/finance/finance.js?ver=' + appVersion + '"\><\/script>');
+    document.write('<script src="content/forbidden_access/forbidden_access.js?ver=' + appVersion + '"\><\/script>');
+    document.write('<script src="content/evaluator1/evaluator1.js?ver=' + appVersion + '"\><\/script>');
+    document.write('<script src="content/redeem_Setup/redeemSetup.js?ver=' + appVersion + '"\><\/script>');
+    document.write('<script src="content/socialMedia/socialMedia.js?ver=' + appVersion + '"\><\/script>');
+    document.write('<script src="content/noticeboard/noticeboard.js?ver=' + appVersion + '"\><\/script>');
+    document.write('<script src="content/incident/incident.js?ver=' + appVersion + '"\><\/script>');
+    document.write('<script src="content/DWM/DWM_Setup.js?ver=' + appVersion + '"\><\/script>');
+    document.write('<script src="content/auditor/auditor.js?ver=' + appVersion + '"\><\/script>');
+    document.write('<script src="content/TPM_Setup/TPM_Setup.js?ver=' + appVersion + '"\><\/script>');
+    document.write('<script src="content/kuberSetup/kuberSetup.js?ver=' + appVersion + '"\><\/script>');
+    document.write('<script src="content/onholdSetup/onholdSetup.js?ver=' + appVersion + '"\><\/script>');
+    document.write('<script src="content/passwordpolicy/passwordpolicy.js?ver=' + appVersion + '"\><\/script>');
+    document.write('<script src="content/suggTemplate/suggestionTemp.js?ver=' + appVersion + '"\><\/script>');
+    document.write('<script src="content/jurySetup/jurySetup.js?ver=' + appVersion + '"\><\/script>');
+    document.write('<script src="content/suggestionSetup/suggestionSetup.js?ver=' + appVersion + '"\><\/script>');
+  </script>
+
+  <!-- for excel export -->
+  <script src="../dist/alasql/alasql.min.js"></script>
+  <script src="../dist/tableExport/xlsx.core.min.js"></script>
+  <script src="../dist/ang/dirPagination.js"></script>
+  <script src="dist/ang/dirPagination.js"></script>
+  <!-- <script src="content/header_side_bar/profile.js"></script> -->
+  <!-- Datepicker -->
+  <!-- <script src="bower_components/moment/min/moment.min.js"></script> -->
+  <script src="../bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js">
+  </script>
+  <script src="../bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.js">
+  </script>
+
+  <!-- mCustomScrollbar -->
+  <script src="../bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+  <script src="../bower_components/ng-scrollbars/dist/scrollbars.min.js"></script>
+  <!-- Slide -->
+  <!-- <script src="dist/js/jquery-ui.js"></script> -->
+  <!-- rzSlider -->
+  <script src="../bower_components/rzSlider/nouislider.min.js"></script>
+  <script src="../bower_components/rzSlider/ui-bootstrap-tpls.js"></script>
+  <script src="../bower_components/rzSlider/rzslider.min.js"></script>
+  <script src="../bower_components/rzSlider/demo.js"></script>
+</body>
+
+</html>

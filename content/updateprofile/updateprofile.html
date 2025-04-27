@@ -1,0 +1,24 @@
+<link rel="stylesheet" href="content/updateprofile/updateprofile.css">
+<section>
+    
+        <button type="button" ng-click="changeLanguage('en')">English</button> |
+        <button type="button" ng-click="changeLanguage('mr')">Marathi</button>
+    <div  class="container main-container" style="margin-left: 3.5%;width: 80%;margin-top: 150px;text-align: center;">
+        <h4 class="txt-color-primary" style="margin-bottom: 5px;">{{ langTranslate.AllSuggestions }}Hello {{empDetails.firstName}} {{empDetails.lastName}},</h4>
+        <h3 style="margin-top: 5px;color: #636363;">{{ langTranslate.Pleaseaddyourdepartmentanddesignationtoproceedfurther }}</h3>
+    
+        <div style="margin-top: 35px;">
+            <select name="deptId" ng-model="selectedDepartment"  style="padding: 10px;width: 250px;font-size: 16px;color: #3c3c3c;border-radius: 5px;">
+                <option ng-repeat="x in departmentListForRegUser" value="{{x.deptId}}" ng-selected="selectedDepartment == x.deptId">{{x.deptName}}</option>
+            </select>
+    
+            <select  ng-model="selectedDesignation" style="margin-left: 20px; padding: 10px;width: 250px;font-size: 16px;color: #3c3c3c;border-radius: 5px;">
+                <option ng-repeat="x in designationListForRegUser" value="{{x.desigId}}" ng-selected="selectedDesignation == x.desigId">{{x.desigName}}</option>
+            </select>
+        </div>
+        <div style="margin-top: 20px;">
+            <div ng-show="flagupdateprofileSpinner" class="small-spinner updateEmpSpinner"></div>
+            <button ng-show="!flagupdateprofileSpinner" class="btn btn-default bg-color-primary btn-submit-dept-desig" ng-click="setDeptDesigOfRegUser()" style="color: white;">{{ langTranslate.Submit }}</button>
+        </div>
+    </div>
+</section>

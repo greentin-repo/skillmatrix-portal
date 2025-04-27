@@ -1,0 +1,302 @@
+<link rel="stylesheet" href="content/employee/employee.css">
+<div ng-show="isDeptAdded" class="container main-container pr" style="margin-left: 3.5%;width: 80%;">
+    <div class="arrow-fwd">
+        <img src="dist/icons/fwd-arrow.png" ng-if="checkIndexEnable(nextIndexMenu)" ng-click="nextMenu()" style="cursor:pointer;">
+    </div>
+    <div class="row" style="margin-top: 44px;">
+        <div class="col-md-12" style="display: inline-flex;">
+            <div style="width: 195px;margin-right: 20px;">
+                <div class="btn btn-default bg-color-primary" ng-click="createEmployee()">
+                    <img style="width: 35px;padding: 4px;" src="dist/icons/ic_add_user.png">
+                    <label style="color: white;margin-left: 10px;">Add New Employee</label>
+                </div>
+            </div>
+            <div style="width: 457px;">
+                <div style="padding: 8px;background: white;border: 2px solid #4b4795;border-radius: 4px;">
+                    <div ng-show="flagexcelimport">
+                        <label style="width: 100%;">Bulk Employee Upload</label>
+                        <form id="upload-events-form" style="margin:0 auto;">
+                            <div style="display: inline-flex;">
+                                <div style="padding: 6px 8px;width: 272px;border: 1px solid lightgray;margin-right: 2px;margin-right: 8px;">
+                                    <i style="margin-right: 2px;" class="fa fa-file"></i>
+                                    <span ng-show="empExcel == '' || empExcel == null">Please select file</span>
+                                    <span ng-show="empExcel != '' && empExcel != null">File Selected</span>
+                                </div>
+                                <button class="btn btn-default btn-file bg-color-primary" style="margin-right: 2px;color: white;font-size: 13px;position: relative;">Browse
+                                        <input style="width: 90px;height: 33px;" id="upload-file-input" type="file" fileread="empExcel" accept=".xlsx .xls .jpg, .png, .gif" name="excel"/>
+                                    </button>
+                                <button class="btn btn-default bg-color-primary " style="color: white;font-size: 13px;" ng-click="addSetupDetails()" type="submit">Upload</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div ng-show="flaguploaded">
+                        <label style="padding: 14px;font-size: 17px;position: relative;left: 8em;">Upload</label>
+                        <div class="uploadedspinner"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 15px;">
+        <div class="col-md-12">
+            <div class="search-bar">
+                <input id="text-id" type="text" placeholder="Search here..." ng-model="globalEmpId">
+                <i class="fa fa-search"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div style="margin :0 auto;">
+                <table class="table">
+                    <tr style="color: #4b4795;">
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email ID</th>
+                        <th>Contact No</th>
+                        <th>Address</th>
+                        <th>Branch</th>
+                        <th>Department</th>
+                        <th>Designation</th>
+                        <th>Action</th>
+                        <th>Status</th>
+                    </tr>
+                    <div ng-show="flagEmployeeListSpinner" class="small-spinner"></div>
+                    <tr dir-paginate="x in employeeList | filter: globalEmpId | itemsPerPage:7" pagination-id="tbl-employee" style="color: #333333;background-color: #fff;">
+                        <td>{{x.cmpyEmpId}}</td>
+                        <td class="txt-capitalize">{{x.firstName}} {{x.lastName}}</td>
+                        <td>{{x.emailId}}</td>
+                        <td>{{x.contactNo}}</td>
+                        <td>{{x.address}}</td>
+                        <td>{{x.branch.name}}</td>
+                        <td>{{x.dept.deptName}}</td>
+                        <td>{{x.designation.desigName}}</td>
+                        <td style="padding: 4px 9px;"><i class="material-icons" style="font-size: 20px;color: #00000094;cursor: pointer;width: 33%;" ng-click="editEmployee(x)">edit</i></td>
+                        <td>
+                            <label class="switch">
+                                <!-- <input type="checkbox" ng-model="empcheck" checked> -->
+                                <input type="checkbox" ng-model="x.empcheck"  checked>
+                                <span class="slider round" ng-click="employeeStatus(x)"></span>
+                            </label>
+                        </td>
+                    </tr>
+                </table>
+                <dir-pagination-controls ng-show="flagTblemployee" pagination-id="tbl-employee" max-size="7" direction-links="true" boundary-links="true">
+                </dir-pagination-controls>
+            </div>
+        </div>
+    </div>
+    <!------------------------Create Employee Model------------------------>
+    <div class="modal" id="employeeModal1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content" style="width: 137%;height: auto;">
+                <div class="modal-header" style="border-bottom: 1px solid #27255a96;">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" id="title">ADD Employee</h4>
+                </div>
+                <form name="addemployeeForm" ng-submit="submitEmployee(addemployeeForm.$valid)" novalidate>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6 col-md-12 col-sm-6" style="margin-top: 16px;">
+                                <label class="lbl-dep">Branch<label class="asterisk-color">*</label></label>
+                                <input type="hidden" name="branch" class="lblEmpl" ng-model="branch">
+                                <label>{{selectbranch}}</label>
+                                <!-- <select class="lblEmpl" name="branch" ng-model="branch" ng-change="getDepartmentList(branch.branchId)" ng-options="item as item.name for item in branchList" class="lblEmpl" style="color: #bbb0b0;
+                                        font-size: 13px;">
+                                        <option value="">Please select branch</option>
+                                </select> -->
+                                <!-- <p class="error" ng-show="flagErrAddEmployeeDept">Please select department</p> -->
+                            </div>
+                            <div class="col-md-6 col-md-12 col-sm-6" style="margin-top: 14px;">
+                                <label class="label-emp">Emp ID<label class="asterisk-color">*</label></label>
+                                <input type="text" placeholder="Emp id" name="cmpyEmpId" ng-model="cmpyEmpId" class="lblEmpl"  required>
+                                <p class="error" ng-show="addemployeeForm.cmpyEmpId.$dirty && addemployeeForm.cmpyEmpId.$invalid">Please Enter Employee ID</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-md-12 col-sm-6" style="margin-top: 33px;">
+                                <label class="lbl-dep">Department<label class="asterisk-color">*</label></label>
+                                <select class="lblEmpl" name="dept" ng-model="dept" ng-change="flagErrAddEmployeeDept = false" ng-options="departmentList as departmentList.deptName for departmentList in departmentList" class="lblEmpl" style="font-size: 13px;">
+                                    <option value="">Please select department</option>
+                                </select>
+                                <p class="error" ng-show="flagErrAddEmployeeDept">Please Select Department</p>
+                            </div>
+                            <div class="col-md-6 col-md-12 col-sm-6">
+                                <label class="label-emp" style="margin-top: 35px;">Contact No<label class="asterisk-color">*</label></label>
+                                <input type="text" oninput="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')" ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/" name="contactno" placeholder="Contactno" class="lblEmpl" ng-model="contactno" ng-minlength="10" ng-maxlength="10" required>
+                                <p class="error" ng-show="addemployeeForm.contactno.$error.required && addemployeeForm.contactno.$dirty">Please Enter Contact Number</p>
+                                <p class="error" ng-show="addemployeeForm.contactno.$error.pattern">Please Enter Valid Mobile Number</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-md-12 col-sm-6">
+                                <label class="lbl-deg">Designation<label class="asterisk-color">*</label></label>
+                                <select class="lblEmpl" name="desgination" ng-model="desgination" ng-change="flagErrAdddesignation = false" ng-options="DesignationList as DesignationList.desigName for DesignationList in DesignationList" style="color: #615959;
+                                                font-size: 13px;">
+                                    <option value="">Please select designation</option>
+                                </select>
+                                <p class="error" ng-show="flagErrAdddesignation">Please Select Designation</p>
+                            </div>
+                            <div class="col-md-6 col-md-12 col-sm-6" style="margin-top: 16px;">
+                                <label class="label-emp">Email ID<label class="asterisk-color">*</label></label>
+                                <input type="email" placeholder="Email ID" name="emailId" ng-model="emailId" ng-pattern="/^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/" ng-minlength="6" ng-maxlength="250" class="lblEmpl" required>
+                                <p class="error" ng-show="addemployeeForm.emailId.$error.required && addemployeeForm.emailId.$dirty">Please Enter Email ID</p>
+                                <p class="error" ng-show="addemployeeForm.emailId.$error.pattern">Please Enter Valid Email ID</p>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-md-12 col-sm-6" style="margin-top: 18px;">
+                                <label class="label-emp">First Name<label class="asterisk-color">*</label></label>
+                                <input type="text" name="fname" placeholder="First Name" ng-model="fname" ng-pattern="/^[a-zA-Z\s]*$/" class="lblEmpl" required>
+                                <p class="error" ng-show="addemployeeForm.fname.$error.required && addemployeeForm.fname.$dirty">Please Enter First Name</p>
+                                <p class="error" ng-show="addemployeeForm.fname.$error.pattern">Enter characters only
+                                </p>
+                            </div>
+                            <div class="col-md-6 col-md-12 col-sm-6" style="margin-top: 16px;">
+                                <label class="lbl-address">Address<label class="asterisk-color">*</label></label>
+                                <textarea placeholder="Address" class="input-add" id="add-address" name="add" ng-model="add" required="true"></textarea>
+                                <p class="error" ng-show="addemployeeForm.add.$error.required && addemployeeForm.add.$dirty" style="color:red;">Please Enter Address</p>
+                                <p class="error" ng-show="addemployeeForm.add.$error.pattern">Enter characters only</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-md-12 col-sm-6" style="margin-top: 18px;">
+                                <label class="label-emp">Last Name<label class="asterisk-color">*</label></label>
+                                <input type="text" name="lname" placeholder="Last Name" ng-model="lname" ng-pattern="/^[a-zA-Z\s]*$/" class="lblEmpl" required>
+                                <p class="error" ng-show="addemployeeForm.lname.$error.required && addemployeeForm.lname.$dirty">Please Enter Last Name</p>
+                                <p class="error" ng-show="addemployeeForm.lname.$error.pattern">Enter Characters Only
+                                </p>
+                            </div>
+                         </div>
+                    </div>
+                    <div class="modal-footer" style="padding: 46px;text-align: right;border-top: none;padding-top: 0px;">
+                        <center>
+                            <div ng-show="flagAddSpinner" class="small-spinner"></div>
+                            <button ng-show="!flagAddSpinner" class="btn btn-category btn-addemp" type="submit" style="color:white;">Add Employee</button>
+                        </center>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-------Update Employee -->
+    <div class="modal fade" id="employee_editModal1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content" style="width: 137%;height: auto;">
+                <div class="modal-header" style="border-bottom: 1px solid #27255a96;">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" id="title">Update Employee</h4>
+                </div>
+                <form name="updateemployeeForm" ng-submit="editEmpDet(updateemployeeForm.$valid)" novalidate>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6 col-md-12 col-sm-6" style="margin-top: 16px;">
+                                <label class="lbl-dep">Branch<label class="asterisk-color">*</label></label>
+                                <input type="hidden" name="branch" class="lblEmpl" ng-model="branchId">
+                                <label>{{brachName}}</label>
+                                <!-- <select class="lblEmpl" name="branch" ng-model="branchId" ng-change="flagErrAddEmployeeDept = false" class="lblEmpl">
+                                    <option ng-repeat="x in branchList" value="{{x.branchId}}" ng-selected="branchId == x.branchId" >{{x.name}}</option>
+                                </select> -->
+
+                                <!-- <p class="error" ng-show="flagErrAddEmployeeDept">Please select branch</p> -->
+                            </div>
+                            <div class="col-md-6 col-md-12 col-sm-6" style="margin-top: 14px;">
+                                <label class="label-emp">Emp ID<label class="asterisk-color">*</label></label>
+                                <input type="text" placeholder="Emp id" name="cmpyEmpId" value="{{EmpData.cmpyEmpId}}" class="lblEmpl" ng-model="cmpyEmpId" ng-pattern="/^[a-zA-Z0-9\s]*$/" required>
+                                <p class="error" ng-show="updateemployeeForm.cmpyEmpId.$dirty && updateemployeeForm.cmpyEmpId.$invalid" ng-message="pattern">Please Enter Employee ID</p>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-md-12 col-sm-6" style="margin-top: 16px;">
+                                <label class="lbl-dep">Department<label class="asterisk-color">*</label></label>
+                                <label>{{deptName}}</label>
+                                <input type="hidden" name="dept" class="lblEmpl" ng-model="deptId">
+                                <!-- <select class="lblEmpl" name="dept" ng-model="deptId" ng-change="flagErrAddEmployeeDept = false" class="lblEmpl" >
+                                            <option ng-repeat="x in departmentList" value="{{x.deptId}}" ng-selected="deptId == x.deptId" >{{x.deptName}} </option>
+                                        </select>
+                                <p class="error" ng-show="flagErrAddEmployeeDept">Please select department</p> -->
+                            </div>
+
+                            <div class="col-md-6 col-md-12 col-sm-6">
+                                <label class="label-emp" style="margin-top: 26px;">Contact No<label class="asterisk-color">*</label></label>
+                                <input type="text" oninput="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')" ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/" name="contactno" placeholder="Contactno" value="{{EmpData.contactNo}}" class="lblEmpl" ng-model="contactNo" ng-minlength="10" ng-maxlength="10" required>
+                                <p class="error" ng-show="updateemployeeForm.contactno.$error.required && updateemployeeForm.contactno.$dirty">Please Enter Contact Number</p>
+                                <p class="error" ng-show="updateemployeeForm.contactno.$error.pattern">Please Enter Valid Mobile Number</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-md-12 col-sm-6">
+                                <label class="lbl-deg">Designation<label class="asterisk-color">*</label></label>
+                                <select class="lblEmpl" name="desgination" ng-model="desigId" ng-change="flagErrAddOrganization = false">
+                                    <option ng-repeat="x in DesignationList" value="{{x.desigId}}" ng-selected="desigId == x.desigId" >{{x.desigName}}</option>
+                                </select>
+                                <p class="error" ng-show="flagErrAddOrganization">Please Select Designation</p>
+                            </div>
+                            <div class="col-md-6 col-md-12 col-sm-6" style="margin-top: 16px;">
+                                <label class="label-emp">Email ID<label class="asterisk-color">*</label></label>
+                                <input type="email" placeholder="Email ID" name="emailId" ng-model="emailId" value="{{EmpData.emailId}}"  ng-minlength="6" ng-maxlength="250" class="lblEmpl" required>
+                                <p class="error" ng-show="updateemployeeForm.emailId.$error.required && updateemployeeForm.emailId.$dirty">Please Enter Email ID</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-md-12 col-sm-6" style="margin-top: 18px;">
+                                <label class="label-emp">First Name<label class="asterisk-color">*</label></label>
+                                <input type="text" name="fname" placeholder="First Name" ng-model="firstName" value="{{EmpData.firstName}}" ng-pattern="/^[a-zA-Z\s]*$/" class="lblEmpl" required>
+                                <p class="error" ng-show="updateemployeeForm.fname.$error.required && updateemployeeForm.fname.$dirty">Please Enter First Name</p>
+                                <p class="error" ng-show="updateemployeeForm.fname.$error.pattern">Enter Characters Only
+                                </p>
+                            </div>
+                            <div class="col-md-6 col-md-12 col-sm-6" style="margin-top: 16px;">
+                                <label class="lbl-address">Address<label class="asterisk-color">*</label></label>
+                                <textarea placeholder="Address" class="input-add" id="add-address" name="add" ng-model="address" value="{{EmpData.address}}" required="true"></textarea>
+                                <p class="error" ng-show="updateemployeeForm.add.$error.required && updateemployeeForm.add.$dirty" style="color:red;">Please Enter Address</p>
+                                <p class="error" ng-show="updateemployeeForm.add.$error.pattern">Enter characters only</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-md-12 col-sm-6" style="margin-top: 18px;">
+                                <label class="label-emp">Last Name<label class="asterisk-color">*</label></label>
+                                <input type="text" name="lname" placeholder="Last Name" ng-model="lastName" value="{{EmpData.lastName}}" ng-pattern="/^[a-zA-Z\s]*$/" class="lblEmpl" required>
+                                <p class="error" ng-show="updateemployeeForm.lname.$error.required && updateemployeeForm.lname.$dirty">Please Enter Last Name</p>
+                                <p class="error" ng-show="updateemployeeForm.lname.$error.pattern">Enter Characters Only
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer" style="padding: 46px;text-align: right;border-top: none;padding-top: 0px;">
+                        <center>
+                            <div ng-show="flagupdateSpinner" class="small-spinner updateEmpSpinner"></div>
+                            <button ng-show="!flagupdateSpinner" class="btn btn-category btn-addemp" type="submit" style="color:white;">Update Employee</button>
+                        </center>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div ng-show="!isDeptAdded" class="container main-container" style="margin-left: 3.5%;width: 80%;margin-top: 150px;text-align: center;">
+    <h4 class="txt-color-primary" style="margin-bottom: 5px;">Hello {{empDetails.firstName}} {{empDetails.lastName}},</h4>
+    <h3 style="margin-top: 5px;color: #636363;">Please add your department and designation to proceed further</h3>
+
+    <div style="margin-top: 35px;">
+        <select name="selectedDeptId" ng-model="selectedDeptId" style="padding: 10px;width: 250px;font-size: 16px;color: #3c3c3c;border-radius: 5px;">
+            <option ng-repeat="x in departmentListForRegUser" value="{{x.deptId}}">{{x.deptName}}</option>
+        </select>
+
+        <select name="selectedDesigId" ng-model="selectedDesigId" style="margin-left: 20px; padding: 10px;width: 250px;font-size: 16px;color: #3c3c3c;border-radius: 5px;">
+            <option ng-repeat="x in designationListForRegUser" value="{{x.desigId}}">{{x.desigName}}</option>
+        </select>
+    </div>
+    <div style="margin-top: 20px;">
+        <button class="btn btn-default bg-color-primary btn-submit-dept-desig" ng-click="setDeptDesigOfRegUser()">Submit</button>
+    </div>
+</div>
+<script>
+</script>

@@ -1,0 +1,23 @@
+<div class="modal fade help-modal" id="helpModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body" style="padding: 30px;">
+                <div style="display: inline-flex;">
+                    <div class="help-icon"><i class="fa fa-question-circle"></i></div>
+                    <label class="modal-title txt-color-primary">{{HELP_DATA.TITLE}}</label>
+                </div>
+                <div class="help-text" ng-if="HELP_DATA.IS_SINGLE_TEXT">{{HELP_DATA.TEXT}}</div>
+                <div style="margin-top:15px;margin-bottom:15px;">
+                    <div ng-if="!HELP_DATA.IS_SINGLE_TEXT" ng-repeat="x in HELP_DATA.TEXT">
+                        <label class="help-desc" ng-if="x.label != ''">{{x.label}}</label>
+                        <p class="help-desc">{{x.text}}</p>
+                    </div>
+                </div>
+                <div style="text-align: right;height: 34px;">
+                    <div class="btn-ok" style="float: right;" data-dismiss="modal">OK</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

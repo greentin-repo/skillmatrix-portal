@@ -1,0 +1,233 @@
+<link rel="stylesheet" href="content/suggestionApproach/suggestionApproach.css">
+<div ng-include="'common/loading_indicator.html'"></div>
+<div ng-include="'common/nextPage.html'"></div>
+<section class="content pr">
+	<div class="container">
+			<!-- Small device large here -->
+			<div class="row mt-0 scrollDiv" ng-style="{height: iframeHeight + 'px'}">
+				<div class="col-md-12 mb-5 bg-container">
+	    		<div class="col-md-10 col-sm-12 col-lg-10 block-sugg-approach">
+						
+            <div class="" style="margin-top: 7%;">
+						<div class="row">
+							<div class="col-md-12 mt-2 mb-2 wlcm-msg-blk">
+								<div class="pd-10">
+									<h5 class="title-color pl-10">Hello, {{username}}</h5>
+
+									<h4 class="title-color-l pl-10">{{langTranslate.Welcome_to_myeNovation}}</h4>
+
+									<p class="wlcm-msg-txt">
+										{{langTranslate.Its_very_important_setup_process}}
+											<br>
+										{{langTranslate.To_simplify_the_process_only_single_branch_can_be_setup_at_a_time}}
+									</p>
+								</div>
+							</div>
+							<!--<div class="col-md-4 mt-2 mb-2 verify-email-block" >
+								<div class="verify-cls-btn-blk">
+									<i class="fa fa-close fa-1x btn-close-style"></i>
+								</div>
+								<div class="pd-10 pl-10">
+									<p class="mb-2 msg-email-verify">
+										We've sent an email to <span><strong>rakesh@greentinsolutions.com</strong></span>,
+										Please verify it to start enovation at your organisation.
+									</p>
+									<button class="btn btn-success">Resend</button>
+								</div>
+							</div>-->
+						</div>
+						<div style="height:15px"></div>
+						<div class="row">
+							<div class="col-md-10">
+								<div class="row rolesDiv">
+									<div class="col-md-6 mt-2 mb-2">
+										<div class="bg-white block-container">
+											<div class="row block-h">
+												<div class="col-md-8 block-header">
+													<h5 class="title-color pd-5	 text-uppercase violet-text">{{langTranslate.AN_INITIATOR}}</h5>
+													<p class="txt-block-content">
+														{{langTranslate.Person_will_be_responsible_for}}
+													</p>
+													<div class="separator"></div>
+												</div>
+												<div class="col-md-4 xs-none d-xl-block d-lg-block d-md-block d-sm-none d-none">
+													<img src="dist/img/initiator.png" class="rolesImg">
+												</div>
+											</div>
+											<div class="col-md-12">
+												<p class="txt-block-content">
+													<strong>{{langTranslate.Creating_Submitting}} </strong> {{langTranslate.Suggestion}} 
+												</p>
+												<p class="txt-block-content">
+													<strong>{{langTranslate.Raising_Concern}}</strong>{{langTranslate.To_Executive_Management}} 
+												</p>
+											</div>
+										</div>
+									</div>
+
+									<div class="col-md-6 mt-2 mb-2">
+										<div class="bg-white block-container">
+											<div class="row block-h">
+												<div class="col-md-8 block-header">
+													<h5 class="title-color pd-5	 text-uppercase  violet-text">{{langTranslate.The_Controller}}</h5>
+													<p class="txt-block-content">
+														{{langTranslate.Person_will_be_responsible_for}}
+													</p>
+													<div class="separator"></div>
+												</div>
+												<div class="col-md-4 xs-none d-xl-block d-lg-block d-md-block d-sm-none d-none">
+													<img src="dist/img/controller.png" class="rolesImg">
+												</div>
+											</div>
+											<div class="col-md-12">
+												<p class="txt-block-content">
+													<strong>{{langTranslate.Accepting_or_Rejecting}}</strong> {{langTranslate.Suggestion}} 
+												</p>
+												<p class="txt-block-content">
+													<strong>{{langTranslate.Assigning}}</strong> {{langTranslate.Suggestion_to_Evaluation_Team}}
+												</p>
+											</div>
+										</div>
+									</div>
+
+
+									<div class="col-md-6 mt-2 mb-2">
+										<div class="bg-white block-container">
+											<div class="row block-h">
+												<div class="col-md-8 block-header">
+													<h5 class="title-color pd-5	 text-uppercase  violet-text">{{langTranslate.The_Evaluator}}</h5>
+													<p class="txt-block-content">
+														{{langTranslate.Person_will_be_responsible_for}}
+													</p>
+													<div class="separator"></div>
+												</div>
+												<div class="col-md-4 xs-none d-xl-block d-lg-block d-md-block d-sm-none d-none">
+													<img src="dist/img/evaluator.png" class="rolesImg">
+												</div>
+											</div>
+											<div class="col-md-12">
+												<p class="txt-block-content">
+													<strong>{{langTranslate.Accepting}} </strong> {{langTranslate.Suggestion_For_Evaluation}} 
+												</p>
+												
+												<p class="txt-block-content">
+													<strong>{{langTranslate.Rejecting}}</strong> {{langTranslate.Suggestion_Post_Evaluation}} 
+												</p>
+												<p class="txt-block-content">
+													<strong>{{langTranslate.Submitting}} </strong> {{langTranslate.Evaluation_Details}}
+												</p>
+												<p class="txt-block-content">
+													<strong>{{langTranslate.Recommending}} </strong> {{langTranslate.Suggestion_For_Implementation}}
+												</p>
+											</div>
+										</div>
+									</div>
+
+									<div class="col-md-6 mt-2 mb-2">
+										<div class="bg-white block-container">
+											<div class="row block-h">
+												<div class="col-md-8 block-header">
+													<h5 class="title-color pd-5	 text-uppercase  violet-text">{{langTranslate.The_Implementer}}</h5>
+													<p class="txt-block-content">
+														{{langTranslate.Person_will_be_responsible_for}}
+													</p>
+													<div class="separator"></div>
+												</div>
+												<div class="col-md-4 xs-none d-xl-block d-lg-block d-md-block d-sm-none d-none">
+													<img src="dist/img/implementer.png" class="rolesImg">
+												</div>
+											</div>
+											<div class="col-md-12">
+												<p class="txt-block-content">
+													<strong>{{langTranslate.Accepting}} </strong>{{langTranslate.Suggestion_For_Implementation}}
+												</p>
+												<p class="txt-block-content">
+													<strong>{{langTranslate.Rejecting}} </strong>{{langTranslate.Suggestion_Post_Evaluation}}
+												</p>
+												<p class="txt-block-content">
+													<strong>{{langTranslate.Submitting}} </strong>{{langTranslate.Implementation_Details}}
+												</p>
+												<p class="txt-block-content">
+													<strong>{{langTranslate.Closing}} </strong>{{langTranslate.Suggestion}}
+												</p>
+											</div>
+										</div>
+									</div>
+
+									<!--An Executive-->
+									<div class="col-md-6 mt-2 mb-2">
+										<div class="bg-white block-container">
+											<div class="row block-h">
+												<div class="col-md-8 block-header">
+													<h5 class="title-color pd-5	 text-uppercase  violet-text">{{langTranslate.EXECUTIVE}}</h5>
+													<p class="txt-block-content">
+														{{langTranslate.Person_will_be_responsible_for}}
+													</p>
+													<div class="separator"></div>
+												</div>
+												<div class="col-md-4 xs-none d-xl-block d-lg-block d-md-block d-sm-none d-none">
+													<img src="dist/img/controller.png" class="rolesImg">
+												</div>
+											</div>
+											<div class="col-md-12">
+												<p class="txt-block-content">
+													<strong>{{langTranslate.Assigning}} </strong>{{langTranslate.Concern_For_An_Appropriate_Action}}
+												</p>
+											</div>
+										</div>
+									</div>
+
+								</div>
+
+							</div>
+
+							 <!--<div class="col-md-3" style="padding:0px;">
+								<div class="col-md-12 mt-2 mb-2 approach-blk">
+									<div class="text-center">
+										<h3 class="title-color">Approach At</h3>
+									</div>
+
+									<div class="">
+									    <div class="" >
+									       <div class="col-md-12 col-sm-12 mb-2" style="padding:10% 0px;">
+									        	<div class="text-center blk-lvl">
+									        		<div class="blk-panel-header">
+									        			<label class="text-uppercase blk-lbl">Organisation Level</label>
+									        		</div>
+									        		<div class="blk-body">
+									        			<p class="txt-block-content text-left">
+																	Setup eNovation suggestion platform at organizational level.
+													</p>
+									        		</div>
+									        		<div class="btn-play-blk">
+									        			<img src="dist/img/icon-play.png">
+									        		</div>
+									        	</div>
+									        </div>
+
+									        <div class="col-md-12 col-sm-12"  style="padding:10% 0px;">
+									        	<div class="text-center blk-lvl">
+									        		<div class="blk-panel-header">
+									        			<label class="text-uppercase blk-lbl">Branch Level</label>
+									        		</div>
+									        		<div class="blk-body">
+									        			<p class="txt-block-content text-left">
+														Setup myeNovation platform at individual branch or plant or location wise.
+													</p>
+									        		</div>
+									        		<div class="btn-play-blk" style="bottom:-10%;">
+									        			<img src="dist/img/icon-play.png">
+									        		</div>
+									        	</div>
+									        </div>
+									    </div>
+									</div>
+								</div>
+							</div>--><!--closed column 3 -->
+						</div>
+					  </div>
+          </div>
+        </div>
+      </div>
+</div>
+</section>

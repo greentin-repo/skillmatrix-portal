@@ -1,0 +1,64 @@
+<link rel="stylesheet" href="content/employee/transferModules/transferData.css">
+<div class="modal right fade" id="transferPopup" tabindex="-1" role="dialog" aria-labelledby="transferPopup">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="row m0">
+                <div class="col-md-2 p0">
+                    <div class="" ng-scrollbars ng-style="transferDataSideBarHeight()">
+                        <div class="transferMenusDiv {{menu.class}}" ng-repeat="menu in transferFuncationalityMenu | filter:{'isActive':true}" ng-click="setMenuSelected(menu.id)">
+                            <p class="menuName col-md-12">{{menu.menuName}}
+                                <span class="menuCount m0">({{menu.count || 0}})</span>
+                            </p>
+                            <i class="fa fa-caret-right arrow-right" ng-if="menu.id == transferFunDet.selectedMenu.id"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-10 p0">
+                    <div class="modal-header">
+                        <h5 class="modal-title">{{transferFunDet.selectedMenu.menuName}} (Pending Actions)</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div ng-if="transferFuncationalityMenu != null && (transferFuncationalityMenu | filter:{isActive:true}:true).length > 0">
+                        <div ng-repeat="menu in transferFuncationalityMenu | filter:{isActive:true}">
+                            <div ng-if="menu.id == transferFunDet.selectedMenu.id">
+                                <div class="modal-body" style="padding: 0px;overflow:auto;height:580px;" ng-scrollbars ng-style="transferDataModalBodyHeight()">
+                                    <div ng-include="'content/employee/transferModules/suggestions.html'" ng-if="menu.id == transferFunDet.selectedMenu.id && menu.id == 1"></div>
+                                    <div ng-include="'content/employee/transferModules/audit.html'" ng-if="menu.id == transferFunDet.selectedMenu.id && menu.id == 2"></div>
+                                    <div ng-include="'content/employee/transferModules/kuber.html'" ng-if="menu.id == transferFunDet.selectedMenu.id && menu.id == 3"></div>
+                                    <div ng-include="'content/employee/transferModules/nearmiss.html'" ng-if="menu.id == transferFunDet.selectedMenu.id && menu.id == 4"></div>
+                                    <div ng-include="'content/employee/transferModules/dwm.html'" ng-if="menu.id == transferFunDet.selectedMenu.id && menu.id == 5"></div>
+                                    <div ng-include="'content/employee/transferModules/tpm.html'" ng-if="menu.id == transferFunDet.selectedMenu.id && menu.id == 6"></div>
+                                    <div ng-include="'content/employee/transferModules/skillBook.html'" ng-if="menu.id == transferFunDet.selectedMenu.id && menu.id == 7"></div>
+                                    <div ng-include="'content/employee/transferModules/pms.html'" ng-if="menu.id == transferFunDet.selectedMenu.id && menu.id == 8"></div>
+                                    <div ng-include="'content/employee/transferModules/concern.html'" ng-if="menu.id == transferFunDet.selectedMenu.id && menu.id == 9"></div>
+                                    <div ng-include="'content/employee/transferModules/survey.html'" ng-if="menu.id == transferFunDet.selectedMenu.id && menu.id == 10"></div>
+                                </div>
+                                <div class="modal-footer pr" style="padding: 15px;">
+                                    <div class="row">
+                                        <div class="col-md-8 text-left">
+                                            <ul ng-if="transferFunDet.selectedMenu.count>10" uib-pagination total-items="transferFunDet.selectedMenu.count" ng-model="transferListPagination.current" class="pagination customPagination pagination-sm" max-size="transferListPagination.maxsize" class="pagination-sm"
+                                                boundary-link-numbers="true" rotate="false" previous-text="&#xf060;" next-text="&#xf061;" ng-if="(transferFunDet.selectedMenu.count != null && transferFunDet.selectedMenu.count > 0)" ng-change="onPageChange(transferListPagination.current)">
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-4 text-right" style="margin:10px 0px;">
+                                            <!-- <button type="button" class="btn btn-primary" ng-click="nextPreviousAction('previous',menu);" ng-if="!$first">Previous</button>
+                                <button type="button" class="btn btn-primary" ng-click="nextPreviousAction('next',menu);" ng-if="!$last">Next</button> -->
+                                            <!-- closeModal('#transferPopup'); -->
+                                            <button type="button" class="btn btn-success submitBtn" ng-click="submitPendingActions()" ng-if="menu.count > 0">Submit</button>
+                                            <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-if="transferFuncationalityMenu == null || (transferFuncationalityMenu | filter:{isActive:true}:true).length == 0">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

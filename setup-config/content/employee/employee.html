@@ -1,0 +1,1035 @@
+<link rel="stylesheet" href="content/employee/employee.css">
+<div ng-include="'common/loading_indicator.html'"></div>
+<div ng-include="'common/nextPage.html'"></div>
+<div ng-show="isDeptAdded" class="container main-container pr" style="width: 100%;padding: 0px;">
+    <div style="display: inline-flex;margin-top: 2px;margin-left: 40px;" ng-show="!flagMemberListAvail">
+        <h3 class="txt-color-primary" style="margin-top: 13px;margin-right: 15px;font-size: 19px;">
+            Employee</h3>
+        <div class="btn-help" ng-click="showHelpPopup('employee')" style="margin-top: 8px;"><i
+                class="fa fa-question-circle"></i></div>
+    </div>
+
+    <div class="row" style="margin-left: 7px;margin-right: 5px;margin-bottom: 10px;">
+        <div class="" style="margin-top: 15px;">
+            <!-- <div class="col-md-3" style="text-align: center;position: relative; display: flex;
+            flex-direction: row;
+            gap: 1em;"> -->
+                <div class="col-md-2" style="text-align: center;position: relative;">
+                <div class="btn btn-default bg-color-primary" style="width: 45px;height: 45px;color: white;border-radius: 50%;" ng-click="createEmployee()">
+                    <i class="material-icons" style="position: relative;top: 3px;left: -2px;">add</i>
+                    <label style="position: absolute;top: -21px;left: 0px;right:0px;color: #7b7b7b;">{{langTranslate.Single_Addition}}</label>
+                </div>
+            </div>
+
+                <!-- <div class="btn btn-sm btn-default bg-color-primary addSugg-floatBtn"
+                    style="width: 34px;height: 34px;color: white;" ng-click="createEmployee()" data-toggle="tooltip"
+                    id="single">
+                    <i class="fa fa-plus" style="position: relative;top: 4px"></i>
+                </div>
+                <div class="btn btn-sm btn-default bg-color-primary addSugg-floatBtn"
+                    style="width: 34px;height: 34px;color: white;" ng-click="bulkModalPopUp()" data-toggle="tooltip"
+                    id="bulk">
+                    <i class="fa fa-upload" aria-hidden="true"
+                        style="font-size: 13px;position: relative;top: 3px;left: -1px;"></i>
+                </div>
+                <a class="btn btn-default bg-color-primary addSugg-floatBtn"
+                    style="color: white;font-size: 13px;height: 33px;" href="dist/docs/EmployeeUploadFile.xlsx" download
+                    id="sample" data-toggle="tooltip"><i class="fa fa-download" aria-hidden="true"></i>
+                    {{langTranslate.Sample_File}}</a> -->
+
+            </div>
+            <!-- <div>
+        <select class="form-control deptwiseGraph" placeholder="Select Plant" ng-model="selectBranchId"
+          ng-change="getEmployeeList(selectBranchId);"
+          style="height: 33px;margin-right: 2px;    width: 100%;margin-left: 21px;background: #4b4795;color: #FFF;">
+          <option value="{{branch.branchId}}" ng-repeat="branch in branchAccessList">
+            {{branch.branchName}}
+          </option>
+        </select>
+      </div> -->
+
+
+
+            <div class="col-md-8">
+                <div>
+                    <div style="position: relative;padding: 4px 4px 4px 4px;background: white;border: 1px solid lightgray;;border-radius: 4px;height: 44px;">
+                        <label style="top: -19px;text-align: center;width: 100%;left: 0px;position: absolute;line-height: 1;color: #7b7b7b;">{{langTranslate.Bulk_Addition}}</label>
+                        <div ng-show="flagexcelimport">
+                            <form id="upload-events-form" style="margin:0 auto;">
+                                <div style="display: inline-flex;width: 100%;">
+                                    <div style="padding: 6px 8px;border: 1px solid lightgray;margin-right: 2px;margin-right: 8px;width: 35%">
+                                        <i style="margin-right: 2px;" class="fa fa-file"></i>
+                                        <span ng-show="empExcel == '' || empExcel == null">Select .xls or xlsx
+                                            file</span>
+                                        <span ng-show="empExcel != '' && empExcel != null" style="color:#12ba42;font-weight: 500;">File
+                                            Selected </span>
+                                    </div>
+
+                                    <select class="form-control deptwiseGraph" placeholder="Select Plant" ng-model="uploadSelectBranchId" style="height: 33px;width: 30%;margin-right: 2px;background: #4b4795;color: #FFF;">
+                                         <option value="">Select Plant/Branch</option>
+                                        <option value="{{branch.branchId}}" ng-repeat="branch in branchAccessList">
+                                            {{branch.branchName}}
+                                        </option>
+                                    </select>
+                                    <button class="btn btn-default btn-file bg-color-primary" style="margin-right: 2px;color: white;font-size: 13px;position: relative;width: auto">{{langTranslate.Browse}}
+                                        <input style="height: 33px;width: 50px;" id="upload-file-input" type="file"
+                                            fileread="empExcel" accept=".xlsx , .xls" name="uploadEmployeeFile" />
+                                    </button>
+                                    <button class="btn btn-default bg-color-primary " style="color: white;font-size: 13px;padding: 6px 10px;height: 33px;" ng-click="addSetupDetails()" type="submit">{{langTranslate.Upload}}</button>
+                                    <a class="btn btn-default bg-color-primary " style="color: white;font-size: 13px;margin-left: 2px;height: 33px;" href="dist/docs/EmployeeUploadFile.xlsx"><i class="fa fa-download"
+                                            aria-hidden="true"></i>
+                                        {{langTranslate.Sample_File}}</a>
+                                </div>
+                            </form>
+                        </div>
+                        <div ng-show="flaguploaded">
+                           <div class="uploadedspinner"></div>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+
+
+            <!-- <div class="col-md-7">
+                <div ng-if="isBulkSelected" class="bulktabinfo">
+                    <div class="row">
+                        <div class="workflow">
+                            <div class="form-check" style="width: 100%; padding-left: 2rem;">
+                                <label class="form-check-label select-lbl"
+                                    style="cursor: pointer; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-weight: lighter;">
+                                    <input type="radio" class="form-check-input" name="safetyInci" value="CREATE"
+                                        ng-model="BulkLevelType">
+                                    Create Employee
+                                </label>
+                            </div>
+                            <div class="form-check" style="width: 100%; margin-left: 40px;">
+                                <label class="form-check-label select-lbl"
+                                    style="cursor: pointer;font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-weight: lighter;">
+                                    <input type="radio" class="form-check-input" name="safetyInci" value="UPDATE"
+                                        ng-model="BulkLevelType">
+                                    Modify Employee
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="padding-left: 2rem; padding-right: 2rem; padding-bottom: 2rem;">
+
+                        <div
+                            style="position: relative;padding: 4px 4px 4px 4px;background: white;border: 1px solid lightgray;;border-radius: 4px;height: 44px;">
+                            <div ng-if="flagexcelimport">
+                                <form id="upload-events-form" style="margin:0 auto;">
+                                    <div style="display: inline-flex;width: 100%; justify-content: space-evenly;"
+                                        class="input-group">
+                                        <div
+                                            style="padding: 6px 8px;border: 1px solid lightgray;margin-right: -9px;width: 40%">
+                                            <i style="margin-right: 2px;" class="fa fa-file"></i>
+                                            <span
+                                                ng-if="empExcelDetailsData.empExcel == '' ||empExcelDetailsData.empExcel == null">Select
+                                                .xls or xlsx
+                                                file</span>
+                                            <span
+                                                ng-if="empExcelDetailsData.empExcel != '' && empExcelDetailsData. empExcel != null"
+                                                style="color:#12ba42;font-weight: 500;">{{langTranslate.FileSelected}}</span>
+                                        </div>
+                                        <button class="btn btn-file"
+                                            style="margin-right: 2px;font-size: 13px;position: relative;width: auto;">{{langTranslate.Browse}}
+                                            <input style="height: 33px;width: 50px;" id="upload-file-input" type="file"
+                                                fileread="empExcelDetailsData.empExcel" accept=".xlsx , .xls"
+                                                name="uploadEmployeeFile" />
+                                        </button>
+                                        <select class="form-control deptwiseGraph" placeholder="Select Plant"
+                                            ng-model="empDet.uploadSelectBranchId"
+                                            style="height: 33px;width: 30%;margin-right: 2px;background: #4b4795;color: #FFF;">
+                                            <option value="">{{langTranslate.SelectPlantBranch}}</option>
+                                            <option value="{{branch.branchId}}" ng-repeat="branch in branchAccessList">
+                                                {{branch.branchName}}
+                                            </option>
+                                        </select>
+                                        <button class="btn btn-default bg-color-primary "
+                                            style="color: white;font-size: 13px;padding: 6px 10px;height: 33px;"
+                                            ng-click="addSetupDetails(BulkLevelType)"
+                                            type="button">{{langTranslate.Upload}}</button>
+
+                                        <button class="btn btn-default bg-color-primary "
+                                            style="color: white;font-size: 13px;padding: 6px 10px;height: 33px;"
+                                            type="button" ng-click="closeBulkUi()"><i class="fa fa-close"></i></button>
+
+                                    </div>
+                                </form>
+                            </div>
+                            <div ng-if="flaguploaded">
+                                <div class="uploadedspinner"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            <div class="col-md-2" style="padding: 0px;">
+                <div class="search-bar" style="margin-top: 6px;">
+                    <input id="text-id" type="text" placeholder="Search here..." ng-model="globalEmpId">
+                    <i class="fa fa-search"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin: 0px;">
+        <div class="col-md-3">
+            <div class="deptwrapper" style="width: 15%;">
+                <div class="selected-items-box" ng-click="deptToggle()">
+                    <span
+                        ng-if="(branchAccessList|filter:{isSelected:true}).length==0">{{langTranslate.SelectPlantBranch}}
+                        <i class="fa fa-chevron-circle-down" style="float:right;margin-top:2px;"></i>
+                    </span>
+                    <span
+                        ng-if="(branchAccessList|filter:{isSelected:true}).length>0 && !selectAllBranch">{{(branchAccessList|filter:{isSelected:true}).length}}
+                        {{langTranslate.Plant_Selected}}
+                        <i class="fa fa-chevron-circle-down" style="float:right;margin-top:2px;"></i>
+                    </span>
+                    <span ng-if="selectAllBranch">
+                        All
+                        <i class="fa fa-chevron-circle-down"
+                            style="float:right;margin-top:2px;width: 15%;margin: auto;text-align: center;"></i>
+                    </span>
+                </div>
+                <div class="list" style="background-color: white;">
+                    <ul class="items-list">
+                        <li ng-click="selectAllDepartment()"
+                            style="cursor: pointer;list-style: none;border-bottom: 1px solid lightgray;">
+                            <i class="fa fa-square-o" aria-hidden="true" ng-if="!selectAllBranch"></i>
+                            <i class="fa fa-check-square-o" aria-hidden="true" ng-if="selectAllBranch"></i>
+                            <span>All</span>
+                        </li>
+                        <li ng-repeat="x in branchAccessList" ng-click="setDeptSelected(x)"
+                            style="cursor: pointer;list-style: none;border-bottom: 1px solid lightgray;"
+                            ng-if="x.deptName!='All'">
+                            <i class="fa fa-square-o" aria-hidden="true" ng-if="!x.isSelected"></i>
+                            <i class="fa fa-check-square-o" aria-hidden="true" ng-if="x.isSelected"></i>
+                            <span>{{x.branchName}}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--------------------------------------- status dropdown by manoj------------------------------------- -->
+        <div class="col-md-2">
+            <!-- <div class="statuswrapper col-md-4" style="float:right ;">
+                <div class="selected-items-box" ng-click="statusToggle()">
+                    <span ng-if="!isSelected">{{langTranslate.Status}}
+                        <i class="fa fa-chevron-circle-down" style="float:right;margin-top:2px;"></i>
+                    </span >
+                   <span ng-if="isSelected">{{selectedStatus}}
+                    <i class="fa fa-chevron-circle-down" style="float:right;margin-top:2px;"></i>
+                   </span>
+                </div>
+                <div class="statusList" style="background-color: white;">
+                    <ul class="items-list">
+                        <li ng-repeat="x in statusLists" ng-click="statusSelected(x)" style="cursor: pointer;list-style: none;border-bottom: 1px solid lightgray;">
+
+                            <input type="radio" id="{{x.status}}" name="status" value="{{x.id}}">
+                            <label for="{{x.status}}">{{x.status}}</label><br>
+                        </li>
+                    </ul>
+                </div>
+            </div> -->
+        </div>
+        <div class="col-md-6" style="text-align: right;">
+            <div class="colorInfo">
+                <div ng-click="setSelectedSatus('All')" ng-class="{'selected':(filterDet.status == 'All')}">
+                    <span class="dot all" title="All"></span>
+                    <span class="txt">All</span>
+                </div>
+                <div ng-click="setSelectedSatus('Active')" ng-class="{'selected':(filterDet.status == 'Active')}">
+                    <span class="dot active" title="Active"></span>
+                    <span class="txt">{{langTranslate.Active}}</span>
+                </div>
+                <div ng-click="setSelectedSatus('Inactive')" ng-class="{'selected':(filterDet.status == 'Inactive')}">
+                    <span class="dot inActive" title="Inactive"></span>
+                    <span class="txt">{{langTranslate.Inactive}}</span>
+                </div>
+                <div ng-click="setSelectedSatus('Verified')" ng-class="{'selected':(filterDet.status == 'Verified')}">
+                    <span class="dot verify" title="Verified"></span>
+                    <span class="txt">{{langTranslate.Verified}}</span>
+                </div>
+                <div ng-click="setSelectedSatus('Deleted')" ng-class="{'selected':(filterDet.status == 'Deleted')}">
+                    <span class="dot deleted" title="Deleted"></span>
+                    <span class="txt">Deleted</span>
+                </div>
+            </div>
+            <div class="btn-help"
+                style="width: 22px;height: 22px;margin-top: 4px;margin-left: 10px;display: inline-flex;"
+                ng-click="showHelpPopup('emp_status')">
+                <i style="position: relative;left: 0.5px;font-size: 17px;" class="fa fa-question-circle"></i>
+            </div>
+
+        </div>
+
+        <div class="col-md-1">
+            <div ng-if="employeeList != null && (employeeList |filter: globalEmpId | filter:filterByStatus).length > 0"
+                style="float:right;cursor: pointer;">
+                <div style="cursor: pointer; background: white;padding: 2px;border: 1px solid lightgray; "
+                    ng-click="exportData()">
+                    <img src="dist\img\ic_excel.png" title="Export to excel" class="ic-excel">
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div ng-if="employeeList == null || (employeeList |filter: globalEmpId | filter:filterByStatus).length == 0"
+            class="teamDetNotAvailMsgBox">
+            <img class="image" src="dist/icons/ic_team_mgmt_gray.png">
+            <div>{{langTranslate.Data_not_available}}</div>
+        </div>
+        <div class="col-md-12"
+            ng-if="employeeList != null && (employeeList |filter: globalEmpId | filter:filterByStatus).length>0 ">
+            <div style="margin :0 auto;">
+                <table class="table table-striped table-hover tableBodyScroll">
+
+                    <thead>
+                        <tr>
+                            <th>{{langTranslate.Branch}}</th>
+                            <th>Level</th>
+                            <th>{{langTranslate.EmpID}}</th>
+                            <th>{{langTranslate.EmpName}}</th>
+                            <th>{{langTranslate.Email_ID}}</th>
+                            <th>{{langTranslate.MobileNo}}</th>
+                            <th>{{langTranslate.Department}}</th>
+                            <th>{{langTranslate.Designation}}</th>
+                            <th class="action">{{langTranslate.Action}}</th>
+                            <!-- <th class="status">{{langTranslate.Status}}</th> -->
+                        </tr>
+                    </thead>
+                    <div ng-show="flagEmployeeListSpinner" class="small-spinner"></div>
+                    <tbody ng-scrollbars>
+                        <tr
+                            ng-repeat="x in  filterData = (employeeList |filter: globalEmpId | filter:filterByStatus)|startFrom:(paginateConfig.current-1)*paginateConfig.itemsPerPage | limitTo:paginateConfig.itemsPerPage">
+                            <td>
+                                <span class="dot active" title="Active"
+                                    ng-if="x.isEmailVerified == 1 && x.loggedIn == 1 && x.isDeactive == 0"></span>
+                                <span class="dot inActive" title="Inactive"
+                                    ng-if="x.isEmailVerified == 0  && x.loggedIn == 0 && x.isDeactive == 0"></span>
+                                <span class="dot verify" title="Verified"
+                                    ng-if="x.isEmailVerified == 1  && x.loggedIn == 0 && x.isDeactive == 0"></span>
+                                <span class="dot deleted" title="Deleted" ng-if="x.isDeactive == 1"></span>&nbsp;
+                                {{x.branch.name}}
+                            </td>
+                            <td>{{x.empLevelDetails.levelName || ''}}</td>
+                            <td>{{x.cmpyEmpId| ifEmpty:''}}</td>
+                            <td class="txt-capitalize">{{x.fullName}}</td>
+                            <td>{{x.emailId | ifEmpty:''}}</td>
+                            <td>{{x.contactNo| ifEmpty:''}}</td>
+                            <td>{{x.dept.deptName}}</td>
+                            <td>{{x.designation}}</td>
+                            <td class="action text-center">
+                                <!-- <i class="material-icons" style="font-size: 20px;color: #00000094;cursor: pointer;padding:5%;" ng-click="editEmployee(x)">edit</i>
+                                <i class="fa fa-unlock" style="font-size: 20px;color: #00000094;cursor: pointer;padding:5%;vertical-align:bottom;" ng-click="resetPwdEmployee(x)"></i>
+                                <i class="material-icons" ng-click="showEmpDeleteModel(x)" style="color: #f75555;cursor: pointer;padding:5%;">delete_sweep</i> -->
+                                <div class="btn-group" uib-dropdown dropdown-append-to-body>
+                                    <button id="btn-append-to-body" type="button" class="btn" uib-dropdown-toggle>
+                                        <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                    </button>
+                                    <ul class="empActionOpt dropdown-menu-right" uib-dropdown-menu role="menu"
+                                        aria-labelledby="btn-append-to-body">
+                                        <li role="menuitem" ng-click="editEmployee(x)" ng-if="x.isDeactive == 0">
+                                            Edit
+
+                                        </li>
+                                        <li role="menuitem" ng-click="resetPwdEmployee(x)" ng-if="x.isDeactive == 0">
+                                            Reset Password
+                                        </li>
+                                        <li role="menuitem" ng-click="showEmpDeleteModel(x)" ng-if="x.isDeactive == 0">
+                                            Delete
+                                        </li>
+                                        <li role="menuitem" ng-click="confirmReactivateEmployee(x)"
+                                            ng-if="x.isDeactive == 1">
+                                            Reactivate Employee
+                                        </li>
+                                        <li role="menuitem" ng-click="openTransferPopup(x)">
+                                            Transfer Actions
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </td>
+                            <!-- <td class="status text-center">
+                                <span class="dot active" title="Active" ng-if="x.isEmailVerified == 1  && x.loggedIn == 1"></span>
+                                <span class="dot inActive" title="Inactive" ng-if="x.isEmailVerified == 0  && x.loggedIn == 0"></span>
+                                <span class="dot verify" title="Verified" ng-if="x.isEmailVerified == 1  && x.loggedIn == 0"></span>
+                            </td> -->
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="row" style="margin:0px;">
+                    <div class="col-md-4 text-left">
+                        <div class="pagination-rec-entries">
+                            Total Rows : {{filterData.length}}
+                        </div>
+                    </div>
+                    <div class="col-md-8 text-center">
+                        <ul uib-pagination total-items="filterData.length" ng-model="paginateConfig.current"
+                            class="pagination customPagination pagination-sm" max-size="5" class="pagination-sm"
+                            boundary-link-numbers="true" rotate="false" previous-text="&#xf060;" next-text="&#xf061;"
+                            ng-if="(filterData != null && filterData.length > 0)"
+                            ng-change="onPageChanged(paginateConfig.current)">
+                        </ul>
+                    </div>
+                    <!-- <div class="pagination-rec-entries">
+                        {{tableEntries}}
+                    </div>
+                    <dir-pagination-controls ng-show="flagTblemployee" pagination-id="tbl-employee" max-size="7" direction-links="true" boundary-links="true" on-page-change='onPageChanged(newPageNumber)'>
+                    </dir-pagination-controls> -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!------------------------Create Employee Model------------------------>
+    <div class="modal" id="employeeModal1" role="dialog">
+        <div class="modal-dialog" style="width: 900px;">
+            <div class="modal-content" style="height: auto;">
+                <div class="modal-header" style="border-bottom: 1px solid #27255a96;">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" id="title">{{langTranslate.AddEmployee}}</h4>
+                </div>
+                <form name="addemployeeForm" ng-submit="submitEmployee(addemployeeForm.$valid)" novalidate>
+                    <!-- .$valid -->
+                    <div class="modal-body" style="display: block; overflow: auto;"
+                        ng-style="{height:windowHeight - 195+'px'}" ng-scrollbars>
+                        <div class="row">
+                            <div class="col-md-6 col-md-12 col-sm-6" style="margin-top: 16px;">
+                                <label class="lbl-dep">Branch/Plant<label class="asterisk-color">*</label></label>
+                                <select class="lblEmpl" placeholder="Select Plant" ng-model="createSelectBranchId"
+                                    ng-change="getDepartmentList(createSelectBranchId);getemployeeLevelDetails(createSelectBranchId)"
+                                    name="createSelectBranchId" style="height: 33px;" required>
+                                    <option value="">Select Branch/Plant</option>
+                                    <option value="{{branch.branchId}}" ng-repeat="branch in branchAccessList">
+                                        {{branch.branchName}}
+                                    </option>
+                                </select>
+                                <p class="error"
+                                    ng-show="addemployeeForm.createSelectBranchId.$dirty && addemployeeForm.createSelectBranchId.$invalid">
+                                    Please Select Branch
+                                </p>
+                            </div>
+                            <div class="col-md-6 col-md-12 col-sm-6" style="margin-top: 14px;">
+                                <label class="label-emp">{{langTranslate.EmpID}}
+                                    <!--<label class="asterisk-color">*</label>-->
+                                </label>
+                                <input type="text" placeholder="Emp id" name="cmpyEmpId" ng-model="cmpyEmpId"
+                                    class="lblEmpl" maxlength="20">
+                                <p class="error"
+                                    ng-show="addemployeeForm.cmpyEmpId.$dirty && addemployeeForm.cmpyEmpId.$invalid">
+                                    {{langTranslate.Please_Enter_EmployeeID}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-md-12 col-sm-6" style="margin-top: 18px;">
+                                <label class="label-emp">{{langTranslate.First_Name}}<label
+                                        class="asterisk-color">*</label></label>
+                                <input type="text" name="fname" placeholder="First Name" ng-model="fname"
+                                    ng-pattern="/^[a-zA-Z\s]*$/" class="lblEmpl" required maxlength="50">
+                                <p class="error"
+                                    ng-show="addemployeeForm.fname.$error.required && addemployeeForm.fname.$dirty">
+                                    {{langTranslate.Please_Enter_First_Name}}</p>
+                                <p class="error" ng-show="addemployeeForm.fname.$error.pattern">No special characters
+                                    and numeric values allowed
+                                </p>
+                            </div>
+                            <div class="col-md-6 col-md-12 col-sm-6" style="margin-top: 18px;">
+                                <label class="label-emp">{{langTranslate.middle_name}}</label>
+                                <input type="text" name="Mname" placeholder="Middle Name" ng-model="Mname"
+                                    ng-pattern="/^[a-zA-Z\s]*$/" class="lblEmpl" maxlength="50">
+                                <p class="error" ng-show="addemployeeForm.Mname.$error.pattern">No special characters
+                                    and numeric values allowed
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-md-12 col-sm-6" style="margin-top: 18px;">
+                                <label class="label-emp">{{langTranslate.Last_Name}}</label>
+                                <input type="text" name="lname" placeholder="Last Name" ng-model="lname"
+                                    ng-pattern="/^[a-zA-Z\s]*$/" class="lblEmpl" maxlength="50">
+                                <p class="error" ng-show="addemployeeForm.lname.$error.pattern">No special characters
+                                    and numeric values allowed
+                                </p>
+                            </div>
+                            <div class="col-md-6 col-md-12 col-sm-6 date" style="margin-top: 15px;"
+                                ng-init="setDatePicker('doj')">
+                                <label class="label-emp">Date Of Joining <label class="asterisk-color">*</label></label>
+                                <input type="text" class="lblEmpl datepicker_doj" data-date-format="yyyy-mm-dd"
+                                    ng-model="doj" placeholder="Date Of Joining" onkeydown="return false;" name="doj">
+                            </div>
+                           
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-md-12 col-sm-6" style="margin-top: 33px;">
+                                <label class="lbl-dep">{{langTranslate.Department}}<label
+                                        class="asterisk-color">*</label></label>
+                                <select class="lblEmpl" name="dept" ng-model="dept"
+                                    ng-change="flagErrAddEmployeeDept = false;getLineNameList(dept);"
+                                    ng-options="departmentList as departmentList.deptName for departmentList in departmentList"
+                                    class="lblEmpl" style="font-size: 13px;">
+                                    <option value="">Please select department</option>
+                                </select>
+                                <p class="error" ng-show="flagErrAddEmployeeDept">
+                                    {{langTranslate.Please_Select_Department}}</p>
+                            </div>
+                            <div class="col-md-6 col-md-12 col-sm-6">
+                                <label class="lbl-deg">{{langTranslate.Designation}}</label>
+                                <input type="text" placeholder="Designation" name="designation" ng-model="designation"
+                                    maxlength="50" class="lblEmpl">
+                                <!-- <p class="error" ng-show="flagErrAdddesignation">Please Enter Designation</p> -->
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-md-12 col-sm-6" style="margin-top: 33px;" ng-init="lineFlag = 'N'">
+                                <!-- <label class="lbl-dep">{{langTranslate.Line}}
+                                    <label class="asterisk-color" ng-if="(lineNameList != null && lineNameList.length >0)">*</label>
+                                </label>
+                                <select class="lblEmpl" name="line" ng-model="line" ng-options="lineList as lineList.name for lineList in (lineNameList | filter : {isActive : '!'+N}) track by lineList.id" class="lblEmpl" style="font-size: 13px;">
+                                    <option value="">Please select line</option>
+                                </select> -->
+
+                                <label class="lbl-dep">{{langTranslate.Line}}
+                                    <label class="asterisk-color"
+                                        ng-if="(lineNameList != null && (lineNameList | filter : {isActive : '!'+lineFlag}:true).length >0)">*</label>
+                                </label>
+                                <select class="lblEmpl" name="line" ng-model="EmpData.line"
+                                    ng-options="lineList.name for lineList in (lineNameList | filter : { isActive : '!'+lineFlag}) track by lineList.id"
+                                    class="lblEmpl" style="font-size: 13px;" required>
+                                    <option value="">Please select line</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 col-md-12 col-sm-6">
+                                <label class="label-emp" style="margin-top: 35px;">Mobile No</label>
+                                <input type="text"
+                                    oninput="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')"
+                                    ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/"
+                                    name="contactno" placeholder="Mobile Number" class="lblEmpl" ng-model="contactno"
+                                    ng-minlength="10" maxlength="10">
+                                <!--<p class="error" ng-show="addemployeeForm.contactno.$error.required && addemployeeForm.contactno.$dirty">Please Enter Contact Number</p>-->
+                                <p class="error" ng-show="addemployeeForm.contactno.$error.pattern">
+                                    {{langTranslate.Please_Enter_Valid_MobileNumber}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-md-12 col-sm-6" style="margin-top: 16px;">
+                                <label class="label-emp">{{langTranslate.Email_ID}}
+                                    <!--<label class="asterisk-color">*</label>-->
+                                </label>
+                                <input type="email" placeholder="Email ID" name="emailId" ng-model="emailId"
+                                    ng-pattern="/^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/" ng-minlength="6"
+                                    ng-maxlength="250" class="lblEmpl">
+                                <p class="error"
+                                    ng-show="addemployeeForm.emailId.$error.required && addemployeeForm.emailId.$dirty">
+                                    {{langTranslate.Please_Enter_EmailID}}</p>
+                                <p class="error" ng-show="addemployeeForm.emailId.$error.pattern">
+                                    {{langTranslate.Please_Enter_Valid_EmailID}}</p>
+                            </div>
+
+                            <div class="col-md-6 col-md-12 col-sm-6 date">
+                                <!--style="margin-top: 15px;"-->
+                                <label class="label-emp">{{langTranslate.AnniversaryDate}}</label>
+                                <input type="text" class="lblEmpl datepicker_doa" data-date-format="yyyy-mm-dd"
+                                    ng-model="doa" placeholder="Anniversary date" ng-keyup="setDate('doa')"
+                                    onkeydown="return false;" name="doa">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-md-12 col-sm-6 date" style="margin-top: 15px;">
+                                <label class="label-emp">{{langTranslate.Dateofbirth}}</label>
+                                <input type="text" class="lblEmpl datepicker_dob" data-date-format="yyyy-mm-dd"
+                                    ng-model="dob" placeholder="Date Of Birth" ng-keyup="setDate('dob')"
+                                    onkeydown="return false;" name="dob">
+                            </div>
+                            <div class="col-md-6 col-md-12 col-sm-6 date" style="margin-top: 15px;">
+                                <label class="label-emp">Level Type <label class="asterisk-color"
+                                        ng-if="emplevelList != null && emplevelList.length > 0">*</label></label>
+                                <select class="lblEmpl" placeholder="Select Plant" ng-model="emplvlId"
+                                    style="height: 33px;">
+                                    <option value="">Select Level Type</option>
+                                    <option value="{{data.empLvlId}}" ng-repeat="data in emplevelList"
+                                        ng-if='data.isActive != "N"'>
+                                        {{data.levelName}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                           
+                            <div class="col-md-6 col-md-12 col-sm-6 date" style="margin-top: 15px;">
+                                    <label class="label-emp">{{langTranslate.address}}</label>
+                                    <textarea type="text" style="margin-top: 15px;" id="message" name="empAddr"
+                                    placeholder="Address" ng-model="empAddr" class="lblEmpl" rows="2"
+                                    maxlength="250"></textarea>
+                                <p class="error"
+                                    ng-if="form.addemployeeForm.empAddr.$invalid && (form.addemployeeForm.empAddr.$dirty || form.addemployeeForm.empAddr.$touched)">
+                                    <span ng-if="form.addemployeeForm.empAddr.$error.required">Please
+                                        enter address.</span>
+                                    <span ng-if="form.addemployeeForm.empAddr.$error.maxlength">Please enter valid
+                                        address.</span>
+                                </p>
+                            </div>
+                        </div>
+                       
+                    </div>
+                    <!--End Modal Body-->
+                    <div class="modal-footer">
+                        <div ng-show="flagAddSpinner" class="small-spinner addEmpSpinner"></div>
+                        <button ng-show="!flagAddSpinner" class="btn btn-category btn-addemp" type="submit"
+                            style="color:white;">{{langTranslate.AddEmployee}}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-------Update Employee -->
+    <div class="modal fade" id="employee_editModal1" role="dialog">
+        <div class="modal-dialog" style="width: 900px;">
+            <div class="modal-content" style="height: auto;">
+                <div class="modal-header" style="border-bottom: 1px solid #27255a96;">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" id="title">{{langTranslate.UpdateEmployee}}</h4>
+                </div>
+                <form name="updateemployeeForm" ng-submit="editEmpDet(updateemployeeForm,updateemployeeForm.$valid)"
+                    novalidate autocomplete="off">
+                    <div class="modal-body" style="display: block; overflow: auto;"
+                        ng-style="{height:windowHeight - 195+'px'}" ng-scrollbars>
+                        <div class="row">
+                            <div class="col-md-6 col-md-12 col-sm-6" style="margin-top: 16px;">
+                                <label class="lbl-dep">Branch/Plant<label class="asterisk-color">*</label></label>
+                                <!-- <input type="hidden" name="branch" class="lblEmpl" ng-model="branchId">
+                <label>{{brachName}}</label> -->
+                                <!-- <select class="lblEmpl" name="branch" ng-model="branchId" ng-change="flagErrAddEmployeeDept = false" class="lblEmpl">
+                                    <option ng-repeat="x in branchList" value="{{x.branchId}}" ng-selected="branchId == x.branchId" >{{x.name}}</option>
+                                </select> -->
+
+                                <!-- <p class="error" ng-show="flagErrAddEmployeeDept">Please select branch</p> -->
+                                <select class="lblEmpl" placeholder="Select Plant" ng-model="branchId"
+                                    name="updateSelectBranchId" style="height: 33px;"
+                                    ng-change="getDepartmentList(branchId);getemployeeLevelDetails(branchId)">
+                                    <option value="">Select Branch/Plant</option>
+                                    <option value="{{branch.branchId}}" ng-repeat="branch in branchAccessList"
+                                        ng-selected="selectBranchId == branch.branchId">
+                                        {{branch.branchName}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 col-md-12 col-sm-6" style="margin-top: 14px;">
+                                <label class="label-emp">{{langTranslate.EmpID}}</label>
+                                <input type="text" placeholder="Emp id" name="cmpyEmpId" value="{{EmpData.cmpyEmpId}}"
+                                    class="lblEmpl" ng-model="cmpyEmpId" maxlength="20">
+                                <!-- <p class="error" ng-show="updateemployeeForm.cmpyEmpId.$dirty && updateemployeeForm.cmpyEmpId.$invalid" ng-message="pattern">Please Enter Employee ID</p> -->
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 col-md-12 col-sm-6" style="margin-top: 18px;">
+                                <label class="label-emp">{{langTranslate.First_Name}}<label
+                                        class="asterisk-color">*</label></label>
+                                <input type="text" name="fname" placeholder="First Name" ng-model="firstName"
+                                    value="{{EmpData.firstName}}" ng-pattern="/^[a-zA-Z\s]*$/" class="lblEmpl" required
+                                    maxlength="50">
+                                <p class="error"
+                                    ng-show="updateemployeeForm.fname.$error.required && updateemployeeForm.fname.$dirty">
+                                    {{langTranslate.Please_Enter_First_Name}}</p>
+                                <p class="error" ng-show="updateemployeeForm.fname.$error.pattern">No special characters
+                                    and numeric values allowed
+                                </p>
+                            </div>                         
+                            <div class="col-md-6 col-md-12 col-sm-6" style="margin-top: 18px;">
+                                <label class="label-emp">{{langTranslate.middle_name}}</label>
+                                <input type="text" name="Mname" placeholder="Middle Name" ng-model="Mname"
+                                    ng-pattern="/^[a-zA-Z\s]*$/" class="lblEmpl" maxlength="50"   value="{{EmpData.lastName}}">
+                                <p class="error" ng-show="addemployeeForm.Mname.$error.pattern">No special characters
+                                    and numeric values allowed
+                                </p>
+                            </div>
+                           
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-md-12 col-sm-6" style="margin-top: 18px;">
+                                <label class="label-emp">{{langTranslate.Last_Name}}</label>
+                                <input type="text" name="lname" placeholder="Last Name" ng-model="lastName"
+                                    value="{{EmpData.lastName}}" ng-pattern="/^[a-zA-Z\s]*$/" class="lblEmpl"
+                                    maxlength="50">
+                                <p class="error" ng-show="updateemployeeForm.lname.$error.pattern">No special characters
+                                    and numeric values allowed
+                                </p>
+                            </div>
+                            <div class="col-md-6 col-md-12 col-sm-6 date" style="margin-top: 15px;">
+                                <label class="label-emp">Date Of Joining
+                                    <label class="asterisk-color">*</label>
+                                </label>
+                                <!-- <span ng-if="EmpData.doj == undefined || EmpData.doj == null || EmpData.doj == ''" ng-init="setDatePicker('doj')">
+                                    <input type="text" class="lblEmpl datepicker_doj" data-date-format="yyyy-mm-dd"
+                                        ng-model="doj" placeholder="Date Of Joining" onkeydown="return false;"
+                                        name="doj">
+                                </span>
+                                <span ng-if="EmpData.doj != undefined && EmpData.doj != null && EmpData.doj != ''">
+                                    <input type="text" class="lblEmpl" ng-model="EmpData.doj"
+                                        placeholder="Date Of Joining">
+                                </span> -->
+                                <input type="text" class="lblEmpl datepicker_doj" data-date-format="yyyy-mm-dd"
+                                    ng-model="doj" placeholder="Date of Joining" ng-keyup="setDate('doj')"
+                                    onkeydown="return false;" name="doj">
+                            </div>
+                        </div>
+                        <div class="row">                            
+                            <div class="col-md-6 col-md-12 col-sm-6" style="margin-top: 16px;">
+                                <label class="lbl-dep">{{langTranslate.Department}}<label
+                                        class="asterisk-color">*</label></label>
+                                <label ng-if="EmpData.departmentLevel.length>0">{{deptName}} (Controller)</label>
+                                <!--<input ng-if="EmpData.departmentLevel.length>0" type="hidden" name="dept" class="lblEmpl" ng-model="deptId">-->
+                                <select
+                                    ng-if="EmpData.departmentLevel == undefined || EmpData.departmentLevel.length==0"
+                                    class="lblEmpl" name="dept" ng-model="updatedept.deptId"
+                                    ng-change="getLineNameListForUpdate(updatedept.deptId);" class="lblEmpl">
+                                    <option value="">
+                                        Please Select Department</option>
+                                    <option ng-repeat="x in departmentList" value="{{x.deptId}}"
+                                        ng-selected="deptId == x.deptId">
+                                        {{x.deptName}}</option>
+                                </select>
+                                <p class="error" ng-show="flagErrAddEmployeeDept">
+                                    {{langTranslate.Please_Select_Department}}</p>
+                            </div>
+
+                            <div class="col-md-6 col-md-12 col-sm-6">
+                                <label class="lbl-deg">{{langTranslate.Designation}}</label>
+                                <input type="text" placeholder="Designation" name="designation" ng-model="designation"
+                                    value="{{EmpData.designation}}" maxlength="50" class="lblEmpl">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <!-- <div class="col-md-6 col-md-12 col-sm-6" style="margin-top: 33px;">
+                                <label class="lbl-dep">{{langTranslate.Line}}
+                                    <label class="asterisk-color"
+                                        ng-if="(lineNameList != null && lineNameList.length > 0)">*</label>
+                                </label>
+                                <select class="lblEmpl" name="line" ng-model="EmpData.line" ng-options="lineList as lineList.name for lineList in (lineNameList | filter : {isActive : '!'+N}) track by lineList.id" class="lblEmpl" style="font-size: 13px;">
+                                    <option value="">Please select line</option>
+                                </select>
+                            </div> -->
+
+                            <div class="col-md-6 col-md-12 col-sm-6" ng-init="lineFlag = 'N'">
+                                <label class="lbl-dep">{{langTranslate.Line}}
+                                    <label class="asterisk-color"
+                                        ng-if="lineNameList!= null && (lineNameList|filter:{isActive : '!'+lineFlag}:true).length > 0">*</label>
+                                </label>
+                                <select class="lblEmpl" name="line" ng-model="EmpData.line"
+                                    ng-options="lineList.name for lineList in (lineNameList | filter : { isActive : '!'+lineFlag }) track by lineList.id"
+                                    class="lblEmpl" style="font-size: 13px;" required>
+                                    <option value="">Please select line</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 col-md-12 col-sm-6">
+                                <label class="label-emp" style="margin-top: 26px;">{{langTranslate.MobileNo}}</label>
+                                <input type="text"
+                                    oninput="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')"
+                                    value="{{EmpData.contactNo}}"
+                                    ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/"
+                                    name="contactNo" placeholder="Mobile Number" class="lblEmpl" ng-model="contactNo"
+                                    ng-minlength="10" maxlength="10">
+                                <p class="error" ng-show="updateemployeeForm.contactNo.$error.pattern">
+                                    {{langTranslate.Please_Enter_Valid_MobileNumber}}</p>
+                                <!-- <input type="text" name="contactno" placeholder="Contact No" value="{{EmpData.contactNo}}" class="lblEmpl" ng-model="contactNo"> -->
+                                <!-- <input type="text" oninput="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')" ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/" name="contactno" placeholder="Contact No" value="{{EmpData.contactNo}}" class="lblEmpl"
+                                    ng-model="contactNo" ng-minlength="10" ng-maxlength="10"> -->
+                                <!-- <p class="error" ng-show="updateemployeeForm.contactno.$error.required && updateemployeeForm.contactno.$dirty">Please Enter Contact Number</p>-->
+                                <!-- <p class="error" ng-show="updateemployeeForm.contactno.$error.pattern">Please Enter Valid Mobile Number</p> -->
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-md-12 col-sm-6" style="margin-top: 16px;">
+                                <label class="label-emp">{{langTranslate.Email_ID}}
+                                    <!--<label class="asterisk-color">*</label>-->
+                                </label>
+                                <input type="email" placeholder="Email ID" name="emailId" ng-model="emailId"
+                                    value="{{EmpData.emailId}}" ng-minlength="6" ng-maxlength="250" class="lblEmpl">
+                                <p class="error"
+                                    ng-show="updateemployeeForm.emailId.$error.required && updateemployeeForm.emailId.$dirty">
+                                    {{langTranslate.Please_Enter_EmailID}}</p>
+                            </div>
+
+                            <div class="col-md-6 col-md-12 col-sm-6 date">
+                                <!--style="margin-top: 15px;"-->
+                                <label class="label-emp">{{langTranslate.AnniversaryDate}}</label>
+                                <input type="text" class="lblEmpl datepicker_doa" data-date-format="yyyy-mm-dd"
+                                    ng-model="doa" placeholder="Anniversary date" ng-keyup="setDate('doa')"
+                                    onkeydown="return false;" name="doa">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-md-12 col-sm-6 date" style="margin-top: 15px;">
+                                <label class="label-emp">{{langTranslate.Dateofbirth}}</label>
+                                <input type="text" class="lblEmpl datepicker_dob" data-date-format="yyyy-mm-dd"
+                                    ng-model="dob" placeholder="Date of birth" ng-keyup="setDate('dob')"
+                                    onkeydown="return false;" name="dob">
+                            </div>
+                            <div class="col-md-6 col-md-12 col-sm-6 date" style="margin-top: 15px;">
+                                <label class="label-emp">Level Type <label class="asterisk-color"
+                                        ng-if="emplevelList != null && emplevelList.length > 0">*</label></label>
+                                <select class="lblEmpl" placeholder="Select Plant" ng-model="empLvlDet"
+                                    style="height: 33px;">
+                                    <option value="">Select Level Type</option>
+                                    <option value="{{data.empLvlId}}" ng-repeat="data in emplevelList"
+                                        ng-if='data.isActive != "N"'>
+                                        {{data.levelName}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">                           
+                            <div class="col-md-6 col-md-12 col-sm-6 date" style="margin-top: 15px;">
+                                <label class="label-emp">{{langTranslate.address}}</label>
+                                <textarea type="text" style="margin-top: 15px;" id="message" name="empAddr"
+                                placeholder="Address" ng-model="empAddr" class="lblEmpl" rows="2"
+                                maxlength="250"></textarea>
+                            <p class="error"
+                                ng-if="form.addemployeeForm.empAddr.$invalid && (form.addemployeeForm.empAddr.$dirty || form.addemployeeForm.empAddr.$touched)">
+                                <span ng-if="form.addemployeeForm.empAddr.$error.required">Please
+                                    enter address.</span>
+                                <span ng-if="form.addemployeeForm.empAddr.$error.maxlength">Please enter valid
+                                    address.</span>
+                            </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div ng-show="flagupdateSpinner" class="small-spinner updateEmpSpinner"></div>
+                        <button ng-show="!flagupdateSpinner" class="btn btn-category btn-addemp" type="submit"
+                            style="color:white;">{{langTranslate.UpdateEmployee}}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div ng-show="!isDeptAdded" class="container main-container"
+    style="margin-left: 3.5%;width: 80%;margin-top: 150px;text-align: center;">
+    <h4 class="txt-color-primary" style="margin-bottom: 5px;">Hello {{empDetails.firstName}} {{empDetails.lastName}},
+    </h4>
+    <h3 style="margin-top: 8px;color: #636363;">{{langTranslate.department_to_proceed_further}}</h3>
+    <div style="margin-top: 30px;">
+        <select name="selectedDeptId" ng-model="selectedDeptId"
+            style="padding: 10px;width: 250px;font-size: 16px;color: #3c3c3c;border-radius: 5px;">
+            <option value="">{{langTranslate.SelectDepartment}}</option>
+            <option ng-repeat="x in departmentListForRegUser" value="{{x.deptId}}">{{x.deptName}}</option>
+        </select>
+    </div>
+    <div style="margin-top: 20px;">
+        <button class="btn btn-default bg-color-primary btn-submit-dept-desig"
+            ng-click="setDeptDesigOfRegUser()">{{langTranslate.Submit}}</button>
+    </div>
+
+</div>
+
+<div id="confirmDeleteModal" class="modal fade confirmDeleteModal1" role="dialog">
+    <div class="trans-bg"></div>
+    <img data-dismiss="modal" class="img-close" src="dist/icons/ic_close.png" style="top: 2em; width: 3em;right: 5em;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body" style="padding:10px;display: flex;height: 250px;background-color: #767da7c2;">
+                <div class="img-del-container">
+                    <img src="dist/icons/ic_delete_lg.png">
+                </div>
+                <b
+                    style="font-size: 18px;top: 26%; position: absolute;left: 39%;color: #4a4794;font-size: 28px;top: 26%;position: absolute;left: 32%; ">Are
+                    you sure</b>
+                <!-- <span style="color: #4a4794;font-size: 56px;top: 19%; position: absolute;left: 69%;">?</span> -->
+                <p class="msg" style="color: #4a4794bf;position: absolute;top: 47%;width: 95%;
+                    text-align: center; font-size: 23px;">{{langTranslate.remove_this_employee_from_list}}</p>
+                <div style="top: 82%;position: absolute; left: 63%;">
+                    <div ng-show="flagdeleteSpinner" class="small-spinner deleteSpinner"></div>
+                    <button ng-show="!flagdeleteSpinner" type="button" class="delete-btn" id="btnConfirmRemove"
+                        ng-click="employeeStatus(selectEmpForDel)">{{langTranslate.Yes}}</button>
+                    <button ng-show="!flagdeleteSpinner" type="button" class="delete-btn"
+                        data-dismiss="modal">{{langTranslate.No}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="confirmReactivateEmp" class="modal fade confirmDeleteModal1" role="dialog ">
+    <div class="trans-bg "></div>
+    <img data-dismiss="modal" class="img-close" src="dist/icons/ic_close.png" style="top: 2em; width: 3em;right: 5em; ">
+    <div class="modal-dialog ">
+        <div class="modal-content ">
+            <div class="modal-body"
+                style="padding:10px;display: flex;height: 250px;background-color: rgba(118,125,167,0.76); ">
+                <!-- <div class="img-del-container ">
+                    <img src="dist/icons/ic_delete_lg.png ">
+                </div> -->
+                <b style="font-size: 18px;top: 26%; position: absolute;left: 39%;color: #4a4794;font-size: 28px;top:
+                    26%;position: absolute;left: 32%; ">Are you sure</b>
+                <!-- <span style="color: #4a4794;font-size: 56px;top: 19%; position: absolute;left: 69%; ">?</span> -->
+                <p class="msg" style="color: rgba(74, 71, 148, 0.75);position: absolute;top: 47%;width: 95%;
+                    text-align: center; font-size: 23px; ">
+                    <!-- {{langTranslate.reactivate_this_employee}} -->
+                    that you want to reactivate this employee?
+                </p>
+                <div style="top: 82%;position: absolute; left: 63%; ">
+                    <div ng-if="flagdeleteSpinner" class="small-spinner deleteSpinner "></div>
+                    <button ng-if="!flagdeleteSpinner" type="button" class="delete-btn" id="btnConfirmRemove "
+                        ng-click="reactiveEmployee();">{{langTranslate.Yes}}
+                    </button>
+                    <button ng-if="!flagdeleteSpinner" type="button" class="delete-btn " class="close"
+                        data-dismiss="modal">{{langTranslate.No}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="statusMessageModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body" style="padding: 30px;">
+                <div style="text-align: center;">
+                    <i class="material-icons ic-popup">{{langTranslate.info}}</i>
+                    <div class="msg">{{statusMessage}}</div>
+                    <!-- <button type="button" class="btn btn-success" style="    margin-left: 0px;
+                    margin-top: 20px;">OK</button> -->
+                    <div class="btn-ok" data-dismiss="modal" {{langTranslate.Submit}}>{{langTranslate.OK}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div ng-include="'common/help_popup.html'"></div>
+<!-- Transfer Functionality -->
+<div ng-include="'content/employee/transferModules/transferFunctionality.html'"></div>
+<div ng-include="'content/employee/transferModules/transferEmpBranch.html'"></div>
+
+<!-------Error List while uploading -->
+<div class="modal fade" id="employee_errorlist" role="dialog">
+    <div class="modal-dialog" style="width: 900px;">
+        <div class="modal-content" style="height: auto;">
+            <div class="modal-header" style="border-bottom: 1px solid #27255a96;">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="title">{{langTranslate.Error_uploadedfile}}</h4>
+            </div>
+            <div class="modal-body" style="padding: 15px 15px 35px 15px;">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div style="margin :0 auto;">
+                            <table class="table">
+                                <tr style="color: #4b4795;">
+                                    <th>{{langTranslate.EmployeeID}}</th>
+                                    <th>{{langTranslate.First_Name}}</th>
+                                    <th>{{langTranslate.Last_Name}}</th>
+                                    <th>{{langTranslate.ContactNumber}}</th>
+                                    <th>{{langTranslate.Email_ID}}</th>
+                                    <th>{{langTranslate.Department}}</th>
+                                    <th>{{langTranslate.Comment}}</th>
+                                </tr>
+                                <tr dir-paginate="x in erroEmployeeList |itemsPerPage:7" pagination-id="tbl-employee1"
+                                    style="color: #333333;background-color: #fff;">
+                                    <td>{{x.employeeId}}</td>
+                                    <td class="txt-capitalize">{{x.firstName}}</td>
+                                    <td> {{x.lastName}}</td>
+                                    <td>{{x.contactNumber}}</td>
+                                    <td>{{x.emailId}}</td>
+                                    <td>{{x.department}}</td>
+                                    <td>{{x.comment}}</td>
+                                </tr>
+                            </table>
+                            <dir-pagination-controls pagination-id="tbl-employee1" max-size="7" direction-links="true"
+                                boundary-links="true">
+                            </dir-pagination-controls>
+                        </div>
+                    </div>
+                </div>
+                <!-- close row-->
+            </div>
+            <!-- close modal body-->
+            <div class="modal-footer">
+                <button type="button" class="deletebtn" data-dismiss="modal">{{langTranslate.Cancel}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-------Reset Password -->
+<div id="employee_resetPwd" class="modal fade" style="margin: 0 auto;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 class="modal-title" id="myModalLabel"><i class="fa fa-lock"></i> {{
+                    langTranslate.ResetAccountPasswordFor}} - <small
+                        style="vertical-align: middle;">{{selectResetPwdEmp.firstName}}
+                        {{selectResetPwdEmp.lastName}}</small></h3>
+            </div>
+            <div class="modalBody">
+                <div class="well" style="margin: 0px;border-radius: 0px;">
+                    <div class="padding-top-and-bottom-fiftheen-px align-text-center hidden-sm hidden-xs">
+                        <i class="fa fa-unlock-alt"
+                            style="width: 65px; height: 65px; font-size: 45px; margin: 0 auto 8px; padding-top: 7px; padding-left: 17px; display: block; border: solid 1px #CDCDCD; color: #CECECE; -moz-border-radius: 50%; -webkit-border-radius: 50%; border-radius: 50%;"></i>
+                    </div>
+                    <form name="resetAccountForm" ng-submit="resetPassword(resetAccountForm.$valid)"
+                        novalidate="novalidate">
+                        <div class="input-filed form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="UserPassword"><i class="fa fa-unlock-alt"
+                                        title="Choose password"></i></span>
+                                <input type="password" class="form-control" id="newPass" ng-model="newPassword"
+                                    name="newPassword" ng-maxlength="16" ng-minlength="8" required title="New password"
+                                    placeholder="New password" />
+                            </div>
+                            <p class="error"
+                                ng-show="resetAccountForm.newPassword.$error.required && resetAccountForm.newPassword.$dirty">
+                            </p>
+                            <p class="error"
+                                ng-show="resetAccountForm.newPassword.$error.maxlength && resetAccountForm.newPassword.$dirty">
+                                {{ langTranslate.Passwordmustbemaximumof16characters }} .</p>
+                            <p class="error"
+                                ng-show="resetAccountForm.newPassword.$error.minlength && resetAccountForm.newPassword.$dirty">
+                                {{ langTranslate.Passwordmustbeminimumof8characters }}.</p>
+                        </div>
+                        <div class="input-filed form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="UserPasswordMatch"><i class="fa fa-lock"
+                                        title="Choose password"></i></span>
+                                <input type="password" class="form-control" id="matchPass" ng-model="passwordMatch"
+                                    name="passwordMatch" ng-maxlength="16" ng-minlength="8" required
+                                    compare-to="newPassword" title="Confirm password" placeholder="Confirm password" />
+                            </div>
+                            <p class="error"
+                                ng-show="resetAccountForm.passwordMatch.$error.required && resetAccountForm.passwordMatch.$dirty">
+                            </p>
+                            <p class="error"
+                                ng-show="resetAccountForm.passwordMatch.$error.maxlength && resetAccountForm.passwordMatch.$dirty">
+                                {{ langTranslate.Passwordmustbeminimumof8characters }}.</p>
+                            <p class="error"
+                                ng-show="resetAccountForm.passwordMatch.$error.minlength && resetAccountForm.passwordMatch.$dirty">
+                                {{ langTranslate.Passwordmustbeminimumof8characters }}.</p>
+                            <!-- <p class="error" ng-show="flagPassDoesNotMatch"> Password Doesn't match.</p> -->
+                            <p class="error "
+                                ng-show="resetAccountForm.passwordMatch.$error.compareTo  && resetAccountForm.passwordMatch.$dirty">
+                                {{ langTranslate.NewPasswordandConfirmPassworddonotmatch }} .
+                            </p>
+                        </div>
+                        <div class="resetBtn">
+                            <button type="submit" class="btn btn-block btn-reset">{{ langTranslate.Submit }}</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div></div>
+<!-- <script>
+    document.getElementById('upload-file-input').onchange = function() {
+        var fileName = this.value;
+        alert('Selected file: ' + fileName);
+    };
+</script> -->

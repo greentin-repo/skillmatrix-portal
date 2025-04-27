@@ -1,0 +1,59 @@
+.lineLoader {
+    height: 3px;
+    width: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    overflow: hidden;
+    background-color: #ddd;
+}
+.lineLoader:before{
+  display: block;
+  position: absolute;
+  content: "";
+  left: -200px;
+  width: 200px;
+  height: 4px;
+  background-color: #33C771;
+  animation: loading 2s linear infinite;
+}
+
+.lineLoaderRelative {
+    height: 3px;
+    width: 100%;
+    position: relative;
+    top: 0px;
+    left: 0px;
+    overflow: hidden;
+    background-color: #ddd;
+}
+.lineLoader:before {
+    display: block;
+    position: absolute;
+    content: "";
+    left: -200px;
+    width: 200px;
+    height: 4px;
+    background-color: #33C771;
+    animation: loading 2s linear infinite;
+}
+
+.lineLoaderRelative:before{
+    display: block;
+    position: absolute;
+    content: "";
+    left: -200px;
+    width: 200px;
+    height: 4px;
+    background-color: #33C771;
+    animation: loading 2s linear infinite;
+}
+
+@keyframes loading {
+    from {left: -200px; width: 30%;}
+    50% {width: 30%;}
+    70% {width: 70%;}
+    80% { left: 50%;}
+    95% {left: 120%;}
+    to {left: 100%;}
+}

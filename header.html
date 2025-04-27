@@ -1,0 +1,72 @@
+<!-- header -->
+
+<header class="page-header">
+	<!-- navigation -->
+	<div class="main-top py-1">
+		<nav class="navbar navbar-expand-lg navbar-light fixed-navi">
+			<div class="container-fluid">
+				<!-- logo -->
+				<a class="navbar-brand font-weight-bold" href="index.html">
+					<!-- <i class="fa fa-ils mr-2" aria-hidden="true"></i>Inside -->
+					<img src="static-website/images/myenovation.jpg" class="logoEnovation" alt="myEnovationLogo">
+				</a>
+				<!-- //logo -->
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+				 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse text-center" id="navbarSupportedContent">
+					<ul class="navbar-nav ml-lg-auto">
+							<li class="ml-lg-5 mb-lg-0 mb-4 mt-3" class="btnFreeTrial">
+									<a href="index.html#services" class="reqe-button txtFreeTrial">Features
+									</a>
+								</li>
+						<li class="ml-lg-5 mb-lg-0 mb-4 mt-3" class="btnFreeTrial">
+							<a href="index.html#products" class="reqe-button txtFreeTrial">Products
+							</a>
+						</li>
+						<li class="ml-lg-5 mb-lg-0 mb-4 mt-3" class="btnFreeTrial">
+							<a href="Registration.html" class="reqe-button txtFreeTrial">Free Trial</a>
+						</li>
+						<!-- <li class="ml-lg-5 mb-lg-0 mb-4 mt-3" class="btnFreeTrial">
+							<a href="scheduleDemo.html" class="reqe-button txtFreeTrial">Demo</a>
+						</li> -->
+						<!-- <li class="nav-item mx-xl-5 mx-lg-3 my-lg-0 my-3">
+							<a class="nav-link mt-4" href="pricing.html">Pricing</a>
+						</li> -->
+						<!-- <li class="search my-lg-0 my-4">
+							<a class="play-icon popup-with-zoom-anim" href="#small-dialog">
+								<!-- <i class="fa fa-search" aria-hidden="true"></i> 
+								<img src="static-website/assets/images/support.svg"  class="iconSupport">
+								<div>
+									<p class="txtSupport">Support</p>
+								</div>
+							</a>
+						</li> -->
+						<li class="ml-lg-4 mb-lg-0 mb-4">
+							<a class="play-icon popup-with-zoom-anim" href="login.html">
+								<img src="static-website/assets/images/btn-login.png" class="iconLogin">
+								<div>
+									<p class="txtLogin">Login</p>
+								</div>
+							</a>
+
+						</li>
+				</div>
+			</div>
+		</nav>
+	</div>
+	<!-- //navigation -->
+</header>
+<!-- //header -->
+<script type="text/javascript">
+	$(window).scroll(function() {
+			var scroll = $(window).scrollTop();
+			// console.log(scroll);
+			if (scroll > 45) {
+					$(".page-header").addClass("addShadow");
+			}else {
+				$(".page-header").removeClass("addShadow");
+			}
+	});
+</script>

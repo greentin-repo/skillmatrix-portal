@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html ng-app="loginRegApp" ng-controller="loginCtrl" ng-cloak>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Login To myeNovation Portal</title>
+    <link rel="shortcut icon" type="image/x-icon" href="static-website/images/favicon.ico" />
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+
+    <!-- AdminLTE Skins. Choose a skin from the css/skins folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="bower_components/custom/common.css">
+    <link rel="stylesheet" href="dist/css/login.css">
+
+    <!-- Matearial Icons -->
+    <link rel="stylesheet" href="dist/fonts/google-material-icons/material_icons.css">
+
+    <!-- Google Font -->
+    <link rel="stylesheet" href="dist/fonts/roboto/roboto.css">
+
+    <style type="text/css">
+        [ng\:cloak],
+        [ng-cloak],
+        [data-ng-cloak],
+        [x-ng-cloak],
+        .ng-cloak,
+        .x-ng-cloak,
+        .ng-hide:not(.ng-hide-animate) {
+            display: none !important;
+        }
+        /*body {
+      background-image: url("static-website/assets/images/GabHomescreen3.jpg");
+      background-repeat: round;
+
+    }*/
+    </style>
+</head>
+
+<body class="hold-transition login-page">
+    <!--login-page-->
+    <div class="wrapper">
+        <div class="container">
+            <div class="row" style="margin-top: 150px;">
+                <div class="col-lg-8 col-md-4 text-center logo-name" style="margin-top: 0px;margin-bottom:5%;">
+                    <div class="row" style="margin-bottom: 5%;">
+                        <div class="col-md-4" style="padding: 0;text-align: right;">
+                            <img src="dist/icons/danaLogo.png" alt="DanaLogo" style="width: 60%;max-width: 100%;">
+                        </div>
+                        <div class="col-md-8" style="padding: 0;">
+                            <img src="dist/icons/ANANDLogo.png" alt="ANANDLogo" style="width: 50%;max-width: 100%;">
+                        </div>
+                    </div>
+                    <img style="height: 130px;margin-top: 0px;margin-left: 0px;max-width:100%;" src="dist/icons/my_enovation_white@2x.png">
+                    <img src="static-website/images/tredlogo.png" style="height: 22px;width: 22px;margin-top: 49px;margin-left: -9px;">
+                </div>
+                <div class="col-lg-4 col-md-7 col-sm-8 col-xs-12 col-login-form">
+                    <div class="login-block-container">
+                        <!-- <form name="loginForm" ng-submit="submitLoginForm(loginForm.$valid)" novalidate> -->
+                        <div class="row">
+                            <div class="col-md-12" style="text-align:center;min-height: 110px;">
+                                <img check-org-logo-loaded style="margin-top:30px;margin-bottom:0px;" height="80" src="{{orgLogoPath}}">
+                            </div>
+                        </div>
+                        <!--<div class="row">
+                                <div class="col-md-12" style="text-align:center;">
+                                    <h2 class="txt-green">Green Tin Solutions</h2>
+                                </div>
+                            </div>-->
+
+                        <div style="position: relative;">
+                            <div ng-if="!isEmailVerified" id="firstStepBlock" style="width: 100%;padding-left: 18px;padding-right: 18px;margin-top:30px;">
+                                <div class="form-group">
+                                    <label class="form-label" for="input-username">{{LANG_CONST.EMAIL_ID}}</label>
+                                    <input type="text" ng-keyup="error.errMgs = ''" ng-keydown="$event.keyCode === 13 && login()" name="username" ng-model="loginDet.username" class="form-control" id="input-username" placeholder="{{LANG_CONST.ENTR_EML_ID}}" style="width:108%;">
+                                </div>
+                            </div>
+
+                            <div ng-if="isEmailVerified" id="secondStepBlock" style="padding-left: 18px;padding-right: 18px;width: 100%;margin-top:30px;">
+                                <div class="form-group">
+                                    <div class="entered-email">
+                                        <i class="material-icons">email</i>
+                                        <div style="padding: 5px;">{{loginDet.username}}</div>
+                                    </div>
+                                    <div>
+                                        <div class="btn-change-email" ng-click="changeEmail()" style="font-size: 12px;">
+                                            {{LANG_CONST.CHANGE_EML}}</div>
+                                    </div>
+                                    <label class="form-label" for="input-pass">{{LANG_CONST.PASS}}</label>
+                                    <input type="password" ng-keyup="error.errMgs = ''" ng-keydown="$event.keyCode === 13 && login()" class="form-control" name="loginDet.pass" ng-model="loginDet.pass" id="input-pass" placeholder="{{LANG_CONST.ENTR_PASS}}">
+                                </div>
+                            </div>
+                        </div>
+
+                        <p ng-show="flagErrorMsg" class="error" style="padding-left: 18px;padding-right: 18px;margin-bottom: 0px;">
+                            {{error.errMgs}}</p>
+
+                        <div class="row" style="margin-top: 30px;margin-right: -35px;margin-left: -35px;">
+                            <div class="col-md-12" style="text-align:center;">
+                                <button id="btn-login" style="width:100%;" class="login-btn" ng-click="login()">
+                  <span class="login-lbl" ng-if="!isEmailVerified">{{LANG_CONST.VERIFY}}</span>
+                  <span class="login-lbl" ng-if="isEmailVerified">{{LANG_CONST.LOGIN}}</span>
+                  <i ng-show="!flagSpinner" class="material-icons" style="margin-left:127px;">arrow_forward</i>
+                  <i ng-show="flagSpinner" class="fa fa-spinner fa-spin"
+                    style="font-size: 24px;position: absolute;color: white;right: 99px;margin-top: 2px;"></i>
+                </button>
+                                <div style="margin-top: 21px;display: block;">
+                                    <a href="forgotPassword.html" style="font-size: 15px;">{{LANG_CONST.FORGOT_PASS}}</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- </form> -->
+                    </div>
+                    <div class="playStoreDiv" style="text-align: center;margin-top: 30px;">
+                        <a href="https://play.google.com/store/apps/details?id=com.enovation.greentinsolutions" target="_blank"><img src="dist/icons/google-play.png" height="50" width="140" alt="Play Store" /></a>
+                        <a href="https://itunes.apple.com/us/app/myenovation/id1451898012?ls=1&mt=8" target="_blank"><img src="dist/icons/App-Store-Transparent.png" height="60" width="160" alt="App Store" style="margin-top: -14px;" /></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="snackbar-container" data-snackbar="true" data-snackbar-duration="3000" data-snackbar-remove-delay="200">
+    </div>
+    <!-- jQuery 3 -->
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+
+    <!-- jQuery UI 1.11.4 -->
+    <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+
+    <!-- Angular JS -->
+    <script src="dist/ang/angular.min.js"></script>
+    <script src="dist/ang/angular-route.min.js"></script>
+    <script src="dist/ang/angular-translate.min.js"></script>
+    <script src="bower_components/snackbar/ang.snackbar.js"></script>
+    <script src="dist/ang/appDomain.js?ver=1.0.1"></script>
+    <script>
+        document.write('<script src="dist/ang/login_app.js?ver=' + appVersion + '"\><\/script>');
+        document.write('<script src="dist/ang/login.js?ver=' + appVersion + '"\><\/script>');
+        document.write('<script src="dist/ang/translateProvider.js?ver=' + appVersion + '"\><\/script>');
+    </script>
+
+    <!-- AdminLTE App -->
+    <script src="dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+    <script src="dist/js/pages/dashboard.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="dist/js/demo.js"></script>
+
+</body>
+
+</html>

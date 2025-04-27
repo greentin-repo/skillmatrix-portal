@@ -1,0 +1,64 @@
+<link rel="stylesheet" href="content/launchModule/launchModule.css?ver=123">
+<div class="modal fade in confirmationModal" role="dialog" style="display: block;">
+    <img src="../dist/icons/home-bg.jpg" alt="background" id="bg" class="backgroundImg">
+    <div class="modal-dialog">
+        <div class="modal-content" style="background: transparent">
+            <div class="modal-body" style="padding:10px;" ng-style="setSetCompletedHeight()">
+                <div class="rocket">
+                    <div class="img-success-container">
+                        <img src="../dist/icons/checkmark.png">
+                    </div>
+                    <audio id="clappingAudio">
+                        <source src="horse.ogg" type="audio/ogg">
+                        <source src="dist/audio/crowd-clapping1.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <div class="row logo-setup">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-4" style="padding: 0;">
+                            <img src="../dist/icons/danaLogo.png" alt="DanaLogo" style="width: 130px;height:70px;max-width: 100%;">
+                        </div>
+                        <div class="col-md-4" style="padding: 0;">
+                            <img src="../dist/icons/ANANDLogo.png" alt="ANANDLogo" style="width: 240px;height:40px;max-width: 100%;margin: 10px 0px">
+                        </div>
+                        <div class="col-md-2"></div>
+                    </div>
+                    <div class="textmsg text-center">
+                        <b style="font-size: 28px;">Congratulations!!</b><br />
+                        <!-- <h1>myeNovation - {{urlMenu}}</h1> -->
+                        <h1>myeNovation - Skill Book / PMS</h1>
+                        <!-- <h3>{{empDetails.organization.name}} <small>({{empDetails.branch.name}})</small></h3> -->
+                        <h3>Dana Anand India Pvt. Ltd.</h3>
+                        <h3>Launched!!</h3>
+                    </div>
+                </div>
+                <section class="rnOuter" ng-if="isPMSNewUser" ng-class="isLoading ? 'scroll' :''">
+                    <div class='rnInner'>
+                        <div class='rnUnit' ng-style="{'height': windowHeight+'px'}"></div>
+                        <div class='rnUnit' ng-style="{'height': windowHeight+'px'}"></div>
+                        <div class='rnUnit' ng-style="{'height': windowHeight+'px'}"></div>
+                        <div class='rnUnit' ng-style="{'height': windowHeight+'px'}"></div>
+                        <div class='rnUnit' ng-style="{'height': windowHeight+'px'}"></div>
+                        <div class='rnUnit' ng-style="{'height': windowHeight+'px'}"></div>
+                        <div class='rnUnit' ng-style="{'height': windowHeight+'px'}"></div>
+                        <div class='rnUnit' ng-style="{'height': windowHeight+'px'}"></div>
+                        <div class='rnUnit' ng-style="{'height': windowHeight+'px'}"></div>
+                        <div class='rnUnit' ng-style="{'height': windowHeight+'px'}"></div>
+                    </div>
+                    <button class="btn btn-success launchBtn" style="position: absolute; z-index: 999;top: 50%;left: 50%; transform: translate(-50%, -50%); width: 100px;" ng-click="goLive()" onclick="playAudio()" id="launchBtnClick" ng-if="isPMSNewUser">Launch</button>
+                </section>
+            </div>
+            <div class="modal-footer" style="border: none;" ng-if="!isPMSNewUser">
+                <!-- <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="setSelectedMenu();stopInterval();">Let's
+                    Go</button> -->
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var x = document.getElementById("clappingAudio");
+
+    function playAudio() {
+        x.play();
+    }
+</script>

@@ -1,0 +1,860 @@
+<link rel="stylesheet" href="content/redeem_Setup/redeemSetup.css">
+<section class="content pr">
+    <div class="container" style="width: 99%;">
+        <div ng-include="'common/loading_indicator.html'"></div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div style="display: inline-flex;margin-top: 10px;width: 85%;margin-left: 14px;">
+                    <h3 class="txt-color-primary" style="margin-top: 9px;margin-right: 15px;font-size: 19px;">
+                        {{langTranslate.Gifts_Rewards}}
+                    </h3>
+                    <div class="btn-help" ng-click="showHelpPopup()" style="margin-top: 6px;margin-right: 15px;"><i class="fa fa-question-circle" style="position: relative;left: -0.5px;"></i></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12" style="display: flex;">
+                <div class="main-tab-switcher" style="    margin-left: 15px;">
+                    <div class="main-tab-switch" ng-class="{mainActiveSwitch:isSetMainTab(1)}" ng-click="setMainTab(1)">
+                        {{langTranslate.Category}}
+                    </div>
+                    <div class="main-tab-switch" ng-class="{mainActiveSwitch:isSetMainTab(2)}" ng-click="setMainTab(2)">
+                        {{langTranslate.Vendors}}
+                    </div>
+                    <div class="main-tab-switch" ng-class="{mainActiveSwitch:isSetMainTab(3)}" ng-click="setMainTab(3)">
+                        {{langTranslate.Admin}}
+                    </div>
+                    <div class="main-tab-switch" ng-class="{mainActiveSwitch:isSetMainTab(4)}" ng-click="setMainTab(4)">
+                        {{langTranslate.Rewards}}
+                    </div>
+                    <div class="main-tab-switch" ng-class="{mainActiveSwitch:isSetMainTab(5)}" ng-click="setMainTab(5)">
+                        {{langTranslate.Communication}}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-12">
+            <div ng-show="isSetMainTab(1)" class="tab-content">
+                <div>
+                    <div class="vrt-tabs-details">
+                        <div class="add-new-cost-data-block">
+                            <div class="vendor" style="width:30%;">
+                                <label class="lbl-input" style="width: 100%;">{{langTranslate.CategoryName}}<label
+                    class="asterisk-color" style="color:red">*</label></label>
+                                <input class="form-control" placeholder="Category Name" type="text" name="categoryName" style="width: 100%;" ng-model="categoryName" required>
+                            </div>
+                            <div class="vendor" style="width:30%;">
+                                <label class="lbl-input" style="width: 100%;">{{langTranslate.Description}}<label class="asterisk-color"
+                    style="color:red">*</label></label>
+                                <input class="form-control" placeholder="Description" type="text" name="description" ng-model="description" style="width: 100%;">
+                            </div>
+                            <div class="btn-vendor1">
+                                <button ng-show="!flagAddcategory" type="submit" class="btn-add-cost-data btn" ng-click="saveCategory()">{{langTranslate.Add}}</button>
+                                <div ng-show="flagAddcategory" class="small-spinner addNewSmallSpinner"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div ng-if="!flagTeamListSpinner && rewardscatList.length==0  || rewardscatList==null" class="loadingIndicatorContainer ldng-ind-sm" style="margin-top: 150px;border: 2px solid lightgray;width: 259px;">
+                            <i class="fa fa-sliders fa-2x" style="color: black;" aria-hidden="true"></i>
+                            <div class="msg">Data not found.</div>
+                        </div>
+                        <table class="table customTable tbl-vendor-det " ng-if="rewardscatList!=null && rewardscatList.length>0 ">
+                            <thead>
+                                <tr>
+                                    <th>{{langTranslate.CategoryName}}</th>
+                                    <th style="width: 38%;">{{langTranslate.Description}}</th>
+                                    <th>{{langTranslate.Action}}</th>
+                                </tr>
+                            </thead>
+                            <tbody style="max-height:350px;overflow:auto;" ng-scrollbars>
+                                <tr ng-repeat="x in rewardscatList">
+                                    <td style=" margin-top: 13px;width: 32%;">
+                                        <input class="form-control" type="text" name="name" style=" width: 100%;" ng-if="x.isupdate" ng-model="x.categoryName" required placeholder="Category Name">
+                                        <div class="data-cost-det-card" ng-if="!x.isupdate">{{x.categoryName}}</div>
+                                    </td>
+                                    <td style=" margin-top: 13px;width: 16%;">
+                                        <input class="form-control" type="text" name="description" style="width: 100%;" ng-if="x.isupdate" ng-model="x.description" placeholder="Description">
+                                        <div class="data-cost-det-card" ng-if="!x.isupdate">{{x.description}}</div>
+                                    </td>
+                                    <td style="margin:auto;width: 10%;">
+                                        <div ng-if="!x.isupdate">
+                                            <i class="material-icons ic-action ic-edit" ng-click="updateCategorydata(x)">edit</i>
+                                            <i class="material-icons ic-action ic-delete" ng-click="deleteCategorypopup(x,'category')">delete_sweep</i>
+                                        </div>
+                                        <div ng-if="x.isupdate" style="display:flex;">
+                                            <button type="button" class="btn updateFreq btn-xs" ng-click="updateCategory(x)" style="width: 96%;margin-right: 8px;">{{langTranslate.Save}}</button>
+                                            <button type="button" class="btn cancelFreq btn-xs" ng-click="x.isupdate = false;cancelUpdate('category')" style="width: 83%;">{{langTranslate.Cancel}}</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div ng-show="isSetMainTab(2)" class="tab-content">
+                <div>
+                    <div class="vrt-tabs-details">
+                        <form name="addVendorForm" ng-submit="submitVendor(addVendorForm.$valid)" novalidate>
+                            <div>
+                                <div class="branch-txt">
+                                    <div style="display: inline-flex;width: 100%;">
+                                        <div class="txt-finance">
+                                            <span class="select-lbl">Select Branch</span>
+                                        </div>
+                                        <select class="form-control deptwiseGraph" placeholder="Select Branch" ng-model="selectBranchId" name="selectBranchId" ng-change="getVendorList()">
+                                  <option value="{{branch.branchId}}" ng-repeat="branch in branchAccessList">
+                                      {{branch.branchName}}
+                                  </option>
+                              </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="add-new-cost-data-block" style="margin-top: 30px;">
+                                <div class="vendor" style="width:30%;">
+                                    <label class="lbl-input" style="width: 100%;">{{langTranslate.VendorName}}<label
+                      class="asterisk-color" style="color:red">*</label></label>
+                                    <input class="form-control" placeholder="Name" type="text" name="name" style="width: 100%;" ng-pattern="/^[a-zA-Z\s]*$/" ng-model="name" required>
+                                    <!-- <p class="error" style="color: red;" ng-show="addVendorForm.name.$error.required && addVendorForm.name.$dirty && addVendorForm.name.$touched">Please Enter Name</p> -->
+                                    <p class="error" style="color: red;" ng-show="addVendorForm.name.$error.pattern">Enter characters only
+                                    </p>
+                                </div>
+                                <div class="vendor" style="width:30%;">
+                                    <label class="lbl-input" style="width: 100%;"> {{langTranslate.VendorEmail}}<label
+                      class="asterisk-color" style="color:red">*</label></label>
+                                    <input class="form-control" placeholder="Email" type="text" name="emailId" style="width: 100%;" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" maxlength="250" ng-model="emailId" required>
+                                    <p class="error" style="color: red;" ng-show="addVendorForm.emailId.$error.pattern">Please Enter Valid Email ID</p>
+                                </div>
+                                <div class="vendor" style="width:30%;">
+                                    <label class="lbl-input" style="width: 100%;"> {{langTranslate.VendorMobile}}<label
+                      class="asterisk-color" style="color:red">*</label></label>
+                                    <input class="form-control" placeholder="Contact No" type="text" name="contactNo" style="width: 100%" ng-model="contactNo" required minlength="10" maxlength="10" oninput="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
+                                    <p class="error" style="color: red;" ng-show="addVendorForm.contactNo.$error.minlength">Must be a valid 10 digit contact number</p>
+                                </div>
+                                <div class="btn-vendor1">
+                                    <button ng-show="!flagAddvendor" type="submit" class="btn-add-cost-data btn" ng-disabled="editVenderDiv">{{langTranslate.Add}}</button>
+                                    <div ng-show="flagAddvendor" class="small-spinner addNewSmallSpinner"></div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div>
+                        <div ng-if="!flagTeamListSpinner && vendorList.length==0  || vendorList==null" class="loadingIndicatorContainer ldng-ind-sm" style="margin-top: 150px;border: 2px solid lightgray;width: 259px;">
+                            <i class="fa fa-sliders fa-2x" style="color: black;" aria-hidden="true"></i>
+                            <div class="msg">Data not found.</div>
+                        </div>
+                        <table class="table customTable tbl-vendor-det " ng-if="vendorList!=null && vendorList.length>0 ">
+                            <thead>
+                                <tr>
+                                    <th>{{langTranslate.VendorName}}</th>
+                                    <th>{{langTranslate.VendorEmail}}</th>
+                                    <th>{{langTranslate.VendorMobile}}</th>
+                                    <th>{{langTranslate.Action}}</th>
+                                </tr>
+                            </thead>
+                            <tbody style="max-height:350px;overflow:auto;" ng-scrollbars>
+                                <tr ng-repeat="x in vendorList">
+                                    <td style=" margin-top: 13px;">
+                                        <!-- <label class="lbl-cost-det-card">Vendor Name <label class="asterisk-color" style="color:red">*</label></label> -->
+                                        <input class="form-control" type="text" name="name" style=" width: 100%;" ng-if="x.isupdate" ng-pattern="/^[a-zA-Z\s]*$/" ng-model="x.name" required placeholder="Name">
+                                        <div class="data-cost-det-card" ng-if="!x.isupdate">{{x.name}}</div>
+                                    </td>
+                                    <td style=" margin-top: 13px;">
+                                        <!-- <label class="lbl-cost-det-card">Vendor Email Id <label class="asterisk-color" style="color:red">*</label></label> -->
+                                        <input class="form-control" type="email" name="emailId" style="width: 100%;" ng-if="x.isupdate" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" ng-model="x.emailId" required placeholder="Email Id">
+                                        <div class="data-cost-det-card" ng-if="!x.isupdate">{{x.emailId}}</div>
+                                    </td>
+                                    <td style=" margin-top: 13px;">
+                                        <!-- <label class="lbl-cost-det-card">Vendor Mobile <label class="asterisk-color" style="color:red">*</label></label> -->
+                                        <input class="form-control" type="text" name="contactNo" style="width: 100%;" oninput="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')" minlength="10" maxlength="10" ng-model="x.contactNo" ng-if="x.isupdate" required>
+                                        <div class="data-cost-det-card" ng-if="!x.isupdate">{{x.contactNo}}</div>
+                                    </td>
+                                    <td style="margin:auto;width:10%;">
+                                        <div ng-if="!x.isupdate">
+                                            <i class="material-icons ic-action ic-edit" ng-click="updateVendorR(x)">edit</i>
+                                            <i class="material-icons ic-action ic-delete" ng-click="deletePopup(x,'vendor')">delete_sweep</i>
+                                        </div>
+                                        <div ng-if="x.isupdate">
+                                            <button type="button" class="btn updateFreq btn-xs" ng-click="updateVendor(x)">{{langTranslate.Save}}</button>
+                                            <button type="button" class="btn cancelFreq btn-xs" ng-click="x.isupdate = false;cancelUpdate('vendor')">{{langTranslate.Cancel}}</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div ng-show="isSetMainTab(3)" class="tab-content">
+                <div>
+                    <div class="vrt-tabs-details" style="display: flex;">
+                        <div>
+                            <div class="branch-txt" style="width: 23em;">
+                                <div style="display: inline-flex;width: 100%;">
+                                    <div class="txt-finance">
+                                        <span class="select-lbl">Select Branch</span>
+                                    </div>
+                                    <select class="form-control deptwiseGraph" placeholder="Select Branch" ng-model="selectBranchId" name="selectBranchId" ng-change="getAdminList()">
+                              <option value="{{branch.branchId}}" ng-repeat="branch in branchAccessList">
+                                  {{branch.branchName}}
+                              </option>
+                          </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="btn btn-default bg-color-primary" ng-click="showAddEmployeePopup()" style="position: relative;
+                        left: 25px;">
+                            <img style="width: 35px;padding: 4px;" src="dist/icons/ic_add_user.png">
+                            <label style="color: white;margin-left: 10px;margin-right: 10px;">Add Admin</label>
+                        </div>
+                        <!-- <form name="addPersonForm" ng-submit="submitPerson(addPersonForm.$valid)" novalidate>
+              <div class="add-new-cost-data-block">
+                <div class="vendor" style="width:30%;">
+                  <label class="lbl-input" style="width: 100%;">{{langTranslate.AdminName}}<label class="asterisk-color"
+                      style="color:red">*</label></label>
+                  <input class="form-control" placeholder=" Name" type="text" name="name" style="width: 100%;"
+                    ng-pattern="/^[a-zA-Z\s]*$/" ng-model="adminName" required>
+                  <p class="error" style="color: red;" ng-if="addPersonForm.name.$error.pattern">Enter characters only
+                  </p>
+                </div>
+                <div class="vendor" style="width:30%;">
+                  <label class="lbl-input" style="width: 100%;">{{langTranslate.AdminEmail}}<label
+                      class="asterisk-color" style="color:red">*</label></label>
+                  <input class="form-control" placeholder="Email" type="text" name="emailId" style="width: 100%;"
+                    ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" maxlength="250" ng-model="adminEmailId" required>
+                  <p class="error" style="color: red;" ng-show="addPersonForm.emailId.$error.pattern">Please Enter
+                    Valid
+                    Email ID</p>
+                </div>
+                <div class="vendor" style="width:30%;">
+                  <label class="lbl-input" style="width: 100%;">{{langTranslate.AdminMobile}}<label
+                      class="asterisk-color" style="color:red">*</label></label>
+                  <input class="form-control" type="text" placeholder="Contact No" name="contactNo" style="width: 100%"
+                    oninput="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')" minlength="10"
+                    maxlength="10" ng-model="adminContactNo" required>
+                  <p class="error" style="color: red;" ng-if="addPersonForm.contactNo.$error.pattern">Please Enter
+                    Valid
+                    Mobile Number</p>
+                </div>
+                <div style="margin: 1.5em auto auto;">
+                  <button type="submit" class="btn-add-cost-data btn"
+                    ng-disabled="editPersonDiv">{{langTranslate.Add}}</button>
+                </div>
+              </div>
+            </form> -->
+                    </div>
+                    <div>
+                        <div ng-if="!flagTeamListSpinner && personList.length==0 || personList==null" class="loadingIndicatorContainer ldng-ind-sm" style="margin-top: 150px;border: 2px solid lightgray;width: 259px;">
+                            <i class="fa fa-sliders fa-2x" style="color: black;" aria-hidden="true"></i>
+                            <div class="msg">Data not found.</div>
+                        </div>
+                        <table class="table customTable tbl-admin-det" ng-if="personList.length!=0 && personList!=null">
+                            <thead>
+                                <tr>
+                                    <th>{{langTranslate.ID}}</th>
+                                    <th>{{langTranslate.Name}}</th>
+                                    <th>{{langTranslate.Email_ID}}</th>
+                                    <th>{{langTranslate.ContactNo}}</th>
+                                    <th>{{langTranslate.Branch}}</th>
+                                    <th>{{langTranslate.Department}}</th>
+                                    <th>{{langTranslate.Designation}}</th>
+                                    <th>{{langTranslate.Action}}</th>
+                                </tr>
+                            </thead>
+                            <tbody style="max-height:350px;overflow:auto;" ng-scrollbars>
+                                <tr ng-repeat="x in personList">
+                                    <td>{{x.cmpyEmpId}}</td>
+                                    <td class="txt-capitalize">{{x.firstName}} {{x.lastName}}</td>
+                                    <td>{{x.emailId}}</td>
+                                    <td>{{x.contactNo}}</td>
+                                    <td>{{x.branchName}}</td>
+                                    <td>{{x.deptName}}</td>
+                                    <td>{{x.designation}}</td>
+                                    <td><i class="material-icons" ng-click="deletePopup(x,'person')" style="color: #f75555;cursor: pointer;"> delete_sweep</i></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div ng-show="isSetMainTab(4)" class="tab-content">
+                <div>
+                    <div class="vrt-tabs-details">
+                        <div>
+                            <div class="branch-txt" style="top: -25px;">
+                                <div style="display: inline-flex;width: 100%;">
+                                    <div class="txt-finance">
+                                        <span class="select-lbl">Select Branch</span>
+                                    </div>
+                                    <select class="form-control deptwiseGraph" placeholder="Select Branch" ng-model="selectBranchId" name="selectBranchId" ng-change="getRewardList()">
+                                  <option value="{{branch.branchId}}" ng-repeat="branch in branchAccessList">
+                                      {{branch.branchName}}
+                                  </option>
+                                </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="add-new-cost-data-block">
+                            <div class="vendor" style="width:50%;">
+                                <label class="lbl-input" style="padding-left: 8px;">{{langTranslate.Category}}</label>
+                                <select ng-model="redeem.categoryId" class="form-control" name="categoryId">
+                                  <option value="">Select Category</option>
+                                  <option ng-repeat="categoryName in rewardscatList" value="{{categoryName.id}}">
+                                    {{categoryName.categoryName}}</option>
+                                </select>
+                            </div>
+                            <div class="vendor" style="width: 100%;">
+                                <label class="lbl-input">{{langTranslate.GiftTitle}}</label>
+                                <input class="form-control" type="text" name="description" style="width: 100%;" ng-model="redeem.description" placeholder="Gift title" />
+                            </div>
+                            <div class="vendor" style="width: 20%;">
+                                <label class="lbl-input" style="width: 100%;">{{langTranslate.Points}}</label>
+                                <input class="form-control" type="number" name="points" style="width: 82px;" ng-model="redeem.points" placeholder="Points" />
+                            </div>
+                            <div class="vendor" style="width: 20%;">
+                                <label class="lbl-input" style="width: 100%;">Amount</label>
+                                <input class="form-control" type="number" name="amount" style="width: 92px;" ng-model="redeem.amount" placeholder="Amount" />
+                            </div>
+                            <div class="vendor">
+                                <label class="lbl-input" style="width: 100%;">{{langTranslate.GiftImage}}</label>
+                                <div class="img-block" ng-repeat="file in files">
+                                    <i class="clear-img  material-icons" ng-click="files.splice($index, 1);">clear </i>
+                                    <img ng-src="{{file.imgsrc}}" class="img-thumbnail" style="height: 33px;    padding: 0px;width: 71px;" ng-click="previewImageForCreateSugg(file.imgsrc)" ng-init="fileReader(file)">
+                                </div>
+                                <button class="btn btn-file" style="height: 33px;width: 75px;display: block;color: white;cursor: pointer;" ng-if="files.length==0">
+                                  <i class="material-icons">add</i>
+                                  <input type="file" id="file" onchange="angular.element(this).scope().getFileDetails(this)"
+                                    accept="image/*" />
+                                </button>
+                            </div>
+                            <div style="margin: 1.5em auto auto;">
+                                <button type="submit" ng-click="addReward(redeem)" class="btn-add-cost-data btn" ng-disabled="editRewardsDiv">{{langTranslate.Add}}</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div ng-if="!flagTeamListSpinner && rewardsList.length==0 || rewardsList==null" class="loadingIndicatorContainer ldng-ind-sm" style="margin-top: 150px;border: 2px solid lightgray;width: 259px;">
+                            <i class="fa fa-sliders fa-2x" style="color: black;" aria-hidden="true"></i>
+                            <div class="msg">Data not found.</div>
+                        </div>
+                        <table class="tbl-cost-det table tbl-particulars-det" ng-if="rewardsList.length!=0 && rewardsList!=null">
+                            <thead>
+                                <tr>
+                                    <th>{{langTranslate.GiftCode}}</th>
+                                    <th>{{langTranslate.Category}}</th>
+                                    <th>{{langTranslate.GiftTitle}}</th>
+                                    <th>{{langTranslate.Points}}</th>
+                                    <th>Amount</th>
+                                    <th>{{langTranslate.GiftImage}}</th>
+                                    <th>{{langTranslate.Action}}</th>
+                                </tr>
+                            </thead>
+                            <tbody style="max-height:250px;overflow:auto;" ng-scrollbars>
+                                <tr ng-repeat="x in rewardsList">
+                                    <td style="margin-top: 15px;">
+                                        <!-- <label class="lbl-cost-det-card">GiftCode</label> -->
+
+                                        <div class="data-cost-det-card" style="padding-top: 3px;">
+                                            {{x.giftCode}}
+                                            <!-- {{x.description}}({{x.giftCode}}) -->
+                                        </div>
+                                    </td>
+                                    <td style=" margin-left: 10%;margin-top: 15px;">
+                                        <!-- <label class="lbl-cost-det-card">Category</label> -->
+                                        <select ng-if="x.isupdate" ng-model="x.categoryId" class="form-control">
+                      <option ng-repeat="categoryName in rewardscatList" value="{{categoryName.id}}">
+                        {{categoryName.categoryName}}</option>
+                    </select>
+
+                                        <div class="data-cost-det-card" ng-if="!x.isupdate">{{x.category.categoryName}}</div>
+                                    </td>
+                                    <td style="margin-top: 15px;">
+                                        <!-- <label class="lbl-cost-det-card">Gift Title</label> -->
+                                        <input class="form-control" type="text" name="description" style="width: 100%;" ng-if="x.isupdate" ng-model="x.description" />
+                                        <div class="data-cost-det-card" ng-if="!x.isupdate">{{x.description}}</div>
+                                    </td>
+                                    <td style="margin-top: 15px;">
+                                        <!-- <label class="lbl-cost-det-card">Points</label> -->
+                                        <input class="form-control" type="number" name="points" style="width: 90%;" ng-if="x.isupdate" ng-model="x.points" />
+                                        <div class="data-cost-det-card" ng-if="!x.isupdate">{{x.points}}</div>
+                                    </td>
+                                    <td style="margin-top: 15px;">
+                                        <!-- <label class="lbl-cost-det-card">Points</label> -->
+                                        <input class="form-control" type="number" name="amount" style="width: 90%;" ng-if="x.isupdate" ng-model="x.amount" />
+                                        <div class="data-cost-det-card" ng-if="!x.isupdate">{{x.amount}}</div>
+                                    </td>
+                                    <td>
+                                        <!-- <label class="lbl-cost-det-card">Gift Image</label> -->
+                                        <div ng-if="x.isupdate" class="img-block" ng-repeat="file in files1">
+                                            <i class="clear-img  material-icons" ng-click="files1.splice($index, 1);">clear </i>
+                                            <img src="{{file.imgsrc}}" check-gift-image-loaded class="img-thumbnail" style="height: 33px;padding: 0px;width: 71px;" ng-src="{{file.imgsrc}}" ng-init="fileReader(file)">
+                                        </div>
+                                        <button ng-if="x.isupdate && files1.length == 0" class="btn btn-file btn-sm" style="height: 33px;width: 75px;display: block;color: white;cursor: pointer;" ng-if="files1.length==0">
+                      <i class="material-icons">add</i>
+                      <input type="file" id="file" onchange="angular.element(this).scope().getFileDetails1(this)"
+                        accept="image/*" />
+                    </button>
+                                        <div class="data-cost-det-card" ng-if="!x.isupdate"><img src="{{x.url}}" check-gift-image-loaded style="height: 50px;padding: 0px;width: 50px;" ng-click="previewImageForCreateSugg(x.url)">
+                                        </div>
+                                    </td>
+                                    <td style="margin:auto;">
+                                        <div style="margin-top:2px;float:right;display:inline-flex;" ng-if="!x.isupdate">
+                                            <i class="material-icons ic-action ic-edit" ng-if="!x.isupdate" ng-click="editRewards(x)">edit</i>
+                                            <i class="material-icons ic-action ic-delete" ng-click="deletePopup(x,'reward')">delete_sweep</i>
+                                        </div>
+                                        <div ng-if="x.isupdate">
+                                            <button type="button" class="btn updateFreq btn-xs" ng-click="addReward(x)">{{langTranslate.Save}}</button>
+                                            <button type="button" class="btn cancelFreq btn-xs" ng-click="x.isupdate = false;cancelUpdate('reward')">{{langTranslate.Cancel}}</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div ng-show="isSetMainTab(5)" class="tab-content">
+                <div>
+                    <div class="vrt-tabs-details">
+                        <div>
+                            <div class="branch-txt" style="left: 1px;top: -20px;">
+                                <div style="display: inline-flex;width: 100%;">
+                                    <div class="txt-finance">
+                                        <span class="select-lbl">Select Branch</span>
+                                    </div>
+                                    <select class="form-control deptwiseGraph" placeholder="Select Branch" ng-model="selectBranchId" name="selectBranchId" ng-change="getRewardResponsibleDataList()">
+                              <option value="{{branch.branchId}}" ng-repeat="branch in branchAccessList">
+                                  {{branch.branchName}}
+                              </option>
+                          </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="add-new-cost-data-block">
+                            <div class="vendor" style="width:30%">
+                                <label class="lbl-input" style="padding-left: 8px;">Title({{langTranslate.GiftCode}})<label
+                                class="asterisk-color" style="color:red">*</label></label>
+                                <select ng-model="giftCode" class="form-control" ng-model="giftCode" name="giftCode">
+                                <option value=""> Select Gift</option>
+                                <option ng-repeat="giftCode in rewardsList" value="{{giftCode.id}}" required>
+                                  {{giftCode.description}}({{giftCode.giftCode}})
+                                </option>
+                              </select>
+                            </div>
+                            <div class="vendor" style="width:30%;">
+                                <label class="lbl-input" style="width: 100%;">{{langTranslate.Vendor}} <label class="asterisk-color"
+                                  style="color:red">*</label></label>
+                                <div class="change-owner-block" ng-click="showVendorList()">
+                                    <div ng-if="selectedVendor==null" style="width:100%;margin:auto 5px;color: #717171;">Select Vendor
+                                    </div>
+                                    <div style="margin: auto 5px;width: 100%;" ng-if="selectedVendor!=null">
+                                        <div>{{selectedVendor.name}} </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="vendor" style="width:30%;">
+                                <label class="lbl-input" style="width: 100%;">{{langTranslate.Admin}}<label class="asterisk-color"
+                                  style="color:red">*</label></label>
+                                <div class="change-owner-block" ng-click="showPersonList()">
+                                    <div ng-if="selectedPerson==null" style="width:100%;margin:auto 5px;color: #717171;">Select Admin
+                                    </div>
+                                    <div style="margin: auto 5px;width: 100%;" ng-if="selectedPerson!=null">
+                                        <div>{{selectedPerson.firstName}} {{selectedPerson.lastName}} </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="margin: 1.5em auto auto;">
+                                <button type="button" class="btn-add-cost-data" style="width: 50px;height: 30px;" ng-click="addRewardResponsibleData()" ng-disabled="editCommunicationDiv">{{langTranslate.Add}}</button>
+                            </div>
+                        </div>
+                        <div>
+                            <div ng-if="!flagTeamListSpinner && rewardResponsibleList.length==0 || rewardResponsibleList==null" class="loadingIndicatorContainer ldng-ind-sm" style="margin-top: 150px;border: 2px solid lightgray;width: 259px;">
+                                <i class="fa fa-sliders fa-2x" style="color: black;" aria-hidden="true"></i>
+                                <div class="msg">Data not found.</div>
+                            </div>
+                            <table class="table customTable tbl-vendor-det" ng-if="rewardResponsibleList != null && rewardResponsibleList.length > 0">
+                                <thead>
+                                    <tr>
+                                        <th>Title({{langTranslate.GiftCode}})</th>
+                                        <th>{{langTranslate.Vendor}}</th>
+                                        <th>{{langTranslate.Admin}}</th>
+                                        <th>{{langTranslate.Action}}</th>
+                                    </tr>
+                                </thead>
+                                <tbody style="max-height:350px;overflow:auto;" ng-scrollbars>
+                                    <tr ng-repeat="x in rewardResponsibleList">
+                                        <td style=" margin-top: 13px;">
+                                            <!-- <label class="lbl-cost-det-card">Gift Code</label> -->
+                                            <!-- <div class="data-cost-det-card" style="padding-top: 3px;">
+                        {{x.rewards.description}} ({{x.rewards.giftCode}})</div> -->
+                                            <div class="data-cost-det-card" style="padding-top: 3px;">
+                                                {{x.description}} ({{x.giftCode}})</div>
+                                        </td>
+                                        <td style=" margin-top: 13px;">
+                                            <!-- <label class="lbl-cost-det-card">Vendor</label> -->
+                                            <!-- <div class="change-owner-block" ng-if="x.isupdate" ng-click="showVendorList()">
+                        <div style="margin:auto 5px;width: 100%;">
+                          <div ng-if="newVendorSelected.name == x.vendor.name">{{x.vendor.name}} </div>
+                          <div ng-if="newVendorSelected.name != x.vendor.name">{{newVendorSelected.name}} </div>
+                        </div>
+                      </div>
+                      <div class="data-cost-det-card" ng-if="!x.isupdate">{{x.vendor.name}}</div> -->
+                                            <div class="change-owner-block" ng-if="x.isupdate" ng-click="showVendorList()">
+                                                <div style="margin:auto 5px;width: 100%;">
+                                                    <div ng-if="newVendorSelected.name == x.name">{{x.name}} </div>
+                                                    <div ng-if="newVendorSelected.name != x.name">{{newVendorSelected.name}} </div>
+                                                </div>
+                                            </div>
+                                            <div class="data-cost-det-card" ng-if="!x.isupdate">{{x.name}}</div>
+                                        </td>
+                                        <td style=" margin-top: 13px;">
+                                            <!-- <label class="lbl-cost-det-card">Admin</label> -->
+                                            <!-- <div class="change-owner-block" ng-if="x.isupdate" ng-click="showPersonList()">
+                        <div style="margin:auto 5px;width: 100%;">
+                          <div ng-if="newPersonSelected.name == x.rewardRespDetails.name">{{x.rewardRespDetails.name}}
+                          </div>
+                          <div ng-if="newPersonSelected.name != x.rewardRespDetails.name">{{newPersonSelected.name}}
+                          </div>
+                        </div>
+                      </div>
+                      <div class="data-cost-det-card" ng-if="!x.isupdate">{{x.rewardRespDetails.name}}</div> -->
+                                            <div class="change-owner-block" ng-if="x.isupdate" ng-click="showPersonList()">
+                                                <div style="margin:auto 5px;width: 100%;">
+                                                    <div ng-if="newPersonSelected.name == x.adminName">{{x.adminName}}
+                                                    </div>
+                                                    <div ng-if="newPersonSelected.name != x.adminName">{{newPersonSelected.name}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="data-cost-det-card" ng-if="!x.isupdate">{{x.adminName}}</div>
+                                        </td>
+                                        <td style="margin:auto;width:10%;">
+                                            <div ng-if="!x.isupdate">
+                                                <i class="material-icons ic-action ic-edit" ng-click="updateData(x)">edit</i>
+                                                <i class="material-icons ic-action ic-delete" ng-click="deletePopup(x,'responsible')">delete_sweep</i>
+                                            </div>
+                                            <div ng-if=" x.isupdate">
+                                                <button type="button" class="btn updateFreq btn-xs" ng-click="updateRewardResponsibleData(x)">{{langTranslate.Save}}</button>
+                                                <button type="button" class="btn cancelFreq btn-xs" ng-click="x.isupdate = false;cancelUpdate('communication');">{{langTranslate.Cancel}}</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="modal fade" id="addVendor" role="dialog">
+    <div class="modal-dialog" style="width: 900px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title txt-color-primary" style="text-align: center;font-weight: 500;font-family: roboto;">
+                    Vendors List</h4>
+            </div>
+            <div class="modal-body">
+                <div class="search-box" style="margin-bottom: 14px;" ng-show="!flagEmpDetLoading && !flagEmpDetNotAvail">
+                    <input type="text" ng-model="searchEmp"><i style="margin-top: 3px;" class="fa fa-search"></i>
+                </div>
+                <div ng-show="flagEmpDetLoading" class="loadingIndicatorContainer ldng-ind-sm">
+                    <img src="dist/icons/ic_team_mgmt_gray.png">
+                    <div class="msg">{{langTranslate.Please_wait_empoyee_details_are_loading}}</div>
+                    <div style="width: 100px; margin:0 auto;" class="lineLoaderRelative"></div>
+                </div>
+                <div ng-show="flagEmpDetNotAvail" class="teamDetNotAvailMsgBox">
+                    <img class="image" src="dist/icons/ic_team_mgmt_gray.png">
+                    <div>Data not available</div>
+                </div>
+                <table class="team_det_table" ng-show="!flagEmpDetLoading && !flagEmpDetNotAvail">
+                    <thead style="display: inline-block;width: 100%;">
+                        <tr>
+                            <th style="width:10%;">Sr.</th>
+                            <th>Name</th>
+                            <th>Email ID</th>
+                            <th>Mobile Number</th>
+                        </tr>
+                    </thead>
+                    <tbody style="height: 350px;display: inline-block;width: 100%;overflow: auto;" ng-scrollbars>
+                        <tr ng-repeat="x in vendorList | filter : searchEmp" ng-click="setSelectedVendor(x)">
+                            <td style="width:10%;">{{$index+1}}</td>
+                            <td>{{x.name}}</td>
+                            <td>{{x.emailId}}</td>
+                            <td>{{x.contactNo}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- <div class="modal-footer" style="height: 66px;display: inline-flex;width: 100%;">
+        <button ng-show="!flagMemberAddSpinner" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div> -->
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="addPerson" role="dialog">
+    <div class="modal-dialog" style="width: 900px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title txt-color-primary" style="text-align: center;font-weight: 500;font-family: roboto;">
+                    Responsible Persons List</h4>
+            </div>
+            <div class="modal-body">
+                <div class="search-box" style="margin-bottom: 14px;" ng-show="!flagEmpDetLoading && !flagEmpDetNotAvail">
+                    <input type="text" ng-model="searchEmp"><i style="margin-top: 3px;" class="fa fa-search"></i>
+                </div>
+                <div ng-show="flagEmpDetLoading" class="loadingIndicatorContainer ldng-ind-sm">
+                    <img src="dist/icons/ic_team_mgmt_gray.png">
+                    <div class="msg">{{langTranslate.Please_wait_empoyee_details_are_loading}}</div>
+                    <div style="width: 100px; margin:0 auto;" class="lineLoaderRelative"></div>
+                </div>
+                <div ng-show="flagEmpDetNotAvail" class="teamDetNotAvailMsgBox">
+                    <img class="image" src="dist/icons/ic_team_mgmt_gray.png">
+                    <div>Data not available</div>
+                </div>
+                <table class="team_det_table" ng-show="!flagEmpDetLoading && !flagEmpDetNotAvail">
+                    <thead style="display: inline-block;width: 100%;">
+                        <tr>
+                            <!-- <th style="width:10%;">Sr.</th>
+              <th>Person Name</th>
+              <th>Email ID</th>
+              <th>Mobile Number</th> -->
+                            <th style="padding-left: 14px;">{{langTranslate.ID}}</th>
+                            <th>{{langTranslate.Name}}</th>
+                            <th>{{langTranslate.Email_ID}}</th>
+                            <th>{{langTranslate.ContactNo}}</th>
+                            <th>{{langTranslate.Branch}}</th>
+                            <th>{{langTranslate.Department}}</th>
+                            <th>{{langTranslate.Designation}}</th>
+                        </tr>
+                    </thead>
+                    <tbody style="height: 350px;display: inline-block;width: 100%;overflow: auto;" ng-scrollbars>
+                        <tr ng-repeat="x in personList | filter : searchEmp" ng-click="setSelectedPerson(x)">
+                            <td style="width: 23%;">{{x.cmpyEmpId}}</td>
+                            <td style="width: 26%;">{{x.firstName}} {{x.lastName}}</td>
+                            <td style="width: 40%;">{{x.emailId}}</td>
+                            <td style="width: 29%;">{{x.contactNo}}</td>
+                            <td style="width: 36%;">{{x.branchName}}</td>
+                            <td style="width: 19%;">{{x.deptName}}</td>
+                            <td style="width: 40%;">{{x.designation}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- <div class="modal-footer" style="height: 66px;display: inline-flex;width: 100%;">
+        <button ng-show="!flagMemberAddSpinner" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div> -->
+        </div>
+    </div>
+</div>
+
+
+<div id="deleteVendor" class="modal fade confirmDeleteModal" role="dialog">
+    <div class="trans-bg"></div>
+    <img data-dismiss="modal" class="img-close" src="dist/icons/ic_close.png" style="top: 2em; width: 3em;right: 5em;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body" style="text-align: center;padding:20px;height: 250px;background-color: #767da7c2;">
+                <div class="img-del-container">
+                    <img src="dist/icons/ic_delete_lg.png">
+                </div>
+                <div style="font-size: 18px;color: #4a4794;font-size: 28px;margin-top: 40px;"><b>Are you sure</b></div>
+                <!-- <span style="color: #4a4794;font-size: 56px;top: 19%; position: absolute;left: 69%;">?</span> -->
+                <p class="msg" style="color: #4a4794bf;width: 100%;text-align: center; font-size: 23px;margin-top: 20px;">
+                    that you want to remove this gift from cart </p>
+                <div style="margin-top: 17px;text-align: right;">
+                    <div ng-show="flagdeleteSpinner" class="small-spinner deleteSpinner" style="width: 40px;height: 40px;">
+                    </div>
+                    <button ng-show="!flagdeleteSpinner" type="button" class="delete-btn" id="btnConfirmRemove" ng-click="removeData()">{{langTranslate.Yes}}</button>
+                    <button ng-show="!flagdeleteSpinner" type="button" class="delete-btn" data-dismiss="modal">{{langTranslate.No}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="deleteRewards" class="modal fade confirmDeleteModal" role="dialog">
+    <div class="trans-bg"></div>
+    <img data-dismiss="modal" class="img-close" src="dist/icons/ic_close.png" style="top: 2em; width: 3em;right: 5em;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body" style="text-align: center;padding:20px;height: 250px;background-color: #767da7c2;">
+                <div class="img-del-container">
+                    <img src="dist/icons/ic_delete_lg.png">
+                </div>
+                <div style="font-size: 18px;color: #4a4794;font-size: 28px;margin-top: 40px;"><b>Are you sure</b></div>
+                <!-- <span style="color: #4a4794;font-size: 56px;top: 19%; position: absolute;left: 69%;">?</span> -->
+                <p class="msg" style="color: #4a4794bf;width: 100%;text-align: center; font-size: 23px;margin-top: 20px;">
+                    that you want to remove this gift from cart </p>
+                <div style="margin-top: 17px;text-align: right;">
+                    <div ng-show="flagdeleteSpinner" class="small-spinner deleteSpinner" style="width: 40px;height: 40px;">
+                    </div>
+                    <button ng-show="!flagdeleteSpinner" type="button" class="delete-btn" id="btnConfirmRemove" data-dismiss="modal" ng-click="deleteReward()">{{langTranslate.Yes}}</button>
+                    <button ng-show="!flagdeleteSpinner" type="button" class="delete-btn" data-dismiss="modal">{{langTranslate.No}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="deleteVender" class="modal fade confirmDeleteModal" role="dialog">
+    <div class="trans-bg"></div>
+    <img data-dismiss="modal" class="img-close" src="dist/icons/ic_close.png" style="top: 2em; width: 3em;right: 5em;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body" style="text-align: center;padding:20px;height: 250px;background-color: #767da7c2;">
+                <div class="img-del-container">
+                    <img src="dist/icons/ic_delete_lg.png">
+                </div>
+                <div style="font-size: 18px;color: #4a4794;font-size: 28px;margin-top: 40px;"><b>Are you sure</b></div>
+                <!-- <span style="color: #4a4794;font-size: 56px;top: 19%; position: absolute;left: 69%;">?</span> -->
+                <p class="msg" style="color: #4a4794bf;width: 100%;text-align: center; font-size: 23px;margin-top: 20px;">
+                    that you want to remove this gift from cart </p>
+                <div style="margin-top: 17px;text-align: right;">
+                    <div ng-show="flagdeleteSpinner" class="small-spinner deleteSpinner" style="width: 40px;height: 40px;">
+                    </div>
+                    <button ng-show="!flagdeleteSpinner" type="button" class="delete-btn" id="btnConfirmRemove" ng-click="deleteVendor()">{{langTranslate.Yes}}</button>
+                    <button ng-show="!flagdeleteSpinner" type="button" class="delete-btn" data-dismiss="modal">{{langTranslate.No}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="deletePerson" class="modal fade confirmDeleteModal" role="dialog">
+    <div class="trans-bg"></div>
+    <img data-dismiss="modal" class="img-close" src="dist/icons/ic_close.png" style="top: 2em; width: 3em;right: 5em;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body" style="text-align: center;padding:20px;height: 250px;background-color: #767da7c2;">
+                <div class="img-del-container">
+                    <img src="dist/icons/ic_delete_lg.png">
+                </div>
+                <div style="font-size: 18px;color: #4a4794;font-size: 28px;margin-top: 40px;"><b>Are you sure</b></div>
+                <!-- <span style="color: #4a4794;font-size: 56px;top: 19%; position: absolute;left: 69%;">?</span> -->
+                <p class="msg" style="color: #4a4794bf;width: 100%;text-align: center; font-size: 23px;margin-top: 20px;">
+                    that you want to remove this gift from cart </p>
+                <div style="margin-top: 17px;text-align: right;">
+                    <div ng-show="flagdeleteSpinner" class="small-spinner deleteSpinner" style="width: 40px;height: 40px;">
+                    </div>
+                    <button ng-show="!flagdeleteSpinner" type="button" class="delete-btn" id="btnConfirmRemove" data-dismiss="modal" ng-click="deletePerson()">{{langTranslate.Yes}}</button>
+                    <button ng-show="!flagdeleteSpinner" type="button" class="delete-btn" data-dismiss="modal">{{langTranslate.No}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="deleteResPerson" class="modal fade confirmDeleteModal" role="dialog">
+    <div class="trans-bg"></div>
+    <img data-dismiss="modal" class="img-close" src="dist/icons/ic_close.png" style="top: 2em; width: 3em;right: 5em;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body" style="text-align: center;padding:20px;height: 250px;background-color: #767da7c2;">
+                <div class="img-del-container">
+                    <img src="dist/icons/ic_delete_lg.png">
+                </div>
+                <div style="font-size: 18px;color: #4a4794;font-size: 28px;margin-top: 40px;"><b>Are you sure</b></div>
+                <!-- <span style="color: #4a4794;font-size: 56px;top: 19%; position: absolute;left: 69%;">?</span> -->
+                <p class="msg" style="color: #4a4794bf;width: 100%;text-align: center; font-size: 23px;margin-top: 20px;">
+                    that you want to remove this gift from cart </p>
+                <div style="margin-top: 17px;text-align: right;">
+                    <div ng-show="flagdeleteSpinner" class="small-spinner deleteSpinner" style="width: 40px;height: 40px;">
+                    </div>
+                    <button ng-show="!flagdeleteSpinner" type="button" class="delete-btn" id="btnConfirmRemove" data-dismiss="modal" ng-click="deleteRewardResponsibleData()">{{langTranslate.Yes}}</button>
+                    <button ng-show="!flagdeleteSpinner" type="button" class="delete-btn" data-dismiss="modal">{{langTranslate.No}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--------------------Category Delete popup---------------->
+<div id="deletecategory" class="modal fade confirmDeleteModal" role="dialog">
+    <div class="trans-bg"></div>
+    <img data-dismiss="modal" class="img-close" src="dist/icons/ic_close.png" style="top: 2em; width: 3em;right: 5em;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body" style="text-align: center;padding:20px;height: 250px;background-color: #767da7c2;">
+                <div class="img-del-container">
+                    <img src="dist/icons/ic_delete_lg.png">
+                </div>
+                <div style="font-size: 18px;color: #4a4794;font-size: 28px;margin-top: 40px;"><b>Are you sure</b></div>
+                <!-- <span style="color: #4a4794;font-size: 56px;top: 19%; position: absolute;left: 69%;">?</span> -->
+                <p class="msg" style="color: #4a4794bf;width: 100%;text-align: center; font-size: 23px;margin-top: 20px;">
+                    that you want to remove this gift from cart </p>
+                <div style="margin-top: 17px;text-align: right;">
+                    <div ng-show="flagdeleteSpinner" class="small-spinner deleteSpinner" style="width: 40px;height: 40px;">
+                    </div>
+                    <button ng-show="!flagdeletecategorySpinner" type="button" class="delete-btn" id="btnConfirmRemove" data-dismiss="modal" ng-click="deleteCategory()">{{langTranslate.Yes}}</button>
+                    <button ng-show="!flagdeletecategorySpinner" type="button" class="delete-btn" data-dismiss="modal">{{langTranslate.No}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!------Add Employee-->
+<div class="modal fade" id="addEmployeeModal" role="dialog">
+    <div class="modal-dialog" style="width: 1100px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title txt-color-primary" style="text-align: center;font-weight: 500;font-family: roboto;">
+                    Add Admin Person</h4>
+            </div>
+            <div class="modal-body">
+                <div class="search-box" style="margin-bottom: 14px;" ng-show="!flagEmpDetLoading">
+                    <input type="text" ng-model="searchEmp"><i style="margin-top: 3px;" class="fa fa-search"></i>
+                </div>
+                <div ng-show="flagEmpDetLoading" class="loadingIndicatorContainer ldng-ind-sm">
+                    <img src="dist/icons/ic_team_mgmt_gray.png">
+                    <div class="msg">{{langTranslate.Please_wait_empoyee_details_are_loading}}</div>
+                    <div style="width: 100px; margin:0 auto;" class="lineLoaderRelative"></div>
+                </div>
+                <div ng-show="flagEmpDetNotAvail" class="teamDetNotAvailMsgBox">
+                    <img class="image" src="dist/icons/ic_team_mgmt_gray.png">
+                    <div>Data not available</div>
+                </div>
+                <table class="emp_det_table" ng-show="!flagEmpDetLoading">
+                    <thead style="display: inline-block;width: 100%;height: 40px;">
+                        <tr>
+                            <th>{{langTranslate.Select}}</th>
+                            <th>{{langTranslate.EmployeeID}}</th>
+                            <th>{{langTranslate.Name}}</th>
+                            <th>{{langTranslate.ContactNo}}</th>
+                            <th>{{langTranslate.Email_ID}}</th>
+                            <th>{{langTranslate.Department}}</th>
+                            <th>{{langTranslate.Designation}}</th>
+                        </tr>
+                    </thead>
+                    <tbody style="height: 350px;display: inline-block;width: 100%;overflow: auto;" ng-scrollbars>
+                        <tr ng-repeat="x in employeeList | filter : searchEmp" ng-if="x.isDeactive == 0" ng-click="selectEmployee('#empChk' + x.empId);checkTeamEmp(x)" style="cursor:pointer;">
+                            <td><input type="radio" name="empChk" value="{{x.empId}}" id="empChk{{x.empId}}" ng-model="x.isChecked" ng-click="selectEmployee('#empChk' + x.empId)" style="margin: 0px;">
+                            </td>
+                            <td>{{x.cmpyEmpId}}</td>
+                            <td>{{x.firstName}} {{x.lastName}}</td>
+                            <td>{{x.contactNo}}</td>
+                            <td>{{x.emailId}}</td>
+                            <td>{{x.dept.deptName}}</td>
+                            <td>{{x.designation}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer" style="height: 66px;display: inline-flex;width: 100%;">
+                <div class="err-sel-member">{{errSelectMemberMsg}}</div>
+                <div ng-show="flagMemberAddSpinner" style="position: unset;width: 35px;height: 35px;" class="small-spinner">
+                </div>
+                <button ng-show="!flagMemberAddSpinner" type="button" class="btn btn-default" data-dismiss="modal">{{langTranslate.Close}}</button>
+                <button ng-show="!flagMemberAddSpinner && !flagEmpDetLoading && !flagEmpDetNotAvail" type="button" class="btn btn-default bg-color-primary txt-white" ng-click="addAdminPerson()" style="width: 88px;">{{langTranslate.Add}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div ng-include="'common/help_popup.html'"></div>

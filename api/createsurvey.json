@@ -1,0 +1,7 @@
+{
+    "surveyId": 4,
+    "question": "This is Third Questions with Multi Choice Options",
+    "choiceTypeId": 2,
+    "createdById": 1,
+    "optionsList":[]
+}

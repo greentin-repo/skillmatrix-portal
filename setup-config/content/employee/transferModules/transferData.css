@@ -1,0 +1,402 @@
+.p0 {
+    padding: 0px;
+}
+
+.m0 {
+    margin: 0px;
+}
+
+.modal.right.transferEmpBranchPopup .modal-dialog {
+    width: 75%;
+}
+
+.modal.right.transferEmpBranchPopup.fade .modal-dialog {
+    right: -75%;
+}
+
+.modal.right .modal-dialog {
+    position: fixed;
+    margin: auto;
+    width: 95%;
+    height: 100%;
+    -webkit-transform: translate3d(0%, 0, 0);
+    -ms-transform: translate3d(0%, 0, 0);
+    -o-transform: translate3d(0%, 0, 0);
+    transform: translate3d(0%, 0, 0);
+    background: #ffffff 0% 0% no-repeat padding-box;
+    box-shadow: -6px -11px 6px #00000029;
+}
+
+.modal.right.fade .modal-dialog {
+    right: -95%;
+    -webkit-transition: opacity 0.3s linear, right 0.3s ease-out;
+    -moz-transition: opacity 0.3s linear, right 0.3s ease-out;
+    -o-transition: opacity 0.3s linear, right 0.3s ease-out;
+    transition: opacity 0.3s linear, right 0.3s ease-out;
+}
+
+.modal.right.fade.in .modal-dialog {
+    right: 0;
+}
+
+.modal.right .modal-content {
+    height: 100%;
+    border-radius: 0px;
+}
+
+.modal.right .modal-content .modal-header .close {
+    padding: 4px 10px;
+}
+
+.modal.right .modal-content .modal-header {
+    padding: 10px;
+}
+
+.modal.right .modal-content .modal-header .modal-title {
+    display: inline-block;
+    text-align: left;
+    font: normal normal 500 18px/1.5 Helvetica Neue;
+    letter-spacing: 0;
+    color: #7044CD;
+}
+
+.transferMenusDiv {
+    width: calc(100% - 3rem);
+    max-width: calc(100% - 3rem);
+    height: 4em;
+    box-shadow: 3px 0px 4px #00000029, 3px 0px 4px #00000029;
+    border: 1px solid #7044CD;
+    border-radius: 7px;
+    margin: 6px 1rem;
+    position: relative;
+    cursor: pointer;
+}
+
+.transferMenusDiv .menuName {
+    text-align: left;
+    font: normal normal 500 15px/1.5 Helvetica Neue;
+    letter-spacing: 0px;
+    color: #515774;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    margin: 0px;
+}
+
+.transferMenusDiv.active {
+    background: #7044CD;
+    border: none;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.transferMenusDiv.active .menuName {
+    color: #FFF;
+}
+
+.transferMenusDiv.active .arrow-right {
+    color: #7044CD;
+    z-index: 999;
+    top: 50%;
+    right: -0.7rem;
+    position: absolute;
+    font-size: 6rem;
+    transform: translate(1rem, -50%);
+}
+
+.table-striped tbody tr.tdSelected {
+    background: #d6f3e2;
+}
+
+.table-striped tbody tr.tdSelected td,
+.table-striped tbody tr.tdSelected th {
+    color: #6b6b6b;
+}
+
+
+/* It is simple way to use scroll bar to table body*/
+
+table.tableBodyScroll {
+    margin-bottom: 0px;
+    border-spacing: 0 !important;
+    border-collapse: collapse !important;
+}
+
+table.tableBodyScroll tbody {
+    display: block;
+    overflow-y: scroll;
+}
+
+table.tableBodyScroll thead,
+table.tableBodyScroll tbody tr {
+    display: table;
+    width: 100%;
+    margin: auto;
+    table-layout: fixed;
+}
+
+table.tableBodyScroll tbody tr td,
+table.tableBodyScroll thead tr th,
+table.tableBodyScroll tbody tr th {
+    padding: 0.45rem;
+    vertical-align: middle !important;
+    border-top: 1px solid #dee2e6;
+}
+
+table.tableBodyScroll tbody tr td,
+table.tableBodyScroll tbody tr th {
+    /* color: #8792d6; */
+    overflow-wrap: break-word;
+    vertical-align: middle !important;
+}
+
+
+/* .table-striped tbody tr:nth-of-type(odd) {
+background-color: #f9f9f9;
+}    */
+
+.tableBodyScroll.table-bordered td,
+.tableBodyScroll.table-bordered.table-bordered th {
+    border: 1px solid #dee2e6;
+}
+
+
+/* .tableBodyScroll.table-hover tbody tr:hover {
+background-color: rgba(0, 0, 0, 0.075);
+} */
+
+.tableBodyScroll tbody td {
+    overflow-wrap: break-word;
+}
+
+.srClass {
+    width: 3%;
+    text-align: center;
+}
+
+.actionClass {
+    width: 15%;
+    text-align: center;
+    position: relative;
+    padding: 0px;
+}
+
+th.actionClass {
+    padding: 0px !important;
+}
+
+.actionClass .form-control,
+.actionClass .form-control:focus,
+.actionClass .form-control:hover {
+    border: none;
+    border-bottom: 1px solid #ccc;
+    color: #555;
+    padding-left: 0px;
+    font-weight: normal;
+    box-shadow: none;
+    outline: none;
+    border-radius: 0px;
+    background-color: transparent;
+}
+
+.actionClass .form-control.ng-not-empty,
+.actionClass .form-control.ng-not-empty:focus,
+.actionClass .form-control.ng-not-empty:hover {
+    border-bottom: 1px solid #7044CD;
+    color: #7044CD;
+}
+
+.customUISelect {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: left;
+    font-weight: normal;
+    height: 34px;
+}
+
+.customUISelect .selectize-input {
+    background: #ffffff 0% 0% no-repeat padding-box;
+    border-radius: 4px;
+    border: 1px solid transparent !important;
+    box-shadow: none !important;
+    background-color: #ffffff !important;
+    background-image: none !important;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.customUISelect .selectize-input .ui-select-search {
+    padding: 0px 20px 0px 0px !important;
+}
+
+.customUISelect.selectize-control.single .selectize-input:after {
+    right: 5px;
+}
+
+.customUISelect .ui-select-match .selectedName {
+    color: #7044CD;
+}
+
+.mCSB_inside>.mCSB_container {
+    margin-right: 20px;
+}
+
+.customPagination {
+    font-family: Helvetica, FontAwesome;
+    margin: 5px 0px;
+}
+
+.customPagination li a {
+    border-radius: 6px;
+    border: 3px solid #eeeeee;
+    margin: 0px 5px;
+    color: #373737;
+    background-color: #fff;
+}
+
+.customPagination>.disabled>a {
+    color: #373737;
+    border-color: #eeeeee;
+}
+
+.customPagination>.active>a,
+.customPagination>.active>a:focus,
+.customPagination>.active>a:hover {
+    border-color: #7044cd;
+    color: #7044cd;
+    background-color: #fff;
+}
+
+.customPagination>.pagination-next a,
+.customPagination>.pagination-prev a {
+    border: 3px solid transparent;
+    color: #7044cd !important;
+}
+
+.customPagination>.pagination-next.disabled a,
+.customPagination>.pagination-prev.disabled a {
+    opacity: 0.5;
+}
+
+.tableBodyScroll .ui-select-choices,
+.tableBodyScroll .ui-select-no-choice {
+    position: fixed;
+    top: auto;
+    left: auto;
+    width: inherit;
+}
+
+
+/* .selectize-dropdown .optgroup-header  */
+
+.ui-select-choices-content .optgroup-header {
+    background: #7044CD;
+    color: #FFF;
+}
+
+.EmpDetailsBlock {
+    border-bottom: 1px solid #7044CD;
+}
+
+.EmpDetailsBlock .empInfo {
+    display: inline-block;
+    padding: 5px;
+    border-right: 1px solid #7044CD;
+    min-width: 100px;
+}
+
+
+/* .EmpDetailsBlock .empInfo .key,
+.EmpDetailsBlock .empInfo .value {
+display: inline-block;
+} */
+
+.EmpDetailsBlock .empInfo .key {
+    color: #000;
+    /* font-weight: bold; */
+    font-size: 12px;
+}
+
+.EmpDetailsBlock .empInfo .value {
+    color: #7044cd;
+    font-weight: 400;
+}
+
+.transferEmpFormBlock {
+    margin: 0px;
+    padding: 5px 0px;
+}
+
+.p-b-0 {
+    padding-bottom: 0px !important;
+}
+
+.p-l-5 {
+    padding-left: 5px !important;
+}
+
+.p-r-5 {
+    padding-right: 5px !important;
+}
+
+.transferEmpFormBlock .form-group {
+    margin: 0px;
+    padding: 5px;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+}
+
+.transferEmpFormBlock .form-group .lbl {
+    font-size: 13px;
+}
+
+.transferEmpFormBlock .ui-select-choices,
+.transferEmpFormBlock .ui-select-no-choice {
+    position: fixed;
+    top: auto;
+    left: auto;
+    width: calc(100% - 76.76%);
+}
+
+.cutomInputField,
+.cutomInputField:focus-visible {
+    border: none;
+    outline: none;
+    width: 100%;
+    height: 31px;
+    border-bottom: 1px solid lightgray;
+    border-radius: 0px;
+}
+
+.calendarIcon {
+    position: absolute;
+    left: 12px;
+    bottom: 14px;
+    z-index: 999;
+}
+
+.transferEmpSpinner {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    right: 10px;
+    top: 0px;
+    left: unset;
+}
+
+.errorMsg {
+    margin: 0px;
+    font-size: 12px;
+    text-align: right;
+    color: #f00;
+}
+.table-striped tr:nth-child(even){
+    background-color:rgba(236, 229, 229, 0.444);
+    }
+.table-hover tr:hover{
+    background-color: rgba(195, 194, 194, 0.444);
+}
+
+.srClass{
+    cursor: pointer;
+}

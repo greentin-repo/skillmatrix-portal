@@ -1,0 +1,66 @@
+{
+    "status": "success",
+    "statusCode": 200,
+    "reason": "Recoreds fetch successfully",
+    "result": true,
+    "branchList": [
+        {
+            "branchId": 1,
+            "name": "CBI",
+            "location": "pune",
+            "orgId": 0,
+            "org": {
+                "orgId": 1,
+                "name": "Grabial"
+            }
+        },
+        {
+            "branchId": 2,
+            "name": "FBI",
+            "location": "mumbai",
+            "orgId": 0,
+            "org": {
+                "orgId": 1,
+                "name": "Grabial"
+            }
+        },
+        {
+            "branchId": 3,
+            "name": "FBI",
+            "location": "Bangluru",
+            "orgId": 0,
+            "org": {
+                "orgId": 1,
+                "name": "Grabial"
+            }
+        },
+        {
+            "branchId": 4,
+            "name": "Orange",
+            "location": "Chennai",
+            "orgId": 0,
+            "org": {
+                "orgId": 1,
+                "name": "Grabial"
+            }
+        },
+        {
+            "branchId": 5,
+            "name": "Orange",
+            "location": "Tamilnadu",
+            "orgId": 0,
+            "org": {
+                "orgId": 1,
+                "name": "Grabial"
+            }
+        }
+    ],
+    "deptList": null,
+    "catagoryList": null,
+    "statusList": null,
+    "orgList": null,
+    "pointmaster": null,
+    "teamtypemaster": null,
+    "designation": null,
+    "benefitAnalysisList": null
+}

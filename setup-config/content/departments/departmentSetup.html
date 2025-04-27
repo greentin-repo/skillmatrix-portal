@@ -1,0 +1,238 @@
+<link rel="stylesheet" href="content/departments/departments.css">
+<div ng-include="'common/loading_indicator.html'"></div>
+<div ng-include="'common/nextPage.html'"></div>
+<!-- <div class="container pr">
+    <div class="row" style="margin-top: 4%;margin-right: 9%">
+        <div class="col-md-8">
+            <div class="right-card" ng-if="selectedBranch!=null" style="margin-left: 40px;">
+                <div class="header">
+                    <label class="txt-color-primary" style="font-size: 19px;">Department</label>
+                    <div class="btn-help" ng-click="showHelpPopup('department')" style="margin-left: 10px;"><i class="fa fa-question-circle"></i></div>
+                </div>
+                <div class="branch-txt" style="margin-left: 32px;width: 55%;">
+                    <div style="display: inline-flex;width: 100%;">
+                        <div class="txt-finance">
+                            <span class="select-lbl">Branch/Plant</span>
+                        </div>
+                        <select class="form-control deptwiseGraph" placeholder="Select Plant" ng-model="dataDept.branchId" name="branchId" ng-change="getDeptList()" style="height: 35px;">
+                        <option value="{{branch.branchId}}" ng-repeat="branch in branchAccessList">
+                            {{branch.branchName}}
+                        </option>
+                    </select>
+                    </div>
+                </div>
+                <div ng-if="deptListLoading" class="loadingIndicatorContainer ldng-ind-sm" style="margin-top: 10px;border: 2px solid lightgray;width: 259px;">
+                    <i class="fa fa-building-o fa-2x" aria-hidden="true"></i>
+                    <div class="msg">{{langTranslate.Please_wait_department_list_is_loading}}</div>
+                    <div style="width: 100px; margin:0 auto;" class="lineLoaderRelative"></div>
+                </div>
+                <div ng-if="!deptListLoading && deptList.length==0" class="loadingIndicatorContainer ldng-ind-sm" style="margin-top: 10px;border: 2px solid lightgray;width: 259px;">
+                    <i class="fa fa-building-o fa-2x" aria-hidden="true"></i>
+                    <div class="msg">Data not found.</div>
+                </div>
+                <div style="padding-right: 9px;margin-top: 7%" ng-if="!deptListLoading && deptList.length>0">
+
+                    <table class="tbl-right-side">
+                        <thead>
+                            <tr>
+                                <th style="width: 13%"></th>
+                                <th style="width: 33%;">{{langTranslate.Department_Name}}</th>
+                                <th style="width: 40%;">Is Maintenance Department ?</th>
+                                <th style="width: 11%;">{{langTranslate.Action}}</th>
+                            </tr>
+                        </thead>
+                        <tbody scroll-bottom="deptList">
+                            <tr ng-repeat="dataDept in deptList">
+                                <td>{{$index+1}}</td>
+                                <td class="pr">
+                                    <div ng-if="dataDept.deptId!=0 && !dataDept.isUpdate" style="display: flex;">
+                                        <div style="width: 44%;">
+                                            <span style="word-break: break-word;">{{dataDept.deptName}}</span>
+                                        </div>
+                                        <div style="position: absolute;right: 35%;">
+                                            <span>
+                                                <input class="disableRadioCheckbox" type="checkbox"
+                                                    style="margin-left:30%;" ng-model="dataDept.isDeptForMaintenance"
+                                                    ng-checked="dataDept.isDeptForMaintenance == 1 ? true : false"
+                                                    ng-true-value="1" ng-false-value="0">
+                                            </span>
+                                        </div>
+                                        <div class="editDeleteIcon">
+                                            <span>
+                                                <i class="material-icons" ng-click="setUpdateDepartment(dataDept)"
+                                                    style="color: orange;margin-right:6px;cursor: pointer;vertical-align: middle;">create</i>
+                                                <i class="material-icons" ng-click="deleteDepartment(dataDept)"
+                                                    style="color: #f75555;cursor: pointer;vertical-align: middle;">delete_sweep</i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div ng-if="dataDept.deptId==0 && !dataDept.isUpdate" style="display:inline-flex">
+                                        <div>
+                                            <input type="text" ng-model="dataDept.deptName" ng-keyup="$event.keyCode == 13 ? submitDepartment(dataDept) : null" maxlength="30">
+                                        </div>
+                                        <div style="position: absolute;right: 34%;">
+                                            <input type="checkbox" style="margin-left:10px;" ng-model="dataDept.isDeptForMaintenance" ng-checked="dataDept.isDeptForMaintenance == 1 ? true : false" ng-true-value="1" ng-false-value="0">
+                                        </div>
+                                        <div class="editDeleteIcon">
+
+                                            <button type="button" class="btn btn-success btn-xs savedeptBtn" ng-click="submitDepartment(dataDept)">{{langTranslate.Save}}</button>
+                                            <button type="button" class="btn btn btn-xs cancelFreq" ng-click="getDeptList()">{{langTranslate.Cancel}}</button>
+                                        </div>
+                                    </div>
+                                    <div ng-if="dataDept.deptId!=0 && dataDept.isUpdate" style="display:inline-flex">
+                                        <div>
+                                            <input type="text" ng-model="dataDept.deptName" ng-keyup="$event.keyCode == 13 ? updateDepartment(dataDept) : null" maxlength="30">
+                                        </div>
+                                        <div style="position: absolute;right: 34%;">
+                                            <input type="checkbox" style="margin-left:10px;" ng-model="dataDept.isDeptForMaintenance" ng-checked="dataDept.isDeptForMaintenance == 1 ? true : false" ng-true-value="1" ng-false-value="0">
+                                        </div>
+                                        <div class="editDeleteIcon">
+                                            <button type="button" class="btn btn-success btn-xs savedeptBtn" ng-click="updateDepartment(dataDept)">{{langTranslate.Save}}</button>
+                                            <button type="button" class="btn btn btn-xs cancelFreq" ng-click="dataDept.isUpdate == true;resetUpdateDepartment()">{{langTranslate.Cancel}}</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="right-card-button">
+                    <span type="button" class=" btn-circle btn-lg sidebar-bg-color" ng-click="addDepartment()">
+                        <i class="fa fa-plus" style="color: white;" aria-hidden="true"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+ -->
+
+<div class="col-lg-12">
+    <div class="tab-content">
+        <div class="row" style="margin-top: 1%;margin-right: 9%">
+            <div class="col-md-8">
+                <div class="right-card" ng-if="selectedBranch!=null" style="margin-left: 40px;">
+                    <div class="header">
+                        <label class="txt-color-primary" style="font-size: 19px;">Department</label>
+                        <div class="btn-help" ng-click="showHelpPopup('department')" style="margin-left: 10px;"><i class="fa fa-question-circle"></i></div>
+                    </div>
+                    <div class="branch-txt" style="margin-left: 32px;width: 55%;">
+                        <div style="display: inline-flex;width: 100%;">
+                            <div class="txt-finance">
+                                <span class="select-lbl">Branch/Plant</span>
+                            </div>
+                            <select class="form-control deptwiseGraph" placeholder="Select Plant" ng-model="dataDept.branchId" name="branchId" ng-change="getDeptList()" style="height: 35px;">
+                                    <option value="{{branch.branchId}}" ng-repeat="branch in branchAccessList">
+                                        {{branch.branchName}}
+                                    </option>
+                                </select>
+                        </div>
+                    </div>
+                    <div ng-if="deptListLoading" class="loadingIndicatorContainer ldng-ind-sm" style="margin-top: 10px;border: 2px solid lightgray;width: 259px;">
+                        <i class="fa fa-building-o fa-2x" aria-hidden="true"></i>
+                        <div class="msg">{{langTranslate.Please_wait_department_list_is_loading}}</div>
+                        <div style="width: 100px; margin:0 auto;" class="lineLoaderRelative"></div>
+                    </div>
+                    <div ng-if="!deptListLoading && deptList.length==0" class="loadingIndicatorContainer ldng-ind-sm" style="margin-top: 10px;border: 2px solid lightgray;width: 259px;">
+                        <i class="fa fa-building-o fa-2x" aria-hidden="true"></i>
+                        <div class="msg">Data not found.</div>
+                    </div>
+                    <div style="padding-right: 9px;margin-top: 7%" ng-if="!deptListLoading && deptList.length>0">
+
+                        <table class="tbl-right-side">
+                            <thead>
+                                <tr>
+                                    <th style="width: 13%"></th>
+                                    <th style="width: 33%;">{{langTranslate.Department_Name}}</th>
+                                    <th style="width: 40%;">Is Maintenance Department ?</th>
+                                    <th style="width: 11%;">{{langTranslate.Action}}</th>
+                                </tr>
+                            </thead>
+                            <tbody scroll-bottom="deptList">
+                                <tr ng-repeat="dataDept in deptList">
+                                    <td>{{$index+1}}</td>
+                                    <td class="pr">
+                                        <div ng-if="dataDept.deptId!=0 && !dataDept.isUpdate" style="display: flex;">
+                                            <div style="width: 44%;">
+                                                <span style="word-break: break-word;">{{dataDept.deptName}}</span>
+                                            </div>
+                                            <div style="position: absolute;right: 35%;">
+                                                <span>
+                                                            <input class="disableRadioCheckbox" type="checkbox"
+                                                                style="margin-left:30%;" ng-model="dataDept.isDeptForMaintenance"
+                                                                ng-checked="dataDept.isDeptForMaintenance == 1 ? true : false"
+                                                                ng-true-value="1" ng-false-value="0">
+                                                        </span>
+                                            </div>
+                                            <div class="editDeleteIcon">
+                                                <span>
+                                                            <i class="material-icons" ng-click="setUpdateDepartment(dataDept)"
+                                                                style="color: orange;margin-right:6px;cursor: pointer;vertical-align: middle;">create</i>
+                                                            <i class="material-icons" ng-click="deleteDepartment(dataDept)"
+                                                                style="color: #f75555;cursor: pointer;vertical-align: middle;">delete_sweep</i>
+                                                        </span>
+                                            </div>
+                                        </div>
+                                        <div ng-if="dataDept.deptId==0 && !dataDept.isUpdate" style="display:inline-flex">
+                                            <div>
+                                                <input type="text" ng-model="dataDept.deptName" ng-keyup="$event.keyCode == 13 ? submitDepartment(dataDept) : null" maxlength="30">
+                                            </div>
+                                            <div style="position: absolute;right: 34%;">
+                                                <input type="checkbox" style="margin-left:10px;" ng-model="dataDept.isDeptForMaintenance" ng-checked="dataDept.isDeptForMaintenance == 1 ? true : false" ng-true-value="1" ng-false-value="0">
+                                            </div>
+                                            <div class="editDeleteIcon">
+
+                                                <button type="button" class="btn btn-success btn-xs savedeptBtn" ng-click="submitDepartment(dataDept)">{{langTranslate.Save}}</button>
+                                                <button type="button" class="btn btn btn-xs cancelFreq" ng-click="getDeptList()">{{langTranslate.Cancel}}</button>
+                                            </div>
+                                        </div>
+                                        <div ng-if="dataDept.deptId!=0 && dataDept.isUpdate" style="display:inline-flex">
+                                            <div>
+                                                <input type="text" ng-model="dataDept.deptName" ng-keyup="$event.keyCode == 13 ? updateDepartment(dataDept) : null" maxlength="30">
+                                            </div>
+                                            <div style="position: absolute;right: 34%;">
+                                                <input type="checkbox" style="margin-left:10px;" ng-model="dataDept.isDeptForMaintenance" ng-checked="dataDept.isDeptForMaintenance == 1 ? true : false" ng-true-value="1" ng-false-value="0">
+                                            </div>
+                                            <div class="editDeleteIcon">
+                                                <button type="button" class="btn btn-success btn-xs savedeptBtn" ng-click="updateDepartment(dataDept)">{{langTranslate.Save}}</button>
+                                                <button type="button" class="btn btn btn-xs cancelFreq" ng-click="dataDept.isUpdate == true;resetUpdateDepartment()">{{langTranslate.Cancel}}</button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="right-card-button">
+                        <span type="button" class=" btn-circle btn-lg sidebar-bg-color" ng-click="addDepartment()">
+                                    <i class="fa fa-plus" style="color: white;" aria-hidden="true"></i>
+                                </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="confirmRemModal" class="modal fade confirmDeleteModal" role="dialog">
+        <div class="trans-bg"></div>
+        <img data-dismiss="modal" class="img-close" src="dist/icons/ic_close.png" style="top: 2em; width: 3em;right: 5em;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body" style="padding:10px;display: flex;height: 250px;background-color: #767da7c2;">
+                    <div class="img-del-container">
+                        <img src="dist/icons/ic_delete_lg.png">
+                    </div>
+                    <b style="font-size: 18px;top: 26%; position: absolute;left: 39%;color: #4a4794;font-size: 28px;top: 26%;position: absolute;left: 32%; ">Are
+                            you sure </b>
+                    <p class="msg" style="color: #4a4794bf;position: absolute;top: 47%;width: 95%;
+                            text-align: center; font-size: 23px;">{{langTranslate.remove_this_department_from_list}}</p>
+                    <div style="top: 82%;position: absolute; left: 63%;">
+                        <div ng-show="flagdeleteSpinner" class="small-spinner deleteSpinner"></div>
+                        <button ng-show="!flagdeleteSpinner" type="button" class="delete-btn" data-dismiss="modal" id="btnConfirmRemove" ng-click="removeDept(selectedDept)">{{langTranslate.Yes}}</button>
+                        <button ng-show="!flagdeleteSpinner" type="button" class="delete-btn" data-dismiss="modal">{{langTranslate.No}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

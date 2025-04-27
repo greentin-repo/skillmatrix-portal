@@ -1,0 +1,303 @@
+<link rel="stylesheet" href="content/header_side_bar/profile.css">
+<section class="content">
+
+
+
+  <div class="container main-container" style="margin-top: 30px;width:800px;position: relative;">
+    <div class="back-btn">
+      <i class="material-icons" style="cursor:pointer;" ng-click="backButton()">keyboard_backspace</i>
+    </div>
+    <!-- box-shadow: 0 0 10px #f5f5f5;
+            border: 1px solid #f5f5f5; -->
+    <form method="post" style="padding: 10px;" id="upload-file-input">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="profile-img">
+            <img check-sugg-det-usr-image-loaded class="usr-img" src="{{EmployeeList.profilePic}}" name="profilePic">
+            <div class="file btn btn-lg btn-primary">
+              {{ langTranslate.Browse }}
+              <input style="width: 90px;height: 33px;" name="profilePic" type="file" fileread="EmployeeList.profilePic"
+                onchange="angular.element(this).scope().uploadBtn(this)" accept=".jpg,.png,.gif" id="profilePicId" />
+
+            </div>
+            <!-- <img class="usr-img" src="{{browsedImage}}" name="profilePic"> -->
+          </div>
+          <div class="profile-work">
+            <div ng-show="flagProfilePicUploadSpinner" class="small-spinner popupSaveSpinner"
+              style="position: inherit;margin: 0 auto;margin-top: 14px;width: 30px;height: 30px;"></div>
+            <button ng-show="!flagProfilePicUploadSpinner && flagHideUploadBtn" class="profile-edit-btn"
+              ng-click="updateprofilepic()" type="submit">{{ langTranslate.Upload }}</button>
+            <div ng-show="flagProfilePicRemove" class="small-spinner popupSaveSpinner"
+              style="position: inherit;margin: 0 auto;margin-top:20px;width: 30px;height: 30px;"></div>
+            <button ng-show="!flagProfilePicRemove && EmployeeList.profilePic != null && !flagHideUploadBtn"
+              class="profile-edit-btn" ng-click="removeProfilePic()" type="submit">{{
+              langTranslate.RemoveProfilePic }}</button>
+            <button class="profile-edit-btn" ng-click="resetPassPopUp()" type="submit">{{
+              langTranslate.ResetPassword }}</button>
+            <!-- <button class="profile-edit-btn" ng-click="updateProfileDetail()" type="submit">Update Profile</button>  -->
+            <p style="    border: none;
+                            border-bottom: 2px solid #0062cc;">{{ langTranslate.Roles }}</p>
+            <div style="height: 17em;overflow: auto" ng-scrollbars>
+              <ul style="list-style: none;">
+                <li ng-repeat="x in EmployeeList.roles" style="margin-top: 6px;margin-left: -38px;">
+                  {{x.name}}</li>
+                <li ng-repeat="x in EmployeeList.pmsUserRoles" style="margin-top: 6px;margin-left: -38px;">
+                  {{x.userType.userType}}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="row">
+            <div class="col-md-8">
+              <div class="profile-head">
+                <h5 style="margin-bottom: 0px;">
+                  {{EmployeeList.firstName || ''}} {{EmployeeList.lastName || ''}}
+                </h5>
+                <h6 style="margin-bottom: 0px;">
+                  {{EmployeeList.designation || ''}}
+                </h6>
+                <ul class="nav nav-tabs" style="width: 487px;border-bottom: 2px solid #0062cc;">
+                  <li class="nav-item">
+                    <a class="nav-link active">{{ langTranslate.About }}</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-4" style="padding: 0px;">
+              <div>
+                <label style="font-weight: 500;color: #4b4795;">{{ langTranslate.Select_language }}
+                  :</label>
+              </div>
+              <div>
+                <select class="profile-edit-btn" ng-model="selectedLanguage"
+                  ng-options="data.langName for data in langList track by data.langId"
+                  style=" padding: 5px 15px;border: 1px solid #6568b2;">
+                </select>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="row">
+              <div class="col-md-3">
+                <label>{{ langTranslate.FirstName }}</label>
+              </div>
+              <div class="col-md-1">
+                <span>:</span>
+              </div>
+              <div class="col-md-8">
+                <p style="margin: 0px;">{{EmployeeList.firstName}}
+                </p>
+              </div>
+            </div>
+            <div class="row" style="margin-top: 10px;">
+              <div class="col-md-3">
+                <label>{{ langTranslate.LastName }}</label>
+              </div>
+              <div class="col-md-1">
+                <span>:</span>
+              </div>
+              <div class="col-md-8">
+                <p style="margin: 0px;">{{EmployeeList.lastName}}
+                </p>
+              </div>
+            </div>
+            <div class="row" style="margin-top: 10px;">
+              <div class="col-md-3">
+                <label>{{ langTranslate.Designation }}</label>
+              </div>
+              <div class="col-md-1">
+                <span>:</span>
+              </div>
+              <div class="col-md-8">
+                <p style="margin: 0px;">{{EmployeeList.designation}}</p>
+              </div>
+            </div>
+            <div class="row" style="margin-top: 10px;">
+              <div class="col-md-3">
+                <label>{{ langTranslate.Department }}</label>
+              </div>
+              <div class="col-md-1">
+                <span>:</span>
+              </div>
+              <div class="col-md-8">
+                <p style="margin: 0px;">{{EmployeeList.dept.deptName || ''}}</p>
+              </div>
+            </div>
+            <div class="row" style="margin-top: 10px;">
+              <div class="col-md-3">
+                <label>{{ langTranslate.Line_Name }}</label>
+              </div>
+              <div class="col-md-1">
+                <span>:</span>
+              </div>
+              <div class="col-md-8">
+                <p style="margin: 0px;">{{EmployeeList.line.name || ''}}</p>
+              </div>
+            </div>
+            <div class="row" style="margin-top: 10px;">
+              <div class="col-md-3">
+                <label>{{ langTranslate.Email }}</label>
+              </div>
+              <div class="col-md-1">
+                <span>:</span>
+              </div>
+              <div class="col-md-8">
+                <input class="email-txt" ng-model="EmployeeList.emailId" type="text" />
+              </div>
+            </div>
+            <div class="row" style="margin-top: 10px;">
+              <div class="col-md-3">
+                <label>{{ langTranslate.Phone }}</label>
+              </div>
+              <div class="col-md-1">
+                <span>:</span>
+              </div>
+              <div class="col-md-8">
+                <input class="email-txt" ng-model="EmployeeList.contactNo" type="text">
+              </div>
+            </div>
+            <div class="row" style="margin-top: 10px;">
+              <div class="col-md-3">
+                <label>Date Of Joining</label>
+              </div>
+              <div class="col-md-1">
+                <span>:</span>
+              </div>
+              <div class="col-md-8">
+                <p style="margin: 0px;">{{EmployeeList.doj || '-'}}</p>
+              </div>
+            </div>
+            <div class="row" style="margin-top: 10px;">
+              <div class="col-md-3">
+                <label>{{ langTranslate.Dateofbirth }}</label>
+              </div>
+              <div class="col-md-1">
+                <span>:</span>
+              </div>
+              <div class="col-md-8">
+                <div class="input-group date email-txt" style="padding:0px;">
+                  <div class="input-group-addon"><span class="fa fa-calendar"></span></div>
+                  <input type="text" class="form-control datepicker_dob" data-date-format="yyyy-mm-dd"
+                    ng-model="EmployeeList.dob" ng-keyup="setDate('dob')" placeholder="{{langTranslate.Dateofbirth}}">
+                </div>
+              </div>
+            </div>
+            <div class="row" style="margin-top: 10px;">
+              <div class="col-md-3">
+                <label>{{ langTranslate.AnniversaryDate }}</label>
+              </div>
+              <div class="col-md-1">
+                <span>:</span>
+              </div>
+              <div class="col-md-8">
+                <div class="input-group date email-txt" style="padding:0px;">
+                  <div class="input-group-addon"><span class="fa fa-calendar"></span></div>
+                  <input type="text" class="form-control datepicker_doa" data-date-format="yyyy-mm-dd"
+                    ng-model="EmployeeList.doa" ng-keyup="setDate('doa')"
+                    placeholder="{{langTranslate.AnniversaryDate}}">
+                </div>
+              </div>
+            </div>
+            <button class="profile-update-btn" ng-click="updateProfileDetail()" type="submit">{{
+              langTranslate.Update_Profile }}</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+
+  <div id="resetPassModal" class="modal fade" style="margin: 0 auto;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h3 class="modal-title" id="myModalLabel"><i class="fa fa-lock"></i> {{
+            langTranslate.ResetAccountPassword }}
+          </h3>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="modalBody">
+              <div class="well">
+                <div class="padding-top-and-bottom-fiftheen-px align-text-center hidden-sm hidden-xs">
+                  <i class="fa fa-unlock-alt"
+                    style="width: 65px; height: 65px; font-size: 45px; margin: 0 auto 8px; padding-top: 7px; padding-left: 17px; display: block; border: solid 1px #CDCDCD; color: #CECECE; -moz-border-radius: 50%; -webkit-border-radius: 50%; border-radius: 50%;"></i>
+                </div>
+                <form name="resetAccountForm" ng-submit="resetPassword(resetAccountForm.$valid)"
+                  novalidate="novalidate">
+                  <div class="input-filed form-group">
+                    <div class="input-group">
+                      <span class="input-group-addon" id="UserPasswordMatch"><i class="fa fa-lock"
+                          title="Choose password"></i></span>
+                      <input type="password" class="form-control" id="pass" ng-model="password" name="pass" required
+                        title="Current password" placeholder="Current password" />
+                    </div>
+                  </div>
+                  <div class="input-filed form-group">
+                    <div class="input-group">
+                      <span class="input-group-addon" id="UserPassword"><i class="fa fa-unlock-alt"
+                          title="Choose password"></i></span>
+                      <input type="password" class="form-control" id="newPass" ng-model="newPassword" name="newPassword"
+                        ng-keyup="checkPassPolicy()" ng-maxlength="16" required title="New password"
+                        placeholder="New password" />
+                    </div>
+                    <p class="error"
+                      ng-show="resetAccountForm.newPassword.$error.required && resetAccountForm.newPassword.$dirty">
+                    </p>
+                    <p class="error" ng-show="resetAccountForm.newPassword.$error.maxlength">
+                      {{ langTranslate.Passwordmustbemaximumof16characters }} .</p>
+                    <p class="error" ng-show="resetAccountForm.newPassword.$error.minlength">
+                      {{ langTranslate.Passwordmustbeminimumof8characters }}.</p>
+                    <div id="message" ng-if="flagPass">
+                      <h3>Password must contain the following: </h3>
+                      <p id="letter" ng-class="{'valid':policyObj.lowerCaseValid,'invalid':!policyObj.lowerCaseValid}">
+                        {{ minAlphabetic}}
+                        <b>Alphabet</b> letter
+                      </p>
+                      <p id="number" ng-class="{'valid':policyObj.numberValid,'invalid':!policyObj.numberValid}">
+                        {{ minNumeric}} <b>number</b></p>
+                      <p id="special" ng-class="{'valid':policyObj.specialValid,'invalid':!policyObj.specialValid}">
+                        {{ minSpecialChar}} <b>Special</b>character</p>
+                      <p id="length" ng-class="{'valid':policyObj.lengthValid,'invalid':!policyObj.lengthValid}">
+                        Minimum <b>{{minPasswdLength}}
+                          characters</b></p>
+                    </div>
+                  </div>
+                  <div class="input-filed form-group">
+                    <div class="input-group">
+                      <span class="input-group-addon" id="UserPasswordMatch"><i class="fa fa-lock"
+                          title="Choose password"></i></span>
+                      <input type="password" class="form-control" id="matchPass" ng-model="passwordMatch"
+                        name="passwordMatch" ng-maxlength="16" ng-minlength="8" required compare-to="newPassword"
+                        title="Confirm password" placeholder="Confirm password" />
+                    </div>
+                    <p class="error"
+                      ng-show="resetAccountForm.passwordMatch.$error.required && resetAccountForm.passwordMatch.$dirty">
+                    </p>
+                    <p class="error" ng-show="resetAccountForm.passwordMatch.$error.maxlength">
+                      {{ langTranslate.Passwordmustbeminimumof8characters }}.</p>
+                    <p class="error" ng-show="resetAccountForm.passwordMatch.$error.minlength">
+                      {{ langTranslate.Passwordmustbeminimumof8characters }}.</p>
+                    <!-- <p class="error" ng-show="flagPassDoesNotMatch"> Password Doesn't match.</p> -->
+                    <p class="error " ng-show="resetAccountForm.passwordMatch.$error.compareTo">
+
+                      {{ langTranslate.NewPasswordandConfirmPassworddonotmatch }} .
+
+                    </p>
+                  </div>
+
+                  <div class="resetBtn">
+                    <button type="submit" class="btn btn-block btn-reset">{{ langTranslate.Submit
+                      }}</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

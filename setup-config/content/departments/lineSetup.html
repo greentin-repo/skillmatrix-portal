@@ -1,0 +1,254 @@
+<link rel="stylesheet" href="content/departments/departments.css">
+<div ng-include="'common/loading_indicator.html'"></div>
+<div ng-include="'common/nextPage.html'"></div>
+<!-- <div class="container pr">
+    <div class="row" style="margin-top: 4%; margin-left: 29px; margin-right: 5%;">
+        <div class="col-md-6">
+            <div ng-if="branchListLoading" class="loadingIndicatorContainer ldng-ind-sm" style="margin-top: 10px;border: 2px solid lightgray;width: 259px;">
+                <i class="fa fa-building-o fa-2x" aria-hidden="true"></i>
+                <div class="msg">{{langTranslate.Please_wait_branch_list_is_loading}}</div>
+                <div style="width: 100px; margin:0 auto;" class="lineLoaderRelative"></div>
+            </div>
+            <div class="branch-txt" style="width: 60%;">
+                <div style="display: inline-flex;width: 100%;">
+                    <div class="txt-finance">
+                        <span class="select-lbl">Branch/Plant</span>
+                    </div>
+                    <select class="form-control deptwiseGraph" placeholder="Select Plant" ng-model="dataDept.branchId" name="branchId" ng-change="getDeptList()">
+                  <option value="{{branch.branchId}}" ng-repeat="branch in branchAccessList">
+                    {{branch.branchName}}
+                  </option>
+                </select>
+                </div>
+            </div>
+            <div ng-if="deptList.length==0" class="loadingIndicatorContainer ldng-ind-sm" style="margin-top: 10px;border: 2px solid lightgray;width: 259px;">
+                <i class="fa fa-building-o fa-2x" aria-hidden="true"></i>
+                <div class="msg">{{langTranslate.Datanotavailable}}</div>
+            </div>
+            <table class="tbl-left-side" ng-if="deptList.length>0">
+                <thead>
+                    <tr style="display: inline-table;width: 98%;">
+                        <th>{{langTranslate.Sr_No}}</th>
+                        <th>{{langTranslate.Department_Name}}</th>
+                    </tr>
+                </thead>
+                <tbody style="height: 350px;overflow: scroll;display: block;">
+                    <tr ng-repeat="data in deptList" ng-click="setdwmSelectedDept(data)" ng-style="data.deptId==dwmSelectedDept.deptId && {'background-color':'#8792d6','color':'white'}" style="display: inline-table;width: 100%;">
+                        <td style="width : 30%;">{{$index+1}}</td>
+                        <td>{{data.deptName}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-6">
+            <div class="right-card" ng-if="dwmSelectedDept!=null">
+                <div class="header">
+                    <label class="txt-color-primary" style="font-size: 19px;">Line</label>
+                    <div class="btn-help" style="margin-left: 10px;"><i class="fa fa-question-circle" ng-click="showHelpPopup('lineSetup')"></i></div>
+                </div>
+                <div class="header-det">
+                    <div class="sidebar-bg-color" id="selected-branch-label" style="color: white;">
+                        <label class="width-40">{{dwmSelectedDept.deptName}}</label>
+                    </div>
+                </div>
+                <div ng-if="deptListLoading" class="loadingIndicatorContainer ldng-ind-sm" style="margin-top: 10px;border: 2px solid lightgray;width: 259px;">
+                    <i class="fa fa-building-o fa-2x" aria-hidden="true"></i>
+                    <div class="msg">{{langTranslate.Please_wait_department_list_is_loading}}</div>
+                    <div style="width: 100px; margin:0 auto;" class="lineLoaderRelative"></div>
+                </div>
+                <div ng-if="deptLineList.length==0" class="loadingIndicatorContainer ldng-ind-sm" style="margin-top: 10px;border: 2px solid lightgray;width: 259px;">
+                    <i class="fa fa-building-o fa-2x" aria-hidden="true"></i>
+                    <div class="msg">Data not found.</div>
+                </div>
+                <div style="padding-right: 9px;" ng-if="deptLineList.length>0">
+                    <table class="tbl-right-side">
+                        <thead>
+                            <tr>
+                                <th style="width: 32%"></th>
+                                <th>{{langTranslate.Line_Name}}</th>
+                            </tr>
+                        </thead>
+                        <tbody scroll-bottom="deptLineList">
+                            <tr ng-repeat="dataLine in deptLineList">
+                                <td>{{$index+1}}</td>
+                                <td class="pr">
+                                    <div ng-if="dataLine.id!=0 && !dataLine.isUpdate">
+                                        <span style="word-break: break-word;">{{dataLine.name}}</span>
+                                        <span class="editDeleteIcon">
+                                            <i class="material-icons" ng-click="setUpdateLineName(dataLine)"
+                                                style="color: orange;margin-right:6px;cursor: pointer;vertical-align: middle;">create</i>
+                                        </span>
+                                    </div>
+                                    <div ng-if="dataLine.id==0 && !dataLine.isUpdate">
+                                        <input type="text" ng-model="dataLine.name" ng-keyup="$event.keyCode == 13 ? submitLineName(dataLine) : null" maxlength="30">
+                                        <button type="button" class="btn btn-success btn-xs" ng-click="submitLineName(dataLine)" style="margin-left: 21px;">{{langTranslate.Save}}</button>
+                                        <button type="button" class="btn  btn-xs linefreq" ng-click="getDeptLineList()">{{langTranslate.Cancel}}</button>
+                                    </div>
+                                    <div ng-if="dataLine.id!=0 && dataLine.isUpdate">
+                                        <input type="text" ng-model="dataLine.name" ng-keyup="$event.keyCode == 13 ? updateLineName(dataLine) : null" maxlength="30">
+                                        <button type="button" class="btn btn-success btn-xs" ng-click="updateLineName(dataLine)" style="margin-left: 21px;">{{langTranslate.Save}}</button>
+                                        <button type="button" class="btn  btn-xs linefreq" ng-click="updateLineName(dataLine)">{{langTranslate.Cancel}}</button>
+
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="right-card-button">
+                    <span type="button" class=" btn-circle btn-lg sidebar-bg-color" ng-click="addLineName()">
+            <i class="fa fa-plus" style="color: white;" aria-hidden="true"></i>
+          </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+<div class="col-lg-12">
+    <div class="tab-content">
+        <div class="row" style="margin-top: 1%;margin-left: 3px;">
+            <div class="col-md-6">
+                <div ng-if="branchListLoading" class="loadingIndicatorContainer ldng-ind-sm" style="margin-top: 10px;border: 2px solid lightgray;width: 259px;">
+                    <i class="fa fa-building-o fa-2x" aria-hidden="true"></i>
+                    <div class="msg">{{langTranslate.Please_wait_branch_list_is_loading}}</div>
+                    <div style="width: 100px; margin:0 auto;" class="lineLoaderRelative"></div>
+                </div>
+                <div class="branch-txt" style="width: 60%;">
+                    <div style="display: inline-flex;width: 100%;">
+                        <div class="txt-finance">
+                            <span class="select-lbl">Branch/Plant</span>
+                        </div>
+                        <select class="form-control deptwiseGraph" placeholder="Select Plant" ng-model="dataDept.branchId" name="branchId" ng-change="getDeptList()">
+                              <option value="{{branch.branchId}}" ng-repeat="branch in branchAccessList">
+                                {{branch.branchName}}
+                              </option>
+                            </select>
+                    </div>
+                </div>
+                <div ng-if="deptList.length==0" class="loadingIndicatorContainer ldng-ind-sm" style="margin-top: 10px;border: 2px solid lightgray;width: 259px;">
+                    <i class="fa fa-building-o fa-2x" aria-hidden="true"></i>
+                    <div class="msg">{{langTranslate.Datanotavailable}}</div>
+                </div>
+                <table class="tbl-left-side" ng-if="deptList.length>0">
+                    <thead>
+                        <tr style="display: inline-table;width: 98%;">
+                            <th>{{langTranslate.Sr_No}}</th>
+                            <th>{{langTranslate.Department_Name}}</th>
+                        </tr>
+                    </thead>
+                    <tbody style="height: 350px;overflow: scroll;display: block;">
+                        <tr ng-repeat="data in deptList" ng-click="setdwmSelectedDept(data)" ng-style="data.deptId==dwmSelectedDept.deptId && {'background-color':'#8792d6','color':'white'}" style="display: inline-table;width: 100%;">
+                            <td style="width : 30%;">{{$index+1}}</td>
+                            <td>{{data.deptName}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-6">
+                <div class="right-card" ng-if="dwmSelectedDept!=null">
+                    <div class="header">
+                        <label class="txt-color-primary" style="font-size: 19px;">Line</label>
+                        <div class="btn-help" style="margin-left: 10px;"><i class="fa fa-question-circle" ng-click="showHelpPopup('lineSetup')"></i></div>
+                    </div>
+                    <div class="header-det">
+                        <div class="sidebar-bg-color" id="selected-branch-label" style="color: white;">
+                            <label class="width-40">{{dwmSelectedDept.deptName}}</label>
+                        </div>
+                    </div>
+                    <div ng-if="deptListLoading" class="loadingIndicatorContainer ldng-ind-sm" style="margin-top: 10px;border: 2px solid lightgray;width: 259px;">
+                        <i class="fa fa-building-o fa-2x" aria-hidden="true"></i>
+                        <div class="msg">{{langTranslate.Please_wait_department_list_is_loading}}</div>
+                        <div style="width: 100px; margin:0 auto;" class="lineLoaderRelative"></div>
+                    </div>
+                    <div ng-if="deptLineList.length==0" class="loadingIndicatorContainer ldng-ind-sm" style="margin-top: 10px;border: 2px solid lightgray;width: 259px;">
+                        <i class="fa fa-building-o fa-2x" aria-hidden="true"></i>
+                        <div class="msg">Data not found.</div>
+                    </div>
+                    <div style="padding-right: 9px;" ng-if="deptLineList.length>0">
+                        <table class="tbl-right-side">
+                            <thead>
+                                <tr>
+                                    <th style="width: 32%"></th>
+                                    <th>{{langTranslate.Line_Name}}</th>
+                                </tr>
+                            </thead>
+                            <tbody scroll-bottom="deptLineList">
+                                <tr ng-repeat="dataLine in deptLineList" ng-if='dataLine.isActive!= "N"'>
+                                    <td>{{$index+1}}</td>
+                                    <td class="pr">
+                                        <div ng-if="dataLine.id!=0 && !dataLine.isUpdate">
+                                            <span style="word-break: break-word;">{{dataLine.name}}</span>
+                                            <span class="editDeleteIcon">
+                                                    <i class="material-icons" ng-click="setUpdateLineName(dataLine)"
+                                                        style="color: orange;margin-right:6px;cursor: pointer;vertical-align: middle;">create</i>
+                                                    <i class="material-icons" ng-click="deleteLineName(dataLine)"
+                                                        style="color: #f75555;cursor: pointer;vertical-align: middle;">delete_sweep</i>
+                                            </span>
+                                        </div>
+                                        <div ng-if="dataLine.id==0 && !dataLine.isUpdate">
+                                            <input type="text" ng-model="dataLine.name" ng-keyup="$event.keyCode == 13 ? submitLineName(dataLine) : null" maxlength="30">
+                                            <button type="button" class="btn btn-success btn-xs" ng-click="submitLineName(dataLine)" style="margin-left: 63px;margin-top: 2px;">{{langTranslate.Save}}</button>
+                                            <button type="button" class="btn  btn-xs linefreq" ng-click="getDeptLineList()">{{langTranslate.Cancel}}</button>
+                                        </div>
+                                        <div ng-if="dataLine.id!=0 && dataLine.isUpdate">
+                                            <input type="text" ng-model="dataLine.name" ng-keyup="$event.keyCode == 13 ? updateLineName(dataLine) : null" maxlength="30">
+                                            <button type="button" class="btn btn-success btn-xs" ng-click="updateLineName(dataLine)" style="margin-left: 63px;margin-top: 2px;">{{langTranslate.Save}}</button>
+                                            <button type="button" class="btn  btn-xs linefreq" ng-click="updateLineName(dataLine)">{{langTranslate.Cancel}}</button>
+
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="right-card-button">
+                        <span type="button" class=" btn-circle btn-lg sidebar-bg-color" ng-click="addLineName()">
+                    <i class="fa fa-plus" style="color: white;" aria-hidden="true"></i>
+                  </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!------------------------------------Model------------------------------------------------->
+<div id="confirmRemLineModal" class="modal fade confirmDeleteModal" role="dialog">
+    <div class="trans-bg"></div>
+    <img data-dismiss="modal" class="img-close" src="dist/icons/ic_close.png" style="top: 2em; width: 3em;right: 5em;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body" style="padding:10px;display: flex;height: 250px;background-color: #767da7c2;">
+                <div class="img-del-container">
+                    <img src="dist/icons/ic_delete_lg.png">
+                </div>
+                <b style="font-size: 18px;top: 26%; position: absolute;left: 39%;color: #4a4794;font-size: 28px;top: 26%;position: absolute;left: 32%; ">Are
+          you sure </b>
+                <!-- <span style="color: #4a4794;font-size: 56px;top: 19%; position: absolute;left: 69%;">?</span> -->
+                <p class="msg" style="color: #4a4794bf;position: absolute;top: 47%;width: 95%;
+                text-align: center; font-size: 23px;">{{langTranslate.remove_this_department_from_list}}</p>
+                <div style="top: 82%;position: absolute; left: 63%;">
+                    <div ng-show="flagdeleteSpinner" class="small-spinner deleteSpinner"></div>
+                    <button ng-show="!flagdeleteSpinner" type="button" class="delete-btn" data-dismiss="modal" id="btnConfirmRemove" ng-click="removeline()">{{langTranslate.Yes}}</button>
+                    <button ng-show="!flagdeleteSpinner" type="button" class="delete-btn" data-dismiss="modal">{{langTranslate.No}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="statusMessageModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body" style="padding: 30px;">
+                <div style="text-align: center;">
+                    <i class="material-icons ic-popup">{{langTranslate.info}}</i>
+                    <div class="msg">{{statusMessage}}</div>
+                    <!-- <button type="button" class="btn btn-success" style="    margin-left: 0px;
+                    margin-top: 20px;">OK</button> -->
+                    <div class="btn-ok" data-dismiss="modal">{{langTranslate.OK}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,477 @@
+textarea {
+    border-color: #8792D6;
+}
+
+.mCSB_inside>.mCSB_container {
+    margin-right: 0px;
+}
+
+.sugg-det-container .mCSB_inside>.mCSB_container {
+    margin-right: 15px !important;
+}
+
+.sugg-graph-container .mCSB_inside>.mCSB_container {
+    margin-right: 25px;
+}
+
+.tbl-left-side {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
+
+.tbl-left-side th {
+    color: gray;
+    padding: 3px 6px;
+}
+
+.tbl-left-side tbody tr {
+    background: white;
+    color: #8792D6;
+    cursor: pointer;
+    transition: box-shadow 0.1s ease-in-out;
+}
+
+.tbl-left-side tbody tr:hover {
+    -webkit-box-shadow: 0px 3px 5px 1px rgba(204, 202, 204, 1);
+    -moz-box-shadow: 0px 3px 5px 1px rgba(204, 202, 204, 1);
+    box-shadow: 0px 3px 5px 1px rgba(204, 202, 204, 1);
+}
+
+.tbl-left-side td {
+    padding: 3px 6px;
+    vertical-align: middle;
+}
+
+.right-card {
+    position: relative;
+    background: white;
+    border-radius: 23px;
+    height: 480px;
+    width: 94%;
+    -webkit-box-shadow: 2px 25px 41px -2px rgba(51, 50, 51, 0.34);
+    -moz-box-shadow: 2px 25px 41px -2px rgba(51, 50, 51, 0.34);
+    box-shadow: 2px 25px 41px -2px rgba(51, 50, 51, 0.34);
+    /* position: relative;
+    margin-bottom: 46px;
+    background: white;
+    border-radius: 23px;
+    height: 500px;
+    width: 80%;
+    -webkit-box-shadow: 2px 25px 41px -2px rgba(51, 50, 51, 0.34);
+    -moz-box-shadow: 2px 25px 41px -2px rgba(51, 50, 51, 0.34);
+    box-shadow: 2px 25px 41px -2px rgba(51, 50, 51, 0.34); */
+}
+
+.right-card .header {
+    padding: 15px 35px;
+    display: inline-flex;
+    width: 100%;
+}
+
+#selected-branch-label label {
+    text-align: center;
+}
+
+.selectedBranch {
+    color: white;
+}
+
+.tbl-right-side {
+    width: 100%;
+    display: block;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
+
+.tbl-right-side th {
+    color: gray;
+    padding: 3px 6px;
+}
+
+.tbl-right-side tbody {
+    height: 290px;
+    overflow: scroll;
+    overflow-x: hidden;
+    display: block;
+    width: 101.5%;
+}
+
+.tbl-right-side tbody tr {
+    width: 95%;
+    display: inline-table;
+    cursor: pointer;
+    color: #8792D6;
+    cursor: pointer;
+    transition: box-shadow 0.1s ease-in-out;
+}
+
+.tbl-right-side tbody tr td:nth-child(2):hover {
+    -webkit-box-shadow: 0px 3px 5px 1px rgba(204, 202, 204, 1);
+    -moz-box-shadow: 0px 3px 5px 1px rgba(204, 202, 204, 1);
+    box-shadow: 0px 3px 5px 1px rgba(204, 202, 204, 1);
+}
+
+.tbl-right-side td {
+    padding: 6px 18px;
+    vertical-align: middle;
+}
+
+.tbl-right-side tbody tr td:first-child {
+    border-radius: 5px;
+    width: 10%;
+}
+
+.tbl-right-side tbody tr td:nth-child(2) {
+    background: #F5F5F5;
+    border-radius: 5px;
+    width: 90%;
+}
+
+.tbl-right-side tbody tr td:nth-child(3) {
+    background: #F5F5F5;
+    border-radius: 5px;
+    width: 90%;
+}
+
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    padding: 6px 0;
+    font-size: 12px;
+    line-height: 1.428571429;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.btn-circle.btn-lg {
+    width: 50px;
+    height: 50px;
+    padding: 13px 16px;
+    font-size: 18px;
+    line-height: 1.33;
+    border-radius: 25px;
+}
+
+.right-card-button {
+    position: absolute;
+    right: -22px;
+    bottom: 8px;
+    /* bottom: 32px; */
+}
+
+.saveBtn {
+    float: right;
+    margin: 1% -2% 0px 0px;
+}
+
+.savedeptBtn {
+    float: left;
+    margin: 1% -2% 0px 0px;
+}
+
+.pr {
+    position: relative;
+}
+
+.arrow-fwd {
+    position: absolute;
+    z-index: 999;
+    top: 1%;
+    right: 20%;
+    cursor: pointer;
+}
+
+.confirmDeleteModal .trans-bg {
+    background: #7776bb;
+    opacity: 0.3;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 998;
+}
+
+.confirmDeleteModal .modal-dialog {
+    top: 25%;
+    z-index: 999;
+}
+
+.confirmDeleteModal .modal-content {
+    width: 76%;
+    margin: 0 auto;
+}
+
+.modal-body {
+    position: relative;
+    padding: 15px;
+}
+
+.confirmDeleteModal .img-close {
+    position: absolute;
+    color: #4a4794;
+    top: 0px;
+    right: 0px;
+    padding: 3px 3px 5px 5px;
+    color: white;
+    width: 20px;
+    cursor: pointer;
+    z-index: 999;
+}
+
+.confirmDeleteModal .img-del-container {
+    display: inline-block;
+    position: absolute;
+    top: -31%;
+    left: 33%;
+}
+
+.confirmDeleteModal .img-del-container img {
+    width: 158px;
+    padding: 43px;
+}
+
+.card-option-dropdown .dropdown-menu {
+    width: 140px;
+    min-width: 140px;
+    right: 0px;
+}
+
+.delete-btn {
+    width: 65px;
+    margin-right: 10px;
+    background: transparent;
+    color: white;
+    font-size: 19px;
+    border: 1px solid transparent;
+    border-radius: 16px;
+}
+
+.delete-btn:hover {
+    width: 65px;
+    margin-right: 10px;
+    background: #4b4794;
+    color: white;
+    font-size: 19px;
+    border: 1px solid transparent;
+    border-radius: 16px;
+}
+
+.editDeleteIcon {
+    position: absolute;
+    z-index: 999;
+    right: 3%;
+}
+
+.editDeleteIcon .material-icons {
+    font-size: 20px;
+}
+
+.deleteSpinner {
+    top: 13px;
+    width: 38px;
+    height: 38px;
+    position: relative;
+}
+
+
+/*------------Main Tab---------------*/
+
+
+/* .main-tab-switcher {
+    -webkit-box-shadow: 0px 0px 5px 1px rgb(226, 226, 226);
+    -moz-box-shadow: 0px 0px 5px 1px rgba(184, 184, 184, 1);
+    box-shadow: 0px 0px 5px 1px rgb(226, 226, 226);
+    padding: 2px;
+    background: white;
+    /* border-radius: 25px; */
+
+
+/* display: inline-flex;
+color: #8791d6;
+margin-top: 10px; */
+
+
+/* margin-bottom: 10px; */
+
+
+/* 
+} */
+
+
+/* .mainActiveSwitch {
+    background: #4B4795 !important;
+    color: white;
+    line-height: 1.5;
+    -webkit-box-shadow: 0px 0px 12px -2px rgba(143, 141, 143, 1);
+    -moz-box-shadow: 0px 0px 12px -2px rgba(143, 141, 143, 1);
+    box-shadow: 0px 0px 12px -2px rgba(143, 141, 143, 1);
+} */
+
+*/
+/* .tab-content {
+    padding: 14px;
+    height: 500px;
+    width: 100%;
+    background: white;
+    -webkit-box-shadow: 0px 0px 5px 1px rgb(226, 226, 226);
+    -moz-box-shadow: 0px 0px 5px 1px rgba(184, 184, 184, 1);
+    box-shadow: 0px 0px 5px 1px rgb(226, 226, 226);
+} */
+
+.disableRadioCheckbox {
+    cursor: not-allowed;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.disableRadioCheckbox {
+    pointer-events: none !important;
+    cursor: not-allowed !important;
+    user-select: none;
+}
+
+.deptwrapper {
+    border-radius: 5px;
+    /*min-width: 300px;*/
+    position: relative;
+    display: table-cell;
+    /*max-width: 600px; */
+}
+
+.deptwrapper .selected-items-box {
+    cursor: pointer;
+    border-radius: 5px;
+    border: 1px solid lightgray;
+    background-color: white;
+    padding: 7px;
+    color: black;
+}
+
+.list .items-list {
+    list-style-type: none;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.list .items-list li {
+    margin: 0;
+    width: 100%;
+    padding: 0;
+    border-bottom: solid 1px #C7C6C7;
+    padding: 5px;
+    background-color: #fff;
+}
+
+.deptwrapper .list {
+    display: none;
+    max-height: 200px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border-left: solid 1px #C7C6C7;
+    border-right: solid 1px #C7C6C7;
+    border-bottom: solid 1px #C7C6C7;
+    z-index: 100;
+    position: absolute;
+    width: 100%;
+}
+
+.branch-txt {
+    position: relative;
+    padding: 4px 4px 4px 4px;
+    background: white;
+    border: 1px solid lightgray;
+    border-radius: 4px;
+    height: 44px;
+}
+
+.txt-finance {
+    padding: 6px 8px;
+    margin-right: 2px;
+    margin-right: 23px;
+    width: 67%;
+}
+
+.select-lbl {
+    color: #4b4795;
+    font-weight: 500;
+}
+
+.deptwiseGraph {
+    height: 35px;
+    background-color: #615cbd;
+    color: #fff;
+}
+
+.cancelFreq {
+    background-color: red;
+    color: white;
+    margin: 1% 0% 36px 5px;
+}
+
+.cancelFreq:hover {
+    color: white;
+}
+
+.linefreq {
+    float: right;
+    background-color: red;
+    color: white;
+    margin: 1% 0% 0px 4px;
+}
+
+.linefreq:hover {
+    color: white;
+}
+
+
+/*-----------New Css---------------------------*/
+
+.main-tab-switcher {
+    -webkit-box-shadow: 0 0 5px 1px #e2e2e2;
+    -moz-box-shadow: 0 0 5px 1px rgba(184, 184, 184, 1);
+    box-shadow: 0 0 5px 1px #e2e2e2;
+    padding: 2px;
+    background: #fff;
+    display: inline-flex;
+    color: #8791d6;
+    margin-top: 10px;
+    height: 48px;
+}
+
+.main-tab-switch {
+    line-height: 1.5;
+    /* padding: 10px 34px; */
+    padding: 6px 14px;
+    cursor: pointer
+}
+
+.mainActiveSwitch {
+    background: #8791d6;
+    padding: 7px 20px;
+    /* padding: 10px 34px; */
+    color: #fff;
+    line-height: 1.5;
+    -webkit-box-shadow: 0 0 12px -2px rgba(143, 141, 143, 1);
+    -moz-box-shadow: 0 0 12px -2px rgba(143, 141, 143, 1);
+    box-shadow: 0 0 12px -2px rgba(143, 141, 143, 1)
+}
+
+.tab-content {
+    margin-left: 16px;
+    padding: 14px;
+    height: 520px;
+    width: 89%;
+    background: #fff;
+    -webkit-box-shadow: 0 0 5px 1px #e2e2e2;
+    -moz-box-shadow: 0 0 5px 1px rgba(184, 184, 184, 1);
+    box-shadow: 0 0 5px 1px #e2e2e2
+}
+
+.activeVertTab {
+    color: #4b4795
+}

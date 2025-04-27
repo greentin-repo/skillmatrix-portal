@@ -1,0 +1,15 @@
+{
+    "status": "success",
+    "statusCode": 200,
+    "reason": null,
+    "result": true,
+    "branchList": null,
+    "deptList": null,
+    "catagoryList": null,
+    "statusList": null,
+    "orgList": null,
+    "pointmaster": null,
+    "teamtypemaster": null,
+    "designation": null,
+    "benefitAnalysisList": null
+}

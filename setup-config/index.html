@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html ng-app="configApp" style="height: 100%" ng-cloak>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <link rel="shortcut icon" type="image/x-icon" href="../static-website/images/favicon.ico" />
+    <title>myeNovation - Setup Config</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!--Custom Scrollbar-->
+    <link rel="stylesheet" href="../bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css"
+        type="text/css" />
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="../bower_components/Ionicons/css/ionicons.min.css">
+    <!-- Jquery-ui -->
+    <link rel="stylesheet" href="../dist/css/jquery-ui.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="../bower_components/custom/common.css">
+    <link rel="stylesheet" href="common/setup.css">
+    <link rel="stylesheet" href="dist/css/custom/common.css">
+    <link rel="stylesheet" href="dist/css/custom/custom_navbar.css">
+    <link rel="stylesheet" href="dist/css/custom/style.css">
+    <link rel="stylesheet" href="dist/css/setup-config.css">
+    <link rel="stylesheet" href="dist/css/loading_indicator.css">
+    <link rel="stylesheet" href="../bower_components/snackbar/snackbar.css">
+    <link rel="stylesheet" href="../bower_components/custom/tooltip.css">
+
+    <!-- Spinner -->
+    <link rel="stylesheet" href="../bower_components/spinner/roundSpinner.css">
+    <link rel="stylesheet" href="../bower_components/spinner/hzLineLoadingindicator.css">
+    <link rel="stylesheet" href="../bower_components/spinner/threeDotLoadingIndicator.css">
+    <!-- rzSlider -->
+    <link rel="stylesheet" href="../bower_components/rzSlider/rzslider.css">
+    <!-- datepicker 3 -->
+    <link rel="stylesheet" href="../bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+    <!-- Google Font -->
+    <link rel="stylesheet" href="../dist/fonts/roboto/roboto.css">
+    <!--Material Icons-->
+    <link href="../dist/fonts/google-material-icons/material_icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="../bower_components/select2/select.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/3.4.5/select2.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.8.5/css/selectize.default.css">
+    <style type="text/css">
+        .block-ui-container {
+            position: fixed;
+            z-index: 10000;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            height: 100%;
+            overflow: hidden;
+            opacity: 1;
+            filter: alpha(opacity=00);
+        }
+
+        .block-ui-overlay {
+            width: 100%;
+            height: 100%;
+            opacity: .5;
+            filter: alpha(opacity=50);
+            background-color: #000;
+        }
+
+        .block-ui-message-container {
+            position: absolute;
+            top: 35%;
+            left: 0;
+            right: 0;
+            height: 0;
+            text-align: center;
+            z-index: 10001;
+        }
+
+        .block-ui-message {
+            display: inline-block;
+            text-align: left;
+            background-color: #ffff;
+            color: #26244a;
+            padding: 20px;
+            border-radius: 4px;
+            font-size: 20px;
+            font-weight: 700;
+            filter: alpha(opacity=100);
+            padding-left: 78px;
+            margin-left: 50px;
+            margin-top: 30px;
+            width: 20%;
+        }
+
+        .mainDiv {
+            width: 100%;
+            margin-top: 4%;
+            color: #fff;
+        }
+
+        .confirmationModal {
+            overflow: hidden !important;
+        }
+
+        .confirmationModal .trans-bg {
+            background: transparent;
+            opacity: 0.3;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            z-index: 998;
+        }
+
+        .confirmationModal .modal-dialog {
+            top: 5%;
+            z-index: 999;
+            width: 100%;
+        }
+
+        .confirmationModal .modal-content {
+            width: 95%;
+            margin: 0 auto;
+            box-shadow: none;
+            background: transparent;
+            border: none;
+        }
+
+        .confirmationModal .modal-body {
+            position: relative;
+            padding: 15px;
+        }
+
+        .confirmationModal .img-close {
+            position: absolute;
+            color: #4a4794;
+            top: 2em;
+            right: 5em;
+            padding: 3px 3px 5px 5px;
+            color: white;
+            width: 3em;
+            cursor: pointer;
+            z-index: 9999;
+        }
+
+        .confirmationModal .img-success-container {
+            display: inline-block;
+            position: absolute;
+            right: 0;
+            left: 0;
+            margin: auto;
+            text-align: center;
+            top: -2.3em;
+        }
+
+        .confirmationModal .img-success-container img {
+            width: 65px;
+            border-radius: 50%;
+            height: 65px;
+            padding: 10px;
+            background: #fff;
+            box-shadow: 1px 0px 8px #989898;
+        }
+
+        .confirmationModal .textmsg {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+        }
+
+        .confirmationModal .textmsg h1 {
+            margin-bottom: 0px;
+        }
+
+        .confirmationModal .textmsg h3 {
+            margin-bottom: 0px;
+            margin-top: 10px;
+        }
+
+        .confirmationModal .textmsg h3 small {
+            color: #fff;
+        }
+
+        #bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+        }
+
+        .logo-setup {
+            position: absolute;
+            left: 50%;
+            top: 20%;
+            transform: translate(-50%, -20%);
+            text-align: center;
+        }
+
+        [ng\:cloak],
+        [ng-cloak],
+        [data-ng-cloak],
+        [x-ng-cloak],
+        .ng-cloak,
+        .x- ng-cloak {
+            display: none !important;
+        }
+    </style>
+</head>
+
+<body style="background-color: #F5F5F5;height: 100%">
+    <div class="block-ui-container" ng-if="flagpageloadindicator">
+        <div class="block-ui-overlay"></div>
+        <div class="lineLoader" style="width: 100%;z-index: 99;"></div>
+        <div class="block-ui-message-container">
+            <div class="block-ui-message">Please wait ...</div>
+        </div>
+    </div>
+
+    <div class="main-place holder">
+        <div class="nav-side-menu">
+            <div class="brand" style="margin-bottom: 12px;">
+                <div style="text-align: center">
+                    <img src="../dist/icons/my_enovation_white@2x.png" style="width: 56%;">
+                    <!--<img src="dist/icons/tredlogo.png" style="position: relative;left: -3px;top: 2px; height: 20px;width: 20px;">-->
+                </div>
+                <div style="margin-top: 10px; margin-left: 47px;">
+                    <img src="{{empDetails.profilePic}}" class="profilePic" check-sugg-det-usr-image-loaded>
+                    {{empDetails.firstName}}
+                </div>
+            </div>
+            <div class="finish-setup-block" style="border-bottom: 1px solid #FFF; background-color: #7145ce;"
+                ng-if="empDetails.productOrgConfigDet.isSetupCompleted == 0">
+                <div class="txt1">All set to go</div>
+                <div class="txt2">Just click below button to complete setup!</div>
+                <div class="btn-finish" ng-click="finishSetup()">Finish Setup</div>
+            </div>
+            <div class="setup-label">
+                <span>Settings & Configurations</span>
+            </div>
+
+            <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+            <div class="menu-list">
+
+                <ul id="menu-content" class="menu-content collapse out">
+                    <li ng-if="empDetails.productOrgConfigDet.isSetupCompleted == 1">
+                        <a href="../template.html" style="display: inline-block;width: 100%;">
+                            <i class="fa fa-home" aria-hidden="true"></i> Home</a>
+                    </li>
+                    <li ng-click="setSelectedMenu(sideMenuData[0]);setMainMenu(sideMenuData[0].linkName);"
+                        ng-class="{active: selectedMainMenu==sideMenuData[0].linkName}">
+                        <a href="#">
+                            <i class="fa fa-info-circle" aria-hidden="true"></i>{{sideMenuData[0].linkName}}
+                        </a>
+                    </li>
+                    <li data-toggle="collapse" data-target="#commonsetup" class="collapsed "
+                        ng-class="{active: selectedMainMenu=='Common Settings'}">
+                        <!--active-->
+                        <a href="#"><i class="fa fa-sitemap" aria-hidden="true"></i>Common Settings <span
+                                class="arrow"></span></a>
+                    </li>
+                    <ul class="sub-menu collapse" id="commonsetup">
+                        <li ng-click="setSelectedMenu(sideMenuData[1]);setMainMenu('Common Settings');"
+                            ng-class="{active: selectedMenu.linkName==sideMenuData[1].linkName}"
+                            ng-if="checkSubMenuAccess(menuName,sideMenuData[1].linkName)"><a href="#">Branch *</a></li>
+                        <li class="sideMenuNotAllow" ng-if="!checkSubMenuAccess(menuName,sideMenuData[1].linkName)"
+                            style="cursor: not-allowed;">Branch </li>
+
+                        <li ng-click="setSelectedMenu(sideMenuData[2]);setMainMenu('Common Settings');"
+                            ng-class="{active: selectedMenu.linkName==sideMenuData[2].linkName}"
+                            ng-if="checkSubMenuAccess(menuName,sideMenuData[2].linkName)"><a href="#">Department *</a>
+                        </li>
+                        <li class="sideMenuNotAllow" ng-if="!checkSubMenuAccess(menuName,sideMenuData[2].linkName)"
+                            style="cursor: not-allowed;">Department *</li>
+
+                        <li ng-click="setSelectedMenu(sideMenuData[3]);setMainMenu('Common Settings');"
+                            ng-class="{active: selectedMenu.linkName==sideMenuData[3].linkName}"
+                            ng-if="checkSubMenuAccess(menuName,sideMenuData[3].linkName)"><a href="#">Employee *</a>
+                        </li>
+                        <li class="sideMenuNotAllow" ng-if="!checkSubMenuAccess(menuName,sideMenuData[3].linkName)"
+                            style="cursor: not-allowed;">Employee *</li>
+
+                        <li ng-click="setSelectedMenu(sideMenuData[25]);setMainMenu('Common Settings');"
+                            ng-class="{active: selectedMenu.linkName==sideMenuData[25].linkName}"
+                            ng-if="checkSubMenuAccess(menuName,sideMenuData[25].linkName)"><a href="#">Password
+                                Policy</a></li>
+                        <li class="sideMenuNotAllow" ng-if="!checkSubMenuAccess(menuName,sideMenuData[25].linkName)"
+                            style="cursor: not-allowed;">Password Policy</li>
+
+                        <li ng-click="setSelectedMenu(sideMenuData[14]);setMainMenu('Common Settings');"
+                            ng-class="{active: selectedMenu.linkName==sideMenuData[14].linkName}"
+                            ng-if="checkSubMenuAccess(menuName,sideMenuData[14].linkName)"><a href="#">Access
+                                Management</a></li>
+                        <li class="sideMenuNotAllow" ng-if="!checkSubMenuAccess(menuName,sideMenuData[14].linkName)"
+                            style="cursor: not-allowed;">Access Management</li>
+
+                        <li ng-click="setSelectedMenu(sideMenuData[16]);setMainMenu('Common Settings');"
+                            ng-class="{active: selectedMenu.linkName==sideMenuData[16].linkName}"
+                            ng-if="checkSubMenuAccess(menuName,sideMenuData[16].linkName)"><a href="#">Gift and
+                                Reward</a></li>
+                        <li class="sideMenuNotAllow" ng-if="!checkSubMenuAccess(menuName,sideMenuData[16].linkName)"
+                            style="cursor: not-allowed;">Gift and Reward</li>
+                    </ul>
+                    <li ng-click="logOut()">
+                        <a href="#">
+                            <i class="fa fa-sign-out" aria-hidden="true"></i>Logout
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="page-placeholder">
+            <!-- Keep all page content within the page-content inset div! -->
+            <div class="placeholder-content ">
+                <div ng-view></div>
+            </div>
+        </div>
+        <div class="snackbar-container" data-snackbar="true" data-snackbar-duration="3000"
+            data-snackbar-remove-delay="200"></div>
+        <!-- Modal -->
+        <div id="setupCompleted" class="modal fade confirmationModal" role="dialog">
+            <img src="../dist/icons/home-bg.jpg" alt="background" id="bg" class="backgroundImg">
+            <!-- <img data-dismiss="modal" class="img-close" src="dist/icons/ic_close.png"> -->
+            <div class="modal-dialog">
+                <div class="modal-content" style="background: transparent">
+                    <div class="modal-body" style="padding:10px;" ng-style="setSetCompletedHeight()">
+                        <div class="rocket">
+                            <div class="img-success-container">
+                                <img src="../dist/icons/checkmark.png">
+                            </div>
+                            <div class="row logo-setup">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-4" style="padding: 0;">
+                                    <img src="../dist/icons/danaLogo.png" alt="DanaLogo"
+                                        style="width: 130px;height:70px;max-width: 100%;">
+                                </div>
+                                <div class="col-md-4" style="padding: 0;">
+                                    <img src="../dist/icons/ANANDLogo.png" alt="ANANDLogo"
+                                        style="width: 240px;height:40px;max-width: 100%;margin: 10px 0px">
+                                </div>
+                                <div class="col-md-2"></div>
+                            </div>
+                            <div class="textmsg text-center">
+                                <b style="font-size: 28px;">Congratulations!!</b><br />
+                                <h1>myeNovation</h1>
+                                <h3>Launched!!</h3>
+                                <!-- <h3>{{empDetails.organization.name}} <small>({{empDetails.branch.name}})</small></h3> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer" style="border: none;">
+                        <a type="button" class="btn btn-success" href="../template.html">Let's Go</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- jQuery 3 -->
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../bower_components/jquery-ui/jquery-ui.min.js"></script>
+
+
+    <!-- Bootstrap 3.3.7-->
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- AdminLTE App -->
+    <script src="dist/js/adminlte.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="../dist/js/demo.js"></script>
+
+    <script src="../dist/ang/angular.min.js"></script>
+    <script src="../bower_components/angular-sanitize.min.js"></script>
+    <script src="../dist/ang/angular-route.min.js"></script>
+    <script src="../dist/ang/socket.js"></script>
+    <script src="../bower_components/snackbar/ang.snackbar.js"></script>
+    <script src="../dist/ang/angular-translate.min.js"></script>
+    <script src="../dist/ang/angular-translate-loader-static-files.min.js"></script>
+
+    <!-- UI-bootstrap -->
+    <script src="../bower_components/ui-bootstrap/ui-bootstrap-tpls-2.5.0.min.js"></script>
+    <script src="../bower_components/moment/moment.js"></script>
+    <script src="../bower_components/select2/select.js"></script>
+
+
+    <!-- JSPDF - Convert HTML to PDF -->
+    <script src="../bower_components/angular-animate.min.js"></script>
+    <script src="../bower_components/angular-touch.min.js"></script>
+
+    <script src="../dist/ang/appDomain.js?ver=4.0.0"></script>
+    <script>
+        // document.write('<script src="../dist/ang/appDomain.js?ver=' + appVersion + '"\><\/script>');
+        document.write('<script src="config_app.js?ver=' + appVersion + '"\><\/script>');
+        document.write('<script src="content/branches/branches.js?ver=' + appVersion + '"\><\/script>');
+        document.write('<script src="content/departments/departments.js?ver=' + appVersion + '"\><\/script>');
+        document.write('<script src="content/homePage/homePage.js?ver=' + appVersion + '"\><\/script>');
+        document.write('<script src="content/employee/employee.js?ver=' + appVersion + '"\><\/script>');
+        document.write('<script src="content/userMgmt/userMgmt.js?ver=' + appVersion + '"\><\/script>');
+        document.write('<script src="content/redeem_Setup/redeemSetup.js?ver=' + appVersion + '"\><\/script>');
+        document.write('<script src="content/passwordpolicy/passwordpolicy.js?ver=' + appVersion + '"\><\/script>');
+        document.write('<script src="content/launchModule/launchModule.js?ver=' + appVersion + '"\><\/script>');
+    </script>
+
+    <!-- for excel export -->
+    <script src="../dist/alasql/alasql.min.js"></script>
+    <script src="../dist/tableExport/xlsx.core.min.js"></script>
+    <script src="../dist/ang/dirPagination.js"></script>
+    <script src="dist/ang/dirPagination.js"></script>
+    <!-- <script src="content/header_side_bar/profile.js"></script> -->
+    <!-- Datepicker -->
+    <!-- <script src="bower_components/moment/min/moment.min.js"></script> -->
+    <script src="../bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js">
+    </script>
+    <script src="../bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.js">
+    </script>
+
+    <!-- mCustomScrollbar -->
+    <script src="../bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="../bower_components/ng-scrollbars/dist/scrollbars.min.js"></script>
+    <script>
+        $("#menu-toggle").click(function (e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("active");
+        });
+    </script>
+</body>
+
+</html>

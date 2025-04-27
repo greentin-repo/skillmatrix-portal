@@ -1,0 +1,196 @@
+<link rel="stylesheet" href="content/departments/departments.css">
+<div ng-include="'common/loading_indicator.html'"></div>
+<div ng-include="'common/nextPage.html'"></div>
+<div class="container pr">
+    <div style="margin-top: 20px;" ng-show="!flagMemberListAvail">
+        <!-- <div style="display:flex;margin-left: 43px;">
+            <h3 class="txt-color-primary" style="margin-top: 13px;margin-right: 15px;font-size: 19px;">
+                {{langTranslate.Department}}</h3>
+            <div class="btn-help" style="margin-top: 8px;margin-right: 15px;"><i class="fa fa-question-circle" style="position: relative;left: -0.5px;"></i></div>
+
+        </div> -->
+        <!-- <div class="main-tab-switcher" style="margin-left: 40px;">
+            <div class="main-tab-switch" ng-class="{mainActiveSwitch:isSetMainTab(1)}" ng-click="setMainTab(1)">
+                <label style="margin-left: 5px;margin-right: 5px;margin-top: 7px;">Zone Setup</label>
+            </div>
+            <div class="main-tab-switch" ng-class="{mainActiveSwitch:isSetMainTab(1)}" ng-click="setMainTab(1)">
+                <img style="width: 35px;padding: 4px;" ng-click="getDeptList()" src="dist/icons/ic_add_user.png">
+                <label style="margin-left: 5px;margin-right: 5px;">{{langTranslate.Department}}</label>
+            </div>
+            <div class="main-tab-switch" ng-class="{mainActiveSwitch:isSetMainTab(2)}" ng-click="setMainTab(2)">
+                <img style="width: 35px;padding: 4px;" ng-click="showAddEvaluatorPopup()" src="dist/icons/ic_add_user.png">
+                <label style="margin-left: 10px;margin-right: 10px;">Line</label>
+
+            </div>
+        </div> -->
+        <div class="container" style="width: 99%;">
+            <div ng-include="'common/loading_indicator.html'"></div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div style="display: inline-flex;width: 100%;">
+                        <h3 class="txt-color-primary" style="margin-top: 9px;margin-right: 15px;font-size: 19px;">
+                            {{langTranslate.Department}}
+                        </h3>
+                        <div class="btn-help" ng-click="showHelpPopup('department')" style="margin-top: 6px;margin-right: 15px;"><i class="fa fa-question-circle" style="position: relative;left: -0.5px;"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12" style="display: flex;">
+                <div class="main-tab-switcher" style="    margin-left: 15px;">
+                    <div class="main-tab-switch" ng-class="{mainActiveSwitch:isSetMainTab(1)}" ng-click="setMainTab(1)">
+                        <img style="width: 35px;padding: 4px;" ng-click="getDeptList()" src="dist/icons/ic_add_user.png">
+                        <label style="margin-left: 5px;margin-right: 5px;">{{langTranslate.Department}}</label>
+                    </div>
+                    <div class="main-tab-switch" ng-class="{mainActiveSwitch:isSetMainTab(2)}" ng-click="setMainTab(2)">
+                        <img style="width: 35px;padding: 4px;" ng-click="showAddEvaluatorPopup()" src="dist/icons/ic_add_user.png">
+                        <label style="margin-left: 10px;margin-right: 10px;">Line</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <!-- <div ng-show="isSetMainTab(1)">
+      <div ng-include="'content/departments/zoneSetup.html'"></div>
+    </div> -->
+        <div ng-show="isSetMainTab(1)">
+            <div ng-include="'content/departments/departmentSetup.html'"></div>
+        </div>
+        <div ng-show="isSetMainTab(2)">
+            <div ng-include="'content/departments/lineSetup.html'"></div>
+        </div>
+    </div>
+    <div ng-include="'common/help_popup.html'"></div>
+
+    <!-- <div class="row" style="margin-top: 7%;margin-right: 9%">
+        <div class="col-md-6">
+            <label class="txt-color-primary" style="font-size: 19px;">{{langTranslate.Branch}}</label>
+            <div ng-if="branchListLoading" class="loadingIndicatorContainer ldng-ind-sm"
+                style="margin-top: 10px;border: 2px solid lightgray;width: 259px;">
+                <i class="fa fa-building-o fa-2x" aria-hidden="true"></i>
+                <div class="msg">{{langTranslate.Please_wait_branch_list_is_loading}}</div>
+                <div style="width: 100px; margin:0 auto;" class="lineLoaderRelative"></div>
+            </div>
+            <div ng-if="!branchListLoading && branchList.length==0" class="loadingIndicatorContainer ldng-ind-sm"
+                style="margin-top: 10px;border: 2px solid lightgray;width: 259px;">
+                <i class="fa fa-building-o fa-2x" aria-hidden="true"></i>
+                <div class="msg">Data not found.</div>
+            </div>
+            <table class="tbl-left-side" ng-if="!branchListLoading && branchList.length>0">
+                <thead>
+                    <tr>
+                        <th>{{langTranslate.Sr_No}}</th>
+                        <th>{{langTranslate.Location}}</th>
+                        <th>{{langTranslate.Branch_Name}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="data in branchList" ng-click="setSelectedBranch(data,$index)"
+                        ng-style="data.branchId==selectedBranch.branchId && {'background-color':'#8792d6','color':'white'}">
+                        <td>{{$index+1}}</td>
+                        <td>{{data.location}}</td>
+                        <td>{{data.name}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-6">
+            <div class="right-card" ng-if="selectedBranch!=null">
+                <div class="header">
+                    <label class="txt-color-primary" style="font-size: 19px;">{{langTranslate.Department_Setup}}</label>
+                    <div class="btn-help" ng-click="showHelpPopup()" style="margin-left: 10px;"><i
+                            class="fa fa-question-circle"></i></div>
+                </div>
+                <div class="header-det">
+                    <div class="sidebar-bg-color" id="selected-branch-label" style="color: white;">
+                        <label class="width-20">{{selectedBranchIndex}}</label>
+                        <label class="width-30">{{selectedBranch.location}}</label>
+                        <label class="width-40">{{selectedBranch.name}}</label>
+                    </div>
+                </div>
+                <div ng-if="deptListLoading" class="loadingIndicatorContainer ldng-ind-sm"
+                    style="margin-top: 10px;border: 2px solid lightgray;width: 259px;">
+                    <i class="fa fa-building-o fa-2x" aria-hidden="true"></i>
+                    <div class="msg">{{langTranslate.Please_wait_department_list_is_loading}}</div>
+                    <div style="width: 100px; margin:0 auto;" class="lineLoaderRelative"></div>
+                </div>
+                <div ng-if="!deptListLoading && deptList.length==0" class="loadingIndicatorContainer ldng-ind-sm"
+                    style="margin-top: 10px;border: 2px solid lightgray;width: 259px;">
+                    <i class="fa fa-building-o fa-2x" aria-hidden="true"></i>
+                    <div class="msg">Data not found.</div>
+                </div>
+                <div style="padding-right: 9px;" ng-if="!deptListLoading && deptList.length>0">
+
+                    <table class="tbl-right-side">
+                        <thead>
+                            <tr>
+                                <th style="width: 22%"></th>
+                                <th>{{langTranslate.Department_Name}}</th>
+                            </tr>
+                        </thead>
+                        <tbody scroll-bottom="deptList">
+                            <tr ng-repeat="dataDept in deptList">
+                                <td>{{$index+1}}</td>
+                                <td class="pr">
+                                    <div ng-if="dataDept.deptId!=0 && !dataDept.isUpdate">
+                                        <span style="word-break: break-word;">{{dataDept.deptName}}</span>
+                                        <span class="editDeleteIcon">
+                                            <i class="material-icons" ng-click="setUpdateDepartment(dataDept)"
+                                                style="color: orange;margin-right:6px;cursor: pointer;vertical-align: middle;">create</i>
+                                            <i class="material-icons" ng-click="deleteDepartment(dataDept)"
+                                                style="color: #f75555;cursor: pointer;vertical-align: middle;">delete_sweep</i>
+                                        </span>
+                                    </div>
+                                    <div ng-if="dataDept.deptId==0 && !dataDept.isUpdate">
+                                        <input type="text" ng-model="dataDept.deptName"
+                                            ng-keyup="$event.keyCode == 13 ? submitDepartment(dataDept) : null"
+                                            maxlength="30">
+                                        <button type="button" class="btn btn-success btn-xs saveBtn"
+                                            ng-click="submitDepartment(dataDept)">{{langTranslate.Save}}</button>
+                                    </div>
+                                    <div ng-if="dataDept.deptId!=0 && dataDept.isUpdate">
+                                        <input type="text" ng-model="dataDept.deptName"
+                                            ng-keyup="$event.keyCode == 13 ? updateDepartment(dataDept) : null"
+                                            maxlength="30">
+                                        <button type="button" class="btn btn-success btn-xs saveBtn"
+                                            ng-click="updateDepartment(dataDept)">{{langTranslate.Save}}</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="right-card-button">
+                    <span type="button" class=" btn-circle btn-lg sidebar-bg-color" ng-click="addDepartment()">
+                        <i class="fa fa-plus" style="color: white;" aria-hidden="true"></i>
+                    </span>
+                </div>
+            </div>
+
+        </div>
+    </div> -->
+
+</div>
+
+<!-- Included help popup -->
+<!-- <div ng-include="'common/help_popup.html'"></div> -->
+
+<div class="modal fade" id="statusMessageModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body" style="padding: 30px;">
+                <div style="text-align: center;">
+                    <i class="material-icons ic-popup">{{langTranslate.info}}</i>
+                    <div class="msg">{{statusMessage}}</div>
+                    <!-- <button type="button" class="btn btn-success" style="    margin-left: 0px;
+                    margin-top: 20px;">OK</button> -->
+                    <div class="btn-ok" data-dismiss="modal">{{langTranslate.OK}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,442 @@
+.tab-container {
+    height: 545px;
+    border: 1px solid #a5a0a0;
+    background: white;
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(176, 176, 176, 1);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(176, 176, 176, 1);
+    box-shadow: 0px 0px 5px 0px rgba(176, 176, 176, 1);
+}
+
+.back-btn {
+    /* text-align: right; */
+    /* margin-top: 10px; */
+    position: absolute;
+    z-index: 999;
+    left: 0px;
+    top: 0px;
+}
+
+.back-btn .material-icons {
+    font-size: 47px;
+    color: #4b4794;
+}
+
+.btn-create {
+    padding-left: 40px;
+    padding-right: 40px;
+    font-size: 17px;
+}
+
+.btn-round-border {
+    border-radius: 25px;
+    color: white;
+}
+
+.bg-green {
+    background-color: #33C771;
+}
+
+.profile {
+    margin-top: 49px;
+    border: 1px solid #a8afda;
+    width: 70%;
+    height: 31%;
+}
+
+.profile-txt {
+    margin: 0 auto;
+    margin-top: 49px;
+    width: 70%;
+    height: 31%;
+}
+
+
+/* .profile{
+    background-color: #a8afda;
+    margin-left: 36px;
+    border-radius: 23px;
+    margin-top: 49px;
+    border: 1px solid #a8afda;
+    width: 70%;
+    height: 31%;  
+} */
+
+.profile-icon {
+    height: 9em;
+    margin-left: 12px;
+    width: 75%;
+    margin-top: -1px;
+}
+
+.changeprofile {
+    border: 1px solid #a8afda;
+    background-color: #a8afda;
+    margin-left: 41px;
+    border-radius: 11px;
+    width: 67%;
+    margin-top: 14px;
+}
+
+.change-lbl {
+    margin-left: 30px;
+    height: 30px;
+    margin-top: 8px;
+}
+/* 
+.lblfname {
+    font-size: 17px;
+    position: absolute;
+    left: 74px;
+    color: white;
+    font-weight: 400;
+} */
+
+/* .lbllname {
+    font-size: 17px;
+    position: absolute;
+    left: 274px;
+    color: white;
+    font-weight: 400;
+} */
+/* 
+.txtfName {
+    padding: 5px;
+    width: 86%;
+    margin-top: 30px;
+    margin-left: 33px;
+}
+
+.txtlName {
+    padding: 5px;
+    width: 100%;
+    margin-top: 30px;
+    margin-left: 33px;
+} */
+
+.designation {
+    font-size: 17px;
+    position: absolute;
+    left: 74px;
+    color: white;
+}
+
+.designation-txt {
+    padding: 5px;
+    width: 89%;
+    margin-top: 30px;
+    margin-left: 33px;
+}
+
+.dept-name {
+    font-size: 17px;
+    position: absolute;
+    left: 270px;
+    color: white;
+}
+
+.dept-txt {
+    padding: 5px;
+    width: 100%;
+    margin-top: 30px;
+    margin-left: 33px;
+}
+
+.email {
+    font-size: 17px;
+    position: absolute;
+    left: 74px;
+    color: white;
+    font-weight: 400;
+}
+
+.email-txt {
+    padding: 5px;
+    margin-bottom: 10px;
+    width: 100%;
+  
+}
+
+.mblno {
+    font-size: 17px;
+    position: absolute;
+    left: 74px;
+    color: white;
+    font-weight: 400;
+}
+
+.mbl-txt {
+    padding: 5px;
+    width: 92%;
+    margin-top: 30px;
+    margin-left: 33px;
+}
+
+.btn-submit {
+    width: 23%;
+    float: right;
+    height: 35px;
+    margin-right: 2px;
+    margin-top: -2em;
+    color: white;
+}
+
+.btn-submit:hover {
+    color: white;
+}
+
+.btn-file {
+    /* position: unset;
+    border-radius: 3px;
+    color: white !important;
+    background-color: #ffff;
+    font-size: 13px;
+    height: 33px;
+    width: 90px;
+    padding: 6px;
+    box-shadow: none;
+    border: 1px solid #4b4795; */
+    cursor: pointer;
+    border: 1px solid #a8afda;
+    background-color: #a8afda;
+    border-radius: 11px;
+    width: 67%;
+    margin-top: 14px;
+}
+
+.btn-file input[type=file] {
+    top: 0;
+    opacity: 0;
+    left: 0px;
+    height: 38px;
+    width: 150px;
+}
+
+.btn-file input {
+    display: block;
+    width: 90px;
+    height: 33px;
+    position: absolute;
+}
+
+.btn-default:hover {
+    background-color: #a8afda;
+    border-color: #a8afda;
+}
+
+/* .usr-img {
+    margin-top: 7px;
+    width: 106%;
+    border-radius: 50%;
+    border: 2px solid white;
+    height: 100%;
+    display: inline;
+    -webkit-box-shadow: 0px 0px 2px 0px rgb(150, 115, 150);
+    -moz-box-shadow: 0px 0px 2px 0px rgba(199, 197, 199, 1);
+    box-shadow: 0px 0px 2px 0px rgba(199, 197, 199, 1);
+} */
+
+.modalBody {
+    padding: 4%;
+}
+
+.resetBtn {
+    width: 30%;
+    margin: 0 auto;
+    margin-top: 4%;
+}
+
+.btn-reset {
+    background: #4b4794;
+    color: #ffffff;
+}
+
+.input-filed {
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 4%;
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+    margin-top: 7px;
+}
+
+.btn:hover {
+    color: #fff !important;
+    text-decoration: none;
+}
+body{
+    background: -webkit-linear-gradient(left, #3931af, #00c6ff);
+}
+.emp-profile{
+    padding: 3%;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    border-radius: 0.5rem;
+    background: #fff;
+}
+.profile-img{
+    text-align: center;
+}
+.profile-img img{
+    width: 70%;
+    height: 100%;
+}
+.profile-img .file {
+    position: relative;
+    overflow: hidden;
+    margin-top: -26%;
+    width: 70%;
+    border: none;
+    border-radius: 0;
+    font-size: 15px;
+    background: #212529b8;
+}
+.profile-img .file input {
+    position: absolute;
+    opacity: 0;
+    right: 0;
+    top: 0;
+}
+.profile-head h5{
+    color: #333;
+}
+.profile-head h6{
+    color: #0062cc;
+}
+.profile-edit-btn{
+    border: none;
+    border-radius: 1.5rem;
+    width: 100%;
+    padding: 2%;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: underline;
+    color: #0062cc;
+    cursor: pointer;
+    background: none;
+    margin-bottom: 5px;
+
+}
+.profile-update-btn{
+    border: none;
+    border-radius: 1.5rem;
+ 
+    font-size: 13px;
+   
+    cursor: pointer;
+    float: right;
+    
+   
+    padding: 1%;
+    font-size: 13px;
+    font-weight: 600;
+    color: #ffffff;
+    cursor: pointer;
+    float: right;
+    width: 35%;
+    box-shadow: 0 0 10px #f5f5f5;
+    /* margin-top: 43px; */
+    background: #4b4795;
+
+}
+.proile-rating{
+    font-size: 12px;
+    color: #818182;
+    margin-top: 5%;
+}
+.proile-rating span{
+    color: #495057;
+    font-size: 15px;
+    font-weight: 600;
+}
+.profile-head .nav-tabs{
+    margin-bottom:5%;
+}
+.profile-head .nav-tabs .nav-link{
+    font-weight:600;
+    border: none;
+}
+.profile-head .nav-tabs .nav-link.active{
+    border: none;
+    border-bottom:2px solid #0062cc;
+}
+.profile-work{
+    /* padding: 14%;
+    margin-top: -15%; */
+}
+.profile-work p{
+    font-size: 14px;
+    color: #0062cc;
+    font-weight: 600;
+    margin-top: 10%;
+}
+.profile-work a{
+    text-decoration: none;
+    color: #495057;
+    font-weight: 600;
+    font-size: 14px;
+}
+.profile-work ul{
+    list-style: none;
+}
+.profile-tab label{
+    font-weight: 600;
+}
+.profile-tab p{
+    font-weight: 600;
+    color: #0062cc;
+}
+
+
+/* password policy  */
+
+* Style the submit button */
+input[type=submit] {
+  background-color: #4CAF50;
+  color: white;
+}
+
+/* Style the container for inputs */
+.container {
+  background-color: #f1f1f1;
+  padding: 20px;
+}
+
+/* The message box is shown when the user clicks on the password field */
+#message {
+  display:block;
+  background: #f1f1f1;
+  color: #000;
+  position: relative;
+  padding: 20px;
+  margin-top: 10px;
+}
+
+#message p {
+  padding: 1px 35px;
+  font-size: 18px;
+}
+
+/* Add a green text color and a checkmark when the requirements are right */
+.valid {
+  color: green;
+}
+
+.valid:before {
+  position: relative;
+  left: -35px;
+  content: "✔";
+}
+
+/* Add a red text color and an "x" when the requirements are wrong */
+.invalid {
+  color: red;
+}
+
+.invalid:before {
+  position: relative;
+  left: -35px;
+  content: "✖";
+}

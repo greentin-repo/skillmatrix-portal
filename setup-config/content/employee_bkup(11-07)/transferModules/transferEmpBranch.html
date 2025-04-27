@@ -1,0 +1,147 @@
+<link rel="stylesheet" href="content/employee/transferModules/transferData.css">
+<div class="modal right fade transferEmpBranchPopup" id="transferEmpBranchPopup" tabindex="-1" role="dialog" aria-labelledby="transferEmpBranchPopup">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Transfer - {{transferEmpDet.firstName || ''}} {{transferEmpDet.lastName || ''}} <span ng-if="transferEmpDet.cmpyEmpId">({{transferEmpDet.cmpyEmpId || ''}})</span></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                    </button>
+            </div>
+            <form name="transferForm.form" novalidate autocomplete="off" ng-submit="submitTransferEmp(transferForm.form)">
+                <div class="modal-body" style="padding:0px;overflow:auto;">
+                    <!--  ng-scrollbars ng-style="transferEmpBranchModalBodyHeight()" -->
+                    <div class="EmpDetailsBlock">
+                        <div class="empInfo">
+                            <div class="key">Branch</div>
+                            <div class="value">{{(!isEmpty(transferEmpDet.branch)) ? (transferEmpDet.branch.name || '') : ''}}</div>
+                        </div>
+                        <div class="empInfo">
+                            <div class="key">Department</div>
+                            <div class="value">{{(!isEmpty(transferEmpDet.dept)) ? (transferEmpDet.dept.deptName || '') : ''}}</div>
+                        </div>
+                        <div class="empInfo" ng-if="!isEmpty(transferEmpDet.line)">
+                            <div class="key">Line</div>
+                            <div class="value">{{transferEmpDet.line.name || ''}}</div>
+                        </div>
+                        <div class="empInfo">
+                            <div class="key">Designation</div>
+                            <div class="value">{{transferEmpDet.designation || ''}}</div>
+                        </div>
+                    </div>
+                    <div class="row transferEmpFormBlock">
+                        <div class="col-md-4 p-l-5 p-r-5">
+                            <div class="form-group">
+                                <label class="lbl">Transfer Branch <label class="asterisk-color">*</label></label>
+                                <ui-select ng-model="transferEmpData.branch" name="branch" theme="selectize" class="customUISelect" style="position: relative;width: 100%;" on-select="onTransferEmpSelected($item,'branch')" required>
+                                    <ui-select-match placeholder="Select or search a Branch...">
+                                        <span class="selectedName">{{$select.selected.branchName}}</span>
+                                        <button type="button" class="clear" ng-click="$event.stopPropagation();transferEmpData.branch=undefined;" style="position: absolute;right: 2em;top: 5px;">X</button>
+                                    </ui-select-match>
+                                    <ui-select-choices repeat="item in branchAccessList | filter: $select.search | filter: {branchId:'!'+transferEmpDet.branch.branchId}">
+                                        <span ng-bind-html="item.branchName |highlight: $select.search"></span>
+                                    </ui-select-choices>
+                                    <ui-select-no-choice ng-style="!$select.open && {'display':'none'}">
+                                        Sorry! No Record found!!
+                                    </ui-select-no-choice>
+                                </ui-select>
+                            </div>
+                            <p class="errorMsg" ng-if="transferForm.form.branch.$dirty && transferForm.form.branch.$invalid">
+                                Please Select Branch
+                            </p>
+                        </div>
+                        <div class="col-md-4 p-l-5 p-r-5">
+                            <div class="form-group">
+                                <label class="lbl">Department <label class="asterisk-color">*</label></label>
+                                <ui-select ng-model="transferEmpData.department" name="department" theme="selectize" class="customUISelect" style="position: relative;width: 100%;" on-select="onTransferEmpSelected($item,'dept')" required>
+                                    <ui-select-match placeholder="Select or search a Department...">
+                                        <span class="selectedName">{{$select.selected.deptName}}</span>
+                                        <button type="button" class="clear" ng-click="$event.stopPropagation();transferEmpData.department=undefined;" style="position: absolute;right: 2em;top: 5px;">X</button>
+                                    </ui-select-match>
+                                    <ui-select-choices repeat="item in departmentList | filter: $select.search">
+                                        <span ng-bind-html="item.deptName |highlight: $select.search"></span>
+                                    </ui-select-choices>
+                                    <ui-select-no-choice ng-style="!$select.open && {'display':'none'}">
+                                        Sorry! No Record found!!
+                                    </ui-select-no-choice>
+                                </ui-select>
+                            </div>
+                            <p class="errorMsg" ng-if="transferForm.form.department.$dirty && transferForm.form.department.$invalid">
+                                Please Select Department
+                            </p>
+                        </div>
+                        <div class="col-md-4 p-l-5 p-r-5">
+                            <div class="form-group">
+                                <label class="lbl">Line <label class="asterisk-color"  ng-if="lineNameList != null && (lineNameList|filter : {isActive : '!'+N}).length > 0">*</label></label>
+                                <ui-select ng-model="transferEmpData.line" name="line" theme="selectize" class="customUISelect" style="position: relative;width: 100%;" ng-required="(lineNameList != null && (lineNameList|filter : {isActive : '!'+N}).length > 0)">
+                                    <ui-select-match placeholder="Select or search a Line...">
+                                        <span class="selectedName">{{$select.selected.name}}</span>
+                                        <button type="button" class="clear" ng-click="$event.stopPropagation();transferEmpData.line=undefined;" style="position: absolute;right: 2em;top: 5px;">X</button>
+                                    </ui-select-match>
+                                    <ui-select-choices repeat="item in lineNameList | filter: $select.search | filter : {isActive : '!'+N}">
+                                        <span ng-bind-html="item.name |highlight: $select.search"></span>
+                                    </ui-select-choices>
+                                    <ui-select-no-choice ng-style="!$select.open && {'display':'none'}">
+                                        Sorry! No Record found!!
+                                    </ui-select-no-choice>
+                                </ui-select>
+                            </div>
+                            <p class="errorMsg" ng-if="transferForm.form.line.$dirty && transferForm.form.line.$invalid">
+                                Please Select Line
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row transferEmpFormBlock">
+                        <div class="col-md-3 p-l-5 p-r-5">
+                            <div class="form-group">
+                                <label class="lbl">Level <label class="asterisk-color" ng-if="emplevelList != null && emplevelList.length > 0">*</label></label>
+                                <ui-select ng-model="transferEmpData.level" name="level" theme="selectize" class="customUISelect" style="position: relative;width: 100%;" required>
+                                    <ui-select-match placeholder="Select or search a Level...">
+                                        <span class="selectedName">{{$select.selected.levelName}}</span>
+                                        <button type="button" class="clear" ng-click="$event.stopPropagation();transferEmpData.level=undefined;" style="position: absolute;right: 2em;top: 5px;">X</button>
+                                    </ui-select-match>
+                                    <ui-select-choices repeat="item in emplevelList | filter: $select.search">
+                                        <span ng-bind-html="item.levelName |highlight: $select.search"></span>
+                                    </ui-select-choices>
+                                    <ui-select-no-choice ng-style="!$select.open && {'display':'none'}">
+                                        Sorry! No Record found!!
+                                    </ui-select-no-choice>
+                                </ui-select>
+                            </div>
+                            <p class="errorMsg" ng-if="transferForm.form.level.$dirty && transferForm.form.level.$invalid">
+                                Please Select Level
+                            </p>
+                        </div>
+                        <div class="col-md-3 p-l-5 p-r-5">
+                            <div class="form-group pr" ng-init="setTransferOnDate()">
+                                <label class="lbl">Transfer Date <label class="asterisk-color">*</label></label>
+                                <i class="fa fa-calendar calendarIcon"></i>
+                                <input type="text" class="cutomInputField datepicker_dot" data-date-format="yyyy-mm-dd" ng-model="transferEmpData.transferredOn" placeholder="Date of Transfer" onkeydown="return false;" name="transferredOn" required style="padding-left: 25px;position: relative;cursor: pointer;"
+                                />
+                            </div>
+                            <p class="errorMsg" ng-if="transferForm.form.transferredOn.$dirty && transferForm.form.transferredOn.$invalid">
+                                Please Select Transfer Date
+                            </p>
+                        </div>
+                        <div class="col-md-6 p-l-5 p-r-5">
+                            <div class="form-group p-b-0">
+                                <label class="lbl">Transfer Reason <label class="asterisk-color">*</label></label>
+                                <textarea class="cutomInputField" name="transferReason" placeholder="Reason..." id="transferReason" ng-model="transferEmpData.transferReason" maxlength="500" required></textarea>
+                            </div>
+                            <p class="errorMsg" ng-if="transferForm.form.transferReason.$dirty && transferForm.form.transferReason.$invalid">
+                                Please enter reason
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer" style="padding: 5px;">
+                    <div class="text-right pr">
+                        <div ng-if="flagTransferSpinner" class="small-spinner transferEmpSpinner"></div>
+                        <button type="submit" class="btn btn-success" ng-if="!flagTransferSpinner">Transfer</button>&nbsp;
+                        <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close" ng-if="!flagTransferSpinner">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

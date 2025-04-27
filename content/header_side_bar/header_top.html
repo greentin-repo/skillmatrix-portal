@@ -1,0 +1,1247 @@
+<!-- Logo -->
+<!-- <a href="template.html#!/suggestions" class="logo hidden-xs hidden-sm"> -->
+<!-- mini logo for sidebar mini 50x50 pixels -->
+<!-- <img class="logo-mini img-app-logo" src="dist/icons/ic_explicit.png"> -->
+<!-- logo for regular state and mobile devices -->
+<!-- <span class="logo-lg">eNovation</span> -->
+<!-- </a> -->
+<style>
+    .iconImg img {
+        height: 30px;
+        width: 30px;
+        border-radius: 50%;
+        border: 1px solid lightgray;
+    }
+    
+    .social a {
+        margin: 0px 5px;
+    }
+    
+    .social img {
+        border: none;
+    }
+    
+    ul.navBar {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        float: right;
+    }
+    
+    .navBar li {
+        float: left;
+        margin: 0px;
+    }
+    
+    .navBar li.iconImg a {
+        /*padding: 0px 5px;*/
+        margin: 0px 5px;
+    }
+    
+    .navBar li a {
+        display: block;
+        color: #8792D6 !important;
+        text-align: center;
+        text-decoration: none;
+    }
+    /* Change the link color to #111 (black) on hover */
+    
+    .navBar li a:hover {
+        box-shadow: 1px 0px 10px #888;
+    }
+    
+    .navBar li.iconImg a:hover {
+        border-radius: 50%;
+        padding: 0px;
+    }
+    
+    .addShadow {
+        box-shadow: 0 0 10px #ccc;
+        padding: 0px 0px 0px 1.8em;
+        position: fixed;
+        z-index: 999;
+        right: 0px;
+        top: 5px;
+        margin-left: 0px !important;
+        border-top-left-radius: 15px !important;
+        border-bottom-left-radius: 15px !important;
+        min-height: 30px !important;
+    }
+    /* End fab */
+    
+    .customModal .modal {
+        top: 5em !important;
+    }
+    
+    .customModal .modal-header {
+        background: #8791d6;
+        color: #FFF;
+        height: 40px;
+        cursor: default;
+        text-transform: capitalize;
+        position: relative;
+        padding: 10px;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+    }
+    
+    .customModal .modal-header .close {
+        position: absolute;
+        right: 0px;
+        margin: auto;
+        padding: 10px;
+        top: 0px;
+        color: #FFF;
+        z-index: 999;
+        opacity: 1;
+    }
+    
+    .moodIndicators {
+        padding: 0px;
+        margin: 0px;
+    }
+    
+    .moodIndicators li {
+        list-style: none;
+        text-decoration: none;
+        position: relative;
+        margin: 5px 0px;
+        padding: 0px 15px;
+        cursor: pointer;
+        color: #6b6b6b;
+    }
+    
+    .moodIndicators li:hover,
+    .moodIndicators li.active {
+        background: #d6f3e2;
+    }
+    
+    .moodIndicators li:hover .moodImg,
+    .moodIndicators li.active .moodImg {
+        opacity: 1;
+    }
+    
+    .moodIndicators li .moodImg {
+        width: 40px;
+        height: 40px;
+        margin-right: 10%;
+        opacity: 0.5;
+    }
+    /* .moodIndicators.report li .progress{
+    background-image: url("paper.gif");
+  } */
+    
+    .moodIndicators.report li:hover {
+        background: none;
+        cursor: default;
+        opacity: 1;
+    }
+    
+    .moodIndicators.report li {
+        text-align: center;
+        margin: auto;
+    }
+    
+    .moodIndicators.report li label {
+        font-size: 13px;
+        display: inherit;
+    }
+    
+    .moodIndicators.report li .moodImg {
+        width: 100px;
+        height: 100px;
+        opacity: 1;
+    }
+    /*Ratings  */
+    
+    .ratings {
+        border: none;
+        float: left;
+        margin: 0px 16%;
+    }
+    
+    .ratings>input {
+        display: none;
+    }
+    
+    .ratings>label:before {
+        margin: 5px 10px;
+        font-size: 4em;
+        font-family: FontAwesome;
+        display: inline-block;
+        content: "\f005";
+    }
+    
+    .ratings>.half:before {
+        content: "\f089";
+        position: absolute;
+    }
+    
+    .ratings>label {
+        color: #ddd;
+        float: right;
+    }
+    /***** CSS Magic to Highlight Stars on Hover *****/
+    
+    .ratings>input:checked~label,
+    /* show gold star when clicked */
+    
+    .ratings:not(:checked)>label:hover,
+    /* hover current star */
+    
+    .ratings:not(:checked)>label:hover~label {
+        color: #8791d6;
+    }
+    /* hover previous stars in list */
+    
+    .ratings>input:checked+label:hover,
+    /* hover current star when changing ratings */
+    
+    .ratings>input:checked~label:hover,
+    .ratings>label:hover~input:checked~label,
+    /* lighten current selection */
+    
+    .ratings>input:checked~label:hover~label {
+        color: #8791d6;
+    }
+    
+    .labelfeedback {
+        background: #8791d6;
+        height: 40px
+    }
+    /* Mood IndiactorTab */
+    
+    .graphSwitcher {
+        left: 0px !important;
+        border-radius: 5px !important;
+    }
+    
+    .graphSwitcher .mainActiveSwitch {
+        background: linear-gradient(135deg, #6e8efb, #a777e3);
+    }
+    
+    .graphSwitcher .main-tab-switch {
+        border-bottom-left-radius: 5px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 0px;
+        position: relative;
+        padding: 3px 30px;
+    }
+    
+    .graphSwitcher .main-tab-switch:last-child {
+        border-bottom-left-radius: 0px;
+        border-top-left-radius: 0px;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+    }
+    
+    .graphSwitcher .main-tab-switch .fa {
+        position: absolute;
+        left: 10px;
+        top: 6px;
+    }
+    
+    .deptwiseGraph option {
+        background: #fff;
+        color: #000;
+    }
+    
+    .deptwiseGraph {
+        height: 28px;
+        background: linear-gradient(135deg, #6e8efb, #a777e3);
+        color: #FFF;
+    }
+    
+    .graph-blocks {
+        padding: 10px 12px;
+        background: white;
+        /* max-height: 353px; */
+        border: 1px solid lightgray;
+        position: relative;
+    }
+    
+    .graph-blocks .graph-holder1 {
+        height: 400px !important;
+        /*max-height: 350px !important; */
+    }
+    
+    .graph-lbl {
+        /* color: #4B4794; */
+        font-size: 15px;
+        width: 100%;
+        position: relative;
+        font-family: 'Roboto Medium', sans-serif;
+        margin-bottom: 15px;
+    }
+    
+    .graphDataNotAvailMsgBox {
+        width: 200px;
+        border: 1px solid lightgray;
+        padding: 10px;
+        position: absolute !important;
+        right: 0px !important;
+        left: 0px !important;
+        text-align: center;
+        background: #fbf9f9;
+        top: 8em !important;
+    }
+    
+    .graphDataNotAvailMsgBox .msg,
+    .notAvailBox .msg {
+        font-weight: 500;
+        color: gray;
+        margin-top: 5px;
+    }
+    
+    .graphDataNotAvailMsgBox .image,
+    .notAvailBox .image {
+        height: 50px;
+        padding: 10px;
+    }
+    
+    .NoticesThoughtsModal .modal-header {
+        position: relative;
+        padding: 10px;
+        background: #8791d6;
+        color: #FFF;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+    }
+    
+    .NoticesThoughtsModal .modal-header .close {
+        position: absolute;
+        right: 5px;
+        top: 5px;
+        padding: 10px;
+        opacity: 1;
+        color: #FFF;
+    }
+    
+    .NoticesThoughtsModal .notAvailBox {
+        width: 200px;
+        margin: 0 auto;
+        border: 1px solid lightgray;
+        padding: 10px;
+        position: relative;
+        /* top: 46px; */
+        text-align: center;
+        background: #fbf9f9;
+    }
+    
+    .notices {
+        /* box-shadow: 1px 0px 8px #888; */
+        margin: 0px 0px 10px;
+        border: 1px solid lightgray;
+        border-radius: 5px;
+        width: 96%;
+    }
+    
+    .notices .col-md-4 {
+        text-align: center;
+    }
+    
+    .notices .col-md-4 .listImg {
+        height: 120px;
+        max-width: 100%;
+    }
+    
+    .notices .heading {
+        position: relative;
+        padding: 15px 10px;
+    }
+    
+    .notices .heading h4 {
+        margin: 0px;
+        color: #4B4795;
+        font-size: 15px;
+    }
+    
+    .notices p {
+        margin: 0px;
+        padding: 0px 10px 10px;
+    }
+    
+    .notices .heading span {
+        font-size: 12px;
+        color: #8e8e8e;
+        position: absolute;
+        right: 5px;
+        top: 1px;
+    }
+    
+    div#frame {
+        height: 400px;
+        /*background: url(cork_board.gif) no-repeat;
+    width: 800px;*/
+        padding-top: 10px;
+        padding-left: 10px;
+    }
+    
+    div#frame a.note {
+        -transition: all .2s ease-in-out;
+        -moz-transition: all .2s ease-in-out;
+        -webkit-transition: all .2s ease-in-out;
+        cursor: pointer;
+        display: block;
+    }
+    
+    div#frame a:hover.note {
+        /*border: 1px solid rgba(0,0,0,.75);*/
+        -webkit-transform: scale(1.1);
+        -moz-transform: scale(1.1);
+        transform: scale(1.1);
+        text-decoration: none;
+        color: #337ab7;
+    }
+    
+    .note {
+        width: 190px;
+        min-height: 160px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, .25);
+        float: left;
+        margin: 8px;
+        border: 1px solid rgba(0, 0, 0, .25);
+        position: relative;
+        font-size: 13px;
+    }
+    
+    .sticky0 {
+        transform: rotate(-3.5deg);
+        background-color: white;
+    }
+    
+    .sticky1 {
+        transform: rotate(-3.5deg);
+        background-color: #CBFAFA;
+    }
+    
+    .sticky2 {
+        transform: rotate(1deg);
+        background-color: #FFF780;
+    }
+    
+    .sticky3 {
+        transform: rotate(0deg);
+        background-color: #f5f8cd;
+    }
+    
+    .sticky4 {
+        transform: rotate(-2deg);
+        background-color: #F8CDCD;
+    }
+    
+    .sticky5 {
+        transform: rotate(-2deg);
+        background-color: #ffffff;
+    }
+    
+    .pin {
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, .55);
+        margin: 0 auto;
+        margin-top: 2px;
+    }
+    
+    div#frame a:nth-child(1n) .pin {
+        background-image: -moz-radial-gradient(35px 35px 35deg, circle cover, red 50%, black 100%);
+        background-image: -webkit-radial-gradient(35px 35px, circle cover, red, black);
+        background-image: radial-gradient(red 50%, black 100%);
+    }
+    
+    div#frame a:nth-child(6n) .pin {
+        background-image: -moz-radial-gradient(45px 45px 45deg, circle cover, orange 50%, black 100%);
+        background-image: -webkit-radial-gradient(45px 45px, circle cover, yellow, orange);
+        background-image: radial-gradient(orange 50%, black 100%);
+    }
+    
+    div#frame a:nth-child(3n) .pin {
+        background-image: -moz-radial-gradient(45px 45px 45deg, circle cover, yellow 50%, black 100%);
+        background-image: -webkit-radial-gradient(45px 45px, circle cover, yellow, black);
+        background-image: radial-gradient(yellow 50%, black 100%);
+    }
+    
+    div#frame a:nth-child(5n+3) .pin,
+    div#frame a:last-child .pin {
+        background-image: -moz-radial-gradient(45px 45px 45deg, circle cover, blue 50%, white 100%);
+        background-image: -webkit-radial-gradient(45px 45px, circle cover, blue, white);
+        background-image: radial-gradient(blue 50%, white 100%);
+    }
+    
+    .text {
+        margin: 10px;
+        /*font-family: 'The Girl Next Door', cursive;*/
+    }
+    
+    div#frame .note .date {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        font-size: 10px;
+    }
+    
+    .angleRSlide {
+        position: absolute;
+        left: 0px;
+        margin: auto 0px;
+        top: 0px;
+        bottom: 0px;
+        line-height: 20px;
+        padding: 5px 8px;
+        cursor: pointer;
+        background: #9356e4;
+        border-top-left-radius: 15px;
+        color: #FFF;
+        border-bottom-left-radius: 15px;
+    }
+    
+    .angleLSlide {
+        /*position: absolute;
+    left: 10px;
+    margin: auto 0px;
+    top: 0px;
+    bottom: 0px;
+    line-height: 32px;*/
+    }
+    
+    .visible {
+        visibility: visible;
+        opacity: 1;
+        transition: opacity 2s linear;
+    }
+    
+    .hidden {
+        visibility: hidden;
+        opacity: 0;
+        transition: visibility 0s 2s, opacity 2s linear;
+    }
+    
+    .animated {
+        animation-duration: 1s;
+        animation-fill-mode: both;
+    }
+    
+    .animated.slow {
+        animation-duration: 2s;
+    }
+    
+    @-webkit-keyframes fadeOutRightBig {
+        from {
+            opacity: 1;
+        }
+        to {
+            opacity: 0;
+            -webkit-transform: translate3d(2000px, 0, 0);
+            transform: translate3d(2000px, 0, 0);
+        }
+    }
+    
+    @keyframes fadeOutRightBig {
+        from {
+            opacity: 1;
+        }
+        to {
+            opacity: 0;
+            -webkit-transform: translate3d(2000px, 0, 0);
+            transform: translate3d(2000px, 0, 0);
+        }
+    }
+    
+    .fadeOutRightBig {
+        -webkit-animation-name: fadeOutRightBig;
+        animation-name: fadeOutRightBig;
+    }
+    
+    @-webkit-keyframes fadeInRightBig {
+        from {
+            opacity: 0;
+            -webkit-transform: translate3d(2000px, 0, 0);
+            transform: translate3d(2000px, 0, 0);
+        }
+        to {
+            opacity: 1;
+            -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+        }
+    }
+    
+    @keyframes fadeInRightBig {
+        from {
+            opacity: 0;
+            -webkit-transform: translate3d(2000px, 0, 0);
+            transform: translate3d(2000px, 0, 0);
+        }
+        to {
+            opacity: 1;
+            -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+        }
+    }
+    
+    .fadeInRightBig {
+        -webkit-animation-name: fadeInRightBig;
+        animation-name: fadeInRightBig;
+    }
+    
+    .lbl-input {
+        width: 100%;
+        font-size: 15px;
+    }
+    
+    .contact-title {
+        margin-top: 13px;
+        font-size: 19px;
+        padding: 9px;
+        padding-left: 77px;
+    }
+    
+    .dept-list {
+        font-weight: 500;
+        font-size: 13px;
+        width: 17em;
+        height: 38px;
+        margin-top: 8px;
+    }
+    
+    .add-new-cost-data-block {
+        display: inline-flex;
+        width: 100%;
+        padding: 15px;
+        padding-bottom: 16px;
+        border-bottom: 1px solid lightgray;
+    }
+    
+    .add-new-cost-data-block .lbl-input {
+        font-weight: 500;
+        color: #848484;
+        ;
+    }
+    
+    .add-new-cost-data-block .input-amount {
+        font-size: 11px;
+        padding: 8px;
+        text-align: left;
+        width: 88px;
+        border: 1px solid lightgray;
+    }
+    
+    .add-new-cost-data-block .input-points {
+        font-size: 11px;
+        padding: 8px;
+        text-align: left;
+        width: 88px;
+        border: 1px solid lightgray;
+    }
+    
+    .add-new-cost-data-block .currency-dropdown {
+        padding: 8px;
+        border-color: lightgray;
+        font-size: 11px;
+    }
+    
+    .add-new-cost-data-block .btn-add-cost-data {
+        width: 76px;
+        height: 37px;
+        background: #8791d6;
+        border: none;
+        border-radius: 3px;
+        color: white;
+    }
+    
+    .add-new-cost-data-block .btn-add-cost-data:hover {
+        background: #4b4794;
+    }
+    
+    .card {
+        position: relative;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color: #fff;
+        background-clip: border-box;
+        border: 1px solid rgba(0, 0, 0, .125);
+        border-radius: .25rem;
+    }
+    
+    .contact-usr-card {
+        height: 15em;
+        /*list-style: none;
+    float: left; */
+        margin: 0px;
+        border-radius: 4px;
+        padding: 10px 10px 10px;
+        background: white;
+        border: 1px solid #c5bbbb;
+        box-shadow: 0px 2px 12px 0px rgba(207, 205, 207, 1);
+        border: 4px solid transparent;
+        width: 100%;
+    }
+    
+    .contact-usr-card:hover {
+        -webkit-box-shadow: 0px 2px 30px 1px rgba(189, 187, 189, 1);
+        -moz-box-shadow: 0px 2px 30px 1px rgba(189, 187, 189, 1);
+        box-shadow: 0px 2px 30px 1px rgba(189, 187, 189, 1);
+    }
+    
+    .contact-usr-card .profile-img {
+        width: 85px;
+        height: 85px;
+        border-radius: 50%;
+        margin-top: 10px;
+        margin-bottom: 8px;
+        -webkit-box-shadow: 0px 0px 2px 1px rgba(179, 177, 179, 1);
+        -moz-box-shadow: 0px 0px 2px 1px rgba(179, 177, 179, 1);
+        box-shadow: 0px 0px 2px 1px rgba(179, 177, 179, 1);
+        border: 2px solid white;
+    }
+    
+    .contact-usr-card .usr-name {
+        font-weight: 500;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-height: 1.3;
+        margin-top: 6px;
+    }
+    
+    .contact-usr-card .usr-name,
+    .contact-usr-card .desc {
+        width: 100%;
+    }
+    
+    .contact-usr-card .desc {
+        font-weight: 400;
+        font-size: 17px;
+        color: #8e8e8e;
+        line-height: 1.2;
+        font-weight: bold;
+    }
+    
+    .name-lead {
+        font-size: 16px;
+        font-weight: 500;
+        color: #4b4795;
+        display: inline-block;
+        margin-bottom: .5rem;
+    }
+    
+    .contact-usr-card span.text-muted {
+        font-size: 13px;
+    }
+    
+    .text-muted {
+        color: #636c72 !important;
+    }
+    
+    .role-name {
+        word-break: break-all;
+    }
+    
+    .EmpNotAvailMsgBox {
+        width: 200px;
+        margin: 0 auto;
+        border: 1px solid lightgray;
+        padding: 10px;
+        position: relative;
+        top: 46px;
+        text-align: center;
+        background: #fbf9f9;
+    }
+    
+    .EmpNotAvailMsgBox .msg {
+        font-weight: 500;
+        color: gray;
+        margin-top: 5px;
+    }
+    
+    .EmpNotAvailMsgBox .image {
+        height: 50px;
+        padding: 10px;
+    }
+    
+    .search-box {
+        width: 250px;
+        display: inline-flex;
+        padding: 8px 15px;
+        border: 1px solid lightgray;
+        border-radius: 25px;
+        float: right;
+        margin: 15px 15px 0px;
+    }
+    
+    .search-box input {
+        outline: none;
+        width: 100%;
+        border: none;
+        background: transparent;
+    }
+    
+    .search-box i {
+        margin-top: 3px;
+    }
+    /* MAIN TAb */
+    
+    .main-tab-switcher {
+        box-shadow: 0px 0px 5px 1px rgb(226, 226, 226);
+        padding: 2px;
+        background: white;
+        border-radius: 25px;
+        display: inline-flex;
+        color: #8791d6;
+        margin-top: 8px;
+        position: relative;
+        top: 0px;
+        left: 27px;
+        margin-bottom: 10px;
+    }
+    
+    .main-tab-switch {
+        line-height: 1.5;
+        padding: 3px 25px;
+        cursor: pointer;
+    }
+    
+    .mainActiveSwitch {
+        background: #8791d6;
+        padding: 3px 25px;
+        color: white;
+        border-radius: 25px;
+        line-height: 1.5;
+        -webkit-box-shadow: 0px 0px 12px -2px rgba(143, 141, 143, 1);
+        -moz-box-shadow: 0px 0px 12px -2px rgba(143, 141, 143, 1);
+        box-shadow: 0px 0px 12px -2px rgba(143, 141, 143, 1);
+    }
+    
+    .pad0 {
+        padding: 0px;
+    }
+    
+    .disabledImg {
+        opacity: 0.6;
+        cursor: not-allowed !important;
+    }
+    
+    .moodIndIcon {
+        position: absolute;
+        right: 3em;
+        top: 0px;
+        z-index: 999;
+        cursor: pointer;
+    }
+    
+    .moodIndIcon img {
+        width: 38px;
+        border-radius: 50%;
+        box-shadow: 0px 1px 8px #888;
+        height: 38px;
+    }
+    
+    .rmPad {
+        padding: 10px 0px !important;
+    }
+    
+    .emojiReport .modal-header {
+        padding: 0px;
+        background: #FFF;
+        color: #8791d6;
+    }
+    
+    .emojiReport .modal-header .modal-title:first-child {
+        /* border-right:1px solid #8791d6; */
+        border-top-left-radius: 5px;
+    }
+    
+    .emojiReport .modal-header .modal-title {
+        display: inline-block;
+        padding: 10px;
+        cursor: pointer;
+    }
+    
+    .emojiReport .modal-header .modal-title.active {
+        background: #8791d6;
+        color: #FFF;
+    }
+    
+    .emojiReport .modal-header .close {
+        color: #000;
+    }
+    
+    .emojiReport .form-control {
+        background-clip: padding-box !important;
+        border: 1px solid #ced4da !important;
+        border-radius: 0.25rem !important;
+    }
+</style>
+<!-- Header Navbar: style can be found in header.less -->
+
+<nav class="navbar navbar-static-top addShadow" ng-if="locationpath !='/changepassword'" style="z-index: 999;">
+    <!-- Sidebar toggle button-->
+    <!-- <a href="#" class="sidebar-toggle bg-color-primary-light" data-toggle="push-menu" role="button">
+        <span class="sr-only"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </a> -->
+
+    <!-- <div class="pull-right">
+        <img src="dist/icons/notification.png" style="padding: 15px;">
+        <div class="bg-color-primary" style="display: inline-block;border-top-left-radius: 25px;padding: 7px 12px;color: white;border-bottom-left-radius: 25px;">
+          <img style="width: 19px;margin-right: 6px;" src="dist/icons/ic_user_bordered.png">
+          {{loggedInUsername}}
+          <img ng-click="logout()" style="width: 20px;margin-left: 6px;" src="dist/icons/ic_logout.png">
+        </div>
+    </div> -->
+    <i class="fa fa-angle-double-right angleRSlide" ng-click="showExtraFeatureDiv()" ng-if="!showExtra"></i>
+    <i class="fa fa-angle-double-left angleRSlide" ng-click="showExtraFeatureDiv()" ng-if="showExtra"></i>
+    <ul class="navBar animated" ng-class="{'fadeInRightBig':!showExtra,'hidden':showExtra}">
+        <li title="Help & Feedback" class="iconImg" ng-click="feedbackModel()">
+            <a href="javascript:;"><img src="dist/icons/feedbackRating.png" class="" /></a>
+        </li>
+        <li title="Notice Board" class="iconImg" ng-click="openNoticeThought('notice')">
+            <a href="javascript:;"><img src="dist/icons/NoticeBoard.png" class="" /></a>
+        </li>
+        <li ng-click="showThought()" class="iconImg">
+            <a title="Thought Of The Day" id="thought" data-toggle="popover" data-placement="bottom" href="#"><img src="dist/icons/ThoughtOfTheDay.png" class="" /></a>
+        </li>
+        <li title="Connect To Peer" class="iconImg" ng-click="contactModel()">
+            <a href=""><img src="dist/icons/ConnectToPeer.png" class="" /></a>
+        </li>
+        <li title="Happiness Index" class="iconImg" ng-click="openEmojiReport()">
+            <a href="javascript:;"><img src="dist/icons/happinessindex.png" class="" /></a>
+        </li>
+        <li ng-repeat="x in mediaList" title="{{x.mediaName}}" class="social iconImg">
+            <a ng-if="x.mediaUrl == ''" class="disabledImg" href="javascript:;" target="_blank"><img src="{{x.iconUrl}}" class="" /></a>
+            <a ng-if="x.mediaUrl != ''" href="{{'https://'+x.mediaUrl}}" target="_blank"><img src="{{x.iconUrl}}" class="" /></a>
+        </li>
+    </ul>
+</nav>
+<!---feedback model--->
+<div class="modal fade customModal" id="FeedbackModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="position:relative;">
+                <h5 class="modal-title">{{langTranslate.GIVE_US_FEEDBACK}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <select class="btn btn-lg btn-success btn-block" class="form-control" style="font-size: larger;border: 1px solid #4b4795; color: #4b4795; background-color: white;font-size: larger;" ng-model="feedback.feedbackTypeId" ng-change="changeFeedback(feedback.feedbackTypeId)">
+            <option ng-repeat="feedbackType in feedbackTypeList" value="{{feedbackType.feedbackTypeId}}">
+              {{feedbackType.feedbackType}}</option>
+          </select>
+                </div>
+                <div ng-if="feedback.feedbackTypeId == 1">
+                    <textarea style="margin-top: 10px;" class="form-control" type="textarea" id="feedback" placeholder=" Please enter your query" ng-model="feedback.feedback" maxlength="6000" rows="7"></textarea>
+                </div>
+                <div ng-if="feedback.feedbackTypeId == 2">
+                    <div>
+                        <label style="color: black !important;   margin-left:40%;">{{langTranslate.OVERALL_RATING}}</label>
+                    </div>
+                    <div class="ratings">
+                        <input type="radio" id="star5" name="rating" value="5" ng-model="feedback.ratings" /><label class="full" for="star5" title="5 stars"></label>
+                        <!-- <input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label> -->
+                        <input type="radio" id="star4" name="rating" value="4" ng-model="feedback.ratings" /><label class="full" for="star4" title="4 stars"></label>
+                        <!-- <input type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label> -->
+                        <input type="radio" id="star3" name="rating" value="3" ng-model="feedback.ratings" /><label class="full" for="star3" title="3 stars"></label>
+                        <!-- <input type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label> -->
+                        <input type="radio" id="star2" name="rating" value="2" ng-model="feedback.ratings" /><label class="full" for="star2" title="2 stars"></label>
+                        <!-- <input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label> -->
+                        <input type="radio" id="star1" name="rating" value="1" ng-model="feedback.ratings" /><label class="full" for="star1" title="1 star"></label>
+                        <!-- <input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label> -->
+                    </div>
+                    <textarea style="margin-top: 10px;" class="form-control" type="textarea" id="feedback" placeholder=" Please enter your feedback" ng-model="feedback.feedback" maxlength="6000" rows="7"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button style="background:#8791d6;width: 20%; float: right;color:#FFF;" type="button" class="btn" ng-click="sendData()">{{langTranslate.SEND}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="emoji" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-body" style="padding: 10px 0px 0px;">
+                <button type="button" class=" close" data-dismiss="modal" aria-label="Close" style="margin-right:15px;" ng-if="empDetails.productOrgConfigDet.isHappinessOn == 0">
+          <span aria-hidden="true">&times;</span>
+        </button>
+                <p style="text-align: center;font-weight: bold;margin-bottom: 2em;">{{langTranslate.How_do_you_feel_today}}?</p>
+                <ul class="moodIndicators">
+                    <li ng-class="{'active':isMood(x.rating)}" ng-click="clickMoodIndicator(x.rating)" ng-repeat="x in moodIndicatorsList">
+                        <img src="{{x.img}}" alt="Mood Indicator" class="moodImg">
+                        <span style="padding:10px;font-weight:bold;">{{x.name}}</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="modal-footer" style="padding: 0px 5px 5px 0px;border: none;text-align:center">
+                <!-- <button type="button" class="btn btn-success btn-sm " ng-click="addMoodIndicators()" ng-disabled="empDetails.productOrgConfigDet.isHappinessOn == 1 && moodIndicators == 0">Submit</button> -->
+                <p style="font-size: 12px;color: #888;margin:5px 0px;">
+                    <small>{{langTranslate.Your_input_will_be_confidential}}</small></p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade customModal emojiReport" id="emojiReport" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="position:relative;">
+                <h5 class="modal-title" ng-class="{'active':showAnalytics == 1}" ng-click="showAnalyticsDiv(1)">
+                    {{langTranslate.Happiness_Index}}</h5>
+                <h5 class="modal-title" ng-class="!checkSubMenuAccess('Suggestions','Happiness Index') ? 'disabledImg' : showAnalytics == 2 ? 'active':''" ng-click="checkSubMenuAccess('Suggestions','Happiness Index') ? showAnalyticsDiv(2) : ''">Analytics</h5>
+                <h5 class="modal-title" ng-class="!checkSubMenuAccess('Suggestions','Happiness Index Report') ? 'disabledImg' : showAnalytics == 3 ? 'active':''" ng-click="checkSubMenuAccess('Suggestions','Happiness Index Report') ? showAnalyticsDiv(3) : ''">Report</h5>
+                <!-- <div ng-if="checkSubMenuAccess('Suggestions','Happiness Index')">
+          <div class="moodIndIcon" ng-click="showAnalyticsDiv()">
+            <img src="dist/icons/analytics.png" class="" alt="Analysis" title="Analysis" ng-if="!showAnalytics" />
+            <img src="dist/icons/emoji/happy.png" class="" alt="Analysis" title="Mood Indiactor" ng-if="showAnalytics" />
+          </div>
+        </div> -->
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+            </div>
+            <div class="modal-body rmPad" ng-if="showAnalytics == 1">
+                <!-- <ul class="moodIndicators">
+          <li ng-class="{'active':isMood(x.rating)}" ng-click="clickMoodIndicator1(x.rating)" ng-repeat="x in moodIndicatorsList">
+            <img src="{{x.img}}" alt="Mood Indicator" class="moodImg">
+            <span style="padding:10px;font-weight:bold;">{{x.name}}</span>
+          </li>
+        </ul> -->
+                <ul class="moodIndicators" style="display:inline-flex;width:100%;">
+                    <li ng-repeat="x in moodIndicatorsList" ng-class="{'active':isMood(x.rating)}" ng-click="clickMoodIndicator1(x.rating)" style="text-align:center;">
+                        <label>{{x.name}}</label>
+                        <!-- <div class="" ng-style="{'background-image':'url({{x.img}})'}" style="background-size: cover;"></div> -->
+                        <img src="{{x.img}}" alt="Mood Indicator" class="moodImg" style="width:100px;height:100px;">
+                    </li>
+                </ul>
+            </div>
+            <div class="modal-footer" style="padding: 0px 5px 5px 0px;border: none;text-align:center" ng-if="!showAnalytics">
+                <p style="font-size: 12px;color: #888;margin:5px 0px;">
+                    <small>{{langTranslate.Your_input_will_be_confidential}}</small>
+                </p>
+            </div>
+            <div class="modal-body" ng-if="showAnalytics == 2">
+                <div class="">
+                    <div class="row" style="margin:0px;">
+                        <div class="col-md-6 pad0">
+                            <div class="" style="display: inline-flex;width:100%;">
+                                <div class="main-tab-switcher graphSwitcher" style="margin:auto 0px;">
+                                    <div class="main-tab-switch mainActiveSwitch" ng-class="{'mainActiveSwitch':setMoodIndTab == 'branch'}" ng-click="setMoodIndClick('branch')">
+                                        <i class="fa " ng-class="setMoodIndTab == 'branch' ? 'fa-check-square-o' :'fa-square-o'" aria-hidden="true"></i> {{langTranslate.BranchLevel}}
+                                    </div>
+                                    <div class="main-tab-switch" ng-class="{'mainActiveSwitch':setMoodIndTab == 'dept'}" ng-click="setMoodIndClick('dept')">
+                                        <i class="fa " ng-class="setMoodIndTab == 'dept' ? 'fa-check-square-o' :'fa-square-o'" aria-hidden="true"></i> {{langTranslate.DepartmentLevel}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-6" style="padding-left:0px;">
+                                    <div class="input-group input-daterange">
+                                        <div class="input-group-addon">From</div>
+                                        <input type="text" id="frmMood_datepicker" class="form-control" data-date-format="yyyy-mm-dd" ng-change="dateFromSelected()" ng-model="moodInd.fromDate" ng-click="clickFromDate()">
+                                    </div>
+                                </div>
+                                <div class="col-md-6" style="padding-right:0px;">
+                                    <div class="input-group input-daterange">
+                                        <div class="input-group-addon">To</div>
+                                        <input type="text" id="toMood_datepicker" class="form-control" data-date-format="yyyy-mm-dd" ng-change="dateToSelected()" ng-model="moodInd.toDate" ng-click="clickToDate()">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin:1em 0px 0px; text-align:center;font-size:15px;">
+                        <div ng-if="setMoodIndTab == 'branch' && !flagMoodGraphDataNotAvail">
+                            <span style="color:#4B4795">Employee Count:
+                <strong>{{moodIndicatorsList1[0].totalEmpCount}}</strong></span> &nbsp; &nbsp; &nbsp; &nbsp;
+                            <span style="color:#4B4795">Participation Count: <strong>{{moodIndicatorsList1[0].count}}</strong></span>
+                        </div>
+                        <div ng-if="setMoodIndTab == 'dept' && !flagMoodGraphDataNotAvail">
+                            <span style="color:#4B4795">Participation Count: <strong>{{EmpCount}}</strong></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="moodGraph" style="display:inline-block;width:100%;margin: 1em 0px 0px;">
+                    <div class="row" style="margin:0px;">
+                        <div ng-if="setMoodIndTab == 'branch'">
+                            <ul class="moodIndicators report" style="display:inline-flex;width:100%;">
+                                <li ng-repeat="x in moodIndicatorsList1">
+                                    <label>{{x.name}}</label>
+                                    <!-- <div class="" ng-style="{'background-image':'url({{x.img}})'}" style="background-size: cover;"></div> -->
+                                    <img src="{{x.img}}" alt="Mood Indicator" class="moodImg">
+                                    <label>{{x.percentage}} %</label>
+                                </li>
+                                <li>
+                                    <div ng-if="flagMoodGraphDataNotAvail" class="graphDataNotAvailMsgBox" style="position: relative !important;top: 0px !important;">
+                                        <img class="image" src="dist/icons/ic_info.png">
+                                        <div>{{ langTranslate.Datanotavailable }}</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="graph-blocks" ng-if="setMoodIndTab == 'dept'" style="overflow-x:scroll;">
+                            <!-- <label class="graph-lbl txt-color-primary">Mood Indiactor Report</label> -->
+                            <div ng-if="flagMoodGraphBoxIndicator" class="spinner analyticsIndicator" style="left: 26em;top: 16px;">
+                                <div class="bounce1"></div>
+                                <div class="bounce2"></div>
+                                <div class="bounce3"></div>
+                            </div>
+                            <div class="graph-holder1" style="position: relative; width: 2000px;">
+                                <canvas id="emojiChart" ng-if="!flagMoodGraphDataNotAvail" class="chart chart-bar" chart-data="emojiBarReport.Dataset" chart-labels="emojiBarReport.Label" chart-options="moodGraphOpt" chart-series="emojiBarReport.Series" chart-colors="moodGraphColors"></canvas>
+                                <div ng-if="flagMoodGraphBoxIndicator" class="loadingIndicatorContainer ldng-ind-lg">
+                                    <img src="dist/icons/ic_bar_chart.png" style="width: 70px;">
+                                    <div style="margin-top: 10px;margin-bottom: 10px;">
+                                        {{langTranslate.Please_wait_mood_indiactor_graph_loading}}</div>
+                                    <div style="width: 100px; margin:0 auto;" class="lineLoaderRelative"></div>
+                                </div>
+                                <div ng-if="flagMoodGraphDataNotAvail" class="graphDataNotAvailMsgBox">
+                                    <img class="image" src="dist/icons/ic_info.png">
+                                    <div>{{ langTranslate.Datanotavailable }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body" ng-if="showAnalytics == 3">
+                <div class="row" style="margin:0px;">
+                    <div class="col-md-4">
+                        <select class="form-control" ng-options="item.reportName for item in happinessIndexReports" ng-model="moodInd.selectedReport" name="selectedReport">
+                            </select>
+                    </div>
+                    <div class="col-md-6 pad0">
+                        <div class="row" style="margin: 0px;">
+                            <div class="col-md-6" style="padding-left:0px;">
+                                <div class="input-group input-daterange" ng-init="initReportDate('from')">
+                                    <div class="input-group-addon">From</div>
+                                    <input type="text" id="happinessReportFromDate" class="form-control" data-date-format="yyyy-mm-dd" ng-model="moodInd.fromReportDate" ng-click="clickReportFromDate()">
+                                </div>
+                            </div>
+                            <div class="col-md-6" style="padding-right:0px;">
+                                <div class="input-group input-daterange" ng-init="initReportDate('to')">
+                                    <div class="input-group-addon">To</div>
+                                    <input type="text" id="happinessReportToDate" class="form-control" data-date-format="yyyy-mm-dd" ng-model="moodInd.toReportDate" ng-click="clickReportToDate()">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2 pad0" style="text-align: right;">
+                        <button type="button" class="btn btn-success btn-sm" ng-click="generateHappinessIndexReport()">Generate</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade NoticesThoughtsModal" id="NoticesThoughtsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-lg" role="document">
+        <!--modal-lg-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{NewsThoughtsTitle}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+            </div>
+            <div class="modal-body">
+                <div class="notAvailBox" ng-if="flagNoticesThoughtDataNotAvail">
+                    <img class="image" src="dist/icons/ic_info.png">
+                    <div>{{ langTranslate.Datanotavailable }}</div>
+                </div>
+                <div style="width: 100%;display: inline-block;max-height: 400px;overflow: auto;" ng-scrollbars>
+                    <div class="loadingIndicatorContainer ldng-ind-lg" ng-if="flagNoticesThoughtLoading">
+                        <i class="fa fa-sticky-note-o fa-3x" aria-hidden="true"></i>
+                        <div style="margin-top: 10px;margin-bottom: 10px;">Please wait Notices loading</div>
+                        <div style="width: 100px; margin:0 auto;" class="lineLoaderRelative"></div>
+                    </div>
+                    <div>
+                        <div id="frame">
+                            <a class="note" ng-repeat="x in noticesList" ng-class="x.class">
+                                <div class="pin"></div>
+                                <div class="text"><strong>{{x.title}}</strong></div>
+                                <div class='text'>{{x.noticeMessage}}</div>
+                                <span class="date"> {{x.creationDate |date:'mediumDate'}}</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-----Connect To Peer Model----->
+<div class="modal fade NoticesThoughtsModal" id="ConnecttopeerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-lg" role="document">
+        <!--modal-lg-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Connect To Peer</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+            </div>
+            <div class="modal-body">
+                <!-- <div class="notAvailBox" ng-if="flagNoticesThoughtDataNotAvail">
+          <img class="image" src="dist/icons/ic_info.png">
+          <div>{{ langTranslate.Datanotavailable }}</div>
+        </div> -->
+                <div>
+                    <div class="search-box" ng-if="emplist != null && emplist.length > 0">
+                        <input type="text" ng-model="search.searchEmp" placeholder="Search"><i style="margin-top: 3px;" class="fa fa-search"></i>
+                    </div>
+                </div>
+                <div style="width: 100%;display: inline-block;">
+                    <div class="conatiner" style="overflow: auto;max-height:390px;" ng-scrollbars>
+                        <div class="">
+                            <div class="col-sm-6" dir-paginate="x in filtered = (emplist | filter : search.searchEmp) |itemsPerPage:10 " pagination-id="tbl-employee" style="margin:5px 0px;">
+                                <div class="row contact-usr-card">
+                                    <div class="col-sm-3">
+                                        <div style="">
+                                            <img check-sugg-det-usr-image-loaded class="profile-img" src="{{x.profilePic}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <div>
+                                            <label class="name-lead">{{x.firstName}} {{x.lastName}}</label>
+                                            <span class="text-muted" style="float:right;"><img src="dist/img/desig.png"
+                          style="height: 18px;">&nbsp{{x.designation}}</span>
+                                            <br>
+                                            <span class="fa fa-building-o text-muted" aria-hidden="true"></span>&nbsp;&nbsp;
+                                            <span class="text-muted">{{x.dept.deptName| ifEmpty:'N/A'}}</span>
+                                            <br>
+                                            <span class="fa fa-phone text-muted" aria-hidden="true"></span>&nbsp;&nbsp;
+                                            <span class="text-muted">{{x.contactNo| ifEmpty:'N/A'}}</span>
+                                            <br>
+                                            <span class="fa fa-envelope text-muted" aria-hidden="true"></span>&nbsp;&nbsp;
+                                            <span class="text-muted">{{x.emailId| ifEmpty:'N/A'}}</span>
+                                            <br>
+                                            <span class="fa fa-users text-muted" aria-hidden="true"></span>&nbsp;&nbsp;
+                                            <span class="text-muted role-name" ng-repeat="emprole in x.roles">{{emprole.name| ifEmpty:'N/A'}}
+                        <span ng-if="!$last">,</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <dir-pagination-controls pagination-id="tbl-employee" max-size="10" direction-links="true" boundary-links="true">
+              </dir-pagination-controls> -->
+                        </div>
+                    </div>
+                </div>
+                <dir-pagination-controls pagination-id="tbl-employee" max-size="10" direction-links="true" boundary-links="true">
+                </dir-pagination-controls>
+            </div>
+        </div>
+    </div>
+</div>

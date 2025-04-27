@@ -1,0 +1,54 @@
+
+[
+    {
+        "statusId" : 1,
+        "status" : "Created",
+        "label" : "New",
+        "count" : 100
+    }, {
+        "statusId" : 4,
+        "status" : "HRAccepts",
+        "label" : "Accepted by HR",
+        "count" : 10
+    }, {
+        "statusId" : 3,
+        "status" : "HRRejects",
+        "label" : "Rejectted by HR",
+        "count" : 10
+    }, {
+        "statusId" : 5,
+        "status" : "EvaluationAssigned",
+        "label" : "Assigned To Evaluation Team",
+        "count" : 10
+    }, {
+        "statusId" : 7,
+        "status" : "EvaluationRequestAccepted",
+        "label" : "Accepted by Evaluation Team",
+        "count" : 10
+    }, {
+        "statusId" : 8,
+        "status" : "EvaluationRequestRejected",
+        "label" : "Rejected by Evaluation Team",
+        "count" : 10
+    }, {
+        "statusId" : 15,
+        "status" : "ImplementationRequestAccepted",
+        "label" : "Accepted by Implementation Team",
+        "count" : 10
+    }, {
+        "statusId" : 16,
+        "status" : "ImplementationRequestRejected",
+        "label" : "Rejected by Implementation Team",
+        "count" : 10
+    }, {
+        "statusId" : 0,
+        "status" : "ImplementationAsignedToUser",
+        "label" : "Assigned by HR",
+        "count" : 10
+    }, {
+        "statusId" : 0,
+        "status" : "EvaluationAssignedToUser",
+        "label" : "Assigned by HR",
+        "count" : 10
+    }       
+]

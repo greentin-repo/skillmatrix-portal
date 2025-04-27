@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html ng-app="loginRegApp" ng-controller="registerCtrl">
+
+<head>
+    <title>myeNovation - Create an myeNovation account</title>
+    <link rel="shortcut icon" type="image/x-icon" href="static-website/images/favicon.ico" />
+    <!-- Meta tag Keywords -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8" />
+
+    <script>
+        addEventListener("load", function() {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <!-- //Spinners -->
+    <link rel="stylesheet" href="bower_components/spinner/roundSpinner.css">
+
+    <!-- Custom-Files -->
+    <link rel="stylesheet" href="static-website/css/bootstrap.css">
+    <!-- Bootstrap-Core-CSS -->
+    <link rel="stylesheet" href="static-website/css/style.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="static-website/css/custStyle.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="dist/css/loading_indicator.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="bower_components/snackbar/snackbar.css">
+    <!-- Style-CSS -->
+    <link rel="stylesheet" href="static-website/css/font-awesome.css">
+    <!-- Font-Awesome-Icons-CSS -->
+    <!-- //Custom-Files -->
+
+    <!-- Web-Fonts -->
+    <link href="//fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i&amp;subset=latin-ext" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&amp;subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese" rel="stylesheet">
+    <!-- //Web-Fonts -->
+
+    <style type="text/css">
+        [ng\:cloak],
+        [ng-cloak],
+        [data-ng-cloak],
+        [x-ng-cloak],
+        .ng-cloak,
+        .x-ng-cloak,
+        .ng-hide:not(.ng-hide-animate) {
+            display: none !important;
+        }
+        
+        hr {
+            width: 10%;
+            color: #fff;
+        }
+        
+        .form-group {
+            margin-bottom: 10px;
+            padding: 2% 0px;
+        }
+        
+        label {
+            margin-bottom: 3px;
+            font-family: 'Roboto', Sans-Serif;
+            font-size: 12px;
+        }
+        
+        input,
+        input::-webkit-input-placeholder {
+            font-size: 11px;
+            padding-top: 3px;
+            font-family: 'Roboto', Sans-Serif;
+        }
+        
+        .main-login {
+            background-color: #fff;
+            /* shadows and rounded borders */
+            /* -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3); */
+        }
+        
+        .form-control {
+            /* height: auto!important;
+		padding: 4px 20px !important;
+		/*padding-right: 30px;
+		float: left;
+		position: relative;*/
+            font-family: 'Roboto', Sans-Serif;
+            font-size: 12px;
+        }
+        
+        .input-group {
+            -webkit-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.21) !important;
+            -moz-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.21) !important;
+            box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.21) !important;
+        }
+        
+        #button {
+            width: 50%;
+            border: 1px solid #086DF5;
+            margin: 40px auto 0px;
+            padding: 0px 12px;
+            color: #ffffff;
+            cursor: pointer;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: normal;
+            font-family: 'Roboto', Sans-Serif;
+            background: #086DF5;
+        }
+        
+        .main-center {
+            margin: 20 auto;
+            width: 100%;
+            padding: 88px 30px;
+            /* padding: 10px 30px; */
+            background: /*linear-gradient(to bottom, #9a6bfb 0%, #392367 100%);*/
+            #ffffff;
+            color: #000000;
+            text-shadow: none;
+            /* -webkit-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.31);
+		-moz-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.31);
+		box-shadow: 0 0 88px #dadada; */
+        }
+        
+        span.input-group-addon i {
+            color: #009edf;
+            font-size: 17px;
+        }
+        
+        .login-button {
+            margin-top: 5px;
+        }
+        
+        .login-register {
+            font-size: 11px;
+            text-align: center;
+        }
+        
+        select.form-control:not([size]):not([multiple]) {
+            height: calc(2rem + 0px);
+        }
+        
+        .error {
+            font-size: 11px;
+            margin-top: 5px;
+            color: #fb8484;
+            margin-left: 5px;
+        }
+        
+        .mandetory {
+            color: #fb8484;
+        }
+        
+        .modal-confirm {
+            color: #636363;
+            width: 325px;
+        }
+        
+        .modal-confirm .modal-content {
+            padding: 20px;
+            border-radius: 5px;
+            border: none;
+        }
+        
+        .modal-confirm .modal-header {
+            border-bottom: none;
+            position: relative;
+        }
+        
+        .modal-confirm h4 {
+            text-align: center;
+            font-size: 26px;
+            margin: 30px 0 -15px;
+            width: 100%;
+        }
+        
+        .modal-confirm .form-control,
+        .modal-confirm .btn {
+            min-height: 40px;
+            border-radius: 3px;
+        }
+        
+        .modal-confirm .close {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+        }
+        
+        .modal-confirm .modal-footer {
+            border: none;
+            text-align: center;
+            border-radius: 5px;
+            font-size: 13px;
+        }
+        
+        .modal-confirm .icon-box {
+            color: #fff;
+            position: absolute;
+            margin: 0 auto;
+            left: 0;
+            right: 0;
+            top: -70px;
+            width: 95px;
+            height: 95px;
+            border-radius: 50%;
+            z-index: 9;
+            background: #086DF5;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+        }
+        
+        .modal-confirm .icon-box i {
+            font-size: 58px;
+            position: relative;
+            top: 3px;
+        }
+        
+        .modal-confirm.modal-dialog {
+            margin-top: 80px;
+        }
+        
+        .modal-confirm .btn {
+            color: #fff;
+            border-radius: 4px;
+            background: #086DF5;
+            text-decoration: none;
+            transition: all 0.4s;
+            line-height: normal;
+            border: none;
+        }
+        
+        .modal-confirm .btn-link:hover,
+        .modal-confirm .btn-link:focus {
+            background: transparent !important;
+        }
+        
+        .modal-confirm .btn-link {
+            color: #007bff;
+            border-radius: 4px;
+            background: transparent;
+            text-decoration: none;
+            transition: all 0.4s;
+            line-height: normal;
+            border: none;
+            padding: 0px;
+            min-height: 20px;
+            vertical-align: baseline;
+        }
+        
+        .resend-modal .form-control {
+            border-bottom: 1px solid #ced4da;
+        }
+        
+        .modal-confirm .btn:hover,
+        .modal-confirm .btn:focus {
+            background: #086DF5;
+            outline: none;
+        }
+        
+        .trigger-btn {
+            display: inline-block;
+            margin: 100px auto;
+        }
+        
+        .input-group {
+            -webkit-box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.21) !important;
+            -moz-box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.21) !important;
+            box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.21) !important;
+            border-bottom: 1px solid #ccc;
+        }
+        
+        .form-control {
+            display: block;
+            width: 100%;
+            padding: 0.375rem 0.75rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #495057;
+            background-color: #fff;
+            /* background-clip: padding-box; */
+            /* border: 1px solid #ced4da; */
+            /* border-radius: 0.25rem; */
+            border-left: none;
+            border-right: none;
+            border-top: none;
+            border-bottom: none;
+        }
+        
+        .form-control:focus {
+            color: #495057;
+            /* background-color: #fff; */
+            /* border-color: #80bdff; */
+            outline: 0;
+            box-shadow: 0 0 0 0rem rgba(0, 123, 255, 0.25);
+        }
+        
+        select.form-control:not([size]):not([multiple]) {
+            /*height: calc(2.25rem + 2px);*/
+            border-radius: 0;
+            border-bottom: 1px solid #ccc;
+        }
+        
+        input::placeholder {
+            font-size: 14px;
+            color: #495057;
+        }
+        
+        .dropdown1 {
+            position: relative;
+        }
+        
+        .dropdown-menu1 {
+            position: absolute;
+            z-index: 999;
+            box-shadow: 0px 1px 8px #888;
+            background: #FFF;
+            width: 100%;
+            max-height: 200px;
+            overflow: scroll;
+            overflow-x: hidden;
+        }
+        
+        .dropdown-menu1 li {
+            list-style: none;
+            cursor: pointer;
+            padding: 3%;
+        }
+        
+        .dropdown-menu1 li:hover {
+            background: #7245ce;
+            color: #FFF;
+        }
+        
+        .txt-terms-condi {
+            font-size: 14px;
+            padding: 5px 3px;
+            margin: 5% 0px 0px;
+        }
+        
+        .confirmRegModal .modal-dialog {
+            width: 500px;
+        }
+        
+        .confirmRegModal .modal-confirm .icon-box {
+            background: orange;
+        }
+        
+        .confirmRegModal .btn {
+            width: 100px;
+        }
+        
+        .confirmRegModal .btn-default {
+            background: #868585;
+        }
+        
+        .confirmRegModal .txt {
+            line-height: 1.5;
+        }
+        
+        .confirmRegModal .modal-footer {
+            min-height: 72px;
+        }
+        
+        .lblEmpl {
+            font-family: sans-serif;
+            position: relative;
+            padding: 8px;
+            /* border-bottom: 1px solid #6548da82; */
+            width: 100%;
+            border-bottom-color: rgb(204, 204, 204);
+            border-top: white;
+            border-right: 1px;
+            border-left: 1px;
+            color: #77807d;
+            font-size: 13px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div ng-include="'header.html'"></div>
+
+    <div class="spinner-container1" ng-show="loading">
+        <!---->
+        <div class="spinner-sub-container">
+            <h3 class="message" style="top:7%;">Please wait...</h3>
+            <div class="spinner" style="display:block;margin-top: 26%;">
+                <div class="loader"></div>
+            </div>
+        </div>
+    </div>
+    <div class="bg-free-block bg-white">
+        <div class="container">
+            <!-- Small device large here -->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="text-center reg-head-pt">
+                        <h1 class="title-color">Let's start your</h1>
+                        <h1 class="title-color">registration process...</h1>
+                    </div>
+                    <div class="text-center logo-pd">
+                        <img src="static-website/images/myenovation.jpg" style="width:80%;">
+                    </div>
+                </div>
+
+
+                <div class="col-md-6 reg-form-container">
+                    <div class="container">
+                        <div class="row main">
+                            <div class="main-login main-center text">
+                                <h5 class="text-center pt-10">Create an myeNovation account</h5>
+                                <form class="" name="regForm" ng-submit="submitRegisterForm(regForm.$valid,reg)" novalidate>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <!-- <label for="name" class="cols-sm-2 control-label">Contact Person Name <span class="mandetory">*</span></label> -->
+                                                <div class="cols-sm-10">
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" name="name" id="name" placeholder="Contact Person Name*" ng-model="reg.name" oninput="if (/[^A-Za-z\s]/g.test(this.value)) this.value = this.value.replace(/[^A-Za-z\s]/g,'')" required />
+                                                    </div>
+                                                </div>
+                                                <div ng-show="BtnCreate && !regForm.name.$valid" ng-messages="regForm.name.$error" class="error">
+                                                    <div ng-message="required">This field is required</div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <!-- <label for="org-name" class="cols-sm-2 control-label">Organisation Name <span class="mandetory">*</span></label> -->
+                                                <div class="cols-sm-10">
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" name="orgName" id="org-name" placeholder="Organization Name*" ng-model="reg.orgName" required />
+                                                    </div>
+                                                </div>
+                                                <div ng-show="BtnCreate && !regForm.orgName.$valid" ng-messages="regForm.orgName.$error" class="error">
+                                                    <div ng-message="required">This field is required</div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <!-- <label for="designation" class="cols-sm-2 control-label">Designation <span class="mandetory">*</span></label> -->
+                                                <div class="cols-sm-10">
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" name="designation" id="designation" placeholder="Designation*" ng-model="reg.designation" oninput="if (/[^A-Za-z\s]/g.test(this.value)) this.value = this.value.replace(/[^A-Za-z\s]/g,'')" required />
+                                                    </div>
+                                                </div>
+                                                <div ng-show="BtnCreate && !regForm.designation.$valid" ng-messages="regForm.designation.$error" class="error">
+                                                    <div ng-message="required">This field is required</div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <!-- <label for="mobile-no" class="cols-sm-2 control-label">Contact Number <span class="mandetory">*</span></label> -->
+                                                <div class="cols-sm-10">
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" name="contactNumber" id="mobile-no" placeholder="Contact Number*" ng-model="reg.contactNumber" ng-minlength="10" maxlength="10" oninput="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')" ng-pattern="/^[7-9][0-9]{9}$/"
+                                                            required />
+                                                    </div>
+                                                </div>
+                                                <div ng-show="BtnCreate && !regForm.contactNumber.$valid" ng-messages="regForm.contactNumber.$error" class="error">
+                                                    <div ng-message="required" ng-show="regForm.contactNumber.$error.required">This field is required
+                                                    </div>
+                                                    <div ng-show="regForm.contactNumber.$error.minlength">Must be a valid 10 digit contact number</div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <!-- <label for="email" class="cols-sm-2 control-label">Email <span class="mandetory">*</span></label> -->
+                                                <div class="cols-sm-10">
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" name="email" id="email" placeholder="Organization Email*" ng-model="reg.email" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" required />
+                                                    </div>
+                                                </div>
+                                                <div ng-show="BtnCreate && !regForm.email.$valid && emailVerify" ng-messages="regForm.email.$error" class="error">
+                                                    <div ng-message="required">This field is required.</div>
+                                                </div>
+                                                <div class="error" ng-if="!emailVerify">
+                                                    Please Enter Business Email Address.
+                                                </div>
+                                            </div>
+
+                                            <!--<div class="form-group">
+                                    
+                                                <div class="cols-sm-10">
+                                                    <div class="input-group">
+                                                        <input type="password" class="form-control" name="password" id="pass" placeholder="Password*" ng-model="reg.password" ng-minlength="8" maxlength="16" ng-required="true" />
+                                                    </div>
+
+                                                </div>
+                                                <div ng-show="BtnCreate && !regForm.password.$valid" ng-messages="regForm.password.$error" class="error">
+                                                    <div ng-message="required" ng-show="regForm.password.$error.required">This field is required
+                                                    </div>
+                                                    <div style="color: #d50000;" ng-show="regForm.password.$error.minlength">Password is too short.
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="form-group">
+                                
+                                                <div class="cols-sm-10">
+                                                    <div class="input-group">
+                                                        <input type="password" class="form-control" name="confPassword" id="confirm-pass" placeholder="Confirm Password*" ng-model="reg.confPassword" minlength="8" maxlength="16" required />
+                                                    </div>
+                                                </div>
+                                                <div ng-show="BtnCreate && reg.password" ng-messages="regForm.confPassword.$error" class="error">
+                                                    <div ng-show="reg.password != reg.confPassword">Must match password and confirm password</div>
+                                                </div>
+                                                <div ng-show="BtnCreate && !reg.password" ng-messages="regForm.confPassword.$error" class="error">
+                                                    <div ng-message="required">This field is required</div>
+                                                </div>
+                                            </div>-->
+                                            <div class="form-group">
+                                                <!-- <label for="designation" class="cols-sm-2 control-label">Designation <span class="mandetory">*</span></label> -->
+                                                <div class="cols-sm-10">
+                                                    <div class="input-group">
+                                                        <!-- <label for="country" class="cols-sm-2 control-label">Country <span class="mandetory">*</span></label> --><br>
+                                                        <input type="text" name="country" id="country" class="form-control" ng-model="reg.country" placeholder="Country*" ng-keyup="addCountry()" required />
+                                                        <ul class="dropdown-menu1" ng-if="reg.country.length > 0 && setCountry">
+                                                            <li ng-repeat="country in countries | filter:reg.country" ng-click="setCountryName(country)">
+                                                                {{country.countryName}}</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div ng-show="BtnCreate && !regForm.country.$valid" ng-messages="regForm.country.$error" class="error">
+                                                    <div ng-message="required">This field is required</div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <!-- <label for="designation" class="cols-sm-2 control-label">Designation <span class="mandetory">*</span></label> -->
+                                                <div class="input-group">
+                                                    <select class="lblEmpl" name="registrationSource" ng-model="reg.registrationSource" required>
+                                                        <option value="">How do you get to know about myEnovation*
+                                                        </option>
+                                                        <option ng-repeat="x in registrationSourceList" 
+                                                            value="{{x.id}}" >
+                                                            {{x.name}}</option>
+                                                    </select>
+                                                </div>
+                                                <div ng-show="BtnCreate && !regForm.registrationSource.$valid" ng-messages="regForm.registrationSource.$error" class="error">
+                                                    <div ng-message="required">This field is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <p class="txt-terms-condi">
+                                        By clicking on "Signup" you agree to myeNovation's <a href="#" target="_blank">Terms of service</a> and <a href="#" target="_blank">Privacy
+                                            policy</a>.
+
+
+                                    </p>
+                                    <div class="form-group">
+                                        <div ng-show="registerSpinner" class="small-spinner registerSpinner"></div>
+                                        <button ng-show="!registerSpinner" type="submit" id="button" class="btn btn-primary btn-lg btn-block login-button" ng-click="BtnCreate = true;">Sign up</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Small device ends here -->
+        </div>
+    </div>
+    <!-- //about bottom -->
+
+    <!-- Modal HTML -->
+    <div id="myModal" class="modal fade">
+        <div class="modal-dialog modal-confirm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="icon-box">
+                        <i class="fa fa-check" style="color: white;" aria-hidden="true"></i>
+                    </div>
+                    <h4 class="modal-title">Awesome!</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="text-center" style="color:#000;">Thank you!! You have been registered successfully. <br /> Prior clicking OK, please check if you received verification email.<span>If not, click RESEND
+                            <button type="button" class="btn btn-link" data-dismiss="modal" data-toggle="modal"
+                                data-target="#resendModal" data-backdrop="static" data-keyboard="false">resend</button>
+                        </span></p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success btn-block" ng-click="goHome()">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal HTML -->
+    <div id="confirmRegModal" class="modal fade confirmRegModal">
+        <div class="modal-dialog modal-confirm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="icon-box">
+                        <i class="fa fa-info" style="color: white;" aria-hidden="true"></i>
+                    </div>
+                    <!-- <h4 class="modal-title">Awesome!</h4> -->
+                </div>
+                <div class="modal-body">
+                    <p class="txt text-center" style="color:#000;">Please confirm your entered mobile no :
+                        <b>{{submitFormData.contactNumber}}</b> and email id : <b>{{submitFormData.email}}</b>.</p>
+                </div>
+                <div class="modal-footer">
+                    <div ng-show="registerSpinner" class="small-spinner registerSpinner" style="top: 0px;"></div>
+                    <button ng-show="!registerSpinner" class="btn btn-default" data-dismiss="modal">Edit</button>
+                    <button ng-show="!registerSpinner" class="btn btn-success" ng-click="submitRegDet()">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="reasonModal" class="modal fade">
+        <div class="modal-dialog modal-confirm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="icon-box">
+                        <i class="fa fa-times" style="color: white;" aria-hidden="true"></i>
+                    </div>
+                    <h4 class="modal-title">Ohh!</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center" style="color:#000;"><span id="reasonMsg"></span>.<span> If not received
+                            verification mail then <button type="button" class="btn btn-link" data-toggle="modal"
+                                data-target="#resendModal" data-dismiss="modal" data-backdrop="static"
+                                data-keyboard="false">resend</button> </span></div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success btn-block" ng-click="goHome()">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="resendModal1" class="modal fade">
+        <div class="modal-dialog modal-confirm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="icon-box">
+                        <i class="fa fa-check" style="color: white;" aria-hidden="true"></i>
+                    </div>
+                    <h4 class="modal-title">Mail Send Successfully!</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="text-center">Please check your mail for verification.</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success btn-block" ng-click="goHome()">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="resendModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog resend-modal" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Resend Verification Email</h5>
+                    <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>-->
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="resend_Email" class="col-form-label">Email <span
+                                    class="mandetory">*</span></label>
+                            <input type="text" class="form-control" id="resend_Email" name="resend_Email" ng-model="resend_Email" placeholder="Email" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" required ng-keyup="resendEmailVerify = true" />
+                        </div>
+                        <div class="error" ng-if="!resendEmailVerify">
+                            Please Enter Business Email Address.
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success btn-sm" ng-click="resend(resend_Email)">Send
+                        mail</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="snackbar-container" data-snackbar="true" data-snackbar-duration="3000" data-snackbar-remove-delay="200">
+    </div>
+    <div ng-include="'footer.html'"></div>
+
+
+    <!-- Js files -->
+    <!-- JavaScript -->
+    <script src="static-website/js/jquery-2.2.3.min.js"></script>
+    <!-- Default-JavaScript-File -->
+    <script src="static-website/js/bootstrap.js"></script>
+    <!-- Necessary-JavaScript-File-For-Bootstrap -->
+
+    <!-- Angular JS -->
+    <script src="dist/ang/angular.min.js"></script>
+    <script src="dist/ang/angular-route.min.js"></script>
+    <script src="static-website/js/angular-messages.min.js"></script>
+    <script src="dist/ang/appDomain.js?ver=1.0.1"></script>
+    <script>
+        document.write('<script src="dist/ang/login_app.js?ver=' + appVersion + '"\><\/script>');
+        document.write('<script src="dist/ang/login.js?ver=' + appVersion + '"\><\/script>');
+    </script>
+    <script src="bower_components/snackbar/ang.snackbar.js"></script>
+    <!-- fixed navigation -->
+    <script src="static-website/js/fixed-nav.js"></script>
+    <!-- //fixed navigation -->
+    <!-- dropdown smooth -->
+    <script>
+        $(document).ready(function() {
+            $(".dropdown").hover(
+                function() {
+                    $('.dropdown-menu', this).stop(true, true).slideDown("fast");
+                    $(this).toggleClass('open');
+                },
+                function() {
+                    $('.dropdown-menu', this).stop(true, true).slideUp("fast");
+                    $(this).toggleClass('open');
+                }
+            );
+        });
+    </script>
+    <!-- //dropdown smooth -->
+
+    <!-- search plugin -->
+    <!-- pop-up-box -->
+    <link href="static-website/css/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
+    <script src="static-website/js/jquery.magnific-popup.js"></script>
+    <!-- //pop-up-box -->
+    <!-- search script -->
+    <script>
+        $(document).ready(function() {
+            $('.popup-with-zoom-anim').magnificPopup({
+                type: 'inline',
+                fixedContentPos: false,
+                fixedBgPos: true,
+                overflowY: 'auto',
+                closeBtnInside: true,
+                preloader: false,
+                midClick: true,
+                removalDelay: 300,
+                mainClass: 'my-mfp-zoom-in'
+            });
+
+        });
+        $('[data-dismiss=modal]').on('click', function(e) {
+            var $t = $(this),
+                target = $t[0].href || $t.data("target") || $t.parents('.modal') || [];
+
+            $(target)
+                .find("input,textarea,select")
+                .val('')
+                .end()
+                .find("input[type=checkbox], input[type=radio]")
+                .prop("checked", "")
+                .end();
+        })
+    </script>
+    <!-- //search script -->
+    <!-- //search plugin -->
+
+    <!-- smooth scrolling -->
+    <script src="static-website/js/SmoothScroll.min.js"></script>
+    <!-- move-top -->
+    <script src="static-website/js/move-top.js"></script>
+    <!-- easing -->
+    <script src="static-website/js/easing.js"></script>
+    <!--  necessary snippets for few javascript files -->
+    <script src="static-website/js/inside.js"></script>
+
+    <script src="static-website/js/bootstrap.js"></script>
+    <!-- Necessary-JavaScript-File-For-Bootstrap -->
+    <!-- //Js files -->
+
+
+</body>
+
+</html>

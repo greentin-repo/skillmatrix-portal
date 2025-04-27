@@ -1,0 +1,195 @@
+<style>
+    .progress-bar-container {
+        background: #4b4795;
+        padding-top: 6px;
+        padding-bottom: 12px;
+        margin-top: 18px;
+    }
+    
+    .progress-bar-container .text {
+        color: white;
+        padding-left: 35px;
+        padding-right: 35px;
+        font-size: 26px;
+    }
+    
+    .bg-bar {
+        height: 4px;
+        width: 100%;
+        background: #eaeaea;
+        border-radius: 5px;
+    }
+    
+    .bar-container {
+        color: white;
+        padding-left: 35px;
+        padding-right: 35px;
+        margin-top: 0px;
+    }
+    
+    .progress-bar {
+        height: 4px;
+        width: 50%;
+        background: #25da04;
+        position: relative;
+        top: -4px;
+        border-radius: 5px;
+        border-right: 1px solid #969696;
+    }
+</style>
+
+<!-- Left side column. contains the logo and sidebar -->
+<section>
+    <div class="main-header" style="display:block;position: absolute;left: 0px;z-index: 1030;">
+        <div class="sidenav" style="overflow: hidden;">
+            <div style="margin-bottom: 12px;">
+                <img src="../dist/icons/my_enovation_white@2x.png" style="padding: 0px 30px;width: 100%;">
+                <img src="dist/icons/tredlogo.png" style="position: absolute;left: 18em;top: 40px;height: 22px;width: 22px;">
+            </div>
+            <div class="progress-bar-container" ng-if="empDetails.productOrgConfigDet.isSetupCompleted == 0 && setupPercentComplete != 100">
+                <div class="text">{{setupPercentComplete}}% <small style="font-size: 14px;margin-left: 4px;">Completed</small>
+                </div>
+                <div class="bar-container">
+                    <div class="bg-bar"></div>
+                    <div class="progress-bar" style="width:{{setupPercentComplete}}%;"></div>
+                </div>
+            </div>
+            <div class="finish-setup-block" ng-if="empDetails.productOrgConfigDet.isSetupCompleted == 0 && setupPercentComplete == 100">
+                <div class="txt1">All set to go</div>
+                <div class="txt2">Just click below button to complete setup!</div>
+                <div class="btn-finish" ng-click="finishSetup()">Finish Setup</div>
+            </div>
+            <div style="display: flex;margin-top: 8px;padding-left: 25px;cursor: pointer;" ng-if="empDetails.productOrgConfigDet.isSetupCompleted!=0">
+                <a href="../template.html" style="font-size: 14px;color: white;padding-left: 1px;">
+                    <i class="fa fa-home fa-2x" aria-hidden="true" style="margin-left: 4px;"></i>
+                    <span style="margin-left: 5px;position: relative;top: -3px;font-size: 15px;font-weight: 500;">{{langTranslate.Home}}</span>
+                </a>
+            </div>
+            <div ng-style="empDetails.productOrgConfigDet.isSetupCompleted!=0 ? setSidebarStyle('completed') : empDetails.productOrgConfigDet.isSetupCompleted == 0 && setupPercentComplete == 100 ? setSidebarStyle('pending1') : setSidebarStyle('pending2')" style="overflow:auto;"
+                ng-scrollbars>
+                <div ng-repeat="data in sideMenuData" ng-if="data.isActive == 'Y'">
+                    <div style="display: flex;padding-left: 30px;cursor: pointer;padding-bottom: 1px;padding-top: 1px;" ng-click="setSelectedMenu(data);" ng-class="{'selected-side-menu':data.level==selectedMenu.level}" ng-if="data.isEnable && checkSubMenuAccess(menuName,data.linkName)">
+                        <!-- <div style="display: flex;padding-left: 30px;cursor: pointer;padding-bottom: 1px;padding-top: 1px;" ng-click="setSelectedMenu(data);" ng-class="{'selected-side-menu':data.level==selectedMenu.level}"> -->
+                        <img src="dist/img/Ellipse 158.png" style="height: 20px;width: 20px;margin-top: 4px;margin-left: 3px;" ng-if="!data.isSetUpCompleted">
+                        <img src="dist/img/sidebar-tick.png" style="height: 20px;width: 20px;margin-top: 4px;margin-left: 3px;" ng-if="data.isSetUpCompleted">
+                        <span>
+              <a style="font-size: 15px;color: white;" ng-if="data.linkName == 'Home Setup'">Home Setup</a>
+              <a style="font-size: 15px;color: white;" ng-if="data.linkName == 'Branch'">{{langTranslate.Branch}}</a>
+              <a style="font-size: 15px;color: white;" ng-if="data.linkName == 'Department'">Department</a>
+              <a style="font-size: 15px;color: white;" ng-if="data.linkName == 'Employee'">{{langTranslate.Employee}}</a>
+              <a style="font-size: 15px;color: white;" ng-if="data.linkName == 'Controller'">{{langTranslate.Controller}}</a>
+              <a style="font-size: 15px;color: white;" ng-if="data.linkName == 'Evaluator'">{{langTranslate.Evaluator}}</a>
+              <a style="font-size: 15px;color: white;" ng-if="data.linkName == 'Implementer'">{{langTranslate.Implementer}}</a>
+              <a style="font-size: 15px;color: white;" ng-if="data.linkName == 'Finance Controller'">{{langTranslate.Finance_Controller}}</a>
+              <a style="font-size: 15px;color: white;" ng-if="data.linkName == 'Executive'">{{langTranslate.Executive}}</a>
+              <a style="font-size: 15px;color: white;" ng-if="data.linkName == 'Benefit and Category'">{{langTranslate.Benefit_and_Category}}</a>
+              <a style="font-size: 15px;color: white;" ng-if="data.linkName == 'Configure'">{{langTranslate.Configure}}</a>
+              <a style="font-size: 15px;color: white;" ng-if="data.linkName == 'Pending Tasks Escalation'">{{langTranslate.Pending_Tasks_Escalation}}</a>
+              <a style="font-size: 15px;color: white;" ng-if="data.linkName == 'Evaluation Metrics Points Setup'">{{langTranslate.Evaluation_MetricsPoints}}</a>
+              <a style="font-size: 15px;color: white;" ng-if="data.linkName == 'Change Document'">{{langTranslate.Change_Document}}</a>
+              <a style="font-size: 15px;color: white;" ng-if="data.linkName == 'Access Management'">{{langTranslate.Access_Management}}</a>
+              <a style="font-size: 15px;color: white;" ng-if="data.linkName == 'Mandatory & Target Setup'">{{langTranslate.Mandatory_Target_Setup}}</a>
+              <a style="font-size: 15px;color: white;" ng-if="data.linkName == 'Gifts & Rewards'">{{langTranslate.Gifts_Rewards}}</a>
+              <a style="font-size: 15px;color: white;" ng-if="data.linkName == 'Social Media & TOD'">{{langTranslate.Social_Media_TOD}}</a>
+              <a style="font-size: 15px;color: white;" ng-if="data.linkName == 'Notice Board'">{{langTranslate.Notice_Board}}</a>
+              <a style="font-size: 15px;color: white;" ng-if="data.linkName == 'Incident Management'">{{langTranslate.Incident_Management}}</a>
+              <a style="font-size: 15px;color: white;" ng-if="data.linkName == 'DWM Setup'">{{langTranslate.DWM_Setup}}</a>
+              <a style="font-size: 15px;color: white;" ng-if="data.linkName == 'Auditor'">{{langTranslate.Auditor}}</a>
+              <a style="font-size: 15px;color: white;" ng-if="data.linkName == 'TPM Setup'">{{langTranslate.TPM_Setup}}</a>
+              <a style="font-size: 15px;color: white;" ng-if="data.linkName == 'Kuber Setup'">{{langTranslate.Kuber_Setup}}</a>
+              <a style="font-size: 15px;color: white;" ng-if="data.linkName == 'Onhold Decision authority'">{{langTranslate.Onhold_Authority}}</a>
+              <a style="font-size: 15px;color: white;" ng-if="data.linkName == 'Password Policy'">Password Policy</a>
+              <a style="font-size: 15px;color: white;" ng-if="data.linkName == 'Suggestion Template Setup'">{{langTranslate.SuggestionTemplateSetup}}</a>
+              <a style="font-size: 15px;color: white;" ng-if="data.linkName == 'Suggestion Jury Setup'">{{langTranslate.SuggestionSetup}}</a>
+              <a style="font-size: 15px;color: white;" ng-if="data.linkName == 'Suggestion Assessment Setup'">{{langTranslate.SuggestionAssessment}}</a>
+              <a style="font-size: 15px;color: white;" ng-if="data.linkName == 'Social Club'">Social Club</a>
+              <a style="font-size: 15px;color: white;" ng-if="data.linkName == 'Suggestion Flow Configuration'">Suggestion Flow Configuration</a>
+              <a style="font-size: 15px;color: white;" ng-if="data.linkName == 'Suggestion Workflow'">Suggestion Workflow</a>
+            </span>
+                    </div>
+                    <div ng-if="data.isEnable && !checkSubMenuAccess(menuName,data.linkName)" style="display: flex;margin-top: 0px;padding-left: 30px;cursor: not-allowed;">
+                        <img src="dist/img/Ellipse 158.png" style="height: 25px;width: 25px;margin-top: 6px;cursor: not-allowed;">
+                        <span style="margin-top: 5px;cursor: not-allowed;">
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Home Setup'">Home Setup</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Branch'">{{langTranslate.Branch}}</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Department'">Department</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Employee'">{{langTranslate.Employee}}</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Controller'">{{langTranslate.Controller}}</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Evaluator'">{{langTranslate.Evaluator}}</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Implementer'">{{langTranslate.Implementer}}</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Finance Controller'">{{langTranslate.Finance_Controller}}</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Executive'">{{langTranslate.Executive}}</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Benefit and Category'">{{langTranslate.Benefit_and_Category}}</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Configure'">{{langTranslate.Configure}}</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Pending Tasks Escalation'">{{langTranslate.Pending_Tasks_Escalation}}</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Evaluation Metrics Points Setup'">{{langTranslate.Evaluation_MetricsPoints}}</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Change Document'">{{langTranslate.Change_Document}}</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Access Management'">{{langTranslate.Access_Management}}</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Mandatory & Target Setup'">{{langTranslate.Mandatory_Target_Setup}}</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Gifts & Rewards'">{{langTranslate.Gifts_Rewards}}</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Social Media & TOD'">{{langTranslate.Social_Media_TOD}}</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Notice Board'">{{langTranslate.Notice_Board}}</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Incident Management'">{{langTranslate.Incident_Management}}</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'DWM Setup'">{{langTranslate.DWM_Setup}}</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Auditor'">{{langTranslate.Auditor}}</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'TPM Setup'">{{langTranslate.TPM_Setup}}</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Kuber Setup'">{{langTranslate.Kuber_Setup}}</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Onhold Decision authority'">{{langTranslate.Onhold_Authority}}</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Password Policy'">Password Policy</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Suggestion Template Setup'">{{langTranslate.SuggestionTemplateSetup}}</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Suggestion Jury Setup'">{{langTranslate.SuggestionSetup}}</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Suggestion Assessment Setup'">{{langTranslate.SuggestionAssessment}}</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Social Club'">Social Club</a>            
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Suggestion Flow Configuration'">Suggestion Flow Configuration</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Suggestion Workflow'">Suggestion Workflow</a>
+            </span>
+                    </div>
+
+                    <div ng-if="!data.isEnable" style="display: flex;margin-top: 0px;padding-left: 30px;cursor: not-allowed;">
+                        <img src="dist/img/Ellipse 158.png" style="height: 25px;width: 25px;margin-top: 6px;cursor: not-allowed;">
+                        <span style="margin-top: 5px;cursor: not-allowed;">
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Home Setup'">Home Setup</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Branch'">{{langTranslate.Branch}}</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Department'">Department</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Employee'">{{langTranslate.Employee}}</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Controller'">{{langTranslate.Controller}}</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Evaluator'">{{langTranslate.Evaluator}}</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Implementer'">{{langTranslate.Implementer}}</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Finance Controller'">{{langTranslate.Finance_Controller}}</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Executive'">{{langTranslate.Executive}}</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Benefit and Category'">{{langTranslate.Benefit_and_Category}}</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Configure'">{{langTranslate.Configure}}</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Pending Tasks Escalation'">{{langTranslate.Pending_Tasks_Escalation}}</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Evaluation Metrics Points Setup'">{{langTranslate.Evaluation_MetricsPoints}}</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Change Document'">{{langTranslate.Change_Document}}</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Access Management'">{{langTranslate.Access_Management}}</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Mandatory & Target Setup'">{{langTranslate.Mandatory_Target_Setup}}</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Gifts & Rewards'">{{langTranslate.Gifts_Rewards}}</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Social Media & TOD'">{{langTranslate.Social_Media_TOD}}</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Notice Board'">{{langTranslate.Notice_Board}}</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Incident Management'">Incident Management</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'DWM Setup'">{{langTranslate.DWM_Setup}}</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Auditor'">{{langTranslate.Auditor}}</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'TPM Setup'">{{langTranslate.TPM_Setup}}</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Kuber Setup'">{{langTranslate.Kuber_Setup}}</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Onhold Decision authority'">{{langTranslate.Onhold_Authority}}</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Password Policy'">Password Policy</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Suggestion Template Setup'">{{langTranslate.SuggestionTemplateSetup}}</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Suggestion Jury Setup'">{{langTranslate.SuggestionSetup}}</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Suggestion Assessment Setup'">{{langTranslate.SuggestionAssessment}}</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Social Club'">Social Club</a>     
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Suggestion Flow Configuration'">Suggestion Flow Configuration</a>
+              <a href="#" style="font-size: 15px;color: #ccced0;cursor: not-allowed;" ng-if="data.linkName == 'Suggestion Workflow'">Suggestion Workflow</a>              
+            </span>
+                    </div>
+                </div>
+            </div>
+            <div style="display: flex;margin-top: 2px;padding-left: 13px;cursor: pointer;">
+                <a href="#" style="font-size: 17px;color: white;margin-left: 4px;" ng-click="logOut()">
+                    <i class="fa fa-sign-out" style="font-size: 30px;" aria-hidden="true"></i>
+                    <span style="margin-left: 11px;position: relative;top: -5px;">{{ langTranslate.Logout }}</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>

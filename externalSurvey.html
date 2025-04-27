@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+
+<html ng-app="loginRegApp" ng-controller="extSurveyCtrl">
+
+<head>
+  <title>myeNovation - Home</title>
+
+  <link rel="shortcut icon" type="image/x-icon" href="static-website/images/favicon.ico" />
+
+  <!-- Meta tag Keywords -->
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="keywords" content="enovation, myeNovation, innovation, idea, idea scheme, suggestion, suggestion scheme, kaizen approach, suggestion by employees, employee suggestion scheme, gather ideas, gather ideas from employees, online platform for suggestion scheme, engage employees, employee engagement platform, employee suggestion platform, how to get suggestion from employees, collect ideas from employees, collect suggestion from employees, suggestion platform,
+	employee engagement mobile app, employee suggestion mobile app, survey, mobile app for survey, platform for survey, opinion poll, employee survey application, mobile app for opinion poll, software for suggestion, software for survey, software for opinion poll " />
+
+  <link rel="shortcut icon" type="image/x-icon" href="dist/icons/app_logo.png">
+
+  <script>
+    addEventListener("load", function () {
+      setTimeout(hideURLbar, 0);
+    }, false);
+
+    function hideURLbar() {
+      window.scrollTo(0, 1);
+    }
+
+  </script>
+  <!-- //Meta tag Keywords -->
+
+  <!-- Custom-Files -->
+  <link rel="stylesheet" href="static-website/css/bootstrap.css">
+  <!-- Bootstrap-Core-CSS -->
+  <link rel="stylesheet" href="static-website/css/style.css" type="text/css" media="all" />
+  <link rel="stylesheet" href="static-website/css/custStyle.css" type="text/css" media="all" />
+  <link rel="stylesheet" href="static-website/css/extSurvey.css" type="text/css" media="all" />
+  <link rel="stylesheet" href="content/survey/survey.css" type="text/css" media="all" />
+  <!-- Style-CSS -->
+  <link rel="stylesheet" href="static-website/css/font-awesome.css">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <!-- Font-Awesome-Icons-CSS -->
+  <!-- //Custom-Files -->
+
+  <!-- Web-Fonts -->
+  <link href="//fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i&amp;subset=latin-ext" rel="stylesheet">
+  <link href="//fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&amp;subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese" rel="stylesheet">
+  <!-- //Web-Fonts -->
+
+  <!--Analitics-->
+
+</head>
+
+<body style="min-height:{{windowHeight}}px;">
+
+  <header class="page-header">
+    <div class="main-top py-1">
+      <nav class="navbar navbar-expand-lg navbar-light fixed-navi">
+        <div class="container-fluid">
+          <a class="navbar-brand font-weight-bold" href="index.html">
+            <img src="static-website/images/myenovation.jpg" class="logoEnovation">
+          </a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+
+
+  <div class="survey-body" ng-if="!flagInvalid">
+    <div>
+      <div class="SurveyHeading">
+        <h4>{{extSurveyDet.title}}</h4>
+      </div>
+      <div style="padding: 15px;border-bottom: 1px dashed lightgray;" ng-if="extSurveyDet.description != null && extSurveyDet.description != undefined">
+        <label style="color: #4b4794"><strong>Description : </strong></label>
+        <p style="color: #5a5a5a;">{{extSurveyDet.description}}</p>
+      </div>
+    </div>
+    <div class="" style="padding:0px 10%;position:relative;" ng-if="!flagInvalid && !flagSubmit">
+      <div ng-show="!flagSurveyDetIndicator && !flagSurveyDetailsFailToLoad" class="participate-survey-section">
+        <div class="section-body" ng-scrollbars ng-style="setExtQuesHeightStyle()">
+          <div class="ques-section" ng-repeat="ques in question | orderBy:'id'" ng-init="quesIndex = $index" style="border-bottom: 1px dashed lightgray;">
+            <div class="ques-vert-center content-list">
+              <div class="ques-txt" style="font-weight: bold">
+                {{quesIndex + 1}}. {{ques.question}}
+              </div>
+              <div class="ques-opt">
+                <div ng-if="ques.choiceType.choiceId == 1">
+                  <div style="display:flex;flex-wrap: wrap;">
+                    <div style="width: 49%;" ng-repeat="opt in ques.surveyOptions | orderBy:'id'" ng-init="optIndex = $index ">
+                      <ul class="cust-radio-ul">
+                        <li>
+                          <input type="radio" id="radioOpt{{quesIndex}}{{optIndex}}" name="radioOpt{{ques.quesId}}" value="1" ng-model="opt.userCheck" ng-click="setAnswer()">
+                          <label for="radioOpt{{quesIndex}}{{optIndex}}">{{opt.optText}}</label>
+                          <div class="check"></div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <div ng-if="ques.choiceType.choiceId == 2">
+                  <div style="display:flex;flex-wrap: wrap;">
+                    <div style="width: 49%;" ng-repeat="opt in ques.surveyOptions | orderBy:'id'">
+                      <label class="lbl-cust-checkbox">
+                        <input type="checkbox" name="multiple" ng-model="opt.userCheck" value="1" class="chkOpt label__checkbox" ng-click="setAnswer()">
+                        <span class="label__text">
+                          <span class="label__check">
+                            <i class="material-icons icon">done</i>
+                          </span>
+                          <div class="label_opt_text">{{opt.optText}}</div>
+                        </span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div ng-if="ques.choiceType.choiceId == 5">
+                  <div ng-repeat="opt in ques.surveyOptions | orderBy:'id'" ng-init="opt.ratings = 0;">
+                    <rating-stars ng-model="opt.ratings" ng-change="opt.userCheck = 1;setAnswer()" ratings="opt.ratingScale" average-rating="0" ratings-position="">
+                    </rating-stars>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="ques-section text-center" scroll-bookmark="ques-section-{{question.length}}">
+            <div class="ques-vert-center">
+              <i class="fa fa-smile-o" style="font-size: 110px;color: #12ba42;"></i>
+              <h4 style="text-align: center;">You have completed survey </h4>
+              <button type="button" ng-click="userAnswerSave()" class="btn-survey-done" style="margin-top: 10px">Submit</button>
+            </div>
+          </div>
+        </div>
+        <div class="section-footer">
+          <div class="ans-count">{{question.answeredCount}} of {{question.length}} answered</div>
+          <div class="ques-progress-bar">
+            <div class="progress-bg"></div>
+            <div class="progress-indctr" ng-style="{'width' : (question.answeredCount*100)/question.length + '%'}">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="invalidDiv" ng-if="flagSubmit">
+    <div class="" style="padding:0px 10%;position:relative;">
+      <div ng-show="!flagSurveyDetIndicator && !flagSurveyDetailsFailToLoad" class="participate-survey-section">
+        <div>
+          <div class="modal-dialog modal-confirm">
+            <div class="modal-content">
+              <div class="modal-header">
+                <div class="icon-box">
+                  <i class="fa fa-check" style="color: white;" aria-hidden="true"></i>
+                </div>
+                <h4 class="modal-title">Congratulation!</h4>
+              </div>
+              <div class="modal-body">
+                <p class="text-center">Survey Completed Successfully.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="container invalidDiv" ng-if="flagInvalid && !flagSubmit">
+    <!-- Small device large here -->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="pt-5 mb-4 emailVerificationBox">
+          <div class="text-center">
+            <img src="static-website/assets/images/email-verification.svg" class="verificationImgStyle">
+          </div>
+          <div>
+            <div class="text-center">
+              <h5 class="title-color"><strong>Invalid Token</strong></h5>
+            </div>
+          </div>
+          <div>
+            <div class="text-center">
+              <!-- <h5 class="title-color"><strong>Registered Email Confirmation</strong></h5> -->
+            </div>
+            <div class="col-md-12  text-center btnContinueToSignIn">
+              <img src="static-website/assets/images/button.svg" class="btnContinuetoSignInh">
+              <!-- <div class="btn-txt-continueToSignIn" style="width:30%;margin:auto;cursor: pointer;" ng-click="goLogin()">
+                Continue to sign in</div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="pt-lg-4 pt-3 text-center footerDiv">
+    <p class="copy-right-grids mt-lg-1 copyright-txt-style">
+      <font color="#000">© 2018 <b>myeNovation.</b> All Rights Reserved | Powered By</font><a
+        href="http://greentinsolutions.com" target="target_blank" style="color: #ffcd00;"> Greentin Solutions</a>
+    </p>
+  </div> -->
+  <footer class="footerDiv">
+    <p class="copy-right-grids mt-lg-1 copyright-txt-style">
+      <font color="#000">© 2019 <b>myeNovation.</b> All Rights Reserved | Powered By</font><a href="http://greentinsolutions.com" target="target_blank" style="color: #ffcd00;"> Greentin Solutions</a>
+    </p>
+  </footer>
+
+  <div id="myModal" class="modal fade">
+    <div class="modal-dialog modal-confirm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="icon-box">
+            <i class="fa fa-check" style="color: white;" aria-hidden="true"></i>
+          </div>
+          <h4 class="modal-title">Awesome!</h4>
+        </div>
+        <div class="modal-body">
+          <p class="text-center">Submitted Successfully.</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-success btn-block" ng-click="setPass()">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script src="dist/ang/angular.min.js"></script>
+  <script src="dist/ang/angular-route.min.js"></script>
+  <script src="dist/ang/angular-translate.min.js"></script>
+  <script src="bower_components/snackbar/ang.snackbar.js"></script>
+  <script src="dist/ang/appDomain.js?ver=1.0.1"></script>
+  <script src="static-website/js/jquery-2.2.3.min.js"></script>
+  <!-- Default-JavaScript-File -->
+  <script src="static-website/js/bootstrap.js"></script>
+  <script>
+    document.write('<script src="dist/ang/login_app.js?ver=' + appVersion + '"\><\/script>');
+    document.write('<script src="dist/ang/login.js?ver=' + appVersion + '"\><\/script>');
+
+  </script>
+</body>
+
+</html>

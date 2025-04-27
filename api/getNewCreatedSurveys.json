@@ -1,0 +1,103 @@
+{
+    "addquestions" : [
+        {
+            "questionText" : "How likely is it that you would recommend this company to a friend or colleague",
+            "ansType" : "4", 
+            "options" : [],
+            "fromPoints" :1,
+            "toPoints" : 5
+        }, {
+            "questionText" : "How likely is it that you would recommend this company to a friend or colleague",
+            "ansType" : "4", 
+            "options" : [],
+            "fromPoints" : 1,
+            "toPoints" : 20
+        },  {
+            "questionText" : "Overall, how satisfied or dissatisfied are you with our company?",
+            "ansType" : "1", 
+            "options" : [
+                    {
+                        "optionText" : "Very satisfied"
+                    },{
+                        "optionText" : "Somewhat dissatisfied"
+                    },{
+                        "optionText" : "Very dissatisfied"
+                    }
+                ],
+            "fromPoints" : 0,
+            "toPoints" : 0
+        }, {
+            "questionText" : "Which of the following words would you use to describe our products? Select all that apply.",
+            "ansType" : "2", 
+            "options" : [
+                    {
+                        "optionText" : "Reliable"
+                    },{
+                        "optionText" : "High Quality"
+                    },{
+                        "optionText" : "Useful"
+                    },{
+                        "optionText" : "Unique"
+                    },{
+                        "optionText" : "Poor Quality"
+                    }
+                ],
+            "fromPoints" : 0,
+            "toPoints" : 0
+        }, {
+            "questionText" : "Do you have any other comments, questions, or concerns?",
+            "ansType" : "3", 
+            "options" : [],
+            "fromPoints" : 0,
+            "toPoints" : 0
+        },{
+            "questionText" : "Which of the following words would you use to describe our products? Select all that apply.",
+            "ansType" : "2", 
+            "options" : [
+                    {
+                        "optionText" : "Reliable"
+                    },{
+                        "optionText" : "High Quality"
+                    },{
+                        "optionText" : "Useful"
+                    },{
+                        "optionText" : "Unique"
+                    },{
+                        "optionText" : "Poor Quality"
+                    }
+                ],
+            "fromPoints" : 0,
+            "toPoints" : 0
+        }, {
+            "questionText" : "Do you have any other comments, questions, or concerns?",
+            "ansType" : "3", 
+            "options" : [],
+            "fromPoints" : 0,
+            "toPoints" : 0
+        },{
+            "questionText" : "Which of the following words would you use to describe our products? Select all that apply.",
+            "ansType" : "2", 
+            "options" : [
+                    {
+                        "optionText" : "Reliable"
+                    },{
+                        "optionText" : "High Quality"
+                    },{
+                        "optionText" : "Useful"
+                    },{
+                        "optionText" : "Unique"
+                    },{
+                        "optionText" : "Poor Quality"
+                    }
+                ],
+            "fromPoints" : 0,
+            "toPoints" : 0
+        }, {
+            "questionText" : "Do you have any other comments, questions, or concerns?",
+            "ansType" : "3", 
+            "options" : [],
+            "fromPoints" : 0,
+            "toPoints" : 0
+        }
+    ]
+}

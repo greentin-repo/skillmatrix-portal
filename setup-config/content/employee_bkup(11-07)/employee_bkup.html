@@ -1,0 +1,1096 @@
+<link rel="stylesheet" href="content/employee/employee.css">
+<div ng-include="'common/loading_indicator.html'"></div>
+<div ng-include="'common/nextPage.html'"></div>
+<div ng-if="isDeptAdded" class="container main-container pr" style="width: 100%;padding: 0px;">
+    <div style="display: inline-flex;margin-top: 2px;margin-left: 40px;" ng-if="!flagMemberListAvail">
+        <h3 class="txt-color-primary" style="margin-top: 13px;margin-right: 15px;font-size: 19px;">
+            Employee</h3>
+        <div class="btn-help" ng-click="showHelpPopup('employee')" style="margin-top: 8px;"><i class="fa fa-question-circle"></i></div>
+    </div>
+
+    <div class="row" style="margin-left: 7px;margin-right: 5px;margin-bottom: 10px;">
+        <div class="" style="margin-top: 15px;">
+            <div class="col-md-2" style="text-align: center;position: relative;">
+                <div class="btn btn-default bg-color-primary" style="width: 45px;height: 45px;color: white;border-radius: 50%;" ng-click="createEmployee()">
+                    <i class="material-icons" style="position: relative;top: 3px;left: -2px;">add</i>
+                    <label style="position: absolute;top: -21px;left: 0px;right:0px;color: #7b7b7b;">{{langTranslate.Single_Addition}}</label>
+                </div>
+            </div>
+
+
+            <!-- <div>
+        <select class="form-control deptwiseGraph" placeholder="Select Plant" ng-model="selectBranchId"
+          ng-change="getEmployeeList(selectBranchId);"
+          style="height: 33px;margin-right: 2px;    width: 100%;margin-left: 21px;background: #4b4795;color: #FFF;">
+          <option value="{{branch.branchId}}" ng-repeat="branch in branchAccessList">
+            {{branch.branchName}}
+          </option>
+        </select>
+      </div> -->
+            <div class="col-md-8">
+                <div>
+                    <div style="position: relative;padding: 4px 4px 4px 4px;background: white;border: 1px solid lightgray;;border-radius: 4px;height: 44px;">
+                        <label style="top: -19px;text-align: center;width: 100%;left: 0px;position: absolute;line-height: 1;color: #7b7b7b;">{{langTranslate.Bulk_Addition}}</label>
+                        <div ng-if="flagexcelimport">
+                            <form id="upload-events-form" style="margin:0 auto;">
+                                <div style="display: inline-flex;width: 100%;">
+                                    <div style="padding: 6px 8px;border: 1px solid lightgray;margin-right: 2px;margin-right: 8px;width: 35%">
+                                        <i style="margin-right: 2px;" class="fa fa-file"></i>
+                                        <span ng-if="empExcel == '' || empExcel == null">Select .xls or xlsx
+                                            file</span>
+                                        <span ng-if="empExcel != '' && empExcel != null" style="color:#12ba42;font-weight: 500;">{{langTranslate.FileSelected}}</span>
+                                    </div>
+
+                                    <select class="form-control deptwiseGraph" placeholder="Select Plant" ng-model="empDet.uploadSelectBranchId" style="height: 33px;width: 30%;margin-right: 2px;background: #4b4795;color: #FFF;">
+                                        <option value="">{{langTranslate.SelectPlantBranch}}</option>
+                                        <option value="{{branch.branchId}}" ng-repeat="branch in branchAccessList">
+                                            {{branch.branchName}}
+                                        </option>
+                                    </select>
+                                    <button class="btn btn-default btn-file bg-color-primary" style="margin-right: 2px;color: white;font-size: 13px;position: relative;width: auto">{{langTranslate.Browse}}
+                                        <input style="height: 33px;width: 50px;" id="upload-file-input" type="file"
+                                            fileread="empExcel" accept=".xlsx , .xls" name="uploadEmployeeFile" />
+                                    </button>
+                                    <button class="btn btn-default bg-color-primary " style="color: white;font-size: 13px;padding: 6px 10px;height: 33px;" ng-click="addSetupDetails()" type="button">{{langTranslate.Upload}}</button>
+                                    <a class="btn btn-default bg-color-primary " style="color: white;font-size: 13px;margin-left: 2px;height: 33px;" href="dist/docs/EmployeeUploadFile.xlsx" download><i class="fa fa-download"
+                                            aria-hidden="true"></i>
+                                        {{langTranslate.Sample_File}}</a>
+                                </div>
+                            </form>
+                        </div>
+                        <div ng-if="flaguploaded">
+                            <!-- <label style="padding: 14px;font-size: 17px;position: relative;left: 8em;">Upload</label> -->
+                            <div class="uploadedspinner"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2" style="padding: 0px;">
+                <div class="search-bar" style="margin-top: 6px;">
+                    <input id="text-id" type="text" placeholder="Search here..." ng-model="globalEmpId">
+                    <i class="fa fa-search"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin: 0px;">
+        <div class="col-md-3">
+
+            <div class="deptwrapper" style="width: 15%;">
+                <div class="selected-items-box" ng-click="deptToggle()">
+                    <span ng-if="(branchAccessList|filter:{isSelected:true}).length==0">{{langTranslate.SelectPlantBranch}}
+                        <i class="fa fa-chevron-circle-down" style="float:right;margin-top:2px;"></i>
+                    </span>
+                    <span ng-if="(branchAccessList|filter:{isSelected:true}).length>0 && !selectAllBranch">{{(branchAccessList|filter:{isSelected:true}).length}}
+                        {{langTranslate.Plant_Selected}}
+                        <i class="fa fa-chevron-circle-down" style="float:right;margin-top:2px;"></i>
+                    </span>
+                    <span ng-if="selectAllBranch">
+                        All
+                        <i class="fa fa-chevron-circle-down"
+                            style="float:right;margin-top:2px;width: 15%;margin: auto;text-align: center;"></i>
+                    </span>
+                </div>
+                <div class="list" style="background-color: white;">
+                    <ul class="items-list">
+                        <li ng-click="selectAllDepartment()" style="cursor: pointer;list-style: none;border-bottom: 1px solid lightgray;">
+                            <i class="fa fa-square-o" aria-hidden="true" ng-if="!selectAllBranch"></i>
+                            <i class="fa fa-check-square-o" aria-hidden="true" ng-if="selectAllBranch"></i>
+                            <span>All</span>
+                        </li>
+                        <li ng-repeat="x in branchAccessList" ng-click="setDeptSelected(x)" style="cursor: pointer;list-style: none;border-bottom: 1px solid lightgray;" ng-if="x.deptName!='All'">
+                            <i class="fa fa-square-o" aria-hidden="true" ng-if="!x.isSelected"></i>
+                            <i class="fa fa-check-square-o" aria-hidden="true" ng-if="x.isSelected"></i>
+                            <span>{{x.branchName}}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-----------------------------------status dropdown by manoj----------------------------------->
+        <div class="col-md-2">
+            <!-- <div class="statuswrapper col-md-4" style="float:right ;">
+                <div class="selected-items-box" ng-click="statusToggle()">
+                    <span ng-if="!isSelected">{{langTranslate.Status}}
+                        <i class="fa fa-chevron-circle-down" style="float:right;margin-top:2px;"></i>
+                    </span >
+                   <span ng-if="isSelected">{{selectedStatus}}
+                    <i class="fa fa-chevron-circle-down" style="float:right;margin-top:2px;"></i>
+                   </span>
+                </div>
+                <div class="statusList" style="background-color: white;">
+                    <ul class="items-list">
+                        <li ng-repeat="x in statusLists" ng-click="statusSelected(x)" style="cursor: pointer;list-style: none;border-bottom: 1px solid lightgray;">
+
+                            <input type="radio" id="{{x.status}}" name="status" value="{{x.id}}">
+                            <label for="{{x.status}}">{{x.status}}</label><br>
+                        </li>
+                    </ul>
+                </div>
+            </div> -->
+        </div>
+        <div class="col-md-6" style="text-align: right;">
+            <div class="colorInfo">
+                <div ng-click="setSelectedSatus('All')" ng-class="{'selected':(filterDet.status == 'All')}">
+                    <span class="dot all" title="All"></span>
+                    <span class="txt">All</span>
+                </div>
+                <div ng-click="setSelectedSatus('Active')" ng-class="{'selected':(filterDet.status == 'Active')}">
+                    <span class="dot active" title="Active"></span>
+                    <span class="txt">{{langTranslate.Active}}</span>
+                </div>
+                <!-- <div ng-click="setSelectedSatus('Inactive')" ng-class="{'selected':(filterDet.status == 'Inactive')}">
+                    <span class="dot inActive" title="Inactive"></span>
+                    <span class="txt">{{langTranslate.Inactive}}</span>
+                </div>
+                <div ng-click="setSelectedSatus('Verified')" ng-class="{'selected':(filterDet.status == 'Verified')}">
+                    <span class="dot verify" title="Verified"></span>
+                    <span class="txt">{{langTranslate.Verified}}</span>
+                </div> -->
+                <div ng-click="setSelectedSatus('Inactive')" ng-class="{'selected':(filterDet.status == 'Inactive')}">
+                    <span class="dot inActive" title="Inactive"></span>
+                    <span class="txt">{{langTranslate.Inactive}}</span>
+                </div>
+                <div ng-click="setSelectedSatus('Deleted')" ng-class="{'selected':(filterDet.status == 'Deleted')}">
+                    <span class="dot deleted" title="Deleted"></span>
+                    <span class="txt">Deleted</span>
+                </div>
+            </div>
+            <div class="btn-help" style="width: 22px;height: 22px;margin-top: 4px;margin-left: 10px;display: inline-flex;" ng-click="showHelpPopup('emp_status')">
+                <i style="position: relative;left: 0.5px;font-size: 17px;" class="fa fa-question-circle"></i>
+            </div>
+
+        </div>
+
+        <div class="col-md-1">
+            <div ng-if="employeeList != null && (employeeList |filter: globalEmpId | filter:filterByStatus).length > 0" style="float:right;cursor: pointer;">
+                <div style="cursor: pointer; background: white;padding: 2px;border: 1px solid lightgray; " ng-click="exportData()">
+                    <img src="dist\img\ic_excel.png" title="Export to excel" class="ic-excel">
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div ng-if="employeeList == null || (employeeList |filter: globalEmpId | filter:filterByStatus).length == 0" class="teamDetNotAvailMsgBox">
+            <img class="image" src="dist/icons/ic_team_mgmt_gray.png">
+            <div>{{langTranslate.Data_not_available}}</div>
+        </div>
+        <div class="col-md-12" ng-if="employeeList != null && (employeeList |filter: globalEmpId | filter:filterByStatus).length>0 ">
+            <div style="margin :0 auto;">
+                <table class="table table-striped table-hover tableBodyScroll">
+
+                    <thead>
+                        <tr>
+                            <th>{{langTranslate.Branch}}</th>
+                            <th>Level</th>
+                            <th>{{langTranslate.EmpID}}</th>
+                            <th>{{langTranslate.EmpName}}</th>
+                            <th>{{langTranslate.Email_ID}}</th>
+                            <th>{{langTranslate.MobileNo}}</th>
+                            <th>{{langTranslate.Department}}</th>
+                            <th>{{langTranslate.Designation}}</th>
+                            <th class="action">{{langTranslate.Action}}</th>
+                            <!-- <th class="status">{{langTranslate.Status}}</th> -->
+                        </tr>
+                    </thead>
+                    <div ng-if="flagEmployeeListSpinner" class="small-spinner"></div>
+                    <tbody ng-scrollbars>
+                        <tr ng-repeat="x in  filterData = (employeeList |filter: globalEmpId | filter:filterByStatus)|startFrom:(paginateConfig.current-1)*paginateConfig.itemsPerPage | limitTo:paginateConfig.itemsPerPage">
+                            <td>
+                                <span class="dot active" title="Active" ng-if="x.isEmailVerified == 1 && x.loggedIn == 1 && x.isDeactive == 0"></span>
+                                <!-- <span class="dot inActive" title="Inactive" ng-if="x.isEmailVerified == 0  && x.loggedIn == 0 && x.isDeactive == 0"></span>
+                                <span class="dot verify" title="Verified" ng-if="x.isEmailVerified == 1  && x.loggedIn == 0 && x.isDeactive == 0"></span> -->
+                                <span class="dot inActive" title="Inactive" ng-if="x.isEmailVerified == 1  && x.loggedIn == 0 && x.isDeactive == 0"></span>
+                                <span class="dot deleted" title="Deleted" ng-if="x.isDeactive == 1"></span>&nbsp; {{x.branch.name}}
+                            </td>
+                            <td>{{x.empLevelDetails.levelName| ifEmpty:'-'}}</td>
+                            <td>{{x.cmpyEmpId| ifEmpty:''}}</td>
+                            <td class="txt-capitalize">{{x.fullName| ifEmpty:''}}</td>
+                            <td>{{x.emailId | ifEmpty:''}}</td>
+                            <td>{{x.contactNo| ifEmpty:''}}</td>
+                            <td>{{x.dept.deptName | ifEmpty:''}}</td>
+                            <td>{{x.designation | ifEmpty:''}}</td>
+                            <td class="action text-center">
+                                <!-- <i class="material-icons" style="font-size: 20px;color: #00000094;cursor: pointer;padding:5%;" ng-click="editEmployee(x)">edit</i>
+                                <i class="fa fa-unlock" style="font-size: 20px;color: #00000094;cursor: pointer;padding:5%;vertical-align:bottom;" ng-click="resetPwdEmployee(x)"></i>
+                                <i class="material-icons" ng-click="showEmpDeleteModel(x)" style="color: #f75555;cursor: pointer;padding:5%;">delete_sweep</i> -->
+                                <div class="btn-group" uib-dropdown dropdown-append-to-body>
+                                    <button id="btn-append-to-body" type="button" class="btn" uib-dropdown-toggle>
+                                        <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                    </button>
+                                    <ul class="empActionOpt dropdown-menu-right" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-body">
+                                        <li role="menuitem" ng-click="editEmployee(x)" ng-if="x.isDeactive == 0">
+                                            Edit
+                                        </li>
+                                        <li role="menuitem" ng-click="resetPwdEmployee(x)" ng-if="x.isDeactive == 0">
+                                            Reset Password
+                                        </li>
+                                        <li role="menuitem" ng-click="showEmpDeleteModel(x)" ng-if="x.isDeactive == 0">
+                                            Delete
+                                        </li>
+                                        <li role="menuitem" ng-click="openTransferPopup(x)">
+                                            Transfer Actions
+                                        </li>
+
+                                        <li role="menuitem" ng-click="openTransferBranchPopup(x)">
+                                            Transfer Branch
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </td>
+                            <!-- <td class="status text-center">
+                                <span class="dot active" title="Active" ng-if="x.isEmailVerified == 1  && x.loggedIn == 1"></span>
+                                <span class="dot inActive" title="Inactive" ng-if="x.isEmailVerified == 0  && x.loggedIn == 0"></span>
+                                <span class="dot verify" title="Verified" ng-if="x.isEmailVerified == 1  && x.loggedIn == 0"></span>
+                            </td> -->
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="row" style="margin:0px;">
+                    <div class="col-md-4 text-left">
+                        <div class="pagination-rec-entries">
+                            Total Rows : {{filterData.length}}
+                        </div>
+                    </div>
+                    <div class="col-md-8 text-center">
+                        <ul uib-pagination total-items="filterData.length" ng-model="paginateConfig.current" class="pagination customPagination pagination-sm" max-size="5" class="pagination-sm" boundary-link-numbers="true" rotate="false" previous-text="&#xf060;" next-text="&#xf061;"
+                            ng-if="(filterData != null && filterData.length > 0)" ng-change="onPageChanged(paginateConfig.current)">
+                        </ul>
+                    </div>
+                    <!-- <div class="pagination-rec-entries">
+                        {{tableEntries}}
+                    </div>
+                    <dir-pagination-controls ng-show="flagTblemployee" pagination-id="tbl-employee" max-size="7" direction-links="true" boundary-links="true" on-page-change='onPageChanged(newPageNumber)'>
+                    </dir-pagination-controls> -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!------------------------Create Employee Model------------------------>
+
+    <div class="modal" id="employeeModal1" role="dialog">
+        <div class="modal-dialog" style="width: calc(100% - 10%);">
+            <div class="modal-content" style="height: auto;">
+                <div class="modal-header" style="border-bottom: 1px solid #27255a96;">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" id="title">{{langTranslate.AddEmployee}}</h4>
+                </div>
+                <form name="form.addemployeeForm" ng-submit="submitEmployee(form.addemployeeForm)" novalidate autocomplete="off">
+                    <div class="modal-body" style="display: block; overflow: auto;" ng-style="{height:windowHeight - 200+'px'}" ng-scrollbars>
+                        <div class="row">
+                            <div class="col-md-6 col-md-12 col-sm-6">
+                                <label class="lbl-dep">{{langTranslate.BranchPlant}}<label
+                                        class="asterisk-color">*</label></label>
+                                <select class="lblEmpl" placeholder="Select Plant" ng-model="empInputData.createSelectBranchId" ng-change="getDepartmentList(empInputData.createSelectBranchId);getemployeeLevelDetails(empInputData.createSelectBranchId)" name="createSelectBranchId" style="height: 33px;"
+                                    required>
+                                    <option value="">{{langTranslate.SelectPlantBranch}}</option>
+                                    <option value="{{branch.branchId}}" ng-repeat="branch in branchAccessList">
+                                        {{branch.branchName}}
+                                    </option>
+                                </select>
+                                <p class="error" ng-if="form.addemployeeForm.createSelectBranchId.$dirty && form.addemployeeForm.createSelectBranchId.$invalid">
+                                    Please Select Branch
+                                </p>
+                            </div>
+                            <div class="col-md-6 col-md-12 col-sm-6">
+                                <label class="label-emp">{{langTranslate.EmpID}}
+                                    <!--<label class="asterisk-color">*</label>-->
+                                </label>
+                                <input type="text" placeholder="Emp id" name="cmpyEmpId" ng-model="empInputData.cmpyEmpId" class="lblEmpl" maxlength="20">
+                                <p class="error" ng-if="form.addemployeeForm.cmpyEmpId.$dirty && form.addemployeeForm.cmpyEmpId.$invalid">
+                                    {{langTranslate.Please_Enter_EmployeeID}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-md-12 col-sm-6">
+                                <label class="label-emp">{{langTranslate.First_Name}}<label
+                                        class="asterisk-color">*</label></label>
+                                <input type="text" name="fname" placeholder="First Name" ng-model="empInputData.fname" ng-pattern="/^[a-zA-Z\s]*$/" class="lblEmpl" required maxlength="50">
+                                <p class="error" ng-if="form.addemployeeForm.fname.$error.required && form.addemployeeForm.fname.$dirty">
+                                    {{langTranslate.Please_Enter_First_Name}}</p>
+                                <p class="error" ng-if="form.addemployeeForm.fname.$error.pattern">No special characters and numeric values allowed
+                                </p>
+                            </div>
+                            <div class="col-md-6 col-md-12 col-sm-6">
+                                <label class="label-emp">{{langTranslate.Middle_Name}}</label>
+                                <input type="text" name="mname" placeholder="Middle Name" ng-model="empInputData.mname" ng-pattern="/^[a-zA-Z\s]*$/" class="lblEmpl" maxlength="50">
+                                <p class="error" ng-if="form.addemployeeForm.mname.$error.pattern">No special characters and numeric values allowed
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-md-12 col-sm-6">
+                                <label class="label-emp">{{langTranslate.Last_Name}}</label>
+                                <input type="text" name="lname" placeholder="Last Name" ng-model="empInputData.lname" ng-pattern="/^[a-zA-Z\s]*$/" class="lblEmpl" maxlength="50">
+                                <p class="error" ng-if="form.addemployeeForm.lname.$error.pattern">No special characters and numeric values allowed
+                                </p>
+                            </div>
+                            <div class="col-md-6 col-md-12 col-sm-6">
+                                <label class="lbl-dep">{{langTranslate.Department}}<label
+                                        class="asterisk-color">*</label></label>
+                                <select class="lblEmpl" name="dept" ng-model="empInputData.dept" ng-change="flagErrAddEmployeeDept = false;getLineNameList(empInputData.dept);" ng-options="departmentList as departmentList.deptName for departmentList in departmentList" class="lblEmpl" style="font-size: 13px;" required>
+                                    <option value="">Please select department</option>
+                                </select>
+                                <p class="error" ng-if="form.addemployeeForm.dept.$error.required && form.addemployeeForm.dept.$dirty">
+                                    {{langTranslate.Please_Select_Department}}</p>
+                                <!-- <p class="error" ng-if="flagErrAddEmployeeDept">
+                                    {{langTranslate.Please_Select_Department}}</p> -->
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-md-12 col-sm-6">
+                                <label class="lbl-deg">{{langTranslate.Designation}}</label>
+                                <input type="text" placeholder="Designation" name="designation" ng-model="empInputData.designation" maxlength="50" class="lblEmpl">
+                                <!-- <p class="error" ng-if="flagErrAdddesignation">Please Enter Designation</p> -->
+                            </div>
+                            <div class="col-md-6 col-md-12 col-sm-6" ng-init="lineFlag = 'N'">
+                                <label class="lbl-dep">{{langTranslate.Line}}
+                                    <label class="asterisk-color"
+                                        ng-if="(lineNameList != null && (lineNameList | filter : {isActive : '!'+lineFlag}:true).length >0)">*</label>
+                                </label>
+                                <select class="lblEmpl" name="line" ng-model="empInputData.line" ng-options="lineList.name for lineList in (lineNameList | filter : { isActive : '!'+lineFlag}) track by lineList.id" class="lblEmpl" style="font-size: 13px;">
+                                    <option value="">Please select line</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-md-12 col-sm-6">
+                                <label class="label-emp">{{langTranslate.MobileNo}}</label>
+                                <input type="text" oninput="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')" ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/" name="contactno" placeholder="Mobile Number" class="lblEmpl" ng-model="empInputData.contactno"
+                                    ng-minlength="10" maxlength="10">
+                                <!--<p class="error" ng-if="form.addemployeeForm.contactno.$error.required && form.addemployeeForm.contactno.$dirty">Please Enter Contact Number</p>-->
+                                <p class="error" ng-if="form.addemployeeForm.contactno.$error.pattern">
+                                    {{langTranslate.Please_Enter_Valid_MobileNumber}}</p>
+                            </div>
+                            <div class="col-md-6 col-md-12 col-sm-6">
+                                <label class="label-emp">{{langTranslate.Email_ID}}
+                                    <!--<label class="asterisk-color">*</label>-->
+                                </label>
+                                <input type="email" placeholder="Email ID" name="emailId" ng-model="empInputData.emailId" ng-pattern="/^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/" ng-minlength="6" ng-maxlength="250" class="lblEmpl">
+                                <p class="error" ng-if="form.addemployeeForm.emailId.$error.required && form.addemployeeForm.emailId.$dirty">
+                                    {{langTranslate.Please_Enter_EmailID}}</p>
+                                <p class="error" ng-if="form.addemployeeForm.emailId.$error.pattern || form.addemployeeForm.emailId.$error.email">
+                                    {{langTranslate.Please_Enter_Valid_EmailID}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-md-12 col-sm-6 date">
+                                <!--style="margin-top: 15px;"-->
+                                <label class="label-emp">{{langTranslate.AnniversaryDate}}</label>
+                                <input type="text" class="lblEmpl datepicker_doa" data-date-format="yyyy-mm-dd" ng-model="empInputData.doa" placeholder="Anniversary date" ng-keyup="setDate('doa')" onkeydown="return false;" name="doa">
+                            </div>
+                            <div class="col-md-6 col-md-12 col-sm-6 date">
+                                <label class="label-emp">{{langTranslate.Dateofbirth}}</label>
+                                <input type="text" class="lblEmpl datepicker_dob" data-date-format="yyyy-mm-dd" ng-model="empInputData.dob" placeholder="Date Of Birth" ng-keyup="setDate('dob')" onkeydown="return false;" name="dob">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-md-12 col-sm-6 date">
+                                <label class="label-emp">Level Type <label class="asterisk-color"
+                                        ng-if="emplevelList != null && emplevelList.length > 0">*</label></label>
+                                <select class="lblEmpl" placeholder="Select Plant" ng-model="empInputData.emplvlId" style="height: 33px;">
+                                    <option value="">Select Level Type</option>
+                                    <option value="{{data.empLvlId}}" ng-repeat="data in emplevelList"
+                                        ng-if='data.isActive != "N"'>
+                                        {{data.levelName}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 col-md-12 col-sm-6 date" ng-init="setDatePicker('doj')">
+                                <label class="label-emp">Date Of Joining <label class="asterisk-color">*</label></label>
+                                <input type="text" class="lblEmpl datepicker_doj" data-date-format="yyyy-mm-dd" ng-model="empInputData.doj" placeholder="Date Of Joining" onkeydown="return false;" name="doj" required>
+                                <p class="error" ng-if="form.addemployeeForm.doj.$error.required && form.addemployeeForm.doj.$dirty">Please Enter Date of Joining</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!--End Modal Body-->
+                    <div class="modal-footer">
+                        <div ng-if="flagAddSpinner" class="small-spinner addEmpSpinner"></div>
+                        <button ng-if="!flagAddSpinner" class="btn btn-category btn-addemp" type="submit" style="color:white;">{{langTranslate.AddEmployee}}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-------Update Employee -->
+    <div class="modal fade" id="employee_editModal1" role="dialog">
+        <div class="modal-dialog" style="width: calc(100% - 10%);">
+            <div class="modal-content" style="height: auto;">
+                <div class="modal-header" style="border-bottom: 1px solid #27255a96;">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" id="title">{{langTranslate.UpdateEmployee}}</h4>
+                </div>
+                <form name="updateemployeeForm" ng-submit="editEmpDet(updateemployeeForm,updateemployeeForm.$valid)" novalidate autocomplete="off">
+                    <div class="modal-body" style="display: block; overflow: auto;" ng-style="{height:windowHeight - 200+'px'}" ng-scrollbars>
+                        <div class="row">
+                            <div class="col-md-6 col-md-12 col-sm-6">
+                                <label class="lbl-dep">{{langTranslate.BranchPlant}}<label
+                                        class="asterisk-color">*</label></label>
+                                <!-- <input type="hidden" name="branch" class="lblEmpl" ng-model="branchId">
+                <label>{{brachName}}</label> -->
+                                <!-- <select class="lblEmpl" name="branch" ng-model="branchId" ng-change="flagErrAddEmployeeDept = false" class="lblEmpl">
+                                    <option ng-repeat="x in branchList" value="{{x.branchId}}" ng-selected="branchId == x.branchId" >{{x.name}}</option>
+                                </select> -->
+
+                                <!-- <p class="error" ng-if="flagErrAddEmployeeDept">Please select branch</p> -->
+                                <!-- /* change 11-2-2020 */ -->
+                                <select class="lblEmpl" placeholder="Select Plant" ng-model="empInputData.branchId" name="updateSelectBranchId" style="height: 33px;" ng-change="getDepartmentList(empInputData.branchId);getemployeeLevelDetails(empInputData.branchId)" ng-disabled="empInputData.branchId"
+                                    ng-style="empInputData.branchId && {'cursor': 'not-allowed'}">
+                                    <option value="">{{langTranslate.SelectPlantBranch}}</option>
+                                    <option value="{{branch.branchId}}" ng-repeat="branch in branchAccessList">
+                                        {{branch.branchName}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 col-md-12 col-sm-6">
+                                <label class="label-emp">{{langTranslate.EmpID}}</label>
+                                <input type="text" placeholder="Emp id" name="cmpyEmpId" class="lblEmpl" ng-model="empInputData.cmpyEmpId" maxlength="20">
+                                <!-- <p class="error" ng-if="updateemployeeForm.cmpyEmpId.$dirty && updateemployeeForm.cmpyEmpId.$invalid" ng-message="pattern">Please Enter Employee ID</p> -->
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 col-md-12 col-sm-6">
+                                <label class="label-emp">{{langTranslate.First_Name}}<label
+                                        class="asterisk-color">*</label></label>
+                                <input type="text" name="fname" placeholder="First Name" ng-model="empInputData.firstName" ng-pattern="/^[a-zA-Z\s]*$/" class="lblEmpl" required maxlength="50">
+                                <p class="error" ng-if="updateemployeeForm.fname.$error.required && updateemployeeForm.fname.$dirty">
+                                    {{langTranslate.Please_Enter_First_Name}}</p>
+                                <p class="error" ng-if="updateemployeeForm.fname.$error.pattern">No special characters and numeric values allowed
+                                </p>
+                            </div>
+                            <div class="col-md-6 col-md-12 col-sm-6">
+                                <label class="label-emp">{{langTranslate.Middle_Name}}</label>
+                                <input type="text" name="mname" placeholder="Middle Name" ng-model="empInputData.middleName" ng-pattern="/^[a-zA-Z\s]*$/" class="lblEmpl" maxlength="50">
+                                <p class="error" ng-if="updateemployeeForm.mname.$error.pattern">No special characters and numeric values allowed
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-md-12 col-sm-6">
+                                <label class="label-emp">{{langTranslate.Last_Name}}</label>
+                                <input type="text" name="lname" placeholder="Last Name" ng-model="empInputData.lastName" ng-pattern="/^[a-zA-Z\s]*$/" class="lblEmpl" maxlength="50">
+                                <p class="error" ng-if="updateemployeeForm.lname.$error.pattern">No special characters and numeric values allowed
+                                </p>
+                            </div>
+                            <div class="col-md-6 col-md-12 col-sm-6">
+                                <label class="lbl-dep">{{langTranslate.Department}}<label
+                                        class="asterisk-color">*</label></label>
+                                <label ng-if="EmpData.departmentLevel.length>0">{{deptName}} (Controller)</label>
+                                <!--<input ng-if="EmpData.departmentLevel.length>0" type="hidden" name="dept" class="lblEmpl" ng-model="deptId">          flagErrAddEmployeeDept = false -->
+                                <select ng-if="EmpData.departmentLevel == undefined || EmpData.departmentLevel.length==0" class="lblEmpl" name="dept" ng-model="empInputData.deptId" ng-change="getLineNameListForUpdate(empInputData.deptId);" class="lblEmpl" required>
+                                    <option value="">
+                                        Please Select Department</option>
+                                    <option ng-repeat="x in departmentList" value="{{x.deptId}}"
+                                        ng-selected="deptId == x.deptId">
+                                        {{x.deptName}}{{deptId}}</option>
+                                </select>
+                                <p class="error" ng-if="form.addemployeeForm.dept.$error.required && form.addemployeeForm.dept.$dirty">
+                                    {{langTranslate.Please_Select_Department}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <div class="col-md-6 col-md-12 col-sm-6">
+                                <label class="lbl-deg">{{langTranslate.Designation}}</label>
+                                <input type="text" placeholder="Designation" name="designation" ng-model="empInputData.designation" maxlength="50" class="lblEmpl">
+                            </div>
+                            <div class="col-md-6 col-md-12 col-sm-6" ng-init="lineFlag = 'N'">
+                                <label class="lbl-dep">{{langTranslate.Line}}
+                                    <label class="asterisk-color"
+                                        ng-if="lineNameList!= null && (lineNameList|filter:{isActive : '!'+lineFlag}:true).length > 0">*</label>
+                                </label>
+                                <select class="lblEmpl" name="line" ng-model="empInputData.line" ng-options="lineList.name for lineList in (lineNameList | filter : { isActive : '!'+lineFlag }) track by lineList.id" class="lblEmpl" style="font-size: 13px;">
+                                    <option value="">Please select line</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-md-12 col-sm-6">
+                                <label class="label-emp">{{langTranslate.MobileNo}}</label>
+                                <input type="text" oninput="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')" ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/" name="contactNo" placeholder="Mobile Number" class="lblEmpl" ng-model="empInputData.contactNo"
+                                    ng-minlength="10" maxlength="10">
+                                <p class="error" ng-if="updateemployeeForm.contactNo.$error.pattern">
+                                    {{langTranslate.Please_Enter_Valid_MobileNumber}}</p>
+                                <!-- <input type="text" name="contactno" placeholder="Contact No" value="{{EmpData.contactNo}}" class="lblEmpl" ng-model="contactNo"> -->
+                                <!-- <input type="text" oninput="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')" ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/" name="contactno" placeholder="Contact No" value="{{EmpData.contactNo}}" class="lblEmpl"
+                                    ng-model="contactNo" ng-minlength="10" ng-maxlength="10"> -->
+                                <!-- <p class="error" ng-if="updateemployeeForm.contactno.$error.required && updateemployeeForm.contactno.$dirty">Please Enter Contact Number</p>-->
+                                <!-- <p class="error" ng-if="updateemployeeForm.contactno.$error.pattern">Please Enter Valid Mobile Number</p> -->
+                            </div>
+                            <div class="col-md-6 col-md-12 col-sm-6">
+                                <label class="label-emp">{{langTranslate.Email_ID}}
+                                    <!--<label class="asterisk-color">*</label>-->
+                                </label>
+                                <input type="email" placeholder="Email ID" name="emailId" ng-model="empInputData.emailId" ng-minlength="6" ng-maxlength="250" class="lblEmpl">
+                                <p class="error" ng-if="updateemployeeForm.emailId.$error.required && updateemployeeForm.emailId.$dirty">
+                                    {{langTranslate.Please_Enter_EmailID}}</p>
+                                <p class="error" ng-if="updateemployeeForm.emailId.$error.email">
+                                    {{langTranslate.Please_Enter_Valid_EmailID}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-md-12 col-sm-6 date">
+                                <!--style="margin-top: 15px;"-->
+                                <label class="label-emp">{{langTranslate.AnniversaryDate}}</label>
+                                <input type="text" class="lblEmpl datepicker_doa" data-date-format="yyyy-mm-dd" ng-model="empInputData.doa" placeholder="Anniversary date" ng-keyup="setDate('doa')" onkeydown="return false;" name="doa">
+                            </div>
+                            <div class="col-md-6 col-md-12 col-sm-6 date">
+                                <label class="label-emp">{{langTranslate.Dateofbirth}}</label>
+                                <input type="text" class="lblEmpl datepicker_dob" data-date-format="yyyy-mm-dd" ng-model="empInputData.dob" placeholder="Date of birth" ng-keyup="setDate('dob')" onkeydown="return false;" name="dob">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-md-12 col-sm-6 date">
+                                <label class="label-emp">Level Type <label class="asterisk-color"
+                                        ng-if="emplevelList != null && emplevelList.length > 0">*</label></label>
+                                <select class="lblEmpl" placeholder="Select Plant" ng-model="empInputData.empLvlDet" style="height: 33px;">
+                                    <option value="">Select Level Type</option>
+                                    <option value="{{data.empLvlId}}" ng-repeat="data in emplevelList"
+                                        ng-if='data.isActive != "N"'>
+                                        {{data.levelName}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 col-md-12 col-sm-6 date">
+                                <label class="label-emp">Date Of Joining
+                                    <label class="asterisk-color">*</label>
+                                </label>
+                                <!-- <span ng-if="EmpData.doj == undefined || EmpData.doj == null || EmpData.doj == ''"
+                                    ng-init="setDatePicker('doj')">
+                                    <input type="text" class="lblEmpl datepicker_doj" data-date-format="yyyy-mm-dd"
+                                        ng-model="doj" placeholder="Date Of Joining" onkeydown="return false;"
+                                        name="doj">
+                                </span>
+                                <span ng-if="EmpData.doj != undefined && EmpData.doj != null && EmpData.doj != ''">
+                                    <input type="text" class="lblEmpl" ng-model="EmpData.doj"
+                                        placeholder="Date Of Joining">
+                                </span> -->
+                                <input type="text" class="lblEmpl datepicker_doj" data-date-format="yyyy-mm-dd" ng-model="empInputData.doj" placeholder="Date of Joining" ng-keyup="setDate('doj')" onkeydown="return false;" name="doj">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div ng-if="flagupdateSpinner" class="small-spinner updateEmpSpinner"></div>
+                        <button ng-if="!flagupdateSpinner" class="btn btn-category btn-addemp" type="submit" style="color:white;">{{langTranslate.UpdateEmployee}}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div ng-if="!isDeptAdded" class="container main-container" style="margin-left: 3.5%;width: 80%;margin-top: 150px;text-align: center;">
+    <h4 class="txt-color-primary" style="margin-bottom: 5px;">Hello {{empDetails.firstName}} {{empDetails.lastName}},
+    </h4>
+    <h3 style="margin-top: 8px;color: #636363;">{{langTranslate.department_to_proceed_further}}</h3>
+    <div style="margin-top: 30px;">
+        <select name="selectedDeptId" ng-model="newSetupUserDet.selectedDeptId" style="padding: 10px;width: 250px;font-size: 16px;color: #3c3c3c;border-radius: 5px;">
+            <option value="">{{langTranslate.SelectDepartment}}</option>
+            <option ng-repeat="x in departmentListForRegUser" value="{{x.deptId}}">{{x.deptName}}</option>
+        </select>
+    </div>
+    <div style="margin-top: 20px;">
+        <button class="btn btn-default bg-color-primary btn-submit-dept-desig" ng-click="setDeptDesigOfRegUser()">{{langTranslate.Submit}}</button>
+    </div>
+
+</div>
+
+<div id="confirmDeleteModal" class="modal fade confirmDeleteModal1" role="dialog">
+    <div class="trans-bg"></div>
+    <img data-dismiss="modal" class="img-close" src="dist/icons/ic_close.png" style="top: 2em; width: 3em;right: 5em;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body" style="padding:10px;display: flex;height: 250px;background-color: rgba(118,125,167,0.76);">
+                <div class="img-del-container">
+                    <img src="dist/icons/ic_delete_lg.png">
+                </div>
+                <b style="font-size: 18px;top: 26%; position: absolute;left: 39%;color: #4a4794;font-size: 28px;top: 26%;position: absolute;left: 32%; ">Are
+                    you sure</b>
+                <!-- <span style="color: #4a4794;font-size: 56px;top: 19%; position: absolute;left: 69%;">?</span> -->
+                <p class="msg" style="color: rgba(74, 71, 148, 0.75);position: absolute;top: 47%;width: 95%;
+                    text-align: center; font-size: 23px;">{{langTranslate.remove_this_employee_from_list}}</p>
+                <div style="top: 82%;position: absolute; left: 63%;">
+                    <div ng-if="flagdeleteSpinner" class="small-spinner deleteSpinner"></div>
+                    <button ng-if="!flagdeleteSpinner" type="button" class="delete-btn" id="btnConfirmRemove" ng-click="employeeStatus(selectEmpForDel)">{{langTranslate.Yes}}</button>
+                    <button ng-if="!flagdeleteSpinner" type="button" class="delete-btn" data-dismiss="modal">{{langTranslate.No}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="statusMessageModal" role="dialog">
+    <div class="modal-dialog" style="width: 950px;">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body">
+                <div style="height: 500px;" ng-scrollbars>
+                    <div style="text-align: center;">
+                        <i class="material-icons ic-popup">{{langTranslate.info}}</i>
+                        <!-- <div class="msg">{{statusMessage}}</div> -->
+                        <div class="msg" style="padding: 0px 0px 20px 0px;color: #4b4795;font-weight: 600; "> User can not be removed, please complete all the below pending actions.</div>
+                        <!-- <div ng-if="statusMessage.suggestion.length > 0" style="color: #4b4795;font-weight: 600;padding:10px;">Suggestion </div>
+                        <table ng-if="statusMessage.suggestion.length > 0" class="tablenew table-striped table-bordered" style="width:100%">
+                            <tr style="color: #4b4795;">
+                                <th>Suggestion ID</th>
+                                <th>Assigned Date</th>
+                            </tr>
+                            <tr ng-repeat="x in statusMessage.suggestion" style="color: #333333;background-color: #fff;">
+                                <td>{{x.createdSuggestionNumber}}</td>
+                                <td class="txt-capitalize">{{x.assignedDate| date : "yyyy-MM-dd"}}</td>
+                            </tr>
+                        </table> -->
+
+                        <div ng-if="statusMessage.suggestion.length > 0">
+                            <div class="panel-group" style="width:98%" id="detailGroup">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading panelGradientBg" style="position:relative;padding: 10px 15px;">
+                                        <div class="panel-title" style="text-align:left" ng-click="pendingActionDet.suggestion=(pendingActionDet.suggestion?false:true);" ng-init="pendingActionDet.suggestion =false">
+                                            <label>Suggestion - Pending Actions</label>
+                                            <div style="position: absolute;right: 0px;top:2px;display: inline-flex;">
+                                                <a style="color:#000; text-decoration:none;font-size: 19px;">
+                                                    <i class="collapsed" ng-if="pendingActionDet.suggestion"> <i
+                                                            class="fa fa-plus-square-o"
+                                                            style="color:white;float: right;font-size: 1.3em; margin-top: 3px;padding: 4px;"></i>
+                                                    </i>
+                                                    <i class="expanded" ng-if="!pendingActionDet.suggestion"><i
+                                                            class="fa fa-minus-square-o"
+                                                            style="color:white;padding: 4px;float: right;margin-top: 3px; font-size: 1.3em;"></i></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div ng-if="pendingActionDet.suggestion" style="border: 1px solid lightgray">
+                                    <div class="">
+                                        <table ng-if="statusMessage.suggestion.length > 0" class="tablenew table-striped table-bordered" style="width:100%">
+                                            <tr style="color: #4b4795;">
+                                                <th style="width:50%">Suggestion ID</th>
+                                                <th style="width:50%">Assigned Date</th>
+                                            </tr>
+                                            <tr ng-repeat="x in statusMessage.suggestion" style="color: #333333;background-color: #fff;">
+                                                <td>{{x.createdSuggestionNumber}}</td>
+                                                <td class="txt-capitalize">{{x.assignedDate | date : "dd-MM-yyyy"}}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div ng-if="statusMessage.kuber.length > 0" style="color: #4b4795;font-weight: 600;padding:10px;">Kuber </div>
+                        <table ng-if="statusMessage.kuber.length > 0" class="tablenew table-striped table-bordered" style="width:100%">
+                            <tr style="color: #4b4795;">
+                                <th>Project ID </th>
+                                <th>Assigned Date</th>
+                            </tr>
+                            <tr ng-repeat="x in statusMessage.kuber" style="color: #333333;background-color: #fff;">
+                                <td>{{x.projId}}</td>
+                                <td class="txt-capitalize">{{x.assignedToDate}}</td>
+                            </tr>
+                        </table> -->
+                        <div ng-if="statusMessage.kuber.length > 0">
+                            <div class="panel-group" style="width:98%" id="detailGroup">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading panelGradientBg" style="position:relative;padding: 10px 15px;">
+                                        <div class="panel-title" style="text-align:left" ng-click="pendingActionDet.kuber=(pendingActionDet.kuber?false:true);" ng-init="pendingActionDet.suggestion =false">
+                                            <label>kuber - Pending Actions</label>
+                                            <div style="position: absolute;right: 0px;top:2px;display: inline-flex;">
+                                                <a style="color:#000; text-decoration:none;font-size: 19px;">
+                                                    <i class="collapsed" ng-if="pendingActionDet.kuber"> <i
+                                                            class="fa fa-plus-square-o"
+                                                            style="color:white;float: right;font-size: 1.3em; margin-top: 3px;padding: 4px;"></i>
+                                                    </i>
+                                                    <i class="expanded" ng-if="!pendingActionDet.kuber"><i
+                                                            class="fa fa-minus-square-o"
+                                                            style="color:white;padding: 4px;float: right;margin-top: 3px; font-size: 1.3em;"></i></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div ng-if="pendingActionDet.kuber" style="border: 1px solid lightgray">
+                                    <div class="">
+                                        <table ng-if="statusMessage.kuber.length > 0" class="tablenew table-striped table-bordered" style="width:100%">
+                                            <tr style="color: #4b4795;">
+                                                <th style="width:50%">Project ID </th>
+                                                <th style="width:50%">Assigned Date</th>
+                                            </tr>
+                                            <tr ng-repeat="x in statusMessage.kuber" style="color: #333333;background-color: #fff;">
+                                                <td style="width:50%">{{x.projId}}</td>
+                                                <td style="width:50%" class="txt-capitalize">{{x.assignedToDate | date : "dd-MM-yyyy"}}
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div ng-if="statusMessage.tpm.length > 0" style="color: #4b4795;font-weight: 600;padding:10px;">TPM </div>
+                        <table ng-if="statusMessage.tpm.length > 0" class="tablenew table-striped table-bordered" style="width:100%">
+                            <tr style="color: #4b4795;">
+                                <th>ID</th>
+                                <th>Assigned Date</th>
+                            </tr>
+                            <tr ng-repeat="x in statusMessage.tpm" style="color: #333333;background-color: #fff;">
+                                <td>{{x.id}}</td>
+                                <td class="txt-capitalize">{{x.assignedDate| date : "yyyy-MM-dd"}}</td>
+                            </tr>
+                        </table> -->
+                        <div ng-if="statusMessage.tpm.length > 0">
+                            <div class="panel-group" style="width:98%" id="detailGroup">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading panelGradientBg" style="position:relative;padding: 10px 15px;">
+                                        <div class="panel-title" style="text-align:left" ng-click="pendingActionDet.tpm=(pendingActionDet.tpm?false:true);" ng-init="pendingActionDet.suggestion =false">
+                                            <label>TPM - Pending Actions</label>
+                                            <div style="position: absolute;right: 0px;top:2px;display: inline-flex;">
+                                                <a style="color:#000; text-decoration:none;font-size: 19px;">
+                                                    <i class="collapsed" ng-if="pendingActionDet.tpm"> <i
+                                                            class="fa fa-plus-square-o"
+                                                            style="color:white;float: right;font-size: 1.3em; margin-top: 3px;padding: 4px;"></i>
+                                                    </i>
+                                                    <i class="expanded" ng-if="!pendingActionDet.tpm"><i
+                                                            class="fa fa-minus-square-o"
+                                                            style="color:white;padding: 4px;float: right;margin-top: 3px; font-size: 1.3em;"></i></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div ng-if="pendingActionDet.tpm" style="border: 1px solid lightgray">
+                                    <div class="">
+                                        <table ng-if="statusMessage.tpm.length > 0" class="tablenew table-striped table-bordered" style="width:100%">
+                                            <tr style="color: #4b4795;">
+                                                <th style="width:50%">ID</th>
+                                                <th style="width:50%">Assigned Date</th>
+                                            </tr>
+                                            <tr ng-repeat="x in statusMessage.tpm" style="color: #333333;background-color: #fff;">
+                                                <td>{{x.id}}</td>
+                                                <td class="txt-capitalize">{{x.assignedDate| date : "dd-MM-yyyy"}}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div ng-if="statusMessage.dwm.length > 0" style="color: #4b4795;font-weight: 600;padding:10px;">DWM </div>
+                        <table ng-if="statusMessage.dwm.length > 0" class="tablenew table-striped table-bordered" style="width:100%">
+                            <tr style="color: #4b4795;">
+                                <th>ID</th>
+                                <th>Assigned Date</th>
+                            </tr>
+                            <tr ng-repeat="x in statusMessage.dwm" style="color: #333333;background-color: #fff;">
+                                <td>{{x.dwmId}}</td>
+                                <td class="txt-capitalize">{{x.assignedDate| date : "dd-MM-yyyy"}}</td>
+                            </tr>
+                        </table> -->
+                        <div ng-if="statusMessage.dwm.length > 0">
+                            <div class="panel-group" style="width:98%" id="detailGroup">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading panelGradientBg" style="position:relative;padding: 10px 15px;">
+                                        <div class="panel-title" style="text-align:left" ng-click="pendingActionDet.dwm=(pendingActionDet.dwm?false:true);" ng-init="pendingActionDet.dwm =false">
+                                            <label>DWM - Pending Actions</label>
+                                            <div style="position: absolute;right: 0px;top:2px;display: inline-flex;">
+                                                <a style="color:#000; text-decoration:none;font-size: 19px;">
+                                                    <i class="collapsed" ng-if="pendingActionDet.dwm"> <i
+                                                            class="fa fa-plus-square-o"
+                                                            style="color:white;float: right;font-size: 1.3em; margin-top: 3px;padding: 4px;"></i>
+                                                    </i>
+                                                    <i class="expanded" ng-if="!pendingActionDet.dwm"><i
+                                                            class="fa fa-minus-square-o"
+                                                            style="color:white;padding: 4px;float: right;margin-top: 3px; font-size: 1.3em;"></i></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div ng-if="pendingActionDet.dwm" style="border: 1px solid lightgray">
+                                    <div class="">
+                                        <table ng-if="statusMessage.dwm.length > 0" class="tablenew table-striped table-bordered" style="width:100%">
+                                            <tr style="color: #4b4795;">
+                                                <th style="width:50%">ID</th>
+                                                <th style="width:50%">Assigned Date</th>
+                                            </tr>
+                                            <tr ng-repeat="x in statusMessage.dwm" style="color: #333333;background-color: #fff;">
+                                                <td>{{x.dwmId}}</td>
+                                                <td class="txt-capitalize">{{x.assignedDate| date : "dd-MM-yyyy"}}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div ng-if="statusMessage.incident.length > 0" style="color: #4b4795;font-weight: 600;padding:10px;">Incident </div>
+                        <table ng-if="statusMessage.incident.length > 0" class="tablenew table-striped table-bordered" style="width:100%">
+                            <tr style="color: #4b4795;">
+                                <th>Incident ID</th>
+                                <th>Assigned Date</th>
+                            </tr>
+                            <tr ng-repeat="x in statusMessage.incident" style="color: #333333;background-color: #fff;">
+                                <td>{{x.inceId}}</td>
+                                <td class="txt-capitalize">{{x.assignedDate| date : "dd-MM-yyyy"}}</td>
+                            </tr>
+                        </table> -->
+                        <div ng-if="statusMessage.incident.length > 0">
+                            <div class="panel-group" style="width:98%" id="detailGroup">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading panelGradientBg" style="position:relative;padding: 10px 15px;">
+                                        <div class="panel-title" style="text-align:left" ng-click="pendingActionDet.incident=(pendingActionDet.incident?false:true);" ng-init="pendingActionDet.incident =false">
+                                            <label>Incident - Pending Actions</label>
+                                            <div style="position: absolute;right: 0px;top:2px;display: inline-flex;">
+                                                <a style="color:#000; text-decoration:none;font-size: 19px;">
+                                                    <i class="collapsed" ng-if="pendingActionDet.incident"> <i
+                                                            class="fa fa-plus-square-o"
+                                                            style="color:white;float: right;font-size: 1.3em; margin-top: 3px;padding: 4px;"></i>
+                                                    </i>
+                                                    <i class="expanded" ng-if="!pendingActionDet.incident"><i
+                                                            class="fa fa-minus-square-o"
+                                                            style="color:white;padding: 4px;float: right;margin-top: 3px; font-size: 1.3em;"></i></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div ng-if="pendingActionDet.incident" style="border: 1px solid lightgray">
+                                    <div class="">
+                                        <table ng-if="statusMessage.incident.length > 0" class="tablenew table-striped table-bordered" style="width:100%">
+                                            <tr style="color: #4b4795;">
+                                                <th style="width:50%">Incident ID</th>
+                                                <th style="width:50%">Assigned Date</th>
+                                            </tr>
+                                            <tr ng-repeat="x in statusMessage.incident" style="color: #333333;background-color: #fff;">
+                                                <td>{{x.inceId}}</td>
+                                                <td class="txt-capitalize">{{x.assignedDate| date : "dd-MM-yyyy"}}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div ng-if="statusMessage.audit.length > 0" style="color: #4b4795;font-weight: 600;padding:10px;">Audit </div>
+                        <table ng-if="statusMessage.audit.length > 0" class="tablenew table-striped table-bordered" style="width:100%">
+                            <tr style="color: #4b4795;">
+                                <th>Audit ID</th>
+                                <th>Assigned Date</th>
+                            </tr>
+                            <tr ng-repeat="x in statusMessage.audit" style="color: #333333;background-color: #fff;">
+                                <td>{{x.audit_id}}</td>
+                                <td class="txt-capitalize">{{x.assignedDate| date : "dd-MM-yyyy"}}</td>
+                            </tr>
+                        </table> -->
+                        <div ng-if="statusMessage.audit.length > 0">
+                            <div class="panel-group" style="width:98%" id="detailGroup">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading panelGradientBg" style="position:relative;padding: 10px 15px;">
+                                        <div class="panel-title" style="text-align:left" ng-click="pendingActionDet.audit=(pendingActionDet.audit?false:true);" ng-init="pendingActionDet.audit =false">
+                                            <label>Audit - Pending Actions</label>
+                                            <div style="position: absolute;right: 0px;top:2px;display: inline-flex;">
+                                                <a style="color:#000; text-decoration:none;font-size: 19px;">
+                                                    <i class="collapsed" ng-if="pendingActionDet.audit"> <i
+                                                            class="fa fa-plus-square-o"
+                                                            style="color:white;float: right;font-size: 1.3em; margin-top: 3px;padding: 4px;"></i>
+                                                    </i>
+                                                    <i class="expanded" ng-if="!pendingActionDet.audit"><i
+                                                            class="fa fa-minus-square-o"
+                                                            style="color:white;padding: 4px;float: right;margin-top: 3px; font-size: 1.3em;"></i></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div ng-if="pendingActionDet.audit" style="border: 1px solid lightgray">
+                                    <div class="">
+                                        <table ng-if="statusMessage.audit.length > 0" class="tablenew table-striped table-bordered" style="width:100%">
+                                            <tr style="color: #4b4795;">
+                                                <th style="width:50%">Audit ID</th>
+                                                <th style="width:50%">Assigned Date</th>
+                                            </tr>
+                                            <tr ng-repeat="x in statusMessage.audit" style="color: #333333;background-color: #fff;">
+                                                <td>{{x.audit_id}}</td>
+                                                <td class="txt-capitalize">{{x.assignedDate| date : "dd-MM-yyyy"}}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div ng-if="statusMessage.concern.length > 0" style="color: #4b4795;font-weight: 600;padding:10px;">concern </div>
+                        <table ng-if="statusMessage.concern.length > 0" class="tablenew table-striped table-bordered" style="width:100%">
+                            <tr style="color: #4b4795;">
+                                <th> Concern ID</th>
+                                <th>Assigned Date</th>
+                            </tr>
+                            <tr ng-repeat="x in statusMessage.concern" style="color: #333333;background-color: #fff;">
+                                <td>{{x.concernId}}</td>
+                                <td class="txt-capitalize">{{x.assignedDate| date : "dd-MM-yyyy"}}</td>
+                            </tr>
+                        </table> -->
+
+                        <div ng-if="statusMessage.concern.length > 0">
+                            <div class="panel-group" style="width:98%" id="detailGroup">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading panelGradientBg" style="position:relative;padding: 10px 15px;">
+                                        <div class="panel-title" style="text-align:left" ng-click="pendingActionDet.concern=(pendingActionDet.concern?false:true);" ng-init="pendingActionDet.audit =false">
+                                            <label>Concern - Pending Actions</label>
+                                            <div style="position: absolute;right: 0px;top:2px;display: inline-flex;">
+                                                <a style="color:#000; text-decoration:none;font-size: 19px;">
+                                                    <i class="collapsed" ng-if="pendingActionDet.concern"> <i
+                                                            class="fa fa-plus-square-o"
+                                                            style="color:white;float: right;font-size: 1.3em; margin-top: 3px;padding: 4px;"></i>
+                                                    </i>
+                                                    <i class="expanded" ng-if="!pendingActionDet.concern"><i
+                                                            class="fa fa-minus-square-o"
+                                                            style="color:white;padding: 4px;float: right;margin-top: 3px; font-size: 1.3em;"></i></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div ng-if="pendingActionDet.concern" style="border: 1px solid lightgray">
+                                    <div class="">
+                                        <table ng-if="statusMessage.concern.length > 0" class="tablenew table-striped table-bordered" style="width:100%">
+                                            <tr style="color: #4b4795;">
+                                                <th style="width:50%"> Concern ID</th>
+                                                <th style="width:50%">Assigned Date</th>
+                                            </tr>
+                                            <tr ng-repeat="x in statusMessage.concern" style="color: #333333;background-color: #fff;">
+                                                <td>{{x.concernId}}</td>
+                                                <td class="txt-capitalize">{{x.assignedDate | date : "dd-MM-yyyy" }}
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- <button type="button" class="btn btn-success" style="    margin-left: 0px;
+                    margin-top: 20px;">OK</button> -->
+                        <div class="btn-ok" data-dismiss="modal" {{langTranslate.Submit}}>{{langTranslate.OK}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div ng-include="'common/help_popup.html'"></div>
+<!-- Transfer Functionality -->
+<div ng-include="'content/employee/transferModules/transferFunctionality.html'"></div>
+<div ng-include="'content/employee/transferModules/transferEmpBranch.html'"></div>
+
+<!-------Error List while uploading -->
+<div class="modal fade" id="employee_errorlist" role="dialog">
+    <div class="modal-dialog" style="width: calc(100% - 5%);">
+        <div class="modal-content" style="height: auto;">
+            <div class="modal-header" style="border-bottom: 1px solid #27255a96;">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="title">{{langTranslate.Error_uploadedfile}}</h4>
+            </div>
+            <div class="modal-body" style="padding: 15px 15px 35px 15px;">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div style="margin :0 auto;">
+                            <table class="tablenew table-striped table-bordered" style="width: 100%;">
+                                <tr style="color: #4b4795;">
+                                    <th>{{langTranslate.EmployeeID}}</th>
+                                    <th>{{langTranslate.First_Name}}</th>
+                                    <th>{{langTranslate.Last_Name}}</th>
+                                    <th>{{langTranslate.ContactNumber}}</th>
+                                    <th>{{langTranslate.Email_ID}}</th>
+                                    <th>{{langTranslate.Department}}</th>
+                                    <th>Level</th>
+                                    <th>DOJ</th>
+                                    <th>{{langTranslate.Comment}}</th>
+                                </tr>
+                                <tr dir-paginate="x in erroEmployeeList |itemsPerPage:7" pagination-id="tbl-employee1" style="color: #333333;background-color: #fff;">
+                                    <td>{{x.companyEmpId}}</td>
+                                    <td class="txt-capitalize">{{x.firstName}}</td>
+                                    <td> {{x.lastName}}</td>
+                                    <td>{{x.mobileNumber}}</td>
+                                    <td>{{x.emailId}}</td>
+                                    <td>{{x.department}}</td>
+                                    <td>{{x.empLevel}}</td>
+                                    <td>{{x.doj}}</td>
+                                    <td>{{x.errorMessage}}</td>
+                                </tr>
+                            </table>
+                            <dir-pagination-controls pagination-id="tbl-employee1" max-size="7" direction-links="true" boundary-links="true">
+                            </dir-pagination-controls>
+                        </div>
+                    </div>
+                </div>
+                <!-- close row-->
+            </div>
+            <!-- close modal body-->
+            <!-- <div class="modal-footer">
+                <button type="button" class="delete-btn" data-dismiss="modal">{{langTranslate.Cancel}}</button>
+            </div> -->
+        </div>
+    </div>
+</div>
+<!-------Reset Password -->
+<div id="employee_resetPwd" class="modal fade" style="margin: 0 auto;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 class="modal-title" id="myModalLabel"><i class="fa fa-lock"></i> {{ langTranslate.ResetAccountPasswordFor}} - <small style="vertical-align: middle;">{{selectResetPwdEmp.firstName}}
+                        {{selectResetPwdEmp.lastName}}</small></h3>
+            </div>
+            <div class="modalBody">
+                <div class="well" style="margin: 0px;border-radius: 0px;">
+                    <div class="padding-top-and-bottom-fiftheen-px align-text-center hidden-sm hidden-xs">
+                        <i class="fa fa-unlock-alt" style="width: 65px; height: 65px; font-size: 45px; margin: 0 auto 8px; padding-top: 7px; padding-left: 17px; display: block; border: solid 1px #CDCDCD; color: #CECECE; -moz-border-radius: 50%; -webkit-border-radius: 50%; border-radius: 50%;"></i>
+                    </div>
+                    <form name="resetAccountForm" ng-submit="resetPassword(resetAccountForm.$valid)" novalidate="novalidate">
+                        <div class="input-filed form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="UserPassword"><i class="fa fa-unlock-alt"
+                                        title="Choose password"></i></span>
+                                <input type="password" class="form-control" id="newPass" ng-model="newPassword" name="newPassword" ng-maxlength="16" ng-minlength="8" required title="New password" placeholder="New password" />
+                            </div>
+                            <p class="error" ng-if="resetAccountForm.newPassword.$error.required && resetAccountForm.newPassword.$dirty">
+                            </p>
+                            <p class="error" ng-if="resetAccountForm.newPassword.$error.maxlength && resetAccountForm.newPassword.$dirty">
+                                {{ langTranslate.Passwordmustbemaximumof16characters }} .</p>
+                            <p class="error" ng-if="resetAccountForm.newPassword.$error.minlength && resetAccountForm.newPassword.$dirty">
+                                {{ langTranslate.Passwordmustbeminimumof8characters }}.</p>
+                        </div>
+                        <div class="input-filed form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="UserPasswordMatch"><i class="fa fa-lock"
+                                        title="Choose password"></i></span>
+                                <input type="password" class="form-control" id="matchPass" ng-model="passwordMatch" name="passwordMatch" ng-maxlength="16" ng-minlength="8" required compare-to="newPassword" title="Confirm password" placeholder="Confirm password" />
+                            </div>
+                            <p class="error" ng-if="resetAccountForm.passwordMatch.$error.required && resetAccountForm.passwordMatch.$dirty">
+                            </p>
+                            <p class="error" ng-if="resetAccountForm.passwordMatch.$error.maxlength && resetAccountForm.passwordMatch.$dirty">
+                                {{ langTranslate.Passwordmustbeminimumof8characters }}.</p>
+                            <p class="error" ng-if="resetAccountForm.passwordMatch.$error.minlength && resetAccountForm.passwordMatch.$dirty">
+                                {{ langTranslate.Passwordmustbeminimumof8characters }}.</p>
+                            <!-- <p class="error" ng-if="flagPassDoesNotMatch"> Password Doesn't match.</p> -->
+                            <p class="error " ng-if="resetAccountForm.passwordMatch.$error.compareTo  && resetAccountForm.passwordMatch.$dirty">
+                                {{ langTranslate.NewPasswordandConfirmPassworddonotmatch }} .
+                            </p>
+                        </div>
+                        <div class="resetBtn">
+                            <button type="submit" class="btn btn-block btn-reset">{{ langTranslate.Submit }}</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <script>
+    document.getElementById('upload-file-input').onchange = function() {
+        var fileName = this.value;
+        alert('Selected file: ' + fileName);
+    };
+</script> -->

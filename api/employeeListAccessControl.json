@@ -1,0 +1,323 @@
+[
+	{
+		"employee_name" : "User 1",
+		"email" : "test1@test.com",
+		"contact_no" : "1234567981",
+		"dept" : "DEPT",
+		"desig" : "DESIG",
+		"roles" : [
+			{
+				"role" : "GREENTIN_SUPERADMIN"
+			},
+			{
+				"role" : "SUPERADMIN"
+			},
+			{
+				"role" : "EMPLOYEE"
+			},
+			{
+				"role" : "EXECUTIVE"
+			},
+			{
+				"role" : "CONTROLLER"
+			},
+			{
+				"role" : "CONTROLLERLEVELUP"
+			},
+			{
+				"role" : "EVALUATOR"
+			},
+			{
+				"role" : "IMPLEMENTER"
+			}
+		]
+	},{
+		"employee_name" : "User 2",
+		"email" : "test1@test.com",
+		"contact_no" : "1234567981",
+		"dept" : "DEPT",
+		"desig" : "DESIG",
+		"roles" : [
+			{
+				"role" : "GREENTIN_SUPERADMIN"
+			},
+			{
+				"role" : "SUPERADMIN"
+			},
+			{
+				"role" : "EMPLOYEE"
+			},
+			{
+				"role" : "EXECUTIVE"
+			},
+			{
+				"role" : "CONTROLLER"
+			},
+			{
+				"role" : "CONTROLLERLEVELUP"
+			},
+			{
+				"role" : "EVALUATOR"
+			},
+			{
+				"role" : "IMPLEMENTER"
+			}
+		]
+	},{
+		"employee_name" : "User 3",
+		"email" : "test1@test.com",
+		"contact_no" : "1234567981",
+		"dept" : "DEPT",
+		"desig" : "DESIG",
+		"roles" : [
+			{
+				"role" : "GREENTIN_SUPERADMIN"
+			},
+			{
+				"role" : "SUPERADMIN"
+			},
+			{
+				"role" : "EMPLOYEE"
+			},
+			{
+				"role" : "EXECUTIVE"
+			},
+			{
+				"role" : "CONTROLLER"
+			},
+			{
+				"role" : "CONTROLLERLEVELUP"
+			},
+			{
+				"role" : "EVALUATOR"
+			},
+			{
+				"role" : "IMPLEMENTER"
+			}
+		]
+	},{
+		"employee_name" : "User 4",
+		"email" : "test1@test.com",
+		"contact_no" : "1234567981",
+		"dept" : "DEPT",
+		"desig" : "DESIG",
+		"roles" : [
+			{
+				"role" : "GREENTIN_SUPERADMIN"
+			},
+			{
+				"role" : "SUPERADMIN"
+			},
+			{
+				"role" : "EMPLOYEE"
+			},
+			{
+				"role" : "EXECUTIVE"
+			},
+			{
+				"role" : "CONTROLLER"
+			},
+			{
+				"role" : "CONTROLLERLEVELUP"
+			},
+			{
+				"role" : "EVALUATOR"
+			},
+			{
+				"role" : "IMPLEMENTER"
+			}
+		]
+	},{
+		"employee_name" : "User 5",
+		"email" : "test1@test.com",
+		"contact_no" : "1234567981",
+		"dept" : "DEPT",
+		"desig" : "DESIG",
+		"roles" : [
+			{
+				"role" : "GREENTIN_SUPERADMIN"
+			},
+			{
+				"role" : "SUPERADMIN"
+			},
+			{
+				"role" : "EMPLOYEE"
+			},
+			{
+				"role" : "EXECUTIVE"
+			},
+			{
+				"role" : "CONTROLLER"
+			},
+			{
+				"role" : "CONTROLLERLEVELUP"
+			},
+			{
+				"role" : "EVALUATOR"
+			},
+			{
+				"role" : "IMPLEMENTER"
+			}
+		]
+	},{
+		"employee_name" : "User 6",
+		"email" : "test1@test.com",
+		"contact_no" : "1234567981",
+		"dept" : "DEPT",
+		"desig" : "DESIG",
+		"roles" : [
+			{
+				"role" : "GREENTIN_SUPERADMIN"
+			},
+			{
+				"role" : "SUPERADMIN"
+			},
+			{
+				"role" : "EMPLOYEE"
+			},
+			{
+				"role" : "EXECUTIVE"
+			},
+			{
+				"role" : "CONTROLLER"
+			},
+			{
+				"role" : "CONTROLLERLEVELUP"
+			},
+			{
+				"role" : "EVALUATOR"
+			},
+			{
+				"role" : "IMPLEMENTER"
+			}
+		]
+	},{
+		"employee_name" : "User 7",
+		"email" : "test1@test.com",
+		"contact_no" : "1234567981",
+		"dept" : "DEPT",
+		"desig" : "DESIG",
+		"roles" : [
+			{
+				"role" : "GREENTIN_SUPERADMIN"
+			},
+			{
+				"role" : "SUPERADMIN"
+			},
+			{
+				"role" : "EMPLOYEE"
+			},
+			{
+				"role" : "EXECUTIVE"
+			},
+			{
+				"role" : "CONTROLLER"
+			},
+			{
+				"role" : "CONTROLLERLEVELUP"
+			},
+			{
+				"role" : "EVALUATOR"
+			},
+			{
+				"role" : "IMPLEMENTER"
+			}
+		]
+	},{
+		"employee_name" : "User 8",
+		"email" : "test1@test.com",
+		"contact_no" : "1234567981",
+		"dept" : "DEPT",
+		"desig" : "DESIG",
+		"roles" : [
+			{
+				"role" : "GREENTIN_SUPERADMIN"
+			},
+			{
+				"role" : "SUPERADMIN"
+			},
+			{
+				"role" : "EMPLOYEE"
+			},
+			{
+				"role" : "EXECUTIVE"
+			},
+			{
+				"role" : "CONTROLLER"
+			},
+			{
+				"role" : "CONTROLLERLEVELUP"
+			},
+			{
+				"role" : "EVALUATOR"
+			},
+			{
+				"role" : "IMPLEMENTER"
+			}
+		]
+	},{
+		"employee_name" : "User 9",
+		"email" : "test1@test.com",
+		"contact_no" : "1234567981",
+		"dept" : "DEPT",
+		"desig" : "DESIG",
+		"roles" : [
+			{
+				"role" : "GREENTIN_SUPERADMIN"
+			},
+			{
+				"role" : "SUPERADMIN"
+			},
+			{
+				"role" : "EMPLOYEE"
+			},
+			{
+				"role" : "EXECUTIVE"
+			},
+			{
+				"role" : "CONTROLLER"
+			},
+			{
+				"role" : "CONTROLLERLEVELUP"
+			},
+			{
+				"role" : "EVALUATOR"
+			},
+			{
+				"role" : "IMPLEMENTER"
+			}
+		]
+	},{
+		"employee_name" : "User 10",
+		"email" : "test1@test.com",
+		"contact_no" : "1234567981",
+		"dept" : "DEPT",
+		"desig" : "DESIG",
+		"roles" : [
+			{
+				"role" : "GREENTIN_SUPERADMIN"
+			},
+			{
+				"role" : "SUPERADMIN"
+			},
+			{
+				"role" : "EMPLOYEE"
+			},
+			{
+				"role" : "EXECUTIVE"
+			},
+			{
+				"role" : "CONTROLLER"
+			},
+			{
+				"role" : "CONTROLLERLEVELUP"
+			},
+			{
+				"role" : "EVALUATOR"
+			},
+			{
+				"role" : "IMPLEMENTER"
+			}
+		]
+	}
+]

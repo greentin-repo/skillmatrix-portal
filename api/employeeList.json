@@ -1,0 +1,670 @@
+{
+    "employeeList" :[
+        {
+            "employeeDetails":{
+                "name" : "Priya Patil",
+                "id" : 1,
+                "designation" : "Java Developer",
+                "address" : "pune",
+                "contactNo" : 9898776677
+            },
+            "quesDet" :[
+                {
+                    "quesId" : 1,
+                    "ques" : "Radio Question 1 ?",
+                    "quesType" : "radio",
+                    "options" :[
+                        {
+                            "optText" : "Option 1",
+                            "optId" : 1
+                        },
+                        {
+                            "optText" : "Option 2",
+                            "optId" : 2
+                        },
+                        {
+                            "optText" : "Option 3",
+                            "optId" : 3
+                        },
+                        {
+                            "optText" : "Option 4",
+                            "optId" : 4
+                        }
+                    ],
+                    "answer" : {
+                        "optId" : 3,
+                        "optText" :"Option 3"
+                    }
+
+                },
+                {
+                    "quesId" : 2,
+                    "ques" : "Checkbox Question 2 ?",
+                    "quesType" : "checkbox",
+                    "options" :[
+                        {
+                            "optText" : "Option 1",
+                            "optId" : 1
+                        },
+                        {
+                            "optText" : "Option 2",
+                            "optId" : 2
+                        },
+                        {
+                            "optText" : "Option 3",
+                            "optId" : 3
+                        },
+                        {
+                            "optText" : "Option 4",
+                            "optId" : 4
+                        }
+                    ],
+                    "answer" : {
+                        "optId" : 2,
+                        "optText" :"Option 2"
+                    }
+
+                },
+                {
+                    "quesId" : 3,
+                    "ques" : "Text Question 2 ?",
+                    "quesType" : "text",
+                    "answer" : "Option 1"
+
+                }
+            ]
+        },
+        {
+            "employeeDetails":{
+                "name" : "Chatali Bhadarage",
+                "id" : 2,
+                "designation" : "Angular Developer",
+                "address" : "Mumbai",
+                "contactNo" : 9876894367
+            },
+            "quesDet" :[
+                {
+                    "quesId" : 1,
+                    "ques" : "Question 2 ?",
+                    "quesType" : "radio",
+                    "options" :[
+                        {
+                            "optText" : "Option 1",
+                            "optId" : 1
+                        },
+                        {
+                            "optText" : "Option 2",
+                            "optId" : 2
+                        },
+                        {
+                            "optText" : "Option 3",
+                            "optId" : 3
+                        },
+                        {
+                            "optText" : "Option 4",
+                            "optId" : 4
+                        }
+                    ],
+                    "answer" :{
+                        "optId" : 3,
+                        "optText" :"Option 3"
+                    }
+
+                },
+                {
+                    "quesId" : 2,
+                    "ques" : "Question 1 ?",
+                    "quesType" : "checkbox",
+                    "options" :[
+                        {
+                            "optText" : "Option 1",
+                            "optId" : 1
+                        },
+                        {
+                            "optText" : "Option 2",
+                            "optId" : 2
+                        },
+                        {
+                            "optText" : "Option 3",
+                            "optId" : 3
+                        },
+                        {
+                            "optText" : "Option 4",
+                            "optId" : 4
+                        }
+                    ],
+                    "answer" :{
+                        "optId" : 3,
+                        "optText" :"Option 3"
+                    }
+
+                },
+                {
+                    "quesId" : 3,
+                    "ques" : "Question 2 ?",
+                    "quesType" : "text",
+                    "answer" : "Option 2"
+
+                }
+            ]
+        },
+        {
+            "employeeDetails":{
+                "name" : "Tejaswini Shinde",
+                "id" : 3,
+                "designation" : "Angular Developer",
+                "address" : "Pune",
+                "contactNo" : 9876894367
+            },
+            "quesDet" :[
+                {
+                    "quesId" : 1,
+                    "ques" : "Question 2 ?",
+                    "quesType" : "radio",
+                    "options" :[
+                        {
+                            "optText" : "Option 1",
+                            "optId" : 1
+                        },
+                        {
+                            "optText" : "Option 2",
+                            "optId" : 2
+                        },
+                        {
+                            "optText" : "Option 3",
+                            "optId" : 3
+                        },
+                        {
+                            "optText" : "Option 4",
+                            "optId" : 4
+                        }
+                    ],
+                    "answer" :{
+                        "optId" : 3,
+                        "optText" :"Option 3"
+                    }
+
+                },
+                {
+                    "quesId" : 2,
+                    "ques" : "Question 1 ?",
+                    "quesType" : "checkbox",
+                    "options" :[
+                        {
+                            "optText" : "Option 1",
+                            "optId" : 1
+                        },
+                        {
+                            "optText" : "Option 2",
+                            "optId" : 2
+                        },
+                        {
+                            "optText" : "Option 3",
+                            "optId" : 3
+                        },
+                        {
+                            "optText" : "Option 4",
+                            "optId" : 4
+                        }
+                    ],
+                    "answer" :{
+                        "optId" : 3,
+                        "optText" :"Option 3"
+                    }
+
+                },
+                {
+                    "quesId" : 3,
+                    "ques" : "Question 2 ?",
+                    "quesType" : "text",
+                    "answer" : "Option 3"
+
+                }
+            ]
+        },
+        {
+            "employeeDetails":{
+                "name" : "Ashwini Palkar",
+                "id" : 4,
+                "designation" : "Java Developer",
+                "address" : "pune",
+                "contactNo" : 9898776677
+            },
+            "quesDet" :[
+                {
+                    "quesId" : 1,
+                    "ques" : "Radio Question 1 ?",
+                    "quesType" : "radio",
+                    "options" :[
+                        {
+                            "optText" : "Option 1",
+                            "optId" : 1
+                        },
+                        {
+                            "optText" : "Option 2",
+                            "optId" : 2
+                        },
+                        {
+                            "optText" : "Option 3",
+                            "optId" : 3
+                        },
+                        {
+                            "optText" : "Option 4",
+                            "optId" : 4
+                        }
+                    ],
+                    "answer" : {
+                        "optId" : 3,
+                        "optText" :"Option 3"
+                    }
+
+                },
+                {
+                    "quesId" : 2,
+                    "ques" : "Checkbox Question 2 ?",
+                    "quesType" : "checkbox",
+                    "options" :[
+                        {
+                            "optText" : "Option 1",
+                            "optId" : 1
+                        },
+                        {
+                            "optText" : "Option 2",
+                            "optId" : 2
+                        },
+                        {
+                            "optText" : "Option 3",
+                            "optId" : 3
+                        },
+                        {
+                            "optText" : "Option 4",
+                            "optId" : 4
+                        }
+                    ],
+                    "answer" : {
+                        "optId" : 2,
+                        "optText" :"Option 2"
+                    }
+
+                },
+                {
+                    "quesId" : 3,
+                    "ques" : "Text Question 2 ?",
+                    "quesType" : "text",
+                    "answer" : "Option 1"
+
+                }
+            ]
+        },
+        {
+            "employeeDetails":{
+                "name" : "Vaibhav Patil",
+                "id" : 5,
+                "designation" : "Java Developer",
+                "address" : "pune",
+                "contactNo" : 9898776677
+            },
+            "quesDet" :[
+                {
+                    "quesId" : 1,
+                    "ques" : "Radio Question 1 ?",
+                    "quesType" : "radio",
+                    "options" :[
+                        {
+                            "optText" : "Option 1",
+                            "optId" : 1
+                        },
+                        {
+                            "optText" : "Option 2",
+                            "optId" : 2
+                        },
+                        {
+                            "optText" : "Option 3",
+                            "optId" : 3
+                        },
+                        {
+                            "optText" : "Option 4",
+                            "optId" : 4
+                        }
+                    ],
+                    "answer" : {
+                        "optId" : 3,
+                        "optText" :"Option 3"
+                    }
+
+                },
+                {
+                    "quesId" : 2,
+                    "ques" : "Checkbox Question 2 ?",
+                    "quesType" : "checkbox",
+                    "options" :[
+                        {
+                            "optText" : "Option 1",
+                            "optId" : 1
+                        },
+                        {
+                            "optText" : "Option 2",
+                            "optId" : 2
+                        },
+                        {
+                            "optText" : "Option 3",
+                            "optId" : 3
+                        },
+                        {
+                            "optText" : "Option 4",
+                            "optId" : 4
+                        }
+                    ],
+                    "answer" : {
+                        "optId" : 2,
+                        "optText" :"Option 2"
+                    }
+
+                },
+                {
+                    "quesId" : 3,
+                    "ques" : "Text Question 2 ?",
+                    "quesType" : "text",
+                    "answer" : "Option 1"
+
+                }
+            ]
+        },
+        {
+            "employeeDetails":{
+                "name" : "Akshay Manjartkar",
+                "id" : 6,
+                "designation" : "Java Developer",
+                "address" : "pune",
+                "contactNo" : 9898776677
+            },
+            "quesDet" :[
+                {
+                    "quesId" : 1,
+                    "ques" : "Radio Question 1 ?",
+                    "quesType" : "radio",
+                    "options" :[
+                        {
+                            "optText" : "Option 1",
+                            "optId" : 1
+                        },
+                        {
+                            "optText" : "Option 2",
+                            "optId" : 2
+                        },
+                        {
+                            "optText" : "Option 3",
+                            "optId" : 3
+                        },
+                        {
+                            "optText" : "Option 4",
+                            "optId" : 4
+                        }
+                    ],
+                    "answer" : {
+                        "optId" : 4,
+                        "optText" :"Option 4"
+                    }
+
+                },
+                {
+                    "quesId" : 2,
+                    "ques" : "Checkbox Question 2 ?",
+                    "quesType" : "checkbox",
+                    "options" :[
+                        {
+                            "optText" : "Option 1",
+                            "optId" : 1
+                        },
+                        {
+                            "optText" : "Option 2",
+                            "optId" : 2
+                        },
+                        {
+                            "optText" : "Option 3",
+                            "optId" : 3
+                        },
+                        {
+                            "optText" : "Option 4",
+                            "optId" : 4
+                        }
+                    ],
+                    "answer" : {
+                        "optId" : 2,
+                        "optText" :"Option 2"
+                    }
+
+                },
+                {
+                    "quesId" : 3,
+                    "ques" : "Text Question 2 ?",
+                    "quesType" : "text",
+                    "answer" : "Option 1"
+
+                }
+            ]
+        },
+        {
+            "employeeDetails":{
+                "name" : "Shashikant Farkte",
+                "id" : 7,
+                "designation" : "Java Developer",
+                "address" : "pune",
+                "contactNo" : 9898776677
+            },
+            "quesDet" :[
+                {
+                    "quesId" : 1,
+                    "ques" : "Radio Question 1 ?",
+                    "quesType" : "radio",
+                    "options" :[
+                        {
+                            "optText" : "Option 1",
+                            "optId" : 1
+                        },
+                        {
+                            "optText" : "Option 2",
+                            "optId" : 2
+                        },
+                        {
+                            "optText" : "Option 3",
+                            "optId" : 3
+                        },
+                        {
+                            "optText" : "Option 4",
+                            "optId" : 4
+                        }
+                    ],
+                    "answer" : {
+                        "optId" : 3,
+                        "optText" :"Option 3"
+                    }
+
+                },
+                {
+                    "quesId" : 2,
+                    "ques" : "Checkbox Question 2 ?",
+                    "quesType" : "checkbox",
+                    "options" :[
+                        {
+                            "optText" : "Option 1",
+                            "optId" : 1
+                        },
+                        {
+                            "optText" : "Option 2",
+                            "optId" : 2
+                        },
+                        {
+                            "optText" : "Option 3",
+                            "optId" : 3
+                        },
+                        {
+                            "optText" : "Option 4",
+                            "optId" : 4
+                        }
+                    ],
+                    "answer" : {
+                        "optId" : 2,
+                        "optText" :"Option 2"
+                    }
+
+                },
+                {
+                    "quesId" : 3,
+                    "ques" : "Text Question 2 ?",
+                    "quesType" : "text",
+                    "answer" : "Option 1"
+
+                }
+            ]
+        },
+        {
+            "employeeDetails":{
+                "name" : "Vinay Bhadarage",
+                "id" : 8,
+                "designation" : "Java Developer",
+                "address" : "pune",
+                "contactNo" : 9898776677
+            },
+            "quesDet" :[
+                {
+                    "quesId" : 1,
+                    "ques" : "Radio Question 1 ?",
+                    "quesType" : "radio",
+                    "options" :[
+                        {
+                            "optText" : "Option 1",
+                            "optId" : 1
+                        },
+                        {
+                            "optText" : "Option 2",
+                            "optId" : 2
+                        },
+                        {
+                            "optText" : "Option 3",
+                            "optId" : 3
+                        },
+                        {
+                            "optText" : "Option 4",
+                            "optId" : 4
+                        }
+                    ],
+                    "answer" : {
+                        "optId" : 3,
+                        "optText" :"Option 3"
+                    }
+
+                },
+                {
+                    "quesId" : 2,
+                    "ques" : "Checkbox Question 2 ?",
+                    "quesType" : "checkbox",
+                    "options" :[
+                        {
+                            "optText" : "Option 1",
+                            "optId" : 1
+                        },
+                        {
+                            "optText" : "Option 2",
+                            "optId" : 2
+                        },
+                        {
+                            "optText" : "Option 3",
+                            "optId" : 3
+                        },
+                        {
+                            "optText" : "Option 4",
+                            "optId" : 4
+                        }
+                    ],
+                    "answer" : {
+                        "optId" : 2,
+                        "optText" :"Option 2"
+                    }
+
+                },
+                {
+                    "quesId" : 3,
+                    "ques" : "Text Question 2 ?",
+                    "quesType" : "text",
+                    "answer" : "Option 1"
+
+                }
+            ]
+        },
+        {
+            "employeeDetails":{
+                "name" : "Vaibhav Patil",
+                "id" : 9,
+                "designation" : "Java Developer",
+                "address" : "pune",
+                "contactNo" : 9898776677
+            },
+            "quesDet" :[
+                {
+                    "quesId" : 1,
+                    "ques" : "Radio Question 1 ?",
+                    "quesType" : "radio",
+                    "options" :[
+                        {
+                            "optText" : "Option 1",
+                            "optId" : 1
+                        },
+                        {
+                            "optText" : "Option 2",
+                            "optId" : 2
+                        },
+                        {
+                            "optText" : "Option 3",
+                            "optId" : 3
+                        },
+                        {
+                            "optText" : "Option 4",
+                            "optId" : 4
+                        }
+                    ],
+                    "answer" : {
+                        "optId" : 3,
+                        "optText" :"Option 3"
+                    }
+
+                },
+                {
+                    "quesId" : 2,
+                    "ques" : "Checkbox Question 2 ?",
+                    "quesType" : "checkbox",
+                    "options" :[
+                        {
+                            "optText" : "Option 1",
+                            "optId" : 1
+                        },
+                        {
+                            "optText" : "Option 2",
+                            "optId" : 2
+                        },
+                        {
+                            "optText" : "Option 3",
+                            "optId" : 3
+                        },
+                        {
+                            "optText" : "Option 4",
+                            "optId" : 4
+                        }
+                    ],
+                    "answer" : {
+                        "optId" : 2,
+                        "optText" :"Option 2"
+                    }
+
+                },
+                {
+                    "quesId" : 3,
+                    "ques" : "Text Question 2 ?",
+                    "quesType" : "text",
+                    "answer" : "Option 1"
+
+                }
+            ]
+        }
+    ]
+}

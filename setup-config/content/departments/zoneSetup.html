@@ -1,0 +1,104 @@
+<link rel="stylesheet" href="content/departments/departments.css">
+<div ng-include="'common/loading_indicator.html'"></div>
+<div ng-include="'common/nextPage.html'"></div>
+<div class="container pr">
+  <div class="row" style="margin-top: 4%;margin-right: 9%">
+    <div class="col-md-6">
+      <label class="txt-color-primary" style="font-size: 19px;">Branch</label>
+      <!-- <div ng-if="branchListLoading" class="loadingIndicatorContainer ldng-ind-sm"
+                style="margin-top: 10px;border: 2px solid lightgray;width: 259px;">
+                <i class="fa fa-building-o fa-2x" aria-hidden="true"></i>
+                <div class="msg">{{langTranslate.Please_wait_branch_list_is_loading}}</div>
+                <div style="width: 100px; margin:0 auto;" class="lineLoaderRelative"></div>
+            </div> -->
+      <!-- <div ng-if="!branchListLoading && branchList.length==0" class="loadingIndicatorContainer ldng-ind-sm"
+                style="margin-top: 10px;border: 2px solid lightgray;width: 259px;">
+                <i class="fa fa-building-o fa-2x" aria-hidden="true"></i>
+                <div class="msg">Data not found.</div>
+            </div> -->
+      <table class="tbl-left-side">
+        <thead>
+          <tr>
+            <th>{{langTranslate.Sr_No}}</th>
+            <th>{{langTranslate.Location}}</th>
+            <th>{{langTranslate.Branch_Name}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background-color : #8792d6;color : white">
+            <td>{{$index+1}}</td>
+            <td>{{loggedInLocation}}</td>
+            <td>{{loggedInUserBranchId}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-6">
+      <div class="right-card">
+        <div class="header">
+          <label class="txt-color-primary" style="font-size: 19px;">Zone Setup</label>
+          <div class="btn-help" style="margin-left: 10px;"><i class="fa fa-question-circle"></i></div>
+          <!--ng-click="showHelpPopup('zone')"-->
+        </div>
+        <div class="header-det">
+          <div class="sidebar-bg-color" id="selected-branch-label" style="color: white;">
+            <label class="width-20">{{selectedBranchIndex}}</label>
+            <label class="width-30">{{loggedInLocation}}</label>
+            <label class="width-40">{{loggedInUserBranchId}}</label>
+          </div>
+        </div>
+        <div ng-if="zoneListLoading" class="loadingIndicatorContainer ldng-ind-sm" style="margin-top: 10px;border: 2px solid lightgray;width: 259px;">
+          <i class="fa fa-building-o fa-2x" aria-hidden="true"></i>
+          <div class="msg">Please wait zone list is waiting</div>
+          <div style="width: 100px; margin:0 auto;" class="lineLoaderRelative"></div>
+        </div>
+        <div ng-if="!zoneListLoading && zoneList.length==0" class="loadingIndicatorContainer ldng-ind-sm" style="margin-top: 10px;border: 2px solid lightgray;width: 259px;">
+          <i class="fa fa-building-o fa-2x" aria-hidden="true"></i>
+          <div class="msg">Data not found.</div>
+        </div>
+        <div style="padding-right: 9px;" ng-if="!zoneListLoading && zoneList.length>0">
+          <table class="tbl-right-side">
+            <thead>
+              <tr>
+                <th style="width: 22%"></th>
+                <th>Zone</th>
+              </tr>
+            </thead>
+            <tbody scroll-bottom="zoneList">
+              <tr ng-repeat="dataZone in zoneList">
+                <td>{{$index+1}}</td>
+                <td class="pr">
+                  <div ng-if="dataZone.id!=0 && !dataZone.isUpdate">
+                    <span style="word-break: break-word;">{{dataZone.zoneCode}}</span>
+                    <span style="word-break: break-word;margin-left: 7em;">{{dataZone.zoneName}}</span>
+                    <span class="editDeleteIcon">
+                      <i class="material-icons" ng-click="setUpdateZone(dataZone)" style="color: orange;margin-right:6px;cursor: pointer;vertical-align: middle;">create</i>
+                    </span>
+                  </div>
+                  <div ng-if="dataZone.id==0 && !dataZone.isUpdate" style="display:flex;">
+                    <input type="text" ng-model="dataZone.zoneCode" ng-keyup="$event.keyCode == 13 ? submitZone(dataZone) : null" maxlength="30" style="width: 150px;" placeholder="Zone Code">
+                    <input type="text" ng-model="dataZone.zoneName" ng-keyup="$event.keyCode == 13 ? submitZone(dataZone) : null" maxlength="30" style="width: 100px;margin-left: 5px;" placeholder="Zone Name">
+                    <button type="button" class="btn btn-success btn-xs saveBtn" ng-click="submitZone(dataZone)" style="margin-left: 10px;">{{langTranslate.Save}}</button>
+                  </div>
+                  <div ng-if="dataZone.id!=0 && dataZone.isUpdate" style="display:flex;">
+                    <input type="text" ng-model="dataZone.zoneCode" ng-keyup="$event.keyCode == 13 ? updateZone(dataZone) : null" maxlength="30" style="width: 150px;" placeholder="Zone Code">
+                    <input type="text" ng-model="dataZone.zoneName" ng-keyup="$event.keyCode == 13 ? updateZone(dataZone) : null" maxlength="30" style="width: 100px;margin-left: 5px;" placeholder="Zone Name">
+                    <button type="button" class="btn btn-success btn-xs saveBtn" ng-click="updateZone(dataZone)" style="margin-left: 10px;">{{langTranslate.Save}}</button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="right-card-button">
+          <span type="button" class=" btn-circle btn-lg sidebar-bg-color" ng-click="addZone()">
+            <i class="fa fa-plus" style="color: white;" aria-hidden="true"></i>
+          </span>
+        </div>
+      </div>
+      <!--right card end here-->
+    </div>
+  </div>
+</div>
+<!-- Included help popup -->
+<!-- <div ng-include="'common/help_popup.html'"></div> -->

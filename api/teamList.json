@@ -1,0 +1,574 @@
+{
+    "status": "success",
+    "result": true,
+    "statusCode": 200,
+    "reason": "get TeamList By TeamId ",
+    "sugesstionDetails": null,
+    "sugesstionList": null,
+    "teamList": null,
+    "teamEmployeeList": null,
+    "teamMasterList": [
+        {
+            "teammasterId": 1,
+            "teamName": "First Team",
+            "createdDate": null,
+            "updatedDate": null,
+            "teamList": [
+                {
+                    "teamId": 2,
+                    "status": 0,
+                    "teamName": "First Team",
+                    "team_type_master": {
+                        "teamTypeId": 1,
+                        "type": "Evaluation"
+                    },
+                    "emp_details": {
+                        "empId": 2,
+                        "firstName": "chaitali",
+                        "lastName": "bhadarage",
+                        "contactNo": null,
+                        "address": null,
+                        "emailId": "chaitalibhadarage@gmail.com",
+                        "password": null,
+                        "createdBy": null,
+                        "points": 0,
+                        "profilePic": null,
+                        "fcmKey": null,
+                        "apnKey": null,
+                        "dept": "IT",
+                        "designation": null,
+                        "organization": null,
+                        "createdDate": null,
+                        "updatedDate": null
+                    },
+                    "created_by_details": {
+                        "empId": 1,
+                        "firstName": "Crazy",
+                        "lastName": "Man",
+                        "contactNo": null,
+                        "address": null,
+                        "emailId": "abcd",
+                        "password": "1234",
+                        "createdBy": 7,
+                        "points": 0,
+                        "profilePic": null,
+                        "fcmKey": null,
+                        "apnKey": null,
+                        "dept": {
+                            "deptId": 1,
+                            "deptName": "IT"
+                        },
+                        "designation": {
+                            "desigId": 1,
+                            "desigName": "HR"
+                        },
+                        "organization": {
+                            "orgId": 2,
+                            "name": "Faurecia"
+                        },
+                        "createdDate": null,
+                        "updatedDate": null
+                    },
+                    "updated_by_details": {
+                        "empId": 1,
+                        "firstName": "Crazy",
+                        "lastName": "Man",
+                        "contactNo": null,
+                        "address": null,
+                        "emailId": "abcd",
+                        "password": "1234",
+                        "createdBy": 7,
+                        "points": 0,
+                        "profilePic": null,
+                        "fcmKey": null,
+                        "apnKey": null,
+                        "dept": {
+                            "deptId": 1,
+                            "deptName": "IT"
+                        },
+                        "designation": {
+                            "desigId": 1,
+                            "desigName": "HR"
+                        },
+                        "organization": {
+                            "orgId": 2,
+                            "name": "Faurecia"
+                        },
+                        "createdDate": null,
+                        "updatedDate": null
+                    },
+                    "createdDate": "2018-08-17T12:47:18.000+0000",
+                    "updatedDate": "2018-08-17T18:18:53.000+0000"
+                },
+                {
+                    "teamId": 5,
+                    "status": 0,
+                    "teamName": "First Team",
+                    "team_type_master": {
+                        "teamTypeId": 1,
+                        "type": "Evaluation"
+                    },
+                    "emp_details": {
+                        "empId": 9,
+                        "firstName": "Rishi",
+                        "lastName": "Kashid",
+                        "contactNo": "9.975006563E9",
+                        "address": "UAE",
+                        "emailId": "rishi.kashid@gmail.com",
+                        "password": "OzysWfNa",
+                        "createdBy": 1,
+                        "points": 0,
+                        "profilePic": null,
+                        "fcmKey": "a",
+                        "apnKey": null,
+                        "dept": {
+                            "deptId": 1,
+                            "deptName": "IT"
+                        },
+                        "designation": null,
+                        "organization": {
+                            "orgId": 1,
+                            "name": "Gabrial"
+                        },
+                        "createdDate": "2018-11-28T00:00:00.000+0000",
+                        "updatedDate": "2018-11-28T00:00:00.000+0000"
+                    },
+                    "created_by_details": {
+                        "empId": 1,
+                        "firstName": "Crazy",
+                        "lastName": "Man",
+                        "contactNo": null,
+                        "address": null,
+                        "emailId": "abcd",
+                        "password": "1234",
+                        "createdBy": 7,
+                        "points": 0,
+                        "profilePic": null,
+                        "fcmKey": null,
+                        "apnKey": null,
+                        "dept": {
+                            "deptId": 1,
+                            "deptName": "IT"
+                        },
+                        "designation": {
+                            "desigId": 1,
+                            "desigName": "HR"
+                        },
+                        "organization": {
+                            "orgId": 2,
+                            "name": "Faurecia"
+                        },
+                        "createdDate": null,
+                        "updatedDate": null
+                    },
+                    "updated_by_details": {
+                        "empId": 1,
+                        "firstName": "Crazy",
+                        "lastName": "Man",
+                        "contactNo": null,
+                        "address": null,
+                        "emailId": "abcd",
+                        "password": "1234",
+                        "createdBy": 7,
+                        "points": 0,
+                        "profilePic": null,
+                        "fcmKey": null,
+                        "apnKey": null,
+                        "dept": {
+                            "deptId": 1,
+                            "deptName": "IT"
+                        },
+                        "designation": {
+                            "desigId": 1,
+                            "desigName": "HR"
+                        },
+                        "organization": {
+                            "orgId": 2,
+                            "name": "Faurecia"
+                        },
+                        "createdDate": null,
+                        "updatedDate": null
+                    },
+                    "createdDate": "2018-08-17T10:55:31.000+0000",
+                    "updatedDate": "2018-08-17T18:18:53.000+0000"
+                },
+                {
+                    "teamId": 1,
+                    "status": 0,
+                    "teamName": "First Team",
+                    "team_type_master": {
+                        "teamTypeId": 1,
+                        "type": "Evaluation"
+                    },
+                    "emp_details": {
+                        "empId": 1,
+                        "firstName": "Crazy",
+                        "lastName": "Man",
+                        "contactNo": null,
+                        "address": null,
+                        "emailId": "abcd",
+                        "password": "1234",
+                        "createdBy": 7,
+                        "points": 0,
+                        "profilePic": null,
+                        "fcmKey": null,
+                        "apnKey": null,
+                        "dept": {
+                            "deptId": 1,
+                            "deptName": "IT"
+                        },
+                        "designation": {
+                            "desigId": 1,
+                            "desigName": "HR"
+                        },
+                        "organization": {
+                            "orgId": 2,
+                            "name": "Faurecia"
+                        },
+                        "createdDate": null,
+                        "updatedDate": null
+                    },
+                    "created_by_details": {
+                        "empId": 1,
+                        "firstName": "Crazy",
+                        "lastName": "Man",
+                        "contactNo": null,
+                        "address": null,
+                        "emailId": "abcd",
+                        "password": "1234",
+                        "createdBy": 7,
+                        "points": 0,
+                        "profilePic": null,
+                        "fcmKey": null,
+                        "apnKey": null,
+                        "dept": {
+                            "deptId": 1,
+                            "deptName": "IT"
+                        },
+                        "designation": {
+                            "desigId": 1,
+                            "desigName": "HR"
+                        },
+                        "organization": {
+                            "orgId": 2,
+                            "name": "Faurecia"
+                        },
+                        "createdDate": null,
+                        "updatedDate": null
+                    },
+                    "updated_by_details": {
+                        "empId": 1,
+                        "firstName": "Crazy",
+                        "lastName": "Man",
+                        "contactNo": null,
+                        "address": null,
+                        "emailId": "abcd",
+                        "password": "1234",
+                        "createdBy": 7,
+                        "points": 0,
+                        "profilePic": null,
+                        "fcmKey": null,
+                        "apnKey": null,
+                        "dept": {
+                            "deptId": 1,
+                            "deptName": "IT"
+                        },
+                        "designation": {
+                            "desigId": 1,
+                            "desigName": "HR"
+                        },
+                        "organization": {
+                            "orgId": 2,
+                            "name": "Faurecia"
+                        },
+                        "createdDate": null,
+                        "updatedDate": null
+                    },
+                    "createdDate": "2018-08-17T12:47:18.000+0000",
+                    "updatedDate": "2018-08-17T18:18:53.000+0000"
+                }
+            ]
+        },
+         {
+            "teammasterId": 1,
+            "teamName": "First Team",
+            "createdDate": null,
+            "updatedDate": null,
+            "teamList": [
+                {
+                    "teamId": 2,
+                    "status": 0,
+                    "teamName": "First Team",
+                    "team_type_master": {
+                        "teamTypeId": 1,
+                        "type": "Evaluation"
+                    },
+                    "emp_details": {
+                        "empId": 2,
+                        "firstName": "chaitali",
+                        "lastName": "bhadarage",
+                        "contactNo": null,
+                        "address": null,
+                        "emailId": "chaitalibhadarage@gmail.com",
+                        "password": null,
+                        "createdBy": null,
+                        "points": 0,
+                        "profilePic": null,
+                        "fcmKey": null,
+                        "apnKey": null,
+                        "dept": "IT",
+                        "designation": null,
+                        "organization": null,
+                        "createdDate": null,
+                        "updatedDate": null
+                    },
+                    "created_by_details": {
+                        "empId": 1,
+                        "firstName": "Crazy",
+                        "lastName": "Man",
+                        "contactNo": null,
+                        "address": null,
+                        "emailId": "abcd",
+                        "password": "1234",
+                        "createdBy": 7,
+                        "points": 0,
+                        "profilePic": null,
+                        "fcmKey": null,
+                        "apnKey": null,
+                        "dept": {
+                            "deptId": 1,
+                            "deptName": "IT"
+                        },
+                        "designation": {
+                            "desigId": 1,
+                            "desigName": "HR"
+                        },
+                        "organization": {
+                            "orgId": 2,
+                            "name": "Faurecia"
+                        },
+                        "createdDate": null,
+                        "updatedDate": null
+                    },
+                    "updated_by_details": {
+                        "empId": 1,
+                        "firstName": "Crazy",
+                        "lastName": "Man",
+                        "contactNo": null,
+                        "address": null,
+                        "emailId": "abcd",
+                        "password": "1234",
+                        "createdBy": 7,
+                        "points": 0,
+                        "profilePic": null,
+                        "fcmKey": null,
+                        "apnKey": null,
+                        "dept": {
+                            "deptId": 1,
+                            "deptName": "IT"
+                        },
+                        "designation": {
+                            "desigId": 1,
+                            "desigName": "HR"
+                        },
+                        "organization": {
+                            "orgId": 2,
+                            "name": "Faurecia"
+                        },
+                        "createdDate": null,
+                        "updatedDate": null
+                    },
+                    "createdDate": "2018-08-17T12:47:18.000+0000",
+                    "updatedDate": "2018-08-17T18:18:53.000+0000"
+                },
+                {
+                    "teamId": 5,
+                    "status": 0,
+                    "teamName": "First Team",
+                    "team_type_master": {
+                        "teamTypeId": 1,
+                        "type": "Evaluation"
+                    },
+                    "emp_details": {
+                        "empId": 9,
+                        "firstName": "Rishi",
+                        "lastName": "Kashid",
+                        "contactNo": "9.975006563E9",
+                        "address": "UAE",
+                        "emailId": "rishi.kashid@gmail.com",
+                        "password": "OzysWfNa",
+                        "createdBy": 1,
+                        "points": 0,
+                        "profilePic": null,
+                        "fcmKey": "a",
+                        "apnKey": null,
+                        "dept": {
+                            "deptId": 1,
+                            "deptName": "IT"
+                        },
+                        "designation": null,
+                        "organization": {
+                            "orgId": 1,
+                            "name": "Gabrial"
+                        },
+                        "createdDate": "2018-11-28T00:00:00.000+0000",
+                        "updatedDate": "2018-11-28T00:00:00.000+0000"
+                    },
+                    "created_by_details": {
+                        "empId": 1,
+                        "firstName": "Crazy",
+                        "lastName": "Man",
+                        "contactNo": null,
+                        "address": null,
+                        "emailId": "abcd",
+                        "password": "1234",
+                        "createdBy": 7,
+                        "points": 0,
+                        "profilePic": null,
+                        "fcmKey": null,
+                        "apnKey": null,
+                        "dept": {
+                            "deptId": 1,
+                            "deptName": "IT"
+                        },
+                        "designation": {
+                            "desigId": 1,
+                            "desigName": "HR"
+                        },
+                        "organization": {
+                            "orgId": 2,
+                            "name": "Faurecia"
+                        },
+                        "createdDate": null,
+                        "updatedDate": null
+                    },
+                    "updated_by_details": {
+                        "empId": 1,
+                        "firstName": "Crazy",
+                        "lastName": "Man",
+                        "contactNo": null,
+                        "address": null,
+                        "emailId": "abcd",
+                        "password": "1234",
+                        "createdBy": 7,
+                        "points": 0,
+                        "profilePic": null,
+                        "fcmKey": null,
+                        "apnKey": null,
+                        "dept": {
+                            "deptId": 1,
+                            "deptName": "IT"
+                        },
+                        "designation": {
+                            "desigId": 1,
+                            "desigName": "HR"
+                        },
+                        "organization": {
+                            "orgId": 2,
+                            "name": "Faurecia"
+                        },
+                        "createdDate": null,
+                        "updatedDate": null
+                    },
+                    "createdDate": "2018-08-17T10:55:31.000+0000",
+                    "updatedDate": "2018-08-17T18:18:53.000+0000"
+                },
+                {
+                    "teamId": 1,
+                    "status": 0,
+                    "teamName": "First Team",
+                    "team_type_master": {
+                        "teamTypeId": 1,
+                        "type": "Evaluation"
+                    },
+                    "emp_details": {
+                        "empId": 1,
+                        "firstName": "Crazy",
+                        "lastName": "Man",
+                        "contactNo": null,
+                        "address": null,
+                        "emailId": "abcd",
+                        "password": "1234",
+                        "createdBy": 7,
+                        "points": 0,
+                        "profilePic": null,
+                        "fcmKey": null,
+                        "apnKey": null,
+                        "dept": {
+                            "deptId": 1,
+                            "deptName": "IT"
+                        },
+                        "designation": {
+                            "desigId": 1,
+                            "desigName": "HR"
+                        },
+                        "organization": {
+                            "orgId": 2,
+                            "name": "Faurecia"
+                        },
+                        "createdDate": null,
+                        "updatedDate": null
+                    },
+                    "created_by_details": {
+                        "empId": 1,
+                        "firstName": "Crazy",
+                        "lastName": "Man",
+                        "contactNo": null,
+                        "address": null,
+                        "emailId": "abcd",
+                        "password": "1234",
+                        "createdBy": 7,
+                        "points": 0,
+                        "profilePic": null,
+                        "fcmKey": null,
+                        "apnKey": null,
+                        "dept": {
+                            "deptId": 1,
+                            "deptName": "IT"
+                        },
+                        "designation": {
+                            "desigId": 1,
+                            "desigName": "HR"
+                        },
+                        "organization": {
+                            "orgId": 2,
+                            "name": "Faurecia"
+                        },
+                        "createdDate": null,
+                        "updatedDate": null
+                    },
+                    "updated_by_details": {
+                        "empId": 1,
+                        "firstName": "Crazy",
+                        "lastName": "Man",
+                        "contactNo": null,
+                        "address": null,
+                        "emailId": "abcd",
+                        "password": "1234",
+                        "createdBy": 7,
+                        "points": 0,
+                        "profilePic": null,
+                        "fcmKey": null,
+                        "apnKey": null,
+                        "dept": {
+                            "deptId": 1,
+                            "deptName": "IT"
+                        },
+                        "designation": {
+                            "desigId": 1,
+                            "desigName": "HR"
+                        },
+                        "organization": {
+                            "orgId": 2,
+                            "name": "Faurecia"
+                        },
+                        "createdDate": null,
+                        "updatedDate": null
+                    },
+                    "createdDate": "2018-08-17T12:47:18.000+0000",
+                    "updatedDate": "2018-08-17T18:18:53.000+0000"
+                }
+            ]
+        }
+    ]
+}

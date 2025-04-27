@@ -1,0 +1,59 @@
+
+<section class="content">
+	<!--<div class="container main-container" style="min-height: 657px;width: 99%;">-->
+	    <div class="col-lg-12">
+            <div class="row">
+                <label class="text txt-color-primary" style="margin-left: 27px;font-size: 25px;font-weight: 400;font-family: sans-serif;">User Access Control</label>
+            </div>
+        </div>
+        
+        <div>
+            <hr style="margin-top: 7em;margin-bottom: 10px;border-top: 1px solid #e6e5e5;">
+        </div>
+
+        <div class="row" style="margin-top: 14px;">
+            <div class="col-lg-12">
+                <div class="search-box" style="margin-bottom: 14px;">
+                    <input type="text" ng-model="searchEmp"><i style="margin-top: 3px;" class="fa fa-search"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="user-list-container" ng-scrollbars>
+            <div ng-show="flagEmpDetLoading" class="loadingIndicatorContainer ldng-ind-sm" style="margin-top: 110px;">
+                <img src="dist/icons/ic_team_mgmt_gray.png">
+                <div class="msg">Please wait empoyee details are loading</div>
+                <div style="width: 100px; margin:0 auto;" class="lineLoaderRelative"></div>
+            </div>
+
+            <div ng-show="!flagEmpDetLoading" class="user-list-item" ng-repeat="x in employeeList | filter : searchEmp">
+                <div>
+                    <!-- <div class="user-checkbox">
+                        <input type="checkbox">
+                    </div> -->
+                    <div class="username">{{x.concatedName}}</div>
+                    <div class="email">{{x.emailId}}</div>
+                    <div class="contact-no">{{x.dept.deptName}}</div>
+                    <div class="department">{{x.designation}}</div>
+                    <div class="desig">{{x.desig}}</div>
+                </div>
+                <div style="display: inline-flex;">
+                    <div class="roleCard" ng-repeat="role in allRoles" id="role{{x.empId}}{{role.id}}" ng-click="selectRole(x.empId, role.id)" ng-class="{'selectedRole' : isRoleExist(role.id, x.roles)}">
+                        {{role.name}}
+                        <div id="indicator{{x.empId}}{{role.id}}" class="spinner analyticsIndicator" style="display:none;position: absolute;top: 0px;left: 0px;height: 23px;padding-top: 6px;border-radius: 25px;width: 100%;background: lightgray;opacity: 0.8;">
+                            <div class="bounce1"></div>
+                            <div class="bounce2"></div>
+                            <div class="bounce3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr style="border-top: 1px solid #BDBDBD;margin-bottom: 10px;margin-top: 0px;">
+        
+        <div style="text-align: right;margin-top: 5px;">
+            <button class="btn btn-default btn-submit-role bg-color-primary" ng-click="saveMenu(menuList, selectedRole)">Submit</button>
+        </div>
+    <!--</div>-->
+</section>

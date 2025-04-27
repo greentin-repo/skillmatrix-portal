@@ -1,0 +1,51 @@
+ {
+ "quesDet": [
+            {
+                "quesId": 1,
+                "ques": "Survey Question1",
+                
+                "options" : [
+                    {
+                        "count" : 40,
+                        "optText" : "option 1"
+                    },
+                    {
+                        "count" : 40,
+                        "optText" : "option 2"
+                    },
+                    {
+                        "count" : 10,
+                        "optText" : "option 3"
+                    },
+                    {
+                        "count" : 10,
+                        "optText" : "option 4"
+                    }
+                ]
+                
+            }, 
+            {
+                "quesId": 2,
+                "ques": "Question2",
+                "options" : [{
+                    "count" : 20,
+                    "optText" : "option 1"
+                },
+                {
+                    "count" : 50,
+                    "optText" : "option 2"
+                },
+                {
+                    "count" : 50,
+                    "optText" : "option 3"
+                },
+                {
+                    "count" : 50,
+                    "optText" : "option 4"
+                }
+
+            ]
+                
+            }
+        ]
+}

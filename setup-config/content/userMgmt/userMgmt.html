@@ -1,0 +1,687 @@
+<link rel="stylesheet" href="content/userMgmt/userMgmt.css">
+<div class="container" style="width: 100%;" ng-style="{height: screenHeight+ 'px'}">
+    <div ng-include="'common/loading_indicator.html'"></div>
+    <div class="row">
+        <div class="col-lg-12" style="display: flex;">
+            <div class="main-tab-switcher">
+                <div class="main-tab-switch" ng-class="{mainActiveSwitch:isSetMainTab(1)}" ng-click="setMainTab(1)"
+                    ng-if="!isRoleExistOfRegisteredUser(ROLES.SUPERADMIN.name)">Role Management</div>
+                <div class="main-tab-switch" ng-class="{mainActiveSwitch:isSetMainTab(2)}" ng-click="setMainTab(2)">
+                    <!-- {{langTranslate.Module_Management}} -->
+                    Role - Module Mapping
+                </div>
+                <div class="main-tab-switch" ng-class="{mainActiveSwitch:isSetMainTab(3)}" ng-click="setMainTab(3)">
+                    <!-- {{langTranslate.User_Access_Management}} -->
+                    Role - User Mapping
+                </div>
+
+                <div class="main-tab-switch" ng-class="{mainActiveSwitch:isSetMainTab(5)}" ng-click="setMainTab(5)">
+                    User Access Control
+                </div>
+
+                <!-- <div class="main-tab-switch" ng-class="{mainActiveSwitch:isSetMainTab(4)}" ng-click="setMainTab(4)">
+                    Plant Access Control
+                </div> -->
+            </div>
+        </div>
+    </div>
+
+    <div class="arrow-fwd" ng-if="checkIndexEnable(nextIndexMenu)" ng-click="nextMenu()"
+        style="cursor:pointer;position: absolute;top: 10px;right: 50px;">
+        <img src="dist/icons/fwd-arrow.png">
+    </div>
+    <!--------------Common Branch---------------------------------->
+    <div class="row">
+        <div class="col-md-12" style="margin-top: 6px;margin-left: 11px;">
+            <div class="col-md-6">
+                <div class="branch-txt" ng-if="mainTab != 4">
+                    <div style="display: inline-flex;width: 100%;">
+                        <div class="txt-finance">
+                            <span class="select-lbl">Select Branch</span>
+                        </div>
+                        <select class="form-control deptwiseGraph" placeholder="Select Branch"
+                            ng-model="branchDet.selectBranchId" name="selectBranchId"
+                            ng-change="changeBranchData(branchDet.selectBranchId,mainTab)">
+                            <option value="{{branch.branchId}}" ng-repeat="branch in branchAccessList">
+                                {{branch.branchName}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div style="display:inline-flex;float: right;" ng-if="mainTab == 2">
+                    <div class="lbl-role txt-color-primary">Role</div>
+                    <div class="form-group pr">
+                        <select class="form-control select-field dropdown-select-role"
+                            ng-options="role.name for role in RoleList |filter:{name:'!GREENTIN_SUPERADMIN'}"
+                            ng-model="selectedRole" ng-change="setSelectedRole(selectedRole)">
+                        </select>
+                        <span class="select-icon"></span>
+                    </div>
+                    <div class="btn-help" ng-click="showHelpPopup('module_mgmt')"
+                        style="margin-top: 9px;margin-right: 15px;margin-left: 16px;">
+                        <i class="fa fa-question-circle"></i>
+                    </div>
+                </div>
+                <!-----Tab 3-->
+                <div ng-if="mainTab == 3">
+                    <div class="btn-help" ng-click="showHelpPopup('usr_acc_mgmt')"
+                        style="float: right;margin-top: 7px;">
+                        <i class="fa fa-question-circle"></i>
+                    </div>
+                    <div class="search-box" style="margin-bottom: 14px;margin-right: 15px;">
+                        <input type="text" ng-model="employeeList.searchEmp"><i style="margin-top: 3px;"
+                            class="fa fa-search"></i>
+                    </div>
+                </div>
+                <!------Tab 5-->
+                <div ng-if="mainTab == 5">
+                    <div style="display: inline-flex;width: 65%;">
+                        <div class="search-box" style="margin-bottom: 14px;margin-right: 15px;">
+                            <input type="text" ng-model="userList.searchEmp"><i style="margin-top: 3px;"
+                                class="fa fa-search"></i>
+                        </div>
+                        <div class="btn-help" ng-click="showHelpPopup('usr_acc_control')"
+                            style="float: right;margin-top: 7px;">
+                            <i class="fa fa-question-circle"></i>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-default btn-user" style="color: white;
+                    font-size: 14px;float: right;margin-bottom: 1%;height: 36px;" ng-click="userAccesspopup()">
+                        <i class="fa fa-plus" style="color: white;font-size: 14px;" aria-hidden="true"></i> Add User
+                        Access</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-------------------------------------------------------------->
+    <div ng-show="isSetMainTab(1)" class="usr-mgmt-tab-content">
+        <div class="row">
+            <div class="col-lg-10">
+                <label class="text txt-color-primary"
+                    style="margin-top: 10px;font-size: 25px;font-weight: 400;font-family: sans-serif;">Role Management
+                </label>
+            </div>
+        </div>
+
+        <div ng-show="flagRoleDetLoading" class="loadingIndicatorContainer ldng-ind-sm"
+            style="margin-top: 110px;width: 85%;margin-left: 0px;">
+            <div class="msg">details are loading</div>
+            <div style="width: 100px; margin:0 auto;" class="lineLoaderRelative"></div>
+        </div>
+
+        <div class="row" style="margin-top: 10px;">
+            <div class="col-lg-10" style="margin-left: 0px;max-height:480px;overflow:auto;height: 500px;" ng-scrollbars>
+                <!-- <div class="col-lg-3">
+                    <div class="btn-add-form" style="padding: 0px;">
+                        <div style="width: 100%;">
+                            <img src="dist/img/ic_add.png" style="margin-left: 10px;margin-top: 4px;margin-bottom: 4px;width: 33px;height: 33px;padding: 6px;">
+                            <span class="Organization" style="font-size: 16px;margin-top: 11px;width: 100%;text-align: center;padding-left: 0px;font-weight: 900;">Add Role</span>
+                        </div>
+                    </div>
+                </div> -->
+                <div class="row">
+                    <div class="col-lg-3" ng-repeat="data in roleList">
+                        <div class="btn-show-form" style="margin-left: 1px;padding: 0px;height: 41px;">
+                            <div style="float: left;margin: 10px;">
+                                <span class="organization" style="font-weight:500;">{{data.name}}</span>
+                            </div>
+                            <div style="margin-top: 10px; margin-right: 11px;display: inline; float: right;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--close tab 1-->
+
+    <div ng-show="isSetMainTab(2)" class="usr-mgmt-tab-content">
+        <!-- <div style="position: relative;">
+            <hr style="margin-top: 10px;margin-bottom: 10px;border-top: 1px solid #BDBDBD;">
+        </div> -->
+        <!-- <div class="row">
+            <div class="col-md-12" style="margin-top: 6px;">
+                <div class="col-md-7">
+                    <div class="branch-txt">
+                        <div style="display: inline-flex;width: 100%;">
+                            <div class="txt-finance">
+                                <span class="select-lbl">Select Branch</span>
+                            </div>
+                            <select class="form-control deptwiseGraph" placeholder="Select Branch"
+                            ng-model="branchDet.selectBranchId" name="selectBranchId"
+                                ng-change="getRoleAccessList()">
+                                <option value="{{branch.branchId}}" ng-repeat="branch in branchAccessList">
+                                    {{branch.branchName}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div style="display:inline-flex;">
+                        <div class="lbl-role txt-color-primary">Role</div>
+                        <div class="form-group pr">
+                            <select class="form-control select-field dropdown-select-role"
+                                ng-options="role.name for role in RoleList |filter:{name:'!GREENTIN_SUPERADMIN'}"
+                                ng-model="selectedRole" ng-change="setSelectedRole()">
+                            </select>
+                            <span class="select-icon"></span>
+                        </div>
+                        <div class="btn-help" ng-click="showHelpPopup('module_mgmt')" style="margin-top: 9px;margin-right: 15px;margin-left: 16px;">
+                            <i class="fa fa-question-circle"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <!-- <div class="row" style="height: 422px; overflow: auto;width: 86%" ng-scrollbars>
+                <div style="text-align:center;">
+                    <div ng-if="roleLoading" class="loadingIndicatorContainer ldng-ind-sm"
+                        style="margin-top: 10px;border: 2px solid lightgray;width: 259px;">
+                        <i class="fa fa-building-o fa-2x" aria-hidden="true"></i>
+                        <div class="msg">Please wait menu list is loading</div>
+                        <div style="width: 100px; margin:0 auto;" class="lineLoaderRelative"></div>
+                    </div>
+                    <div ng-if="!roleLoading && menuList.length==0" class="loadingIndicatorContainer ldng-ind-sm"
+                        style="margin-top: 10px;border: 2px solid lightgray;width: 259px;">
+                        <i class="fa fa-building-o fa-2x" aria-hidden="true"></i>
+                        <div class="msg">Data not found</div>
+                    </div>
+                </div>
+                <div class="col-md-4" ng-repeat="x in menuList" ng-if="!roleLoading && menuList.length>0">
+                    <div class="clientListCard">
+                        <div class="checkbox sugg-box">
+                            <label class="sugg-lbl" style="padding-left: 20px !important;">
+                                <input type="checkbox" name="menu" ng-model="x.statusId" ng-click="toggleAll(x,x.statusId)"
+                                    ng-checked="x.statusId">{{x.menuName}}
+                            </label>
+                        </div>
+                        <div class="cl-card-body">
+                            <div class="checkbox" style="margin-top: 0px;margin-bottom: 0px;"
+                                ng-repeat="submenu in x.subMenuList">
+                                <div>
+                                    <label class="sugg-menu">
+                                        <input type="checkbox"
+                                            ng-disabled="selectedRole.name == ROLES.SUPERADMIN.name && submenu.subMenuName=='Access Management'"
+                                            value="{{submenu.subMenuId}}" ng-checked="submenu.statusId"
+                                            ng-model="submenu.statusId"
+                                            ng-change="changeSubMenuAccess(x)">{{submenu.subMenuName}}
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+        <div class="row">
+            <div style="text-align:center;">
+                <div ng-if="roleLoading" class="loadingIndicatorContainer ldng-ind-sm"
+                    style="border: 2px solid lightgray;width: 259px;">
+                    <i class="fa fa-building-o fa-2x" aria-hidden="true"></i>
+                    <div class="msg">Please wait menu list is loading</div>
+                    <div style="width: 100px; margin:0 auto;" class="lineLoaderRelative"></div>
+                </div>
+                <div ng-if="!roleLoading && menuList.length==0" class="loadingIndicatorContainer ldng-ind-sm"
+                    style="margin-top: 9em;border: 2px solid lightgray;width: 259px;margin-left: 26em;">
+                    <i class="fa fa-building-o fa-2x" aria-hidden="true"></i>
+                    <div class="msg">Data not found</div>
+                </div>
+            </div>
+            <div style="position: relative;width: 100%;">
+                <div class="menu-list-container" ng-scrollbars>
+                    <div class="menu-list-item" ng-repeat="x in menuList" ng-if="!roleLoading && menuList.length>0">
+                        <div>
+                            <div class="username" name="menu" ng-model="x.statusId">
+                                {{x.menuName}}</div>
+                        </div>
+                        <div style="margin-top: 3px;">
+                            <div class="menuCard" ng-repeat="submenu in x.subMenuList"
+                                ng-class="{'selectedRole' : submenu.statusId}">
+                                <div ng-model="submenu.statusId" ng-click="toggleAll(x,submenu.subMenuName)">
+                                    {{submenu.subMenuName}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr style="border-top: 1px solid #BDBDBD;margin-bottom: 10px;margin-top: 23px;width: 100%;margin-left: -15px;">
+        <!--&& selectedRole.name != ROLES.SUPERADMIN.name-->
+        <div style="text-align: right;margin-top: 5px;width: 98%;" ng-if="menuList.length > 0">
+            <button class="btn btn-default btn-submit-role bg-color-primary"
+                ng-click="saveMenu(menuList, selectedRole)">Save</button>
+        </div>
+        <!-- <hr style="border-top: 1px solid #BDBDBD;margin-bottom: 10px;margin-top: 0px;">
+            <div style="text-align: right;margin-top: 5px;width: 86%" ng-if="menuList.length > 0">
+                <button class="btn btn-default btn-submit-role bg-color-primary"
+                    ng-click="saveMenu(menuList, selectedRole)">Save</button>
+            </div> -->
+    </div>
+
+
+    <!-- <div ng-show="isSetMainTab(2)" class="usr-mgmt-tab-content">
+        <div class="row" style="margin-top: 10px;">
+            <div class="col-md-12">
+                <label style="font-size: 19px;font-weight: 400;font-family: sans-serif;margin-top: 0;" class="txt-color-primary">Module Management</label>
+            </div>
+        </div>
+        <div style="position: relative;">
+            <hr style="margin-top: 10px;margin-bottom: 10px;border-top: 1px solid #BDBDBD;">
+        </div>
+        <div class="row">
+            <div class="col-md-12" style="margin-top: 44px;left: 42em;margin-top: -10px;">
+                <div style="display:inline-flex;">
+                    <div class="lbl-role txt-color-primary">Role</div>
+                    <div class="form-group pr">
+                        <select class="form-control select-field dropdown-select-role" ng-options="role.name for role in RoleList |filter:{name:'!GREENTIN_SUPERADMIN'}" ng-model="selectedRole" ng-change="setSelectedRole()">
+                        </select>
+                        <span class="select-icon"></span>
+                    </div>
+                    <div class="btn-help" ng-click="showHelpPopup('module_mgmt')" style="margin-top: 9px;margin-right: 15px;margin-left: 16px;">
+                        <i class="fa fa-question-circle"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="height: 422px; overflow: auto;width: 86%" ng-scrollbars>
+            <div style="text-align:center;">
+                <div ng-if="roleLoading" class="loadingIndicatorContainer ldng-ind-sm" style="margin-top: 10px;border: 2px solid lightgray;width: 259px;">
+                    <i class="fa fa-building-o fa-2x" aria-hidden="true"></i>
+                    <div class="msg">Please wait menu list is loading</div>
+                    <div style="width: 100px; margin:0 auto;" class="lineLoaderRelative"></div>
+                </div>
+                <div ng-if="!roleLoading && menuList.length==0" class="loadingIndicatorContainer ldng-ind-sm" style="margin-top: 10px;border: 2px solid lightgray;width: 259px;">
+                    <i class="fa fa-building-o fa-2x" aria-hidden="true"></i>
+                    <div class="msg">Data not found</div>
+                </div>
+            </div>
+            <div class="col-md-4" ng-repeat="x in menuList" ng-if="!roleLoading && menuList.length>0">
+                <div class="clientListCard">
+                    <div class="checkbox sugg-box">
+                        <label class="sugg-lbl" style="padding-left: 20px !important;">
+                        <input type="checkbox"  name="menu" ng-model="x.statusId" ng-click="toggleAll(x,x.statusId)" ng-checked="x.statusId">{{x.menuName}}
+                    </label>
+                    </div>
+                    <div class="cl-card-body">
+                        <div class="checkbox" style="margin-top: 0px;margin-bottom: 0px;" ng-repeat="submenu in x.subMenuList">
+                            <div>
+                                <label class="sugg-menu">
+                                <input type="checkbox" ng-disabled="selectedRole.name == ROLES.SUPERADMIN.name && submenu.subMenuName=='Access Management'" value="{{submenu.subMenuId}}" ng-checked="submenu.statusId" ng-model="submenu.statusId" ng-change="changeSubMenuAccess(x)">{{submenu.subMenuName}}
+                            </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr style="border-top: 1px solid #BDBDBD;margin-bottom: 10px;margin-top: 0px;">
+        <div style="text-align: right;margin-top: 5px;width: 86%" ng-if="menuList.length > 0">
+            <button class="btn btn-default btn-submit-role bg-color-primary" ng-click="saveMenu(menuList, selectedRole)">Save</button>
+        </div>
+    </div> -->
+
+    <!--ng-disabled="selectedRole.name == ROLES.SUPERADMIN.name"-->
+    <!--&& selectedRole.name != ROLES.SUPERADMIN.name-->
+    <!--close tab 2 div-->
+
+    <div ng-show="isSetMainTab(3)" class="usr-mgmt-tab-content" style="margin-left: 0px;">
+        <!-- <div class="row" style="margin-top: 4px;width: 100.3%;">
+            <div class="col-lg-7">
+                <div class="branch-txt" style="left: 0px;">
+                    <div style="display: inline-flex;width: 100%;">
+                        <div class="txt-finance">
+                            <span class="select-lbl">Select Branch</span>
+                        </div>
+                       <select class="form-control deptwiseGraph" placeholder="Select Branch"
+                            ng-model="branchDet.selectBranchId" name="selectBranchId" ng-change="getEmployeeList()">
+                            <option value="{{branch.branchId}}" ng-repeat="branch in branchAccessList">
+                                {{branch.branchName}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="btn-help" ng-click="showHelpPopup('usr_acc_mgmt')" style="float: right;margin-top: 7px;">
+                    <i class="fa fa-question-circle"></i>
+                </div>
+                <div class="search-box" style="margin-bottom: 14px;margin-right: 15px;">
+                    <input type="text" ng-model="searchEmp"><i style="margin-top: 3px;" class="fa fa-search"></i>
+                </div>
+            </div>
+        </div> -->
+
+        <div ng-show="flagEmpDetLoading" class="loadingIndicatorContainer ldng-ind-sm"
+            style="margin-top: 110px;width: 85%;margin-left: 0px;">
+            <img src="dist/icons/ic_team_mgmt_gray.png">
+            <div class="msg">Please wait empoyee details are loading</div>
+            <div style="width: 100px; margin:0 auto;" class="lineLoaderRelative"></div>
+        </div>
+
+        <!-- <div style="position: relative;width: 100%;">
+            <div ng-show="flagEmpDetLineIndicator" class="lineLoader empDetLineLoader"></div>
+            <div class="user-list-container" ng-scrollbars>
+                <div ng-show="!flagEmpDetLoading" class="user-list-item" ng-repeat="x in employeeList | filter : searchEmp" ng-if="x.isDeactive == 0">
+                    <div>
+                        <div class="username">{{x.concatedName}}</div>
+                        <div class="email"><span style="color: #777777;">Email ID : </span>{{x.emailId}}</div>
+                        <div class="contact-no"><span style="color: #777777;">Department : </span>{{x.dept.deptName}}
+                        </div>
+                        <div class="department"><span style="color: #777777;">Designation : </span>{{x.designation}}
+                        </div>
+                    </div>
+                    <div style="display: inline-flex;margin-top: 3px;">
+                        <div class="roleCard" ng-if="role.name != 'GREENTIN_SUPERADMIN' && role.name != 'CONTROLLERLEVELUP'" ng-repeat="role in RoleList" id="role{{x.empId}}{{role.id}}" ng-click="checkPendingActions(x, role.id, role.name, isRoleExist(role.id, x.roles))" ng-class="{'selectedRole' : isRoleExist(role.id, x.roles)}">
+                            {{role.name}}
+                            <div id="indicator{{x.empId}}{{role.id}}" class="spinner analyticsIndicator" style="display:none;position: absolute;top: 0px;left: 0px;height: 23px;padding-top: 6px;border-radius: 25px;width: 100%;background: lightgray;opacity: 0.8;">
+                                <div class="bounce1"></div>
+                                <div class="bounce2"></div>
+                                <div class="bounce3"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <div style="position: relative;width: 100%;">
+            <div ng-show="flagEmpDetLineIndicator" class="lineLoader empDetLineLoader"></div>
+            <div class="menu-list-container1" ng-scrollbars>
+                <div class="menu-list-item" ng-repeat="x in employeeList | filter : employeeList.searchEmp"
+                    ng-if="x.isDeactive == 0">
+                    <div>
+                        <!-- <div class="username" name="menu" ng-model="x.statusId">
+                            {{x.menuName}}</div> -->
+                        <div class="username">{{x.concatedName}}</div>
+                        <div class="email"><span style="color: #777777;">Email ID : </span>{{x.emailId}}</div>
+                        <div class="contact-no"><span style="color: #777777;">Department : </span>{{x.dept.deptName}}
+                        </div>
+                        <div class="department"><span style="color: #777777;">Designation : </span>{{x.designation}}
+                        </div>
+                    </div>
+                    <div style="margin-top: 3px;">
+                        <div class="menuCard"
+                            ng-if="role.name != 'GREENTIN_SUPERADMIN' && role.name != 'CONTROLLERLEVELUP'"
+                            ng-repeat="role in RoleList" id="role{{x.empId}}{{role.id}}"
+                            ng-click="checkPendingActions(x, role.id, role.name, isRoleExist(role.id, x.roles))"
+                            ng-class="{'selectedRole' : isRoleExist(role.id, x.roles)}">
+                            {{role.name}}
+                            <div id="indicator{{x.empId}}{{role.id}}" class="spinner analyticsIndicator"
+                                style="display:none;position: absolute;top: 0px;left: 0px;height: 23px;padding-top: 6px;border-radius: 25px;width: 100%;background: lightgray;opacity: 0.8;">
+                                <div class="bounce1"></div>
+                                <div class="bounce2"></div>
+                                <div class="bounce3"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--close tab 3 div-->
+
+
+    <!---Start Tab 4------>
+    <div ng-show="isSetMainTab(4)" class="usr-mgmt-tab-content">
+        <div class="row" style="margin-top: 4px;width: 100.3%;">
+            <div class="col-lg-0">
+            </div>
+            <div class="col-lg-12">
+                <div class="btn-help" ng-click="showHelpPopup('plant_acc_mgmt')" style="float: right;margin-top: 7px;">
+                    <i class="fa fa-question-circle"></i>
+                </div>
+                <div class="search-box" style="margin-bottom: 14px;margin-right: 15px;">
+                    <input type="text" ng-model="searchEmp"><i style="margin-top: 3px;" class="fa fa-search"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div ng-show="flagEmpDetLoading" class="loadingIndicatorContainer ldng-ind-sm"
+            style="margin-top: 110px;width: 85%;margin-left: 0px;">
+            <img src="dist/icons/ic_team_mgmt_gray.png">
+            <div class="msg">Please wait empoyee details are loading</div>
+            <div style="width: 100px; margin:0 auto;" class="lineLoaderRelative"></div>
+        </div> -->
+
+        <div style="position: relative;width: 100%;">
+            <div ng-show="flagEmpDetLineIndicator" class="lineLoader empDetLineLoader"></div>
+            <div class="user-list-container" ng-scrollbars>
+                <div ng-show="!flagEmpDetLoading" class="user-list-item"
+                    ng-repeat="x in orgEmployeeList | filter : searchEmp" ng-if="x.isDeactive == 0">
+                    <div>
+                        <div class="username">{{x.concatedName}}</div>
+                        <div class="email"><span style="color: #777777;">Email ID : </span>{{x.emailId}}</div>
+                        <div class="contact-no"><span style="color: #777777;">Department :
+                            </span>{{x.dept.deptName}}
+                        </div>
+                        <div class="department"><span style="color: #777777;">Designation : </span>{{x.designation}}
+                        </div>
+                    </div>
+                    <div style="display: inline-flex;margin-top: 3px;">
+                        <div class="roleCard" ng-repeat="branch in branchList"
+                            ng-click="saveplantaccess(x, branch.branchId,isPlantExist(branch.branchId,x.empId),getPlantAccessId(branch.branchId,x.empId))"
+                            ng-class="{'selectedRole' : isPlantExist(branch.branchId,x.empId)}">
+                            <!-- ng-class="{'selectedRole' : branch.isAccess == 'Y' && branch.empId == x.empId}" -->
+                            {{branch.name}}
+                            <div id="plantindicator{{x.empId}}{{branch.branchId}}" class="spinner analyticsIndicator"
+                                style="display:none;position: absolute;top: 0px;left: 0px;height: 23px;padding-top: 6px;border-radius: 25px;width: 100%;background: lightgray;opacity: 0.8;">
+                                <div class="bounce1"></div>
+                                <div class="bounce2"></div>
+                                <div class="bounce3"></div>
+                            </div>
+                        </div>
+                        <!-- <div class="roleCard"
+                            ng-if="role.name != 'GREENTIN_SUPERADMIN' && role.name != 'CONTROLLERLEVELUP'"
+                            ng-repeat="role in RoleList" id="role{{x.empId}}{{role.id}}"
+                            ng-click="checkPendingActions(x, role.id, role.name, isRoleExist(role.id, x.roles))"
+                            ng-class="{'selectedRole' : isRoleExist(role.id, x.roles)}">
+                            {{role.name}}
+                            <div id="indicator{{x.empId}}{{role.id}}" class="spinner analyticsIndicator"
+                                style="display:none;position: absolute;top: 0px;left: 0px;height: 23px;padding-top: 6px;border-radius: 25px;width: 100%;background: lightgray;opacity: 0.8;">
+                                <div class="bounce1"></div>
+                                <div class="bounce2"></div>
+                                <div class="bounce3"></div>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Start Tab 5 -->
+    <div ng-show="isSetMainTab(5)" class="usr-mgmt-tab-content">
+        <div ng-include="'content/userMgmt/userwiseaccessMgmt.html'"></div>
+    </div>
+    <!-- Menu Modal -->
+    <div class="modal fade addNewMenuModal" id="MenuModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add Menu</h4>
+                </div>
+                <div class="modal-body">
+                    <label>New Menu Name</label>
+                    <input type="text" class="inputNewMenu" id="inputName" name="name" placeholder="Enter Menu Name"
+                        ng-model="selectedMenu.menuName" style="width: 100%">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-close" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary btn-update" ng-click="submitMenu()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SubMenu Modal -->
+    <div class="modal fade addNewSubMenuModal" id="subMenuModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title txt-color-primary">Add Sub Menu</h4>
+                </div>
+                <div class="modal-body">
+                    <label>Add Menu</label>
+                    <input type="text" class="inputNewSubMenu" id="inputName" name="name"
+                        placeholder="Enter Sub Menu Name" ng-model="selectedSubMenu.subMenuName" style="width: 100%">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-close" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary btn-update" ng-click="submitSubMenu()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Menu Modal -->
+    <div class="modal fade updateMenuModal" id="UpdateMenuModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title txt-color-primary">Edit Menu</h4>
+                </div>
+                <div class="modal-body">
+                    <label>Please update menu name</label>
+                    <input type="text" class="inputMenu" id="inputName" name="name" placeholder="Enter Menu Name"
+                        ng-model="selectedMenu.menuName" style="width: 100%">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-close" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary btn-update" ng-click="updateMenu()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SubMenu Modal -->
+    <div class="modal fade updateSubMenuModel" id="updateSubMenuModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title txt-color-primary">Update Sub Menu</h4>
+                </div>
+                <div class="modal-body">
+                    <label>Please update submenu name</label>
+                    <input type="text" id="inputName" name="name" class="inputSubMenu" placeholder="Enter Sub Menu Name"
+                        ng-model="selectedSubMenu.subMenuName" style="width: 100%">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-close" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary btn-update"
+                        ng-click="submitUpdateSubMenu()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="setupCompleted" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Congratulations</h4>
+            </div>
+            <div class="modal-body">
+                <p>Setup is completed</p>
+            </div>
+            <div class="modal-footer">
+                <a type="button" class="btn btn-success" href="../template.html#!/suggestions">OK</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="modal fade" id="statusMessageModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body" style="padding: 30px;">
+                <div style="text-align: center;">
+                    <i class="material-icons ic-popup">info</i>
+                    <div class="msg">{{statusMessage}}</div>
+                    <!-- <button type="button" class="btn btn-success" style="    margin-left: 0px;
+                    margin-top: 20px;">OK</button> -->
+                    <div class="btn-ok" data-dismiss="modal">OK</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="confirmRemModal" class="modal fade confirmDeleteModal" role="dialog">
+    <div class="trans-bg"></div>
+    <img data-dismiss="modal" class="img-close" src="dist/icons/ic_close.png" style="top: 2em; width: 3em;right: 5em;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="img-del-container">
+                    <img src="dist/icons/ic_delete_lg.png">
+                </div>
+                <h4 style="margin-top: 30px;margin-bottom: 20px;">Do you really want to remove {{cnfRemPopupRoleTxt}}
+                    role of this employee?</h4>
+                <div class="msg-box" ng-show="removeRoleCnfMsg != '' && removeRoleCnfMsg != null">
+                    <i class="fa fa-info icon"></i>
+                    <div class="msg-container">
+                        <div class="msg">{{removeRoleCnfMsg}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div ng-show="flagdeleteSpinner" class="small-spinner deleteSpinner"
+                    style="width: 40px;height: 40px;position: unset;"></div>
+                <button ng-show="!flagdeleteSpinner" type="button" class="delete-btn" data-dismiss="modal">No</button>
+                <button ng-show="!flagdeleteSpinner" type="button" class="delete-btn" id="btnConfirmRemove"
+                    ng-click="selectRole()">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-------delete Plant Model-->
+<div id="confirmPlantModal" class="modal fade confirmDeleteModal" role="dialog">
+    <div class="trans-bg"></div>
+    <img data-dismiss="modal" class="img-close" src="dist/icons/ic_close.png" style="top: 2em; width: 3em;right: 5em;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="img-del-container">
+                    <img src="dist/icons/ic_delete_lg.png">
+                </div>
+                <h4 style="margin-top: 30px;margin-bottom: 20px;">Do you really want to remove branch of this employee?
+                </h4>
+                <!-- <div class="msg-box" ng-show="removeRoleCnfMsg != '' && removeRoleCnfMsg != null">
+                    <i class="fa fa-info icon"></i>
+                    <div class="msg-container">
+                        <div class="msg">{{removeRoleCnfMsg}}</div>
+                    </div>
+                </div> -->
+            </div>
+            <div class="modal-footer">
+                <div ng-show="flagdeleteplantaccess" class="small-spinner deleteSpinner"
+                    style="width: 40px;height: 40px;position: unset;"></div>
+                <button ng-show="!flagdeleteplantaccess" type="button" class="delete-btn"
+                    data-dismiss="modal">No</button>
+                <button ng-show="!flagdeleteplantaccess" type="button" class="delete-btn" id="btnConfirmRemove"
+                    ng-click="deleteplantaccess()">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div ng-include="'common/help_popup.html'"></div>

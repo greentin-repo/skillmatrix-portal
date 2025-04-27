@@ -1,0 +1,21 @@
+html,body{
+	height: 100%;
+}
+.width-20{
+	width: 20%;
+}
+.width-40{
+	width: 40%;
+}
+.width-30{
+	width: 30%;
+}
+
+
+.sidebar-bg-color{
+	background-color: #8792d6;
+}
+
+.selected-side-menu{
+	background-color: #636EB5;
+}

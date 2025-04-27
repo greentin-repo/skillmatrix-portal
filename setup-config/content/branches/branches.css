@@ -1,0 +1,221 @@
+.right-card {
+    position: relative;
+    margin-bottom: 46px;
+    background: white;
+    border-radius: 23px;
+    height: 535px;
+    width: 80%;
+    -webkit-box-shadow: 2px 25px 41px -2px rgba(51, 50, 51, 0.34);
+    -moz-box-shadow: 2px 25px 41px -2px rgba(51, 50, 51, 0.34);
+    box-shadow: 2px 25px 41px -2px rgba(51, 50, 51, 0.34);
+}
+
+.right-card .header {
+    padding: 16px 35px 8px;
+    border-bottom: 2px solid #f1f1f1;
+    display: inline-flex;width: 100%;
+}
+
+.tbl-right-side {
+    width: 100%;
+    display: block;
+    border-collapse: separate;
+    border-spacing: 0 4px;
+}
+
+.tbl-right-side th {
+    color: gray;
+    padding: 3px 12px;
+}
+
+.tbl-right-side tbody {
+    height: 410px;
+    overflow-x: auto;
+    display: block;
+    width: 101.5%;
+}
+
+.tbl-right-side thead {
+    width: 100%;
+    display: block;
+}
+
+.tbl-right-side thead tr {
+    width: 100%;
+    display: inline-flex;
+}
+
+.tbl-right-side tbody tr {
+    width: 100%;
+    display: inline-table;
+    cursor: pointer;
+    color: #8792D6;
+    cursor: pointer;
+    transition: box-shadow 0.1s ease-in-out;
+}
+
+.tbl-right-side tbody tr:hover {
+    -webkit-box-shadow: 0px 3px 5px 1px rgba(204, 202, 204, 1);
+    -moz-box-shadow: 0px 3px 5px 1px rgba(204, 202, 204, 1);
+    box-shadow: 0px 3px 5px 1px rgba(204, 202, 204, 1);
+}
+
+.tbl-right-side td {
+    padding: 6px 18px;
+    vertical-align: middle;
+    font-weight: 500;
+}
+
+.tbl-right-side tbody tr td:first-child,
+.tbl-right-side thead tr th:first-child {
+    width: 10%;
+    border-radius: 2px;
+    text-align: center;
+}
+
+.tbl-right-side thead tr th:nth-child(2) {
+    width: 40%;
+}
+
+.tbl-right-side thead tr th:nth-child(3) {
+    width: 40%;
+}
+
+.tbl-right-side thead tr th:nth-child(4) {
+    width: 10%;
+}
+
+.tbl-right-side tbody tr td:nth-child(2) {
+    background: #F5F5F5;
+    border-radius: 5px;
+    width: 40%;
+}
+
+.tbl-right-side tbody tr td:nth-child(3) {
+    background: #F5F5F5;
+    border-radius: 5px;
+    width: 40%;
+}
+
+.tbl-right-side tbody tr td:nth-child(4) {
+    width: 10%;
+}
+
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    padding: 6px 0;
+    font-size: 12px;
+    line-height: 1.428571429;
+    border-radius: 15px;
+}
+
+.btn-circle.btn-lg {
+    width: 50px;
+    height: 50px;
+    padding: 13px 16px;
+    font-size: 18px;
+    line-height: 1.33;
+    border-radius: 25px;
+}
+
+.right-card-button {
+    position: absolute;
+    right: -22px;
+    bottom: 32px;
+}
+
+.upload-logo-container {
+    margin-top: 10px;
+    border: 1px solid lightgray;
+    padding: 20px;
+    border-radius: 15px;
+}
+
+.uploadFormContainer {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.upload-box {
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+    min-height: 87px
+}
+
+.upload-box .controls {
+    width: 200px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.uploadDocPopupContent .img-upload-doc {
+    height: 150px;
+    width: 150px;
+    border-radius: 3px;
+    border: 3px solid white;
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(184, 184, 184, 1);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(184, 184, 184, 1);
+    box-shadow: 0px 0px 5px 0px rgba(184, 184, 184, 1);
+}
+
+.uploadDocPopupContent .btn-upload {
+    width: 150px;
+    margin-top: 10px;
+}
+
+.uploadDocPopupContent .modal-body {
+    padding: 15px 15px 25px 15px;
+}
+
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    opacity: 0;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+}
+
+.btn-upload {
+    border-radius: 20px;
+    width: 120px;
+    margin-top: 10px;
+    background: #8792D6;
+    color: #fff;
+    padding: 4px;
+}
+
+.small-spinner-upload {
+    width: 35px;
+    height: 35px;
+    z-index: 995;
+    border: 3px solid #cac8c8;
+    border-top: 4px solid #33C771;
+    border-radius: 100%;
+    position: absolute;
+    margin: auto;
+    left: 83px;
+    top: 15px;
+    animation: spin 1s infinite linear;
+}
+
+.saveBtn {
+    float: right;
+    margin: 1% -2% 0px 0px;
+}
+
+.pr {
+    position: relative;
+}
+
+.arrow-fwd {
+    position: absolute;
+    z-index: 999;
+    top: 3%;
+    right: 20%;
+    cursor: pointer;
+}
+

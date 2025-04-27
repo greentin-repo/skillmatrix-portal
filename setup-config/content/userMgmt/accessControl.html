@@ -1,0 +1,128 @@
+<link rel="stylesheet" href="content/userMgmt/userMgmt.css">
+<section class="content">
+    <div class="container main-container" style="min-height: 656px;width: 99%;padding-left: 37px;">
+        <div class="row" style="margin-top: 44px;">
+            <div class="col-md-12">
+                <label style="font-size: 25px;font-weight: 400;font-family: sans-serif;" class="txt-color-primary">{{langTranslate.Role_base_Access_control}}</label>
+            </div>
+        </div>
+        <div style="position: relative;">
+            <hr style="margin-top: 10px;margin-bottom: 10px;border-top: 1px solid #BDBDBD;">
+        </div>
+        <div class="row">
+            <div class="col-md-12" style="margin-top: 44px;left: 42em;margin-top: -10px;">
+                <div style="display:inline-flex;">
+                    <div class="lbl-role txt-color-primary">{{langTranslate.Role}}</div>
+                    <div class="form-group pr">
+                        <select class="form-control select-field dropdown-select-role"  ng-options="role.name for role in RoleList" ng-model="selectedRole" ng-change="setSelectedRole()">
+                        </select>
+                        <span class="select-icon"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="height: 446px;overflow: auto;">
+            <div style="text-align:center;">
+                <div ng-if="roleLoading" class="loadingIndicatorContainer ldng-ind-sm" style="margin-top: 10px;border: 2px solid lightgray;width: 259px;">
+                    <i class="fa fa-building-o fa-2x" aria-hidden="true"></i>
+                    <div class="msg">{{langTranslate.Please_wait_menu_list_is_loading}}</div>
+                    <div style="width: 100px; margin:0 auto;" class="lineLoaderRelative"></div>
+               </div>
+               <div ng-if="!roleLoading && menuList.length==0" class="loadingIndicatorContainer ldng-ind-sm" style="margin-top: 10px;border: 2px solid lightgray;width: 259px;">
+                    <i class="fa fa-building-o fa-2x" aria-hidden="true"></i>
+                    <div class="msg">{{langTranslate.Data_not_found}}</div>
+               </div>
+            </div>
+            <div class="col-md-4" ng-repeat="x in menuList" >
+                <div class="clientListCard">
+                    <div class="checkbox sugg-box">
+                        <label class="sugg-lbl" style="padding-left: 20px !important;">
+                            <input type="checkbox" name="menu" ng-model="x.statusId" ng-click="toggleAll(x,x.statusId)" ng-checked="x.statusId">{{x.menuName}}
+                        </label>
+                    </div> 
+                    <div class="cl-card-body">
+                        <div class="checkbox" style="margin-top: 0px;margin-bottom: 0px;" ng-repeat="submenu in x.subMenuList">
+                            <div>
+                                <label class="sugg-menu">
+                                    <input type="checkbox" value="{{submenu.subMenuId}}" ng-checked="submenu.statusId" ng-model="submenu.statusId">{{submenu.subMenuName}}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr style="border-top: 1px solid #BDBDBD;margin-bottom: 10px;margin-top: 0px;">
+        <div style="text-align: right;margin-top: 5px;" ng-if="menuList.length > 0">
+            <button class="btn btn-default btn-submit-role bg-color-primary" ng-click="saveMenu(menuList, selectedRole)">{{langTranslate.Submit}}</button>
+        </div>
+    </div>
+</section>
+<!-- <section>
+    <div class="container main-container" style="min-height: 656px;">
+        <div class="row" style="margin-top: 44px;">
+            <div class="col-md-12">
+                <label style="font-size: 25px;font-weight: 400;margin-left: 59px;font-family: sans-serif;" class="txt-color-primary">Roll
+                    base Access control</label>
+            </div>
+        </div>
+        <div style="position: relative;">
+            <hr style="margin-top: 10px;margin-bottom: 10px;border-top: 1px solid #BDBDBD;">
+        </div>
+        <div class="row">
+            <div class="col-md-12" style="margin-top: 44px;left: 42em;margin-top: -10px;">
+                <div style="display:inline-flex;">
+                    <button class="role-btn">Role</button>
+                    ------------------------------
+                    <div class="form-group pr">
+                        <select class="role-dropdown">
+                            <option value="">Choose your role</option> 
+                            <option ng-repeat="x in RoleList" value="">{{x.name}}</option>
+                        </select>
+                    </div> 
+                    -------------------------------
+                    <div class="form-group pr">
+                        <select class="form-control select-field" ng-model="roleId" ng-click="setSelectedRole()">
+                            <option value="" selected disabled>Select Role</option>
+                            <option ng-if="RoleList.length == 0" >No Record found</option>
+                            <option ng-repeat="role in RoleList" value="{{role.id}}">{{role.name}}</option>
+                        </select>
+                            <span class="select-icon"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12"  style="margin:5% 0px; height: 8em;">
+                    <div>
+                       
+                        <div class="col-md-4" ng-repeat="x in menuList">
+                            <div class="clientListCard">
+                                <div class="checkbox sugg-box"   ng-click="setMenu(x)">
+                                ----------------------------------------------------------------------
+                                    <label class="sugg-lbl"><input type="checkbox" value="">{{x.menu.menuName}}</label>
+                                ---------------------------------------------
+                                    <label class="sugg-lbl"><input type="checkbox" value="">{{x.menuName}}</label>
+                                </div>
+                                -----------------------------------------------------------
+                                <div class="checkbox" ng-repeat="submenu in x.menu.submenuList">
+                                -----------------------------------------------------------
+                                <div class="checkbox" ng-repeat="submenu in x.subMenuList">
+                                    <div>
+                                        <label class="sugg-menu"><input type="checkbox" value="" checked>{{submenu.subMenuName}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="col-md-12">
+            <div style="float: right;margin-top: 4em;margin-right: 31px;">
+                <button class="role-btn" ng-click="saveMenu()">Save</button>
+            </div>
+
+        </div>
+</section> -->

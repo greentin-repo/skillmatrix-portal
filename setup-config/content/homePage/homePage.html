@@ -1,0 +1,354 @@
+<link rel="stylesheet" href="content/homePage/homePage.css">
+<!-- <section class="content pr">
+    <div class="container">
+        <div class="row mt-0 scrollDiv" ng-style="{height: iframeHeight + 'px'}">
+            <div class="col-md-12 mb-5 bg-container">
+                <div class="col-md-12 col-sm-12 col-lg-10 block-sugg-approach">
+                    <div class="" style="margin-top: 7%;">
+                        <div style="height:15px"></div>
+                        <div class="row">
+                            <div class="col-md-12" style="overflow:auto;height: 540px;margin-left: 15px" ng-scrollbars>
+                                <div class="row rolesDiv">
+                                    <div class="col-md-6 mt-2 mb-2">
+                                        <div class="bg-white block-container">
+                                            <div class="row block-h">
+                                                <div class="col-md-8 block-header">
+                                                    <h5 class="title-color pd-5	 text-uppercase violet-text">
+                                                        Comman Setup</h5>
+                                                    <p class="txt-block-content">
+                                                        Person will be responsible for
+                                                    </p>
+                                                    <div class="separator"></div>
+                                                </div>
+                                                <div class="col-md-4 xs-none d-xl-block d-lg-block d-md-block d-sm-none d-none">
+                                                    <img src="dist/img/initiator.png" class="rolesImg">
+                                                </div>
+                                            </div>
+                                            <div style="padding: 10px;">
+                                                <p class="txt-block-content">
+                                                    Here you can setup overall Oraganizational settings such as<strong>Branch,Department & Employee etc.</strong>
+                                                </p>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mt-2 mb-2">
+                                        <div class="bg-white block-container">
+                                            <div class="row block-h">
+                                                <div class="col-md-8 block-header">
+                                                    <h5 class="title-color pd-5	 text-uppercase  violet-text">
+                                                        Suggestion Setup</h5>
+                                                    <div class="separator"></div>
+                                                </div>
+                                                <div class="col-md-4 xs-none d-xl-block d-lg-block d-md-block d-sm-none d-none">
+                                                    <img src="dist/img/controller.png" class="rolesImg">
+                                                </div>
+                                            </div>
+                                            <div style="padding: 10px;">
+                                                <p class="txt-block-content">
+                                                    Here you can setup overall Oraganizational settings such as <strong>Branch,Department & Employee etc.</strong>
+
+                                                </p>
+                                                <p class="txt-block-content">
+                                                    <strong></strong>
+
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mt-2 mb-2">
+                                        <div class="bg-white block-container">
+                                            <div class="row block-h">
+                                                <div class="col-md-8 block-header">
+                                                    <h5 class="title-color pd-5	 text-uppercase  violet-text">
+                                                        Concern Setup</h5>
+                                                    <p class="txt-block-content">
+                                                        {{langTranslate.Person_will_be_responsible_for}}
+                                                    </p>
+                                                    <div class="separator"></div>
+                                                </div>
+                                                <div class="col-md-4 xs-none d-xl-block d-lg-block d-md-block d-sm-none d-none">
+                                                    <img src="dist/img/evaluator.png" class="rolesImg">
+                                                </div>
+                                            </div>
+                                            <div style="padding: 10px;">
+                                                <p class="txt-block-content">
+                                                    <strong>{{langTranslate.Accepting}} </strong> {{langTranslate.Suggestion_For_Evaluation}}
+                                                </p>
+
+                                                <p class="txt-block-content">
+                                                    <strong>{{langTranslate.Rejecting}}</strong> {{langTranslate.Suggestion_Post_Evaluation}}
+                                                </p>
+                                                <p class="txt-block-content">
+                                                    <strong>{{langTranslate.Submitting}} </strong> {{langTranslate.Evaluation_Details}}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mt-2 mb-2">
+                                        <div class="bg-white block-container">
+                                            <div class="row block-h">
+                                                <div class="col-md-8 block-header">
+                                                    <h5 class="title-color pd-5	 text-uppercase  violet-text">
+                                                        Incident Management</h5>
+                                                    <p class="txt-block-content">
+                                                        {{langTranslate.Person_will_be_responsible_for}}
+                                                    </p>
+                                                    <div class="separator"></div>
+                                                </div>
+                                                <div class="col-md-4 xs-none d-xl-block d-lg-block d-md-block d-sm-none d-none">
+                                                    <img src="dist/img/implementer.png" class="rolesImg">
+                                                </div>
+                                            </div>
+                                            <div style="padding: 10px;">
+                                                <p class="txt-block-content">
+                                                    <strong>{{langTranslate.Accepting}}
+                                                    </strong>{{langTranslate.Suggestion_For_Implementation}}
+                                                </p>
+                                                <p class="txt-block-content">
+                                                    <strong>{{langTranslate.Rejecting}}
+                                                    </strong>{{langTranslate.Suggestion_Post_Evaluation}}
+                                                </p>
+                                                <p class="txt-block-content">
+                                                    <strong>{{langTranslate.Submitting}}
+                                                    </strong>{{langTranslate.Implementation_Details}}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mt-2 mb-2">
+                                        <div class="bg-white block-container">
+                                            <div class="row block-h">
+                                                <div class="col-md-8 block-header">
+                                                    <h5 class="title-color pd-5	 text-uppercase violet-text">
+                                                        DWM Setup</h5>
+                                                    <p class="txt-block-content">
+                                                        Person will be responsible for
+                                                    </p>
+                                                    <div class="separator"></div>
+                                                </div>
+                                                <div class="col-md-4 xs-none d-xl-block d-lg-block d-md-block d-sm-none d-none">
+                                                    <img src="dist/img/initiator.png" class="rolesImg">
+                                                </div>
+                                            </div>
+                                            <div style="padding: 10px;">
+                                                <p class="txt-block-content">
+                                                    Here you can setup overall Oraganizational settings such as<strong>Branch,Department & Employee etc.</strong>
+                                                </p>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mt-2 mb-2">
+                                        <div class="bg-white block-container">
+                                            <div class="row block-h">
+                                                <div class="col-md-8 block-header">
+                                                    <h5 class="title-color pd-5	 text-uppercase  violet-text">
+                                                        TPM Setup</h5>
+                                                    <div class="separator"></div>
+                                                </div>
+                                                <div class="col-md-4 xs-none d-xl-block d-lg-block d-md-block d-sm-none d-none">
+                                                    <img src="dist/img/controller.png" class="rolesImg">
+                                                </div>
+                                            </div>
+                                            <div style="padding: 10px;">
+                                                <p class="txt-block-content">
+                                                    Here you can setup overall Oraganizational settings such as <strong>Branch,Department & Employee etc.</strong>
+
+                                                </p>
+                                                <p class="txt-block-content">
+                                                    <strong></strong>
+
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mt-2 mb-2">
+                                        <div class="bg-white block-container">
+                                            <div class="row block-h">
+                                                <div class="col-md-8 block-header">
+                                                    <h5 class="title-color pd-5	 text-uppercase  violet-text">
+                                                        Auditor</h5>
+                                                    <p class="txt-block-content">
+                                                        {{langTranslate.Person_will_be_responsible_for}}
+                                                    </p>
+                                                    <div class="separator"></div>
+                                                </div>
+                                                <div class="col-md-4 xs-none d-xl-block d-lg-block d-md-block d-sm-none d-none">
+                                                    <img src="dist/img/evaluator.png" class="rolesImg">
+                                                </div>
+                                            </div>
+                                            <div style="padding: 10px;">
+                                                <p class="txt-block-content">
+                                                    <strong>{{langTranslate.Accepting}} </strong> {{langTranslate.Suggestion_For_Evaluation}}
+                                                </p>
+
+                                                <p class="txt-block-content">
+                                                    <strong>{{langTranslate.Rejecting}}</strong> {{langTranslate.Suggestion_Post_Evaluation}}
+                                                </p>
+                                                <p class="txt-block-content">
+                                                    <strong>{{langTranslate.Submitting}} </strong> {{langTranslate.Evaluation_Details}}
+                                                </p>
+                                                <p class="txt-block-content">
+                                                    <strong>{{langTranslate.Recommending}} </strong> {{langTranslate.Suggestion_For_Implementation}}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mt-2 mb-2">
+                                        <div class="bg-white block-container">
+                                            <div class="row block-h">
+                                                <div class="col-md-8 block-header">
+                                                    <h5 class="title-color pd-5	 text-uppercase  violet-text">
+                                                        Kuber Setup</h5>
+                                                    <p class="txt-block-content">
+                                                        {{langTranslate.Person_will_be_responsible_for}}
+                                                    </p>
+                                                    <div class="separator"></div>
+                                                </div>
+                                                <div class="col-md-4 xs-none d-xl-block d-lg-block d-md-block d-sm-none d-none">
+                                                    <img src="dist/img/implementer.png" class="rolesImg">
+                                                </div>
+                                            </div>
+                                            <div style="padding: 10px;">
+                                                <p class="txt-block-content">
+                                                    <strong>{{langTranslate.Accepting}}
+                                                    </strong>{{langTranslate.Suggestion_For_Implementation}}
+                                                </p>
+                                                <p class="txt-block-content">
+                                                    <strong>{{langTranslate.Rejecting}}
+                                                    </strong>{{langTranslate.Suggestion_Post_Evaluation}}
+                                                </p>
+                                                <p class="txt-block-content">
+                                                    <strong>{{langTranslate.Submitting}}
+                                                    </strong>{{langTranslate.Implementation_Details}}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section> -->
+<section style="background: #fff;">
+    <div class="container">
+        <div class="row mt-0 scrollDiv" ng-style="{height: iframeHeight + 'px'}">
+            <div>
+                <div class="col-md-12 block-sugg-approach">
+                    <div class="" style="margin-top: 7%;">
+                        <div style="height:15px"></div>
+                        <div class="row">
+                            <div class="col-md-10" style="overflow:auto;height: 540px;margin-left: 15px;width: 87%;"
+                                ng-scrollbars>
+                                <div class="row rolesDiv">
+                                    <div class="col-md-12 mt-2 mb-2">
+                                        <div class="bg-white block-container">
+                                            <div
+                                                style="display:inline-flex;padding: 10px;margin-left: 10px;width: 90%;">
+                                                <div class="setup-icon">
+                                                    <i class="fa fa-sitemap icon" aria-hidden="true"></i>
+                                                </div>
+                                                <h5 class="title-color pd-5 text-uppercase violet-text"
+                                                    style="margin-top: 24px;margin-left: 15px;color:#000;font-weight: normal;">
+                                                    <b>Common Settings</b>
+                                                </h5>
+                                            </div>
+                                            <div
+                                                style="border-top: 2px solid #ffcd00;padding: 10px;width: 90%;margin-left: 20px;">
+                                                <div style="margin-left: 7px;margin-top: 3px;text-align: justify;">
+                                                    <div style="display: inline-flex;">
+                                                        <div style="padding: 3px;">
+                                                            <i class="fa fa-angle-right" aria-hidden="true"
+                                                                style="font-size: 32px;color: #7145ce;/* width: 100px; */"></i>
+                                                        </div>
+                                                        <div style="position: relative;padding: 10px;">
+                                                            <label style="font-size: 14px;font-weight: normal;">
+                                                                <b> The Branch </b> for which myeNovation suggestion
+                                                                platform is being rolled out.
+
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div style="display: inline-flex;">
+                                                        <div style="padding: 3px;">
+                                                            <i class="fa fa-angle-right" aria-hidden="true"
+                                                                style="font-size: 32px;color: #7145ce;"></i>
+                                                        </div>
+                                                        <div style="position: relative;padding: 10px;">
+                                                            <label style="font-size: 14px;font-weight: normal;">
+                                                                <b> Department </b> setup allows to add or remove
+                                                                departments for each branch.
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div style="display: inline-flex;">
+                                                        <div style="padding: 3px;">
+                                                            <i class="fa fa-angle-right" aria-hidden="true"
+                                                                style="font-size: 32px;color: #7145ce;"></i>
+                                                        </div>
+                                                        <div style="position: relative;padding: 10px;">
+                                                            <label style="font-size: 14px;font-weight: normal;">
+                                                                <b> Employee </b> provision to add or remove Single/bulk
+                                                                employee records.
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div style="display: inline-flex;">
+                                                        <div style="padding: 3px;">
+                                                            <i class="fa fa-angle-right" aria-hidden="true"
+                                                                style="font-size: 32px;color: #7145ce;"></i>
+                                                        </div>
+                                                        <div style="position: relative;padding: 10px;">
+                                                            <label style="font-size: 14px;font-weight: normal;">
+                                                                <b> Password Policy </b> configure password policy as
+                                                                per requirement.
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div style="display: inline-flex;">
+                                                        <div style="padding: 3px;">
+                                                            <i class="fa fa-angle-right" aria-hidden="true"
+                                                                style="font-size: 32px;color: #7145ce;"></i>
+                                                        </div>
+                                                        <div style="position: relative;padding: 10px;">
+                                                            <label style="font-size: 14px;font-weight: normal;">
+                                                                <b> Module Management </b> Grants module/menu access to
+                                                                each role. Default access is set to run the suggestion
+                                                                process but one may add or remove access as per
+                                                                requirement. .
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div style="display: inline-flex;">
+                                                        <div style="padding: 3px;">
+                                                            <i class="fa fa-angle-right" aria-hidden="true"
+                                                                style="font-size: 32px;color: #7145ce;"></i>
+                                                        </div>
+                                                        <div style="position: relative;padding: 10px;">
+                                                            <label style="font-size: 14px;font-weight: normal;">
+                                                                Setting up <b> Gifts & Rewards </b> helps to automate
+                                                                reward process.
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

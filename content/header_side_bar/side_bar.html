@@ -1,0 +1,357 @@
+<!-- Left side column. contains the logo and sidebar -->
+<style>
+  .largeHeight {
+    height: auto !important;
+  }
+
+  .profile:hover,
+  .profile:focus {
+    background: #8791d6 !important;
+  }
+
+  .profile-det {
+    font-size: 14px;
+    color: white;
+    line-height: 1.4;
+    font-family: roboto;
+  }
+
+  .user-name {
+    font-weight: 500;
+  }
+
+  .departmentName {
+    font-size: 13px;
+  }
+
+  .designationName {
+    font-size: 13px;
+  }
+
+  .txt-email {
+    font-size: 13px;
+  }
+
+  .btn-show-profile {
+    color: white;
+    padding: 6px;
+    text-align: center;
+    border: 2px solid white;
+    font-size: 14px;
+    line-height: 1;
+    width: 100px;
+    margin: 0 auto;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 3px;
+    font-size: 12px;
+  }
+
+  .btn-show-profile:hover {
+    background: #8792D6;
+  }
+
+  .activeSidebarMod1 {
+    background: #343172 !important;
+  }
+
+  .selectedMenu {
+    /* background-color: #8792D6; */
+    background-color: #343172;
+  }
+
+  .usr-profile-pic {
+    display: block;
+    height: 60px;
+    width: 60px;
+    margin: 0 auto;
+    margin-top: 10px;
+    border: 2px solid white;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+  }
+
+  .main-header .logo {
+    height: 52px !important;
+  }
+
+  .extraMar {
+    margin-top: 60px !important;
+  }
+
+</style>
+<aside class="main-sidebar bg-color-primary" ng-controller="headerCtrl" style="margin-top: 0px;">
+  <!-- sidebar: style can be found in sidebar.less -->
+
+  <section class="sidebar">
+    <div class="main-header" style="display:block;position: absolute;left: 0px;z-index: 1030;top: 0px;">
+      <a href="template.html#!/suggestions" class="logo hidden-xs hidden-sm ng-scope">
+        <!-- mini logo for sidebar mini 50x50 pixels -->
+        <img class="logo-mini img-app-logo" src="dist/icons/my_enovation_white@2x_pencil.png" style="height: 100%;width: auto;padding: 0px;margin: 0px 0px 0px 2px;padding-right: 0px;padding-top: 8px;padding-bottom: 3px;">
+        <!-- logo for regular state and mobile devices -->
+        <!-- <span class="logo-lg">{{ langTranslate.myeNovation }}</span> -->
+        <img class="img-app-logo" src="dist/icons/my_enovation_white@2x.png" style="height: 100%;width: auto;padding: 0px;margin: 0px 0px;">
+        <a href="#" ng-click="isExpand = !isExpand; onExpandCollapse()" class="sidebar-toggle bg-color-primary-light" data-toggle="push-menu" role="button" style="display: block;width: 34px;height: 35px;position: absolute;padding: 7px 11px;right:-34px;">
+          <span class="sr-only"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+      </a>
+    </div>
+    <!-- border-top: 1px solid rgb(135, 145, 214); -->
+    <div class="logo hidden-xs hidden-sm" style="border-left: none;border-right: none;margin-top: 40px;padding: 0px;padding-bottom: 12px;
+                 padding-bottom: 12px;" ng-class="{'extraMar':isExpand}">
+      <img check-sugg-det-usr-image-loaded class="img-app-logo" src="{{empDetails.profilePic}}" style="width: 38px;height: 39px; padding: 0px;margin-top: 16px;margin-left: 13px;border-radius: 51px;" ng-if="!isExpand">
+      <center ng-if="!isExpand" style="text-align: center;font-size: 11px;margin-top: 7px;" class="txt-email profile-det"><strong>Points</strong><br />{{empDetails.points}}</center>
+      <div ng-if="isExpand">
+        <img check-sugg-det-usr-image-loaded class="usr-profile-pic" src="{{empDetails.profilePic}}">
+        <center class="txt-capitalize profile-det user-name">{{empDetails.firstName +' '+empDetails.lastName}}</center>
+        <!-- <center class="txt-capitalize profile-det departmentName" style="margin-top: 5px;">{{empDetails.dept.deptName}}</center>
+        <center class="txt-capitalize profile-det designationName">{{empDetails.designation.desigName}}</center>
+        <center class="txt-email profile-det">{{empDetails.emailId}}</center> -->
+        <!-- <center class="txt-email profile-det" ng-repeat="x in userRoles">{{x.name}}</center>  -->
+        <center class="txt-email profile-det"><strong>Points : </strong>{{empDetails.points}}</center>
+        <div class="btn-show-profile" ng-click="showProfile()">{{ langTranslate.ShowProfile }}</div>
+      </div>
+    </div>
+    <ul class="sidebar-menu" data-widget="tree">
+      <!--Suggestions-->
+      <li id="modSugg" class="treeview" data-toggle="tooltip" data-placement="right" title="Suggestion" ng-class="{'selectedMenu': selectedMod=='suggestion'}" ng-click="showModule('suggestion')" ng-if="checkMenuAccess('Suggestions')" style="border-bottom-right-radius: 50px;
+      border-top-right-radius: 50px;">
+        <a class="menu-opt" href="template.html#!/suggestions">
+          <!-- <img style="width: 35px;padding: 3px;" src="dist/icons/ic_sugg_box_sidebar_wh.png"> -->
+          <img style="width: 35px;" src="dist/icons/sidebar/suggestion_box.png">
+          <span class="sidebar-lbl" style="vertical-align: middle;">{{ langTranslate.Suggestions }}</span>
+          <span style="padding-left: 51px;vertical-align: middle;">{{suggestionTotalCount}}</span>
+        </a>
+        <!-- <div ng-if="!checkSubMenuAccess('Suggestions','All Suggestions')">
+          <div class="count">{{suggestionTotalCount}}</div>
+        </div> -->
+      </li>
+
+      <li id="modSugg" class="treeview" ng-if="!checkMenuAccess('Suggestions')" style="cursor: not-allowed;border-bottom-right-radius: 50px;
+      border-top-right-radius: 50px;" data-toggle="tooltip" data-placement="right" title="Suggestion">
+        <a class="menu-opt">
+          <i class="fa fa-archive lock-menu" aria-hidden="true"></i>
+          <span class="sidebar-lbl lock-color">{{ langTranslate.Suggestions }}</span>
+        </a>
+      </li>
+      <!--Suggestions-->
+
+      <li id="modConcerns" class="treeview" ng-if="checkMenuAccess('Concerns')" data-toggle="tooltip" ng-click="showModule('concerns')" data-placement="right" title="Concern" ng-class="{'selectedMenu': selectedMod=='concerns'}" style="border-bottom-right-radius: 50px;
+      border-top-right-radius: 50px;">
+        <a class="menu-opt">
+          <!-- <i class="material-icons" style="position: relative;left: -8px;font-size: 2.8em;vertical-align: middle;">info_outline</i> -->
+          <img style="width: 35px;height:35px;vertical-align:middle;" src="dist/icons/sidebar/concern.png">
+          <span class="sidebar-lbl" style="position: relative;margin-left:8px;">{{ langTranslate.Concerns }}</span>
+        </a>
+      </li>
+
+      <li id="modConcerns" class="treeview" ng-if="!checkMenuAccess('Concerns')" data-toggle="tooltip" data-placement="right" title="Concern" style="border-bottom-right-radius: 50px;
+      border-top-right-radius: 50px;">
+        <a class="menu-opt">
+          <i class="material-icons lock-menu" style="position: relative;top: 3px;left: -4px;font-size: 28px;">info_outline</i>
+          <span class="sidebar-lbl lock-color" style="position: relative;top: -5px;left: 9px;">{{ langTranslate.Concerns }}</span>
+        </a>
+      </li>
+      <!-- Nearmiss -->
+      <li id="modSugg" class="treeview" ng-class="{activeSidebarMod : isModActive('Nearmiss')}" ng-click="showModule('Nearmiss')"  data-toggle="tooltip" data-placement="right" title="Nearmiss" style="border-bottom-right-radius: 50px;
+      border-top-right-radius: 50px;">
+        <!--ng-click="showModule('near_miss')"-->
+        <a class="menu-opt" href="template.html#!/near_miss" style="padding:4px 5px 4px 15px !important;">
+          <!-- <i class="material-icons" style="position: relative;top: 3px;left: -4px;font-size: 23px;">warning</i> -->
+          <img style="width: 35px;height:44px;vertical-align:middle;" src="dist/icons/sidebar/near_miss.png">
+          <span class="sidebar-lbl" style="position: relative;">{{ langTranslate.Nearmiss }}</span>
+        </a>
+      </li>
+      <li id="modSugg" class="treeview" data-toggle="tooltip" data-placement="right" title="Survey" ng-class="{activeSidebarMod : isModActive('survey')}" ng-click="showModule('survey')" style="border-bottom-right-radius: 50px;
+      border-top-right-radius: 50px;">
+        <a class="menu-opt" href="template.html#!/survey">
+          <!-- <img style="width: 28px;padding: 3px;" src="dist/icons/ic_survey_sidebar_wh.png"> -->
+          <img style="width: 35px;border-radius:50%;height:35px;" src="dist/icons/sidebar/TestSurvey1.jpeg">
+          <span class="sidebar-lbl">{{ langTranslate.Survey }}</span>
+        </a>
+      </li>
+      <!-- Auditor -->
+      <li id="modSugg" class="treeview" data-toggle="tooltip" data-placement="right" title="Auditor" ng-class="{activeSidebarMod : isModActive('auditor')}" ng-click="showModule('auditor')" style="border-bottom-right-radius: 50px;
+      border-top-right-radius: 50px;">
+        <a class="menu-opt" href="template.html#!/auditor">
+          <!-- <img style="width: 28px;padding: 3px;" src="dist/icons/ic_survey_sidebar_wh.png"> -->
+          <img style="width: 35px;border-radius:50%;height:35px;" src="dist/icons/sidebar/auditor.png">
+          <span class="sidebar-lbl">{{ langTranslate.Audit }}</span>
+        </a>
+      </li>
+      <!-- DWM -->
+      <li id="modSugg" class="treeview" data-toggle="tooltip" data-placement="right" title="DWM" ng-class="{activeSidebarMod : isModActive('dwm')}" ng-click="showModule('dwm')" style="border-bottom-right-radius: 50px;
+      border-top-right-radius: 50px;">
+        <a class="menu-opt" href="template.html#!/dwm">
+          <!-- <img style="width: 28px;padding: 3px;" src="dist/icons/ic_survey_sidebar_wh.png"> -->
+          <i class="fa fa-list-alt" aria-hidden="true" style="font-size: 29px;"></i>
+          <span class="sidebar-lbl" style="margin-left: 21px;position: relative;top: -6px;">{{ langTranslate.DWM }}</span>
+        </a>
+      </li>
+      <!-- TPM -->
+      <li id="modSugg" class="treeview" data-toggle="tooltip" data-placement="right" title="TPM" ng-class="{activeSidebarMod : isModActive('TPM')}" ng-click="showModule('TPM')" style="border-bottom-right-radius: 50px;
+      border-top-right-radius: 50px;">
+        <a class="menu-opt" href="template.html#!/TPM">
+          <img style="width: 37px;border-radius:50%;height:37px;background-color: white;" src="dist/icons/sidebar/tpm.png">
+          <!-- <i class="fa fa-wrench" aria-hidden="true" style="font-size: 29px;"></i> -->
+          <span class="sidebar-lbl" style="margin-left: -5px;position: relative;top: 2px;">{{ langTranslate.TPM }}</span>
+        </a>
+      </li>
+        <!-- kuber -->
+        <li id="modSugg" class="treeview" data-toggle="tooltip" data-placement="right" title="Kuber" ng-class="{activeSidebarMod : isModActive('Kuber')}" ng-click="showModule('Kuber')" style="border-bottom-right-radius: 50px;
+        border-top-right-radius: 50px;">
+          <a class="menu-opt" href="template.html#!/kuber">
+            <img style="width: 55px;border-radius: 35%; height: 55px;margin-left: -16px;" src="dist/icons/sidebar/kubericon.png">
+            <!-- <i class="fa fa-wrench" aria-hidden="true" style="font-size: 29px;"></i> -->
+            <span class="sidebar-lbl" style="margin-left: -4px;position: relative;top: -1px;">{{ langTranslate.Kuber }}</span>
+          </a>
+        </li>
+      <!--Settings--> 
+
+      <li id="setting" class="treeview" ng-if="checkMenuAccess('Settings') && isSetupCompleted == 1" style="border-bottom-right-radius: 50px;
+      border-top-right-radius: 50px;">
+        <a class="menu-opt">
+          <!-- <img style="width: 28px;padding: 3px;" src="dist/icons/ic_content_setup_sidebar_wh.png"> -->
+          <img style="width: 35px;height:35px;vertical-align:middle;" src="dist/icons/sidebar/setting.png">
+          <span class="sidebar-lbl" style="position: relative;">{{ langTranslate.Settings }}</span>
+        </a>
+        <ul class="treeview-menu bg-color-primary-dark" ng-style="{'top':isExpand == true ? '-17em':'-13em','width':isExpand == true ? '20em':'20em'}">
+          <!--style="top: -108px;"-->
+          <div class="treeview-menu-heading">
+            <!-- <img src="dist/icons/ic_content_setup_sidebar_wh.png"> -->
+            <img style="width: 35px;height:35px;vertical-align:middle;" src="dist/icons/sidebar/setting.png">{{ langTranslate.Settings }}</div>
+          <div class="" ng-style="setSettingHeight()" ng-scrollbars>
+            <li ng-repeat="data in sideMenuData" ng-if="data.isActive == 'Y'">
+              <a style="color:white;" ng-click="redirectToSetup(data)" ng-if="checkSubMenuAccess('Settings',data.linkName)">
+                <span ng-if="data.linkName == 'Suggestion Approach'">{{langTranslate.Suggestion_Approach}}</span>
+                <span ng-if="data.linkName == 'Branch'">{{langTranslate.Branch}}</span>
+                <span ng-if="data.linkName == 'Department'">{{langTranslate.Department}}</span>
+                <span ng-if="data.linkName == 'Employee'">{{langTranslate.Employee}}</span>
+                <span ng-if="data.linkName == 'Controller'">{{langTranslate.Controller}}</span>
+                <span ng-if="data.linkName == 'Evaluator'">{{langTranslate.Evaluator}}</span>
+                <span ng-if="data.linkName == 'Implementer'">{{langTranslate.Implementer}}</span>
+                <span ng-if="data.linkName == 'Finance Controller'">{{langTranslate.Finance_Controller}}</span>
+                <span ng-if="data.linkName == 'Executive'">{{langTranslate.Executive}}</span>
+                <span ng-if="data.linkName == 'Benefit and Category'">{{langTranslate.Benefit_and_Category}}</span>
+                <span ng-if="data.linkName == 'Configure'">{{langTranslate.Configure}}</span>
+                <span ng-if="data.linkName == 'Pending Tasks Escalation'">{{langTranslate.Pending_Tasks_Escalation}}</span>
+                <span ng-if="data.linkName == 'Evaluation Metrics Points Setup'">{{langTranslate.Evaluation_MetricsPoints}}</span>
+                <span ng-if="data.linkName == 'Change Document'">{{langTranslate.Change_Document}}</span>
+                <span ng-if="data.linkName == 'Access Management'">{{langTranslate.Access_Management}}</span>
+                <span ng-if="data.linkName == 'Mandatory & Target Setup'">{{langTranslate.Mandatory_Target_Setup}}</span>
+                <span ng-if="data.linkName == 'Gifts & Rewards'">{{langTranslate.Gifts_Rewards}}</span>
+                <span ng-if="data.linkName == 'Social Media & TOD'">{{langTranslate.Social_Media_TOD}}</span>
+                <span ng-if="data.linkName == 'Notice Board'">{{langTranslate.Notice_Board}}</span>
+                <span ng-if="data.linkName == 'Incident Management'">{{langTranslate.Incident_Management}}</span>
+                <span ng-if="data.linkName == 'Auditor'">{{langTranslate.Auditor}}</span>
+                <span ng-if="data.linkName == 'DWM Setup'">{{langTranslate.DWM_Setup}}</span>
+                <span ng-if="data.linkName == 'TPM Setup'">{{langTranslate.TPM_Setup}}</span>
+                <span ng-if="data.linkName == 'Kuber Setup'">{{langTranslate.Kuber_Setup}}</span>
+                <span ng-if="data.linkName == 'Suggestion Onhold Setup'">Suggestion Onhold Setup</span>
+              </a>
+              <span style="cursor: not-allowed;" class="lock-color" ng-if="!checkSubMenuAccess('Settings',data.linkName)">
+                <span ng-if="data.linkName == 'Suggestion Approach'">{{langTranslate.Suggestion_Approach}}</span>
+                <span ng-if="data.linkName == 'Branch'">{{langTranslate.Branch}}</span>
+                <span ng-if="data.linkName == 'Department'">{{langTranslate.Department}}</span>
+                <span ng-if="data.linkName == 'Employee'">{{langTranslate.Employee}}</span>
+                <span ng-if="data.linkName == 'Controller'">{{langTranslate.Controller}}</span>
+                <span ng-if="data.linkName == 'Evaluator'">{{langTranslate.Evaluator}}</span>
+                <span ng-if="data.linkName == 'Implementer'">{{langTranslate.Implementer}}</span>
+                <span ng-if="data.linkName == 'Finance Controller'">{{langTranslate.Finance_Controller}}</span>
+                <span ng-if="data.linkName == 'Executive'">{{langTranslate.Executive}}</span>
+                <span ng-if="data.linkName == 'Benefit and Category'">{{langTranslate.Benefit_and_Category}}</span>
+                <span ng-if="data.linkName == 'Configure'">{{langTranslate.Configure}}</span>
+                <span ng-if="data.linkName == 'Pending Tasks Escalation'">{{langTranslate.Pending_Tasks_Escalation}}</span>
+                <span ng-if="data.linkName == 'Evaluation Metrics Points Setup'">{{langTranslate.Evaluation_MetricsPoints}}</span>
+                <span ng-if="data.linkName == 'Change Document'">{{langTranslate.Change_Document}}</span>
+                <span ng-if="data.linkName == 'Access Management'">{{langTranslate.Access_Management}}</span>
+                <span ng-if="data.linkName == 'Mandatory & Target Setup'">{{langTranslate.Mandatory_Target_Setup}}</span>
+                <span ng-if="data.linkName == 'Gifts & Rewards'">{{langTranslate.Gifts_Rewards}}</span>
+                <span ng-if="data.linkName == 'Social Media & TOD'">{{langTranslate.Social_Media_TOD}}</span>
+                <span ng-if="data.linkName == 'Notice Board'">{{langTranslate.Notice_Board}}</span>
+                <span ng-if="data.linkName == 'Incident Management'">{{langTranslate.Incident_Management}}</span>
+                <span ng-if="data.linkName == 'Auditor'">{{langTranslate.Auditor}}</span>
+                <span ng-if="data.linkName == 'DWM Setup'">{{langTranslate.DWM_Setup}}</span>
+                <span ng-if="data.linkName == 'TPM Setup'">{{langTranslate.TPM_Setup}}</span>
+                <span ng-if="data.linkName == 'Kuber Setup'">{{langTranslate.Kuber_Setup}}</span>
+                <span ng-if="data.linkName == 'Suggestion Onhold Setup'">Suggestion Onhold Setup</span>
+              </span>
+            </li>
+          </div>
+        </ul>
+      </li>
+
+      <!-- <li id="modSugg" class="treeview" data-toggle="tooltip" data-placement="right" title="Survey" ng-class="{activeSidebarMod : isModActive('survey')}" ng-click="showModule('survey')" >
+                <a class="menu-opt" href="template.html#!/survey">
+                    <img style="width: 28px;padding: 3px;" src="dist/icons/ic_survey_sidebar_wh.png">
+                    <span class="sidebar-lbl">Survey</span>
+                </a>
+            </li> -->
+
+      <li id="setting1" class="treeview" ng-if="checkMenuAccess('Settings') && isSetupCompleted == 0" style="cursor: not-allowed;border-bottom-right-radius: 50px;
+      border-top-right-radius: 50px;" data-toggle="tooltip" data-placement="right"
+        title="User Management">
+        <a class="menu-opt">
+          <i class="fa fa-cog lock-menu" style="font-size: 25px;" aria-hidden="true"></i>
+          <span class="sidebar-lbl lock-color">{{ langTranslate.Settings }}</span>
+        </a>
+      </li>
+      <li id="modConcerns" class="treeview" ng-if="!checkMenuAccess('Settings') && isSetupCompleted == 1" data-toggle="tooltip" data-placement="right" title="Concern" style="border-bottom-right-radius: 50px;
+      border-top-right-radius: 50px;">
+        <a class="menu-opt">
+          <i class="fa fa-cog lock-color" aria-hidden="true"></i>
+          <span class="sidebar-lbl lock-color" style="position: relative;top: -5px;left: 9px;">{{ langTranslate.Settings }}</span>
+        </a>
+      </li>
+      <li id="modSugg" class="treeview" data-toggle="tooltip" data-placement="right" title="Whistle Blower Policy" ng-click="showModule('whistle_policy')" ng-if="empDetails.branch.branchId==2" style="border-bottom-right-radius: 50px;
+      border-top-right-radius: 50px;">
+        <a class="menu-opt">
+          <i class="material-icons " style="position: relative;top: 3px;left: -4px;font-size: 28px;">verified_user</i>
+          <span class="sidebar-lbl" style="position: relative;top: -5px;left: 9px;">{{ langTranslate.WhistleBlowerPolicy }}</span>
+        </a>
+      </li>
+
+      <!--<li id="modSugg" class="treeview" data-toggle="tooltip" data-placement="right" title="Nearmiss" style="cursor: not-allowed;">
+
+        <a class="menu-opt">
+          <i class="material-icons" style="position: relative;top: 3px;left: -4px;font-size: 28px;">warning</i>
+          <span class="sidebar-lbl" style="position: relative;top: -5px;left: 9px;">{{ langTranslate.Nearmiss }}</span>
+        </a>
+      </li>-->
+      <!-- <li id="modSugg" class="treeview" data-toggle="tooltip" data-placement="right" title="Export">
+        <a class="menu-opt" target="_self" href="https://apiprod.myenovation.com/uploads/kaizen.ppt" download="empData.pdf" style="text-decoration:none;">
+          <i class="fa fa-book" aria-hidden="true" style="top: 4px;position: relative;"></i>
+          <span class="sidebar-lbl" style="position: relative;top: 2px;left: 14px;">{{ langTranslate.KaizenDeck }}</span>
+        </a>
+      </li> -->
+      <li id="modSugg" class="treeview" data-toggle="tooltip" data-placement="right" title="Help" ng-class="{activeSidebarMod : isModActive('help')}" ng-click="showModule('help')" style="border-bottom-right-radius: 50px;
+      border-top-right-radius: 50px;">
+        <a class="menu-opt" target="_self" href="template.html#!/help">
+          <!-- <i class="fa fa-info-circle" aria-hidden="true" style="top: 5px;position: relative;"></i> -->
+          <img style="width: 35px;height:35px;vertical-align:middle;" src="dist/icons/sidebar/help1.png">
+          <span class="sidebar-lbl" style="position: relative;">{{ langTranslate.Help }}</span>
+        </a>
+      </li>
+      <ul class="sidebar-menu" data-widget="tree" data-toggle="tooltip" data-placement="right" title="Logout">
+        <li id="modSetup" class="treeview" style="border-bottom-right-radius: 50px;
+        border-top-right-radius: 50px;">
+          <a class="menu-opt">
+            <img style="width: 35px;padding: 3px;" src="dist/icons/ic_logout.png" ng-click="logout()">
+            <span class="sidebar-lbl" ng-click="logout()">{{ langTranslate.Logout }}</span>
+          </a>
+        </li>
+      </ul>
+
+      <!--Setup-->
+    </ul>
+    <footer>
+      <label class="version-lbl">V4.0.0</label><img class="footer-img" src="dist/icons/bottom.png" style="z-index:-1;">
+    </footer>
+  </section>
+</aside>

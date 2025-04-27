@@ -1,0 +1,442 @@
+{
+    "status": "success",
+    "statusCode": 200,
+    "reason": null,
+    "result": true,
+    "branchList": null,
+    "deptList": null,
+    "catagoryList": null,
+    "statusList": null,
+    "orgList": null,
+    "deptlvlList": null,
+    "escalationAlreadyAlignedList": null,
+    "deptlvlusersList": null,
+    "pointmaster": null,
+    "teamtypemaster": null,
+    "roleEscalationSetupList": [
+        {
+            "id": 1,
+            "numberOfDays": 2,
+            "role": {
+                "id": 6,
+                "name": "CONTROLLER"
+            },
+            "branchMaster": {
+                "branchId": 51,
+                "name": "Hinjewadi",
+                "location": "pune",
+                "createdDate": "2018-11-24T18:12:38.000+0000",
+                "updatedDate": "2018-11-29T07:16:52.000+0000",
+                "orgId": 0,
+                "org": {
+                    "orgId": 42,
+                    "name": "Greentin solutions",
+                    "orgDomain": "greentinsolutions.com",
+                    "alies": "greentinsolutions",
+                    "portalLink": "http://greentinsolutions.digitizhr.com/",
+                    "serverDomainName": "greentinsolutions.digitizhr.com",
+                    "createdDate": "2018-11-24T18:12:38.000+0000",
+                    "updatedDate": "2018-11-26T12:32:05.000+0000",
+                    "logo": "http://aihub.greentinsolutions.com/enovation-portal/uploads/greentinsolutions/logo.png",
+                    "orgLogo": null
+                },
+                "setupConfigList": [
+                    {
+                        "id": 18,
+                        "isSetupCompleted": 0,
+                        "isMandatory": 0,
+                        "setupMaster": {
+                            "setupId": 7,
+                            "setupName": "Evaluator",
+                            "status": 1
+                        }
+                    },
+                    {
+                        "id": 12,
+                        "isSetupCompleted": 0,
+                        "isMandatory": 0,
+                        "setupMaster": {
+                            "setupId": 1,
+                            "setupName": "Suggestion Approach",
+                            "status": 1
+                        }
+                    },
+                    {
+                        "id": 19,
+                        "isSetupCompleted": 0,
+                        "isMandatory": 0,
+                        "setupMaster": {
+                            "setupId": 8,
+                            "setupName": "Implementor",
+                            "status": 1
+                        }
+                    },
+                    {
+                        "id": 17,
+                        "isSetupCompleted": 0,
+                        "isMandatory": 0,
+                        "setupMaster": {
+                            "setupId": 6,
+                            "setupName": "Controller",
+                            "status": 1
+                        }
+                    },
+                    {
+                        "id": 16,
+                        "isSetupCompleted": 0,
+                        "isMandatory": 0,
+                        "setupMaster": {
+                            "setupId": 5,
+                            "setupName": "Executive",
+                            "status": 1
+                        }
+                    },
+                    {
+                        "id": 22,
+                        "isSetupCompleted": 0,
+                        "isMandatory": 0,
+                        "setupMaster": {
+                            "setupId": 11,
+                            "setupName": "User Management",
+                            "status": 1
+                        }
+                    },
+                    {
+                        "id": 20,
+                        "isSetupCompleted": 0,
+                        "isMandatory": 0,
+                        "setupMaster": {
+                            "setupId": 9,
+                            "setupName": "Benefits and Category",
+                            "status": 1
+                        }
+                    },
+                    {
+                        "id": 13,
+                        "isSetupCompleted": 0,
+                        "isMandatory": 0,
+                        "setupMaster": {
+                            "setupId": 2,
+                            "setupName": "Branch",
+                            "status": 1
+                        }
+                    },
+                    {
+                        "id": 15,
+                        "isSetupCompleted": 0,
+                        "isMandatory": 0,
+                        "setupMaster": {
+                            "setupId": 4,
+                            "setupName": "Employee",
+                            "status": 1
+                        }
+                    },
+                    {
+                        "id": 14,
+                        "isSetupCompleted": 0,
+                        "isMandatory": 0,
+                        "setupMaster": {
+                            "setupId": 3,
+                            "setupName": "Department",
+                            "status": 1
+                        }
+                    },
+                    {
+                        "id": 21,
+                        "isSetupCompleted": 0,
+                        "isMandatory": 0,
+                        "setupMaster": {
+                            "setupId": 10,
+                            "setupName": "Configure",
+                            "status": 1
+                        }
+                    }
+                ]
+            },
+            "email": "",
+            "name": "Akshay"
+        },{
+            "id": 1,
+            "numberOfDays": 2,
+            "role": {
+                "id": 6,
+                "name": "EVALUATOR"
+            },
+            "branchMaster": {
+                "branchId": 51,
+                "name": "Hinjewadi",
+                "location": "pune",
+                "createdDate": "2018-11-24T18:12:38.000+0000",
+                "updatedDate": "2018-11-29T07:16:52.000+0000",
+                "orgId": 0,
+                "org": {
+                    "orgId": 42,
+                    "name": "Greentin solutions",
+                    "orgDomain": "greentinsolutions.com",
+                    "alies": "greentinsolutions",
+                    "portalLink": "http://greentinsolutions.digitizhr.com/",
+                    "serverDomainName": "greentinsolutions.digitizhr.com",
+                    "createdDate": "2018-11-24T18:12:38.000+0000",
+                    "updatedDate": "2018-11-26T12:32:05.000+0000",
+                    "logo": "http://aihub.greentinsolutions.com/enovation-portal/uploads/greentinsolutions/logo.png",
+                    "orgLogo": null
+                },
+                "setupConfigList": [
+                    {
+                        "id": 18,
+                        "isSetupCompleted": 0,
+                        "isMandatory": 0,
+                        "setupMaster": {
+                            "setupId": 7,
+                            "setupName": "Evaluator",
+                            "status": 1
+                        }
+                    },
+                    {
+                        "id": 12,
+                        "isSetupCompleted": 0,
+                        "isMandatory": 0,
+                        "setupMaster": {
+                            "setupId": 1,
+                            "setupName": "Suggestion Approach",
+                            "status": 1
+                        }
+                    },
+                    {
+                        "id": 19,
+                        "isSetupCompleted": 0,
+                        "isMandatory": 0,
+                        "setupMaster": {
+                            "setupId": 8,
+                            "setupName": "Implementor",
+                            "status": 1
+                        }
+                    },
+                    {
+                        "id": 17,
+                        "isSetupCompleted": 0,
+                        "isMandatory": 0,
+                        "setupMaster": {
+                            "setupId": 6,
+                            "setupName": "Controller",
+                            "status": 1
+                        }
+                    },
+                    {
+                        "id": 16,
+                        "isSetupCompleted": 0,
+                        "isMandatory": 0,
+                        "setupMaster": {
+                            "setupId": 5,
+                            "setupName": "Executive",
+                            "status": 1
+                        }
+                    },
+                    {
+                        "id": 22,
+                        "isSetupCompleted": 0,
+                        "isMandatory": 0,
+                        "setupMaster": {
+                            "setupId": 11,
+                            "setupName": "User Management",
+                            "status": 1
+                        }
+                    },
+                    {
+                        "id": 20,
+                        "isSetupCompleted": 0,
+                        "isMandatory": 0,
+                        "setupMaster": {
+                            "setupId": 9,
+                            "setupName": "Benefits and Category",
+                            "status": 1
+                        }
+                    },
+                    {
+                        "id": 13,
+                        "isSetupCompleted": 0,
+                        "isMandatory": 0,
+                        "setupMaster": {
+                            "setupId": 2,
+                            "setupName": "Branch",
+                            "status": 1
+                        }
+                    },
+                    {
+                        "id": 15,
+                        "isSetupCompleted": 0,
+                        "isMandatory": 0,
+                        "setupMaster": {
+                            "setupId": 4,
+                            "setupName": "Employee",
+                            "status": 1
+                        }
+                    },
+                    {
+                        "id": 14,
+                        "isSetupCompleted": 0,
+                        "isMandatory": 0,
+                        "setupMaster": {
+                            "setupId": 3,
+                            "setupName": "Department",
+                            "status": 1
+                        }
+                    },
+                    {
+                        "id": 21,
+                        "isSetupCompleted": 0,
+                        "isMandatory": 0,
+                        "setupMaster": {
+                            "setupId": 10,
+                            "setupName": "Configure",
+                            "status": 1
+                        }
+                    }
+                ]
+            },
+            "email": "akshay.m@greentinsolutions.com",
+            "name": "Akshay"
+        },{
+            "id": 1,
+            "numberOfDays": 2,
+            "role": {
+                "id": 6,
+                "name": "IMPLEMENTOR"
+            },
+            "branchMaster": {
+                "branchId": 51,
+                "name": "Hinjewadi",
+                "location": "pune",
+                "createdDate": "2018-11-24T18:12:38.000+0000",
+                "updatedDate": "2018-11-29T07:16:52.000+0000",
+                "orgId": 0,
+                "org": {
+                    "orgId": 42,
+                    "name": "Greentin solutions",
+                    "orgDomain": "greentinsolutions.com",
+                    "alies": "greentinsolutions",
+                    "portalLink": "http://greentinsolutions.digitizhr.com/",
+                    "serverDomainName": "greentinsolutions.digitizhr.com",
+                    "createdDate": "2018-11-24T18:12:38.000+0000",
+                    "updatedDate": "2018-11-26T12:32:05.000+0000",
+                    "logo": "http://aihub.greentinsolutions.com/enovation-portal/uploads/greentinsolutions/logo.png",
+                    "orgLogo": null
+                },
+                "setupConfigList": [
+                    {
+                        "id": 18,
+                        "isSetupCompleted": 0,
+                        "isMandatory": 0,
+                        "setupMaster": {
+                            "setupId": 7,
+                            "setupName": "Evaluator",
+                            "status": 1
+                        }
+                    },
+                    {
+                        "id": 12,
+                        "isSetupCompleted": 0,
+                        "isMandatory": 0,
+                        "setupMaster": {
+                            "setupId": 1,
+                            "setupName": "Suggestion Approach",
+                            "status": 1
+                        }
+                    },
+                    {
+                        "id": 19,
+                        "isSetupCompleted": 0,
+                        "isMandatory": 0,
+                        "setupMaster": {
+                            "setupId": 8,
+                            "setupName": "Implementor",
+                            "status": 1
+                        }
+                    },
+                    {
+                        "id": 17,
+                        "isSetupCompleted": 0,
+                        "isMandatory": 0,
+                        "setupMaster": {
+                            "setupId": 6,
+                            "setupName": "Controller",
+                            "status": 1
+                        }
+                    },
+                    {
+                        "id": 16,
+                        "isSetupCompleted": 0,
+                        "isMandatory": 0,
+                        "setupMaster": {
+                            "setupId": 5,
+                            "setupName": "Executive",
+                            "status": 1
+                        }
+                    },
+                    {
+                        "id": 22,
+                        "isSetupCompleted": 0,
+                        "isMandatory": 0,
+                        "setupMaster": {
+                            "setupId": 11,
+                            "setupName": "User Management",
+                            "status": 1
+                        }
+                    },
+                    {
+                        "id": 20,
+                        "isSetupCompleted": 0,
+                        "isMandatory": 0,
+                        "setupMaster": {
+                            "setupId": 9,
+                            "setupName": "Benefits and Category",
+                            "status": 1
+                        }
+                    },
+                    {
+                        "id": 13,
+                        "isSetupCompleted": 0,
+                        "isMandatory": 0,
+                        "setupMaster": {
+                            "setupId": 2,
+                            "setupName": "Branch",
+                            "status": 1
+                        }
+                    },
+                    {
+                        "id": 15,
+                        "isSetupCompleted": 0,
+                        "isMandatory": 0,
+                        "setupMaster": {
+                            "setupId": 4,
+                            "setupName": "Employee",
+                            "status": 1
+                        }
+                    },
+                    {
+                        "id": 14,
+                        "isSetupCompleted": 0,
+                        "isMandatory": 0,
+                        "setupMaster": {
+                            "setupId": 3,
+                            "setupName": "Department",
+                            "status": 1
+                        }
+                    },
+                    {
+                        "id": 21,
+                        "isSetupCompleted": 0,
+                        "isMandatory": 0,
+                        "setupMaster": {
+                            "setupId": 10,
+                            "setupName": "Configure",
+                            "status": 1
+                        }
+                    }
+                ]
+            },
+            "email": "akshay.m@greentinsolutions.com",
+            "name": "Akshay"
+        }
+    ]
+}

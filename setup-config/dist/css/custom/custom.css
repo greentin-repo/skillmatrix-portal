@@ -1,0 +1,39 @@
+.small-ttl-icon {
+  width: 20px;
+  font-size: 20px;
+  margin-right: 5px;
+}
+
+.margin-bottom-top-zero{
+  margin-bottom: 0px;
+  margin-top: 0px;
+}
+
+.margin-top-10 {
+  margin-top: 10px;
+} 
+
+.extra-shadow {
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.32);
+}
+
+.box-title {
+	font-weight: 600;
+    color: #3c8dbc;
+}
+
+.hover-border-highlight:hover {
+    box-shadow: 0 1px 14px rgba(9, 49, 197, 0.32);
+}
+
+.center-align {
+	margin: 0 auto;
+}
+
+.tbl-lbl-desc {
+  width: 100%;
+}
+
+.tbl-lbl-desc tbody tr td:first-child {
+  padding-right: 14px;
+}

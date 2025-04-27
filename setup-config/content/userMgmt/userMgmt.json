@@ -1,0 +1,27 @@
+'use strict';
+
+// Declare app level module which depends on views, and components
+var app = angular.module('mainApp.userMgmt', ['ngRoute','angular.snackbar'])
+
+.config(['$routeProvider', function($routeProvider) {
+$routeProvider.when('/roleMgmt', {
+templateUrl: 'content/userMgmt/roleMgmt.html',
+controller: 'roleMgmtCtrl'
+}).when('/accessControl', {
+templateUrl: 'content/userMgmt/accessControl.html',
+controller: 'accessControlCtrl'
+}).when('/moduleMgmt', {
+templateUrl: 'content/userMgmt/moduleMgmt.html',
+controller: 'moduleMgmtCtrl'
+})
+}]);
+
+
+app.controller("roleMgmtCtrl", ['$scope','appService','$timeout', '$location','snackbar','$route', function($scope, appService, $timeout,$location,snackbar,$route) {
+}]);
+
+app.controller("moduleMgmtCtrl", ['$scope','appService','$timeout', '$location','snackbar','$route', function($scope, appService, $timeout,$location,snackbar,$route) {
+}]);
+
+app.controller("accessControlCtrl", ['$scope','appService','$timeout', '$location','snackbar','$route', function($scope, appService, $timeout,$location,snackbar,$route) {
+}]);

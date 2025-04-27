@@ -1,0 +1,187 @@
+html,body{
+	 background: linear-gradient(to bottom left, #6ee2f5 0%, #6454f0 100%);
+	 height: 100%
+}
+
+.login-box{
+	top: 100px;
+	border:1px solid transparent;
+	height: 450px;
+	width: 70%;
+	left: 15%;
+}
+.logo-box{
+	background: linear-gradient(to bottom, #6ee2f5 0%, #6454f0 100%);
+	height: 450px;;
+	border:1px solid transparent;
+	border-top-left-radius: 13px;
+	border-bottom-left-radius: 13px;
+	
+	}
+.detail-box{
+	background: #FFFFFF;
+	height: 450px;
+	border:1px solid transparent;
+	border-top-right-radius: 13px;
+	border-bottom-right-radius: 13px;
+}
+.remit-logo{
+	display: block;
+    margin: 0 auto;
+    margin-top: 2px;
+}
+.remit-logo-sm{
+	display: block;
+    margin: 0 auto;
+    margin-top: 19px;
+}
+.remit-label{
+	color: #368ED5;
+	text-align: center;
+	line-height: 6;
+	font-family: 'Roboto Regular', sans-serif;
+	font-size: 20px;
+}
+.verify-btn{
+	background: linear-gradient(to bottom, #6ee2f5 0%, #6454f0 100%);
+	border-radius: 44px;
+	width: 44%;
+	font-family: 'Roboto Regular', sans-serif;
+    font-size: 14px;
+    color:#FFFFFF; 
+	border: 0px solid transparent;
+	padding: 9px 0px;
+	cursor: pointer;
+}
+.redeem-btn{
+	background: #5BB656;
+	border-radius: 44px;
+	width: 44%;
+	font-family: 'Roboto Regular', sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    color:#FFFFFF; 
+	border: 0px solid transparent;
+	padding: 9px 0px;
+	cursor: pointer;
+}	
+.validation-text{
+	color: red;
+	font-size: 13px;
+	text-align: center;
+	line-height: 2;
+}
+.form-control{
+	/*width: 70%;*/
+	margin:0 auto;   
+
+}
+.input-text{
+
+	border-top-style: hidden;
+    border-right-style: hidden;
+    border-bottom-style: dotted;
+    border-left-style: hidden;
+}
+.forgot-pass{
+	text-align: right;
+	padding:10px;
+	right:  35px;
+}
+.verify{
+	text-align: center;
+	padding:20px;
+}
+.input-lbl{
+	color: #A2A2A2;
+}
+.error-msg-lbl{ 
+	top: 5px;
+	color: #f1271d;
+	font-size: 11px;
+	text-align: center;
+	line-height: 4;
+}
+.uniquelabel{
+width: 70%;
+margin: 0 auto;
+border:1px solid lightgray;
+padding-left: 20%;
+}
+.unicode-label{
+	display: block;
+	border: 1px solid #ccc;
+    /*width: 250px;*/
+    padding: 6px 12px;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    color: gray;
+}
+.img-cursor{
+    cursor: pointer;
+}
+.offer-lbl{
+	font-family: 'Roboto Regular', sans-serif;
+    font-size: 14px;
+   /* font-weight: bold;*/
+    color:#6bb5f3; 
+}
+.offer-det-lbl{
+	font-family: 'Roboto Regular', sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    color:#6990f3; 
+
+}
+.modal-content-details {
+    position: relative;
+    background-color: #fff;
+    box-shadow: 0 3px 9px rgba(0,0,0,.5);
+    margin: 0 auto;
+    top: 145px;
+    padding-top: 10px;
+    width: 83%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.modal-header1 {
+    padding: 0px;
+    border-bottom: 1px solid #e5e5e5;
+}
+.offer-header-title {
+    padding-left: 13px;
+}	
+.modal-hearder-lbl{
+    color:#368ED5;
+    font-family: 'Roboto Medium', sans-serif;
+}
+.close-btn {
+    -webkit-appearance: none;
+    padding: 4px;
+    cursor: pointer;
+    background: 0 0;
+    border: 0;
+    float: right;
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    filter: alpha(opacity=20);
+    opacity: .2;
+    padding-right: 10px;
+}
+.modal-lbl {
+    color: #A2A2A2;
+    font-size: 15px;
+    font-family: 'Roboto Regular', sans-serif;
+    text-align: center;
+    padding-bottom: 10px;
+}
+@media only screen and (max-width: 600px) {
+    .remit-label{
+    	line-height: 2;
+    }
+}

@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html ng-app="mainApp" disable-right-click ng-cloak>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>myeNovation Portal</title>
+    <link rel="shortcut icon" type="image/x-icon" href="static-website/images/favicon.ico" />
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!--Custom Scrollbar-->
+    <link rel="stylesheet" href="bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css"
+        type="text/css" />
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
+    <!-- Jquery-ui -->
+    <link rel="stylesheet" href="dist/css/jquery-ui.min.css">
+
+    <!-- Theme style -->
+    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="bower_components/custom/common.css">
+    <link rel="stylesheet" href="bower_components/custom/custom_navbar.css">
+    <link rel="stylesheet" href="bower_components/custom/style.css">
+    <link rel="stylesheet" href="bower_components/snackbar/snackbar.css">
+    <link rel="stylesheet" href="bower_components/custom/tooltip.css">
+
+    <!-- Spinner -->
+    <link rel="stylesheet" href="bower_components/spinner/roundSpinner.css">
+    <link rel="stylesheet" href="bower_components/spinner/hzLineLoadingindicator.css">
+    <link rel="stylesheet" href="bower_components/spinner/threeDotLoadingIndicator.css">
+    <link rel="stylesheet" href="dist/css/loading_indicator.css">
+
+    <!-- rzSlider -->
+    <link rel="stylesheet" href="bower_components/rzSlider/rzslider.css">
+
+    <!--Common CSS------>
+    <link rel="stylesheet" href="common/app.css">
+    <!-- datepicker 3 -->
+    <link rel="stylesheet" href="bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+
+    <!-- Google Font -->
+    <link rel="stylesheet" href="dist/fonts/roboto/roboto.css">
+
+    <!--Material Icons-->
+    <link href="dist/fonts/google-material-icons/material_icons.css" rel="stylesheet">
+
+    <!-- Bootstrap DateRangePicker -->
+    <link rel="stylesheet" href="bower_components/bootstrap-rangePicker/daterangepicker.min.css" />
+
+    <link rel="stylesheet" href="bower_components/select2/select.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/3.4.5/select2.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.8.5/css/selectize.default.css">
+
+    <style type="text/css">
+        .lock-menu {
+            font-size: 25px;
+            margin-right: 15px;
+            color: #949292;
+        }
+
+        .lock-color {
+            color: #949292;
+        }
+
+        .block-ui-container {
+            position: fixed;
+            z-index: 10000;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            height: 100%;
+            overflow: hidden;
+            opacity: 1;
+            filter: alpha(opacity=00);
+        }
+
+        .block-ui-overlay {
+            width: 100%;
+            height: 100%;
+            opacity: .5;
+            filter: alpha(opacity=50);
+            background-color: #000;
+        }
+
+        .block-ui-message-container {
+            position: absolute;
+            top: 35%;
+            left: 0;
+            right: 0;
+            height: 0;
+            text-align: center;
+            z-index: 10001;
+        }
+
+        .block-ui-message {
+            display: inline-block;
+            text-align: left;
+            background-color: #ffff;
+            color: #26244a;
+            padding: 20px;
+            border-radius: 4px;
+            font-size: 20px;
+            font-weight: 700;
+            filter: alpha(opacity=100);
+            padding-left: 78px;
+            margin-left: 50px;
+            margin-top: 30px;
+            width: 20%;
+        }
+
+        /* Fab */
+
+        .fab .float {
+            position: fixed;
+            width: 48px;
+            height: 48px;
+            top: 4.3em;
+            right: 20px;
+            background-color: #8792D6;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 1000;
+            animation: bot-to-top 2s ease-out;
+        }
+
+        .fab .float .my-float {
+            line-height: 48px;
+        }
+
+        .fab ul {
+            position: fixed;
+            right: 20px;
+            padding: 1.2em 0px 0px 0px;
+            top: 7.3em;
+            z-index: 100;
+        }
+
+        .fab ul li {
+            list-style: none;
+            margin-bottom: 10px;
+            position: relative;
+            background: #FFF;
+        }
+
+        .fab ul li a .my-float {
+            line-height: 40px;
+        }
+
+        .fab ul li a.facebook {
+            background-color: #3b5999;
+        }
+
+        .fab ul li a.gmail {
+            background-color: #dd4b39;
+        }
+
+        .fab ul li a.youtube {
+            background-color: #cd201f;
+        }
+
+        .fab ul li a.linkedIn {
+            background-color: #0077B5;
+        }
+
+        .fab ul li a.Instagram {
+            background-color: #e4405f;
+        }
+
+        .fab ul li a.twitter {
+            background-color: #55acee;
+        }
+
+        .fab ul li a.emoji {
+            background-color: #f8bc0e;
+        }
+
+        .fab ul li a {
+            /* background-color: #8792D6;
+      color: #FFF; */
+            border-radius: 50px;
+            text-align: center;
+            box-shadow: 0px 1px 10px #999;
+            width: 40px;
+            height: 40px;
+            display: block;
+            line-height: 39px;
+        }
+
+        .fab .my-float.socialImg {
+            /* font-size: 24px;
+      margin-top: 18px;*/
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+        }
+
+        .fab a#menu-share+ul {
+            visibility: hidden;
+        }
+
+        .fab a#menu-share:hover+ul,
+        .fab a#menu-share:focus+ul {
+            visibility: visible;
+            animation: scale-in 0.5s;
+        }
+
+        .fab ul:hover {
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+
+        .fab a#menu-share i {
+            animation: rotate-in 0.5s;
+        }
+
+        .fab a#menu-share:hover>i {
+            animation: rotate-out 0.5s;
+        }
+
+        @keyframes bot-to-top {
+            0% {
+                top: -5px
+            }
+
+            50% {
+                top: 5px
+            }
+        }
+
+        @keyframes scale-in {
+            from {
+                transform: scale(0);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes rotate-in {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes rotate-out {
+            from {
+                transform: rotate(360deg);
+            }
+
+            to {
+                transform: rotate(0deg);
+            }
+        }
+
+        .fab ul li .label {
+            position: absolute;
+            top: 1.2em;
+            right: 5em;
+            color: #FFF;
+            /* #8792D6;*/
+            background-color: rgba(0, 0, 0, 0.7);
+            line-height: 16px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            margin: 0px;
+        }
+
+        .sidebarMenu {
+            display: block;
+            position: absolute;
+            left: 5px;
+            z-index: 1030;
+            top: 5px;
+            border-radius: 50%;
+            height: 40px;
+            width: 40px;
+            box-shadow: 1px 0px 8px #888;
+            text-align: center;
+            line-height: 40px;
+            background: #FFF;
+            cursor: pointer;
+        }
+
+        .sidebarMenu:hover {
+            background: #8791d6;
+        }
+
+        .sidebarMenu:hover a {
+            color: #FFF;
+        }
+
+        [ng\:cloak],
+        [ng-cloak],
+        [data-ng-cloak],
+        [x-ng-cloak],
+        .ng-cloak,
+        .x- ng-cloak {
+            display: none !important;
+        }
+    </style>
+</head>
+<!-- my-enter="doSomething()" -->
+
+<body class="hold-transition skin-blue sidebar-collapse sidebar-mini">
+    <div class="block-ui-container" ng-if="flagpageloadindicator">
+        <div class="block-ui-overlay"></div>
+        <div class="lineLoader" style="width: 100%;z-index: 99;"></div>
+        <div class="block-ui-message-container">
+            <div class="block-ui-message">Please wait ...</div>
+        </div>
+    </div>
+    <div class="wrapper">
+        <!-- <div class="fab">
+      <a href="javascript:;" class="float" id="menu-share">
+        <i class="fa fa-th my-float"></i>
+      </a>
+      <ul>
+        <li ng-click="feedbackModel()">
+          <a href="javascript:;" style="background:transparent;">
+            <img src="dist/icons/feedback1.png" class="btn-create-sugg bg-color-primary-light" style="height: 40px;width: 40px;border-radius: 50%;">
+          </a>
+          <p class="label">Help & Feedback</p>
+        </li>
+        <li ng-click="openNoticeThought('notice')">
+          <a href="javascript:;">
+            <i class="fa fa-bullhorn my-float" style="font-size:1.5em;"></i>
+          </a>
+          <p class="label">Notices</p>
+        </li>
+        <li ng-click="openNoticeThought('thought')">
+          <a href="javascript:;">
+            <i class="fa fa-thumbs-o-up my-float" style="font-size:1.5em;"></i>
+          </a>
+          <p class="label">Thoughts of the day</p>
+        </li>
+        <li ng-repeat="x in socialMediaList">
+          <a href="{{'https://'+x.mediaUrl}}" target="_blank">
+            <img src="{{x.iconUrl}}" check-sugg-det-usr-image-loaded alt="Facebook" class="my-float socialImg">
+          </a>
+          <p class="label">{{x.mediaName}}</p>
+        </li>
+        <li>
+          <a href="template.html#!/contact">
+            <i class="fa fa-address-book-o my-float" style="font-size:1.5em;"></i>
+          </a>
+          <p class="label">Contacts</p>
+        </li>
+        <li ng-click="openEmojiReport()" ng-if="checkSubMenuAccess('Suggestions','Happiness Index')">
+          <a href="javascript:;" class="emoji">
+            <i class="fa fa-smile-o my-float" style="font-size:1.5em;"></i>
+          </a>
+          <p class="label">Happiness Index</p>
+        </li>
+      </ul>
+    </div> -->
+        <!-- Header Navbar: style can be found in header.less -->
+        <header class="main-header" ng-controller="headerCtrl" style="position: unset" ng-cloak>
+            <div style="position: absolute;top: 1em;right: 2em;width:21%" ng-if="showExtra">
+                <!-- <marquee scrollamount="5" ng-style="{'color' : (locationpath !='/homepage') ? '#625eb7' : '#FFF' }">{{thoughtList}}</marquee> -->
+            </div>
+            <div ng-include="'content/header_side_bar/header_top.html'"></div>
+        </header>
+        <!-- <div class="pull-right" style="position: absolute;right: 0px;top: 6px;z-index: 1;">
+            <div class="logout-content" ng-controller="headerCtrl">
+              <img style="width: 19px;margin-right: 6px;" src="dist/icons/ic_user_bordered.png">
+              {{loggedInUsername}}
+              <img ng-click = "logout()" style="width: 20px;margin-left: 6px;cursor: pointer;" src="dist/icons/ic_logout.png">
+            </div>
+            <div class="points-holder">
+               Monthly points <br> <label>100</label>
+            </div>
+        </div> -->
+
+        <!-- <div class="profileshow">
+            <div class="logout-content" ng-controller="headerCtrl">
+                <img class="slide-right"  style="width:19px;margin-right: 15px;cursor: pointer;" src="dist/icons/ic_user_bordered.png">
+                <span class="glyphicon glyphicon-chevron-left userlefticon"></span>
+            </div>
+            <div class="logoutSlide hidden">
+                <div>
+                    <img class="img-account-profile" src="dist/icons/Mask Group 1.png">
+                </div>
+                <div style="margin-top: 126px;" ng-controller="headerCtrl" >
+                    <div>
+                        <center class="txt-capitalize" style="font-size: 15px;color: white;">{{empDetails.firstName +' '+empDetails.lastName}}</center>
+                    </div>
+                    <div style="background-color:rgb(104, 100, 187);margin-top: 10px;">
+                        <center class="txt-capitalize" style="color: white;">{{empDetails.dept.deptName}}</center>
+                    </div>
+                    <div style="background-color: rgb(171, 167, 255);">
+                        <center style="font-size: 12px;color: white;">{{empDetails.emailId}}</center>
+                    </div>
+                    <div style="background-color:rgb(104, 100, 187);">
+                        <center class="txt-capitalize" style="color: #4b4795;"><a href="template.html#!/profile" style="color:#f5f5f5;margin-left: 8px;font-size: 14px;">Profile</a></center>
+                    </div>
+                </div>
+                <div class="seperator"></div>
+                <div class="btn-container" ng-controller="headerCtrl">
+                    <div>
+                        <span><img class="edit-icon" src="dist\icons\Pencil.png"></span>
+                    </div>
+                    <span class="editprofile">Edit Profile</span>
+                    <div ng-click="logout()" style="cursor: pointer;">
+                        <img class="logouticon"  src="dist/icons/ic_logout.png">
+                        <span class="logout-btn">Logout</span>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+        <!-- <div  ng-if="locationpath !='/homepage'" class="hold-transition skin-blue sidebar-mini sidebar-collapse" style="display:block;position: absolute;left: 0px;z-index: 1030;"> -->
+        <a href="template.html#!/homepage"
+            ng-if="locationpath !='/homepage' && locationpath !='/changepassword' && locationpath != '/performanceSheet' && locationpath != '/skillBook' && locationpath != '/skillBook-dashboard' && locationpath != '/skillBook-help' && locationpath != '/appraisal' && locationpath != '/PMS-dashboard' && locationpath != '/PMS-reports' && locationpath != '/PMS-helpDocument' && locationpath !='/profile' && locationpath!='/skillBook-reports'"
+            class="hold-transition skin-blue sidebar-mini sidebar-collapse sidebarMenu">
+            <!-- <a href="template.html#!/homepage" class="logo hidden-xs hidden-sm ng-scope">
+        <a href="template.html#!/homepage" class="sidebar-toggle bg-color-primary-light" data-toggle="push-menu" role="button" style="display: block;width: 34px;height: 34px;position: absolute;right: -34px;padding: 7px 11px;">
+          <span class="sr-only"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+      </a> -->
+            <i class="fa fa-bars" aria-hidden="true"></i>
+        </a>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper bg-content-wrapper-color" style="margin: 0px !important;width:100%;"
+            ng-click="toggleDeptDiv($event)">
+            <div ng-view></div>
+        </div>
+        <!-- /.content-wrapper -->
+
+        <!-- <div ng-include="'content/header_side_bar/side_bar.html'"></div> -->
+        <div class="snackbar-container" data-snackbar="true" data-snackbar-duration="3000"
+            data-snackbar-remove-delay="200">
+        </div>
+    </div>
+
+    <!-- jQuery 3 -->
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
+
+    <!-- jquery.blockUI.js -->
+    <script src="bower_components/BlockUI/jquery.blockUI.js"></script>
+
+
+    <!-- Bootstrap 3.3.7-->
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- AdminLTE App -->
+    <script src="dist/js/adminlte.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="dist/js/demo.js"></script>
+
+    <script src="dist/ang/angular.min.js"></script>
+    <script src="bower_components/angular-sanitize.min.js"></script>
+    <script src="bower_components/angular-messages.min.js"></script>
+    <!-- <script src="dist/ang/angularjs-geolocation.min.js"></script> -->
+    <script src="dist/ang/angular-route.min.js"></script>
+    <script src="bower_components/snackbar/ang.snackbar.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
+    <script src="dist/ang/angular-translate.min.js"></script>
+    <script src="dist/ang/angular-translate-loader-static-files.min.js"></script>
+    <script src="dist/ang/angular-translate-loader-partial.min.js"></script>
+    <!-- Chart.js -->
+    <script src="bower_components/charts/chart.js/Chart.min.js"></script>
+    <script src="bower_components/charts/chart.js/angular-chart.min.js"></script>
+    <script src="bower_components/charts/chart.js/chartjs-plugin-annotation.min.js"></script>
+
+    <!-- UI-bootstrap -->
+    <script src="bower_components/ui-bootstrap/ui-bootstrap-tpls-2.5.0.min.js"></script>
+    <script src="bower_components/bootstrap-rangePicker/moment.min.js"></script>
+    <script src="bower_components/bootstrap-rangePicker/daterangepicker.min.js"></script>
+    <!-- endbower -->
+
+    <script src="bower_components/bootstrap-rangePicker/angular-daterangepicker.min.js"></script>
+
+    <script src="bower_components/select2/select.js"></script>
+
+    <!-- JSPDF - Convert HTML to PDF -->
+    <script src="bower_components/jspdf.min.js"></script>
+    <script src="bower_components/html2pdf.bundle.min.js"></script>
+    <script src="dist/ang/appDomain.js?ver=4.0.0"></script>
+
+    <script>
+        document.write('<script src="dist/ang/main_app.js?ver=' + appVersion + '"\><\/script>');
+        document.write('<script src="content/header_side_bar/header_top_side_bar.js?ver=' + appVersion + '"\><\/script>');
+        document.write('<script src="content/header_side_bar/profile.js?ver=' + appVersion + '"\><\/script>');
+        document.write('<script src="content/updateprofile/updateprofile.js?ver=' + appVersion + '"\><\/script>');
+        document.write('<script src="content/homepage/homepage.js?ver=' + appVersion + '"\><\/script>');
+    </script>
+
+    <script src="bower_components/angular-animate.min.js"></script>
+    <script src="bower_components/angular-touch.min.js"></script>
+
+    <!-- for excel export -->
+    <script src="dist/alasql/alasql.min.js"></script>
+    <script src="dist/tableExport/xlsx.core.min.js"></script>
+    <script src="dist/ang/dirPagination.js"></script>
+    <!-- <script src="content/teamManagement/teamManagement.js"></script> -->
+    <script src="dist/ang/dirPagination.js"></script>
+    <!-- <script src="content/header_side_bar/profile.js"></script> -->
+    <!-- Datepicker -->
+    <!-- <script src="bower_components/moment/min/moment.min.js"></script> -->
+    <script src="bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js">
+    </script>
+    <script src="bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.js">
+    </script>
+
+    <!-- mCustomScrollbar -->
+    <script src="bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="bower_components/ng-scrollbars/dist/scrollbars.min.js"></script>
+    <!-- Slide -->
+    <!-- <script src="dist/js/jquery-ui.js"></script> -->
+    <!-- rzSlider -->
+    <script src="bower_components/rzSlider/nouislider.min.js"></script>
+    <script src="bower_components/pdfmake.min.js"></script>
+    <script src="bower_components/html2canvas.min.js"></script>
+    <script src="bower_components/rzSlider/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/rzSlider/rzslider.min.js"></script>
+    <script src="bower_components/rzSlider/demo.js"></script>
+    <script src="bower_components/Signature/signature_pad.min.js"></script>
+    <script src="bower_components/Signature/signature.js"></script>
+    <!--Tool tip-->
+    <script src="bower_components/tooltip.js"></script>
+    <!-- <script>
+    $(document).ready(function() {
+        $(".slide-left").click(function(){
+            $(this).toggleClass('slide');
+            $(".profileshow").toggleClass('show');
+            $(".logoutSlide").toggleClass('hidden');
+        });
+        $(".slide-right").click(function(){
+            $(this).toggleClass('slide');
+            $(".logoutSlide").toggleClass('hidden');
+        });
+    });
+</script> -->
+    <!-- <script>
+    $('.input-daterange input').each(function() {
+      $(this).datepicker('clearDates');
+    });
+
+  </script> -->
+    <script>
+        function copyToClipboard() {
+            // Create a "hidden" input
+            var aux = document.createElement("input");
+            // Assign it the value of the specified element
+            aux.setAttribute("value", "You can no longer print screen. This is part of the new system security measure");
+            // Append it to the body
+            document.body.appendChild(aux);
+            // Highlight its content
+            aux.select();
+            // Copy the highlighted text
+            document.execCommand("copy");
+            // Remove it from the body
+            document.body.removeChild(aux);
+            // alert("Print screen disable.");
+        }
+        console.log('Screen Shot = ' + screenShot);
+        $(window).keyup(function (e) {
+            if (e.keyCode == 44 && screenShot) {
+                copyToClipboard();
+                //alert("Print screen disable.");
+            }
+        });
+        $(window).keydown(function (e) {
+            if (e.keyCode == 44 && screenShot) {
+                copyToClipboard();
+                //alert("Print screen disable.");
+            }
+        });
+        if (screenShot) {
+            $(window).focus(function () {
+                $("body").show();
+            }).blur(function () {
+                $("body").hide();
+            });
+
+        }
+    </script>
+</body>
+
+</html>

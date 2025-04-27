@@ -1,0 +1,511 @@
+{
+    "surveyList": [
+       {
+        "srvId": 3,
+        "title": "SurveyNmae1",
+        "activeFrom": "2018-05-19T",
+        "activeTill": "2018-05-24T",
+        "createdDate": "2018-08-23T",
+        "updatedDate": null,
+        "createdBy": {
+            "empId": 1,
+            "firstName": "akshay",
+            "lastName": "manjaratkar",
+            "contactNo": "9.975006563E9",
+            "address": "UAE",
+            "emailId": "manjartkars@gmail.com",
+            "password": "3PZSL8t1",
+            "createdBy": null,
+            "points": 0,
+            "dept": {
+                "deptId": 1,
+                "deptName": "IT"
+            },
+            "organization": {
+                "orgId": 1,
+                "name": "Gabrial"
+            },
+            "createdDate": null,
+            "updatedDate": null
+        },
+        "updatedBy": {
+            "empId": 2,
+            "firstName": "sagar",
+            "lastName": "manjaratkar",
+            "contactNo": "9.59595115E9",
+            "address": "UAE",
+            "emailId": "amolsanap@gmail.com",
+            "password": "3PZSL8t1",
+            "createdBy": null,
+            "points": 0,
+            "dept": {
+                "deptId": 3,
+                "deptName": "Account"
+            },
+            "organization": {
+                "orgId": 2,
+                "name": "Faurecia"
+            },
+            "createdDate": null,
+            "updatedDate": null
+        },
+        "dept": {
+            "deptId": 1,
+            "deptName": "IT"
+        },
+        "quesDet": [
+            {
+                "quesId": 2,
+                "quesType": "radio",
+                "ques": "Capital of India",
+                "options" : [
+                    {
+                        "counter" : 10,
+                        "optText" : "option 1"
+                    },
+                    {
+                        "counter" : 40,
+                        "optText" : "option 2"
+                    },
+                    {
+                        "counter" : 20,
+                        "optText" : "option 3"
+                    },
+                    {
+                        "counter" : 50,
+                        "optText" : "option 4"
+                    }
+                ]
+                
+            },
+            {
+                "quesId": 4,
+                "quesType": "checkbox",
+                "ques": "Capital of Maharashtra ?",
+                "options" : [{
+                    "counter" : 20,
+                    "optText" : "option 1"
+                },
+                {
+                    "counter" : 50,
+                    "optText" : "option 2"
+                },
+                {
+                    "counter" : 50,
+                    "optText" : "option 3"
+                },
+                {
+                    "counter" : 50,
+                    "optText" : "option 4"
+                }
+
+            ]
+                
+            },
+            {
+                "quesId": 3,
+                "quesType": "radio",
+                "ques": "Capital of Maharashtra ?",
+                    "options" : [
+                        {
+                            "counter" : 10,
+                            "optText" :"option 1"
+                        },
+                        {
+                            "counter" : 30,
+                            "optText" :"option 2"
+                        },
+                        {
+                            "counter" : 50,
+                            "optText" :"option 3"
+                        },
+                        {
+                            "counter" : 40,
+                            "optText" :"option 4"
+                        }
+
+                ]
+                
+                
+            },
+            {
+                "quesId": 5,
+                "quesType": "checkbox",
+                "ques": "Capital of Maharashtra ?",
+                    "options" : [
+                        {
+                            "counter" : 40,
+                            "optText":"option 2"
+                        },
+                        {
+                            "counter" : 10,
+                            "optText":"option 1"
+                        },
+                        {
+                            "counter" : 20,
+                            "optText":"option 3"
+                        },
+                        {
+                            "counter" : 50,
+                            "optText":"option 4"
+                        }
+                ]
+                
+            },
+            {
+                "quesId": 5,
+                "quesType": "point",
+                "ques": "Numbers ?",
+                    "options" : [
+                        {
+                            "counter" : 40,
+                            "optText":"option 2"
+                        },
+                        {
+                            "counter" : 10,
+                            "optText":"option 1"
+                        },
+                        {
+                            "counter" : 20,
+                            "optText":"option 3"
+                        },
+                        {
+                            "counter" : 50,
+                            "optText":"option 4"
+                        }
+                ]
+                
+            },
+            {
+                "quesId": 9,
+                "quesType": "text",
+                "ques": "Capital of Maharashtra ?",
+                    "options" :["option 1","option 2","option 3","option 4","option 5","option 6","options 7","option 8","option 9"]
+            }
+        ]
+    },
+
+
+    {
+        "srvId": 2,
+        "title": "SurveyNmae3",
+        "activeFrom": "2018-05-19T",
+        "activeTill": "2018-05-24T",
+        "createdDate": "2018-08-23T",
+        "updatedDate": null,
+        "createdBy": {
+            "empId": 1,
+            "firstName": "Priya",
+            "lastName": "Patil",
+            "contactNo": "9.975006563E9",
+            "address": "UAE",
+            "emailId": "manjartkars@gmail.com",
+            "password": "3PZSL8t1",
+            "createdBy": null,
+            "points": 0,
+            "dept": {
+                "deptId": 1,
+                "deptName": "IT"
+            },
+            "organization": {
+                "orgId": 1,
+                "name": "Gabrial"
+            },
+            "createdDate": null,
+            "updatedDate": null
+        },
+        "updatedBy": {
+            "empId": 2,
+            "firstName": "Ashwini",
+            "lastName": "Palkar",
+            "contactNo": "9.59595115E9",
+            "address": "UAE",
+            "emailId": "amolsanap@gmail.com",
+            "password": "3PZSL8t1",
+            "createdBy": null,
+            "points": 0,
+            "dept": {
+                "deptId": 3,
+                "deptName": "Account"
+            },
+            "organization": {
+                "orgId": 2,
+                "name": "Faurecia"
+            },
+            "createdDate": null,
+            "updatedDate": null
+        },
+        "dept": {
+            "deptId": 1,
+            "deptName": "IT"
+        },
+        "quesDet": [
+            {
+                "quesId": 2,
+                "quesType": "radio",
+                "ques": "Question 1",
+                "options" : [
+                    {
+                        "counter" : 10,
+                        "optText" : "option 1"
+                    },
+                    {
+                        "counter" : 40,
+                        "optText" : "option 2"
+                    },
+                    {
+                        "counter" : 20,
+                        "optText" : "option 3"
+                    },
+                    {
+                        "counter" : 50,
+                        "optText" : "option 4"
+                    }
+                ]
+                
+            },
+            {
+                "quesId": 4,
+                "quesType": "checkbox",
+                "ques": "Question 2?",
+                "options" : [{
+                    "counter" : 20,
+                    "optText" : "option 1"
+                },
+                {
+                    "counter" : 50,
+                    "optText" : "option 2"
+                },
+                {
+                    "counter" : 50,
+                    "optText" : "option 3"
+                },
+                {
+                    "counter" : 50,
+                    "optText" : "option 4"
+                }
+
+            ]
+                
+            },
+            {
+                "quesId": 3,
+                "quesType": "radio",
+                "ques": "Question 3 ?",
+                    "options" : [
+                        {
+                            "counter" : 10,
+                            "optText" :"option 1"
+                        },
+                        {
+                            "counter" : 30,
+                            "optText" :"option 2"
+                        },
+                        {
+                            "counter" : 50,
+                            "optText" :"option 3"
+                        },
+                        {
+                            "counter" : 40,
+                            "optText" :"option 4"
+                        }
+
+                ]
+                
+                
+            },
+            {
+                "quesId": 5,
+                "quesType": "checkbox",
+                "ques": "Question 5 ?",
+                    "options" : [
+                        {
+                            "counter" : 40,
+                            "optText":"option 2"
+                        },
+                        {
+                            "counter" : 10,
+                            "optText":"option 1"
+                        },
+                        {
+                            "counter" : 20,
+                            "optText":"option 3"
+                        },
+                        {
+                            "counter" : 50,
+                            "optText":"option 4"
+                        }
+                ]
+                
+            },
+            {
+                "quesId": 9,
+                "quesType": "text",
+                "ques": "Capital of Maharashtra ?",
+                    "options" :["option 1","option2","option3","option4","option5"]
+            }
+        ]
+    },
+
+    {
+        "srvId": 4,
+        "title": "SurveyNmae2",
+        "activeFrom": "2018-05-19T",
+        "activeTill": "2018-05-24T",
+        "createdDate": "2018-08-23T",
+        "updatedDate": null,
+        "createdBy": {
+            "empId": 1,
+            "firstName": "Akshay",
+            "lastName": "manjaratkar",
+            "contactNo": "9.975006563E9",
+            "address": "UAE",
+            "emailId": "manjartkars@gmail.com",
+            "password": "3PZSL8t1",
+            "createdBy": null,
+            "points": 0,
+            "dept": {
+                "deptId": 1,
+                "deptName": "IT"
+            },
+            "organization": {
+                "orgId": 1,
+                "name": "Gabrial"
+            },
+            "createdDate": null,
+            "updatedDate": null
+        },
+        "updatedBy": {
+            "empId": 2,
+            "firstName": "Ashwini",
+            "lastName": "Palkar",
+            "contactNo": "9.59595115E9",
+            "address": "UAE",
+            "emailId": "amolsanap@gmail.com",
+            "password": "3PZSL8t1",
+            "createdBy": null,
+            "points": 0,
+            "dept": {
+                "deptId": 3,
+                "deptName": "Account"
+            },
+            "organization": {
+                "orgId": 2,
+                "name": "Faurecia"
+            },
+            "createdDate": null,
+            "updatedDate": null
+        },
+        "dept": {
+            "deptId": 1,
+            "deptName": "IT"
+        },
+        "quesDet": [
+            {
+                "quesId": 2,
+                "quesType": "radio",
+                "ques": "Capital of India",
+                "options" : [
+                    {
+                        "counter" : 10,
+                        "optText" : "option 1"
+                    },
+                    {
+                        "counter" : 40,
+                        "optText" : "option 2"
+                    },
+                    {
+                        "counter" : 20,
+                        "optText" : "option 3"
+                    },
+                    {
+                        "counter" : 50,
+                        "optText" : "option 4"
+                    }
+                ]
+                
+            },
+            {
+                "quesId": 4,
+                "quesType": "checkbox",
+                "ques": "Question 1?",
+                "options" : [{
+                    "counter" : 20,
+                    "optText" : "option 1"
+                },
+                {
+                    "counter" : 50,
+                    "optText" : "option 2"
+                },
+                {
+                    "counter" : 50,
+                    "optText" : "option 3"
+                },
+                {
+                    "counter" : 50,
+                    "optText" : "option 4"
+                }
+
+            ]
+                
+            },
+            {
+                "quesId": 3,
+                "quesType": "radio",
+                "ques": "Question 1 ?",
+                    "options" : [
+                        {
+                            "counter" : 10,
+                            "optText" :"option 1"
+                        },
+                        {
+                            "counter" : 30,
+                            "optText" :"option 2"
+                        },
+                        {
+                            "counter" : 50,
+                            "optText" :"option 3"
+                        },
+                        {
+                            "counter" : 40,
+                            "optText" :"option 4"
+                        }
+
+                ]
+                
+                
+            },
+            {
+                "quesId": 5,
+                "quesType": "checkbox",
+                "ques": "Question 3?",
+                    "options" : [
+                        {
+                            "counter" : 40,
+                            "optText":"option 2"
+                        },
+                        {
+                            "counter" : 10,
+                            "optText":"option 1"
+                        },
+                        {
+                            "counter" : 20,
+                            "optText":"option 3"
+                        },
+                        {
+                            "counter" : 50,
+                            "optText":"option 4"
+                        }
+                ]
+                
+            },
+            {
+                "quesId": 9,
+                "quesType": "text",
+                "ques": "Capital of Maharashtra ?",
+                    "options" :["option 1","option 2","option 3","option 4","option 5","option 6","options 7","option 8","option 9"]
+            }
+        ]
+    }
+    ]
+}          
