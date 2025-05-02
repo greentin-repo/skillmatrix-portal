@@ -1628,7 +1628,7 @@ var ctrl = app.controller("employeeCtrl", ['$scope', '$filter', 'appService', '$
                     $scope.transferFuncationalityMenu[index].list = $scope.getCountNArray('list', 'surveyPendingList');
                     $scope.transferFuncationalityMenu[index].surveyPendingList = $scope.getCountNArray('list', 'surveyPendingList');
                 } else if ($scope.transferFuncationalityMenu[index].menuName == 'Skill Matrix') {
-                    $scope.transferFuncationalityMenu[index].count = $scope.getCountNArray('count', 'skillBookCount');
+                    $scope.transferFuncationalityMenu[index].count = $scope.getCountNArray('count', 'skillmatrixCount');
                     $scope.transferFuncationalityMenu[index].list = $scope.getCountNArray('list', 'skillmatrixPendingList');
                     $scope.transferFuncationalityMenu[index].skillmatrixPendingList = $scope.getCountNArray('list', 'skillmatrixPendingList');
                 } 
@@ -1706,6 +1706,7 @@ var ctrl = app.controller("employeeCtrl", ['$scope', '$filter', 'appService', '$
                             "cell": "Packaging"
                         }
                     ];
+                    $scope.transferFunDet.response.skillmatrixCount = $scope.transferFunDet.response.skillmatrixPendingList.length;
                     $scope.setListNCount();
                 } else {
                     $("#transferPopup")
