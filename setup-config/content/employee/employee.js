@@ -1909,7 +1909,7 @@ var ctrl = app.controller("employeeCtrl", ['$scope', '$filter', 'appService', '$
             }
         }
         console.log(req);
-        if ($scope.isEmptyArray(req.data[0].SUGGESTION) && $scope.isEmptyArray(req.data[0].AUDIT) && $scope.isEmptyArray(req.data[0].KUBER) && $scope.isEmptyArray(req.data[0].NEARMISS) && $scope.isEmptyArray(req.data[0].DWM) && $scope.isEmptyArray(req.data[0].TPM) && $scope.isEmptyArray(req.data[0].SKILLBOOK) && $scope.isEmptyArray(req.data[0].PMS) && $scope.isEmptyArray(req.data[0].CONCERN) && $scope.isEmptyArray(req.data[0].SURVEY)) {
+        if ($scope.isEmptyArray(req.data[0].SUGGESTION) && $scope.isEmptyArray(req.data[0].AUDIT) && $scope.isEmptyArray(req.data[0].KUBER) && $scope.isEmptyArray(req.data[0].NEARMISS) && $scope.isEmptyArray(req.data[0].DWM) && $scope.isEmptyArray(req.data[0].TPM) && $scope.isEmptyArray(req.data[0].SKILLBOOK) && $scope.isEmptyArray(req.data[0].PMS) && $scope.isEmptyArray(req.data[0].CONCERN) && $scope.isEmptyArray(req.data[0].SURVEY) && $scope.isEmptyArray(req.data[0].SKILLMATRIX)) {
             snackbar.create('Please select pending action', 3000, 'error')
             $scope.pendingActionLoader = false;
             return;
