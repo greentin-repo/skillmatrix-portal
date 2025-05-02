@@ -1691,6 +1691,19 @@ var ctrl = app.controller("employeeCtrl", ['$scope', '$filter', 'appService', '$
                             "userType": "Trainer",
                             "department": "Sales and Marketing",
                             "cell": "Packaging"
+                        },
+                        {
+                            "empId": 36,
+                            "skillingNumber": "1",
+                            "skillingStatus": "PENDING",
+                            "skillingTitle": "PENDING",
+                            "empName": "Rakesh Kumar",
+                            "skillingId": 46,
+                            "workstation": "TEST JACK / W201 TEST JACK",
+                            "ojtRegisId": 47,
+                            "userType": "Trainer",
+                            "department": "Sales and Marketing",
+                            "cell": "Packaging"
                         }
                     ];
                     $scope.setListNCount();
@@ -2040,6 +2053,31 @@ var ctrl = app.controller("employeeCtrl", ['$scope', '$filter', 'appService', '$
             title: "Sample File"
         });
     });
+
+    $scope.selectedUserType = 'Trainer'; // Default selected tab
+
+    $scope.filterByUserType = function(userType) {
+        $scope.selectedUserType = userType;
+        $scope.transferListPagination.current = 1; // Reset to first page when changing filter
+    };
+
+    $scope.getUserTypeCount = function(userType) {
+        if (!$scope.transferFuncationalityMenu[10].skillmatrixPendingList) {
+            return 0;
+        }
+        return $scope.transferFuncationalityMenu[10].skillmatrixPendingList.filter(function(item) {
+            return item.userType === userType;
+        }).length;
+    };
+
+    $scope.getFilteredSkillMatrixList = function() {
+        if (!$scope.transferFuncationalityMenu[10].skillmatrixPendingList) {
+            return [];
+        }
+        return $scope.transferFuncationalityMenu[10].skillmatrixPendingList.filter(function(item) {
+            return item.userType === $scope.selectedUserType;
+        });
+    };
 
 }]);
 

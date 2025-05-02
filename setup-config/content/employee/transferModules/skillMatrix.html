@@ -1,4 +1,25 @@
 <div>
+    <!-- Add tabs section -->
+    <div class="skill-matrix-tabs">
+        <ul class="nav nav-tabs">
+          <li ng-class="{'active': selectedUserType === 'Trainer'}" ng-click="filterByUserType('Trainer')">
+            <a href="javascript:void(0)">
+              Trainer<span> ({{getUserTypeCount('Trainer')}})</span>
+            </a>
+          </li>
+          <li ng-class="{'active': selectedUserType === 'QA'}" ng-click="filterByUserType('QA')">
+            <a href="javascript:void(0)">
+              QA<span> ({{getUserTypeCount('QA')}})</span>
+            </a>
+          </li>
+          <li ng-class="{'active': selectedUserType === 'TL'}" ng-click="filterByUserType('TL')">
+            <a href="javascript:void(0)">
+              TL<span> ({{getUserTypeCount('TL')}})</span>
+            </a>
+          </li>
+        </ul>
+    </div>
+
     <div ng-if="listAPILoading" class="loadingIndicatorContainer ldng-ind-sm" style="margin-top: 10px;border: 2px solid lightgray;width: 259px;">
         <i class="fa fa-building-o fa-2x" aria-hidden="true"></i>
         <div class="msg"> Please wait list is loading</div>
@@ -33,7 +54,7 @@
                 </tr>
             </thead>
             <tbody ng-scrollbars ng-style="transferDataTbodyModalHeight()">
-                <tr ng-repeat="x in transferFuncationalityMenu[10].skillmatrixPendingList |startFrom:(transferListPagination.current-1)*transferListPagination.perPage | limitTo:transferListPagination.perPage">
+                <tr ng-repeat="x in getFilteredSkillMatrixList() |startFrom:(transferListPagination.current-1)*transferListPagination.perPage | limitTo:transferListPagination.perPage">
                     <td class="srClass" ng-click="x.isChecked = (x.isChecked) ? false : true;checkUncheck();x.empData = (!x.isChecked) ? undefined : x.empData;">
                         <i class="fa " aria-hidden="true" ng-class="(x.isChecked) ? 'fa-check-square-o' : 'fa-square-o'"></i>
                     </td>
@@ -57,7 +78,7 @@
                         </ui-select>
                     </td>
                 </tr>
-                <tr ng-if="(transferFuncationalityMenu[10].skillmatrixPendingList == null || transferFuncationalityMenu[10].skillmatrixPendingList.length == 0) && !listAPILoading">
+                <tr ng-if="(getFilteredSkillMatrixList() == null || getFilteredSkillMatrixList().length == 0) && !listAPILoading">
                     <td colspan="7" style="text-align: center;">
                         Data not found.
                     </td>
