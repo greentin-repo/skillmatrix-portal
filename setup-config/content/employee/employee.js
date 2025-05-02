@@ -1729,10 +1729,38 @@ var ctrl = app.controller("employeeCtrl", ['$scope', '$filter', 'appService', '$
             }
         })
     }
+    $scope.getUserTypeList = function(branchId) {
+        var req = {
+            orgId: $rootScope.empDetails.organization.orgId,
+            offset: 0,
+            branchId: branchId
+        };
+        appService.httpPost(req, 'apis/sm/getUserTypeList').then(function(response) {
+            if (response.result) {
+                $scope.skillMatrixEmpList = response.dataList.map(function(item) {
+                    return {
+                        empId: item.empId,
+                        empName: item.empName,
+                        branchName: item.branchName,
+                        userType: item.userType
+                    };
+                });
+            } else {
+                $scope.skillMatrixEmpList = [];
+                if (response.statusCode == 100) {
+                    snackbar.create(response.reason, 3000, 'error');
+                } else {
+                    snackbar.create('Error occurred while fetching user type list', 3000, 'error');
+                }
+            }
+        });
+    };
+
     $scope.openTransferPopup = function (x) {
         $scope.transferFunDet.empData = x;
         $scope.getEmpList();
         $scope.getTransferPendingActions();
+        $scope.getUserTypeList(x.branch.branchId);
     }
     $scope.isEmptyArray = function (array) {
         return (array == null || array.length == 0);

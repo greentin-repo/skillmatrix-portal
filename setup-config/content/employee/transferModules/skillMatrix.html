@@ -69,7 +69,7 @@
                                 <span class="selectedName">{{$select.selected.empName}}</span>
                                 <button type="button" class="clear" ng-click=" $event.stopPropagation();x.empData=undefined;" style="position: absolute;right: 2em;top: 5px;" ng-if="!transferFunDet.selectedMenu.allDataEmp || transferFunDet.selectedMenu.allDataEmp == undefined">X</button>
                             </ui-select-match>
-                            <ui-select-choices group-by="'branchName'" repeat="item in empList | filter: $select.search">
+                            <ui-select-choices group-by="'branchName'" repeat="item in skillMatrixEmpList | filter: {userType: selectedUserType} | filter: $select.search">
                                 <span ng-bind-html="item.empName |highlight: $select.search"></span>
                             </ui-select-choices>
                             <ui-select-no-choice ng-style="!$select.open && {'display':'none'}">
