@@ -1486,7 +1486,8 @@ var ctrl = app.controller("employeeCtrl", ['$scope', '$filter', 'appService', '$
         { id: 7, menuName: 'Skill Book', class: '', isActive: true, count: 0, list: [], skillBookPendingList: [] },
         { id: 8, menuName: 'PMS', class: '', isActive: true, count: 0, list: [], pmsPendingList: [] },
         { id: 9, menuName: 'Concern', class: '', isActive: true, count: 0, list: [], concernPendingList: [] },
-        { id: 10, menuName: 'Survey', class: '', isActive: true, count: 0, list: [], surveyPendingList: [] }
+        { id: 10, menuName: 'Survey', class: '', isActive: true, count: 0, list: [], surveyPendingList: [] },
+        { id: 11, menuName: 'Skill Matrix', class: '', isActive: true, count: 0, list: [], skillmatrixPendingList: [] }
     ];
     $scope.transferFunDet.selectedMenu = $scope.transferFuncationalityMenu[0];
     $scope.closeModal = function (modal) {
@@ -1626,7 +1627,11 @@ var ctrl = app.controller("employeeCtrl", ['$scope', '$filter', 'appService', '$
                     $scope.transferFuncationalityMenu[index].count = $scope.getCountNArray('count', 'surveyCount');
                     $scope.transferFuncationalityMenu[index].list = $scope.getCountNArray('list', 'surveyPendingList');
                     $scope.transferFuncationalityMenu[index].surveyPendingList = $scope.getCountNArray('list', 'surveyPendingList');
-                }
+                } else if ($scope.transferFuncationalityMenu[index].menuName == 'Skill Matrix') {
+                    $scope.transferFuncationalityMenu[index].count = $scope.getCountNArray('count', 'skillBookCount');
+                    $scope.transferFuncationalityMenu[index].list = $scope.getCountNArray('list', 'skillmatrixPendingList');
+                    $scope.transferFuncationalityMenu[index].skillmatrixPendingList = $scope.getCountNArray('list', 'skillmatrixPendingList');
+                } 
                 $scope.transferFuncationalityMenu[index].isActive = ($scope.transferFuncationalityMenu[index].count > 0);
             }
         }
@@ -1647,6 +1652,47 @@ var ctrl = app.controller("employeeCtrl", ['$scope', '$filter', 'appService', '$
             if (response.result) {
                 if (response.empDto.actionPendingWithEmp) {
                     $scope.transferFunDet.response = response.empDto;
+                    $scope.transferFunDet.response.skillmatrixPendingList = [
+                        {
+                            "empId": 36,
+                            "skillingNumber": "1",
+                            "skillingStatus": "PENDING",
+                            "skillingTitle": "PENDING",
+                            "empName": "Rakesh Kumar",
+                            "skillingId": 46,
+                            "workstation": "TEST JACK / W201 TEST JACK",
+                            "ojtRegisId": 47,
+                            "userType": "QA",
+                            "department": "Sales and Marketing",
+                            "cell": "Packaging"
+                        },
+                        {
+                            "empId": 36,
+                            "skillingNumber": "1",
+                            "skillingStatus": "PENDING",
+                            "skillingTitle": "PENDING",
+                            "empName": "Rakesh Kumar",
+                            "skillingId": 46,
+                            "workstation": "TEST JACK / W201 TEST JACK",
+                            "ojtRegisId": 47,
+                            "userType": "TL",
+                            "department": "Sales and Marketing",
+                            "cell": "Packaging"
+                        },
+                        {
+                            "empId": 36,
+                            "skillingNumber": "1",
+                            "skillingStatus": "PENDING",
+                            "skillingTitle": "PENDING",
+                            "empName": "Rakesh Kumar",
+                            "skillingId": 46,
+                            "workstation": "TEST JACK / W201 TEST JACK",
+                            "ojtRegisId": 47,
+                            "userType": "Trainer",
+                            "department": "Sales and Marketing",
+                            "cell": "Packaging"
+                        }
+                    ];
                     $scope.setListNCount();
                 } else {
                     $("#transferPopup")
@@ -1693,7 +1739,8 @@ var ctrl = app.controller("employeeCtrl", ['$scope', '$filter', 'appService', '$
                 SKILLBOOK: [],
                 PMS: [],
                 CONCERN: [],
-                SURVEY: []
+                SURVEY: [],
+                SKILLMATRIX: []
             }]
         };
         for (let index = 0; index < $scope.transferFuncationalityMenu.length; index++) {
@@ -1804,6 +1851,17 @@ var ctrl = app.controller("employeeCtrl", ['$scope', '$filter', 'appService', '$
                             "id": surveyData.surveyId,
                             "empId": $scope.transferFunDet.empData.empId,
                             "transferTo": surveyData.empData.empId
+                        })
+                    }
+                }
+            } else if ($scope.transferFuncationalityMenu[index].skillmatrixPendingList != null && $filter('filter')($scope.transferFuncationalityMenu[index].skillmatrixPendingList, { isChecked: true, empData: '!undefined' }).length > 0) {
+                for (let i = 0; i < $scope.transferFuncationalityMenu[index].skillmatrixPendingList.length; i++) {
+                    var skillMatrixData = $scope.transferFuncationalityMenu[index].skillmatrixPendingList[i];
+                    if ($scope.transferFuncationalityMenu[index].skillmatrixPendingList[i].isChecked && $scope.transferFuncationalityMenu[index].skillmatrixPendingList[i].empData != undefined && !$scope.isEmpty($scope.transferFuncationalityMenu[index].skillmatrixPendingList[i].empData)) {
+                        req.data[0].SKILLMATRIX.push({
+                            "id": skillMatrixData.surveyId,
+                            "empId": $scope.transferFunDet.empData.empId,
+                            "transferTo": skillMatrixData.empData.empId
                         })
                     }
                 }
