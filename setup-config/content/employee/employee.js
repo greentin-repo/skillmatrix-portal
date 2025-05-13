@@ -1652,60 +1652,6 @@ var ctrl = app.controller("employeeCtrl", ['$scope', '$filter', 'appService', '$
             if (response.result) {
                 if (response.empDto.actionPendingWithEmp) {
                     $scope.transferFunDet.response = response.empDto;
-                    $scope.transferFunDet.response.skillmatrixPendingList = [
-                        {
-                            "empId": 36,
-                            "skillingNumber": "1",
-                            "skillingStatus": "PENDING",
-                            "skillingTitle": "PENDING",
-                            "empName": "Rakesh Kumar",
-                            "skillingId": 46,
-                            "workstation": "TEST JACK / W201 TEST JACK",
-                            "ojtRegisId": 47,
-                            "userType": "QA",
-                            "department": "Sales and Marketing",
-                            "cell": "Packaging"
-                        },
-                        {
-                            "empId": 36,
-                            "skillingNumber": "1",
-                            "skillingStatus": "PENDING",
-                            "skillingTitle": "PENDING",
-                            "empName": "Rakesh Kumar",
-                            "skillingId": 46,
-                            "workstation": "TEST JACK / W201 TEST JACK",
-                            "ojtRegisId": 47,
-                            "userType": "TL",
-                            "department": "Sales and Marketing",
-                            "cell": "Packaging"
-                        },
-                        {
-                            "empId": 36,
-                            "skillingNumber": "1",
-                            "skillingStatus": "PENDING",
-                            "skillingTitle": "PENDING",
-                            "empName": "Rakesh Kumar",
-                            "skillingId": 46,
-                            "workstation": "TEST JACK / W201 TEST JACK",
-                            "ojtRegisId": 47,
-                            "userType": "Trainer",
-                            "department": "Sales and Marketing",
-                            "cell": "Packaging"
-                        },
-                        {
-                            "empId": 36,
-                            "skillingNumber": "1",
-                            "skillingStatus": "PENDING",
-                            "skillingTitle": "PENDING",
-                            "empName": "Rakesh Kumar",
-                            "skillingId": 46,
-                            "workstation": "TEST JACK / W201 TEST JACK",
-                            "ojtRegisId": 47,
-                            "userType": "Trainer",
-                            "department": "Sales and Marketing",
-                            "cell": "Packaging"
-                        }
-                    ];
                     $scope.transferFunDet.response.skillmatrixCount = $scope.transferFunDet.response.skillmatrixPendingList.length;
                     $scope.setListNCount();
                 } else {
