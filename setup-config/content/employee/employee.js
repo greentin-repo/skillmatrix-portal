@@ -2029,7 +2029,7 @@ var ctrl = app.controller("employeeCtrl", ['$scope', '$filter', 'appService', '$
         });
     });
 
-    $scope.selectedUserType = 'Trainer'; // Default selected tab
+    $scope.selectedUserType = 'TRAINER'; // Default selected tab
 
     $scope.filterByUserType = function(userType) {
         $scope.selectedUserType = userType;
