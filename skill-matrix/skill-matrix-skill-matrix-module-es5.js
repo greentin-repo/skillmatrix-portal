@@ -1,4 +1,12 @@
 (function () {
+  function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+  function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+  function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+  function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
   function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
   function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -476,6 +484,30 @@
         }, {
           key: "saveCopyChecksheet",
           value: function saveCopyChecksheet(url, data) {
+            return this.httpService.postMethod(url, data);
+          } // Create New Workstation Mapping
+
+        }, {
+          key: "saveWorkstationMapping",
+          value: function saveWorkstationMapping(url, data) {
+            return this.httpService.postMethod(url, data);
+          } // Get Workstation Mapping List
+
+        }, {
+          key: "getWorkstationMappingList",
+          value: function getWorkstationMappingList(url) {
+            return this.httpService.getMethod(url);
+          } // Delete Workstation Mapping
+
+        }, {
+          key: "deleteWorkstationMapping",
+          value: function deleteWorkstationMapping(url, data) {
+            return this.httpService.postMethod(url, data);
+          } // Update Workstation Mapping
+
+        }, {
+          key: "updateWorkstationMapping",
+          value: function updateWorkstationMapping(url, data) {
             return this.httpService.postMethod(url, data);
           }
         }]);
@@ -1385,7 +1417,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<div class=\"row m-0\">\r\n    <div class=\"col-8 m-auto\">\r\n        <app-topBar title=\"Workstation\"></app-topBar>\r\n    </div>\r\n    <div class=\"col-3 m-auto\">\r\n        <!-- <app-loginInfo></app-loginInfo> -->\r\n    </div>\r\n    <div class=\"col-1 p-0 m-auto text-center\">\r\n        <!-- <button class=\"btn btn-default filter-btn\" title=\"Filter\" (click)=\"filterModalOpen(filterPopup)\">\r\n            <i class=\"fa fa-filter filter-icon\" aria-hidden=\"true\"></i>\r\n        </button> -->\r\n        <div class=\"btn-filter-wrap\">\r\n            <button class=\"btn btn-default filter-btn\" [ngClass]=\"{'applied' : searchDet.filterFlag}\" title=\"Filter\"\r\n                (click)=\"filterModalOpen(filterPopup)\">\r\n                <i class=\"fa fa-filter filter-icon\" aria-hidden=\"true\"></i>\r\n            </button>\r\n            <div class=\"btn-clear-filter\" *ngIf=\"searchDet.filterFlag\" (click)=\"removeFilter();\">x</div>\r\n            <div class=\"lbl-filter-applied\" *ngIf=\"searchDet.filterFlag\">Filter Applied</div>\r\n        </div>\r\n    </div>\r\n</div>\r\n<div class=\"homepage-block bg-Transperant p-l-15 p-r-15\">\r\n    <div class=\"extraContent\">\r\n        <div class=\"row m-0\">\r\n            <div class=\"p-l-0 p-r-5 col-4\">\r\n                <div class=\"row m-0\">\r\n                    <!-- <div class=\"p-l-0 p-r-5\" [ngClass]=\"(searchDet.filterFlag)?'col-6':'col-12'\"> -->\r\n                    <div class=\"col-12\">\r\n                        <div class=\"form-group has-search\">\r\n                            <span *ngIf=\"!searchDet.searchData\" class=\"fa fa-search form-control-feedback\"\r\n                                (click)=\"getSearchList(true)\"></span>\r\n                            <span *ngIf=\"searchDet.searchData\" class=\"fa fa-times-circle form-control-clear\"\r\n                                (click)=\"getSearchList(false)\"></span>\r\n                            <input style=\"border-bottom: 1px solid #7044cd;overflow-y: auto; white-space: pre-wrap;\"\r\n                                type=\"text\" class=\"form-control\" name=\"searchInput\"\r\n                                placeholder=\"Search by workstation and line\" [(ngModel)]=\"searchDet.searchInput\"\r\n                                (keyup)=\"$event.keyCode == 13 ? getSearchList(true) : ''\" autocomplete=\"off\"  (ngModelChange)=\"searchDet.searchInput = searchDet.searchInput.trim()\"/>\r\n                        </div>\r\n                    </div>\r\n                    <!-- <div class=\"col-6 p-r-5 p-l-5\" *ngIf=\"searchDet.filterFlag\">\r\n                        <div class=\"filterDiv\">\r\n                            <button class=\"clearFilter\" (click)=\"removeFilter()\">Clear filter</button>\r\n                            &nbsp;\r\n                            <span style=\"color: green;font-size: 12px; font-weight: 500;\">Filter\r\n                                applied</span>\r\n                        </div>\r\n                    </div> -->\r\n                </div>\r\n            </div>\r\n            <div class=\"col-4 p-r-5 p-l-5 form-group\"></div>\r\n            <div class=\"col-4 p-0\">\r\n                <div class=\"addRegDiv\">\r\n                    <button class=\"btn addRegBtn m-0\" type=\"button\" (click)=\"modalOpen(workStation,'top')\"><i\r\n                            class=\"fa fa-plus m-r-10\"></i>Add Workstation</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"table-block\">\r\n        <div class=\"table-responsive tableFixHead\">\r\n            <table class=\"table\" matSort (matSortChange)=\"sortData($event)\">\r\n                <thead>\r\n                    <tr>\r\n                        <th class=\"fixedColumn\" mat-sort-header=\"BranchName\">Plant</th>\r\n                        <th mat-sort-header=\"DeptName\">Department</th>\r\n                        <th mat-sort-header=\"Line\">Cell/Line</th>\r\n                        <th mat-sort-header=\"Workstation\">Workstation</th>\r\n                        <th mat-sort-header=\"MachineIndex\">Machine Index</th>\r\n                        <th mat-sort-header=\"MachineCount\">Machine Count</th>\r\n                        <th mat-sort-header=\"LevelName\">Required Skill Level</th>\r\n                        <th mat-sort-header=\"RequiredWorkforce\">Required Workforce</th>\r\n                        <!-- <th>Tolerance(%)</th> -->\r\n                        <th class=\"actionTh fixedColumn\">Action</th>\r\n                    </tr>\r\n                </thead>\r\n                <tbody>\r\n                    <tr *ngFor=\"let data of workstationData\">\r\n                        <td class=\"actionTh fixedColumn\">{{data.branchName || 'NA'}}</td>\r\n                        <td>{{data.deptName}}</td>\r\n                        <td>{{data.lineName}}</td>\r\n                        <td>{{data.workstation}}</td>\r\n                        <td>{{data.machineIndex}}</td>\r\n                        <td>{{data.machineCount}}</td>\r\n                        <td>{{data.levelName}}</td>\r\n                        <td>{{data.requiredWorkforce}}</td>\r\n                        <!-- <td></td> -->\r\n                        <td class=\"actionTd fixedColumn text-left\">\r\n                            <i class=\"fa fa-edit editIcon\" (click)=\"updateWorkstationForm(workStation, data)\"></i>\r\n                            &nbsp; &nbsp;\r\n                            <i class=\"fas fa-trash-alt deleteIcon\"\r\n                                (click)=\"deactivateWorkstationDetails(data)\"></i>&nbsp; &nbsp;\r\n                        </td>\r\n                    </tr>\r\n                    <tr *ngIf=\"(workstationData == null || workstationData.length == 0)\">\r\n                        <td colspan=\"11\" class=\"text-center no-record-found\" *ngIf=\"!listLoading\">\r\n                            Data not found\r\n                        </td>\r\n                        <td colspan=\"11\" class=\"text-center loading-div\" *ngIf=\"listLoading\">\r\n                            <app-loading></app-loading>\r\n                        </td>\r\n                    </tr>\r\n                </tbody>\r\n            </table>\r\n        </div>\r\n        <app-pagination [staticPagination]=\"staticPagination\" (paginationData)=\"loadMore($event)\"></app-pagination>\r\n    </div>\r\n</div>\r\n<!-- Top Modal -->\r\n<ng-template #workStation let-c=\"close\" let-d=\"dismiss\">\r\n\r\n    <div class=\"modal-header\">\r\n        <h4 class=\"modal-title\" id=\"myModalLabel2\">{{modalTital}}</h4>\r\n        <button type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"closeFilterPopup()\">\r\n            <span aria-hidden=\"true\">&times;</span>\r\n        </button>\r\n    </div>\r\n    <form [formGroup]=\"formdata\" (ngSubmit)=\"addOrUpdateWorkstation(formdata)\" autocomplete=\"off\">\r\n        <div class=\"modal-body p-0\">\r\n            <div class=\"form-group row\" style=\"padding-left: 15px;\">\r\n                <label for=\"branch\" class=\"col-sm-4 col-form-label\">Plant &nbsp;<span class=\"astrik\">*</span></label>\r\n                <div class=\"col-sm-8\">\r\n                    <ng-multiselect-dropdown name=\"branch\" class=\"custom-multiSelection customWidthForInter\"\r\n                        [placeholder]=\"'Select Plant'\" [settings]=\"SingleDropdownSettings\" formControlName=\"branch\"\r\n                        [data]=\"getSortFunction(branchAccessList,'plant')\" (onSelect)=\"onChange($event,'Plant')\"\r\n                        (onDeSelect)=\"onChange(false,'Plant')\" [disabled]=\"isEditing && formdata.get('branch').value\">\r\n                    </ng-multiselect-dropdown>\r\n                    <div *ngIf=\"formdata.controls['branch'].invalid && (formdata.controls['branch'].touched || formdata.controls['branch'].dirty)\"\r\n                        class=\"custom-errorMsg\" style=\"padding-left: 15px;\">\r\n                        <div *ngIf=\"formdata.controls['branch'].errors.required\">\r\n                            Please select plant\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group row\" style=\"padding-left: 15px;\">\r\n                <label for=\"dept\" class=\"col-sm-4 col-form-label\">Department &nbsp;<span class=\"astrik\">*</span></label>\r\n                <div class=\"col-sm-8\">\r\n                    <ng-multiselect-dropdown name=\"dept\" class=\"custom-multiSelection customWidthForInter\"\r\n                        [placeholder]=\"'Select Department'\" [settings]=\"SingleDropdownSettings\" formControlName=\"dept\"\r\n                        [data]=\"getSortFunction(deparmentList,'dept')\"\r\n                        [disabled]=\"isEditing && formdata.get('dept').value\" (onSelect)=\"onChange($event,'dept')\"\r\n                        (onDeSelect)=\"onChange(false,'dept')\">\r\n                    </ng-multiselect-dropdown>\r\n                    <div *ngIf=\"formdata.controls['dept'].invalid && (formdata.controls['dept'].touched || formdata.controls['dept'].dirty)\"\r\n                        class=\"custom-errorMsg\" style=\"padding-left: 15px;\">\r\n                        <div *ngIf=\"formdata.controls['dept'].errors.required\">\r\n                            Please select department\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group row\" style=\"padding-left: 15px;\">\r\n                <label for=\"cell\" class=\"col-sm-4 col-form-label\">Cell/Line &nbsp;<span class=\"astrik\">*</span></label>\r\n                <div class=\"col-sm-8\">\r\n                    <ng-multiselect-dropdown name=\"cell\" class=\"custom-multiSelection customWidthForInter\"\r\n                        [placeholder]=\"'Select Cell/Line'\" [settings]=\"SingleDropdownSettings\" formControlName=\"cell\"\r\n                        [data]=\"getSortFunction(cellLevelList,'cell')\"\r\n                        [disabled]=\"isEditing && formdata.get('cell').value\">\r\n                    </ng-multiselect-dropdown>\r\n                    <div *ngIf=\"isSubmit && formdata.controls['cell'].invalid && (formdata.controls['cell'].touched || formdata.controls['cell'].dirty)\"\r\n                        class=\"custom-errorMsg\" style=\"padding-left: 15px;\">\r\n                        <div *ngIf=\"formdata.controls['cell'].errors.required\">\r\n                            Please select cell/line\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group row\" style=\"padding-left: 15px;\">\r\n                <label for=\"workstation\" class=\"col-sm-4 col-form-label\">Workstation &nbsp;<span\r\n                        class=\"astrik\">*</span></label>\r\n                <div class=\"col-sm-8\">\r\n                    <input style=\"padding: 6px 12px;\" id=\"workstation\" name=\"workstation\" type=\"text\"\r\n                        placeholder=\"Enter Workstation\" formControlName=\"workstation\">\r\n                    <div *ngIf=\"formdata.controls['workstation'].invalid && (formdata.controls['workstation'].touched || formdata.controls['workstation'].dirty)\"\r\n                        class=\"custom-errorMsg\" style=\"padding-left: 15px;\">\r\n                        <div *ngIf=\"formdata.controls['workstation'].errors.required\">\r\n                            Enter workstation\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group row\" style=\"padding-left: 15px;\">\r\n                <label for=\"machineIndex\" class=\"col-sm-4 col-form-label\">Machine Index &nbsp;<span\r\n                        class=\"astrik\">*</span></label>\r\n                <div class=\"col-sm-8\">\r\n                    <input style=\"padding: 6px 12px;\" type=\"text\" placeholder=\"Enter Machine Index\" id=\"machineIndex\"\r\n                        name=\"machineIndex\" formControlName=\"machineIndex\">\r\n                    <div *ngIf=\"formdata.controls['machineIndex'].invalid && (formdata.controls['machineIndex'].touched || formdata.controls['machineIndex'].dirty)\"\r\n                        class=\"custom-errorMsg\" style=\"padding-left: 15px;\">\r\n                        <div *ngIf=\"formdata.controls['machineIndex'].errors.required\">\r\n                            Enter machine index\r\n                        </div>\r\n                        <div *ngIf=\"formdata.get('machineIndex').hasError('invalidInput')\">\r\n                            Invalid input. Please enter a valid number.\r\n                        </div>\r\n\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group row\" style=\"padding-left: 15px;\">\r\n                <label for=\"machineCount\" class=\"col-sm-4 col-form-label\">Machine Count &nbsp;<span\r\n                        class=\"astrik\">*</span></label>\r\n                <div class=\"col-sm-8\">\r\n                        <input style=\"padding: 6px 12px;\" type=\"text\" placeholder=\"Enter Machine Count\" id=\"machineCount\" \r\n                        name=\"machineCount\" formControlName=\"machineCount\"  maxlength=\"3\" />\r\n\r\n                    <div *ngIf=\"formdata.controls['machineCount'].invalid && (formdata.controls['machineCount'].touched || formdata.controls['machineCount'].dirty)\"\r\n                        class=\"custom-errorMsg\" style=\"padding-left: 15px;\">\r\n                        <div *ngIf=\"formdata.controls['machineCount'].errors.required\">\r\n                            Enter machine count\r\n                        </div>\r\n                        <div *ngIf=\"formdata.get('machineCount').hasError('invalidInput')\">\r\n                            Invalid input. Please enter a valid number.\r\n                        </div>\r\n                        <div *ngIf=\"formdata.get('machineCount')?.errors?.lessThanOrEqualToZero\">\r\n                            Value must be greater than zero.\r\n                          </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group row\" style=\"padding-left: 15px;\">\r\n                <label for=\"reqWorkforce\" class=\"col-sm-4 col-form-label \">Required Workforce<span\r\n                        class=\"astrik\">*</span></label>\r\n\r\n                <div class=\"col-sm-8\">\r\n                    <input style=\"padding: 6px 12px; width: 70%;\" id=\"reqWorkforce\" name=\"reqWorkforce\" type=\"text\"\r\n                        placeholder=\"Enter Required Workforce\" formControlName=\"reqWorkforce\" required>\r\n                    <div *ngIf=\"formdata.controls['reqWorkforce'].invalid && (formdata.controls['reqWorkforce'].touched || formdata.controls['reqWorkforce'].dirty)\"\r\n                        class=\"custom-errorMsg\" style=\"padding-left: 15px;\">\r\n                        <div *ngIf=\"formdata.controls['reqWorkforce'].errors.required\">\r\n                            Enter required workforce\r\n                        </div>\r\n                        <div *ngIf=\"formdata.get('reqWorkforce').hasError('invalidInput')\">\r\n                            Invalid input. Please enter a valid number.\r\n                        </div>\r\n\r\n                    </div>\r\n                </div>\r\n            </div>\r\n\r\n            <div class=\"form-group row\" style=\"padding-left: 15px;border-bottom:none;\">\r\n                <label for=\"reqSkillLvl\" class=\"col-sm-4 col-form-label label-with-asterisk\">Required Skill Level<span\r\n                        class=\"astrik\">*</span></label>\r\n                <div class=\"col-sm-8\">\r\n                    <ng-multiselect-dropdown name=\"reqSkillLvl\" class=\"custom-multiSelection customWidthForInter\"\r\n                        [placeholder]=\"'Select Required Skill Level'\" [settings]=\"SingleDropdownSettings\"\r\n                        formControlName=\"reqSkillLvl\" id=\"reqSkillLvl\" [data]=\"skillLevelList\" [disabled]=\"false\">\r\n                    </ng-multiselect-dropdown>\r\n                    <div *ngIf=\"formdata.controls['reqSkillLvl'].invalid && (formdata.controls['reqSkillLvl'].touched || formdata.controls['reqSkillLvl'].dirty)\"\r\n                        class=\"custom-errorMsg\" style=\"padding-left: 15px;\">\r\n                        <div *ngIf=\"formdata.controls['reqSkillLvl'].errors.required\">\r\n                            Please select required skill level\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n\r\n        </div>\r\n        <!-- <div class=\"footerDiv\"></div> -->\r\n        <div class=\"footerBtn\">\r\n            <button class=\"btn btn-lg submitBtn event-btn\" type=\"submit\" [disabled]=\"submitSpinner\">\r\n                <span *ngIf=\"submitSpinner\" class=\"spinner-grow spinner-grow-sm\" role=\"status\"></span>\r\n                <span *ngIf=\"submitSpinner\" class=\"load-text\"> Loading...</span>\r\n                <span *ngIf=\"!submitSpinner\" class=\"btn-text\">Submit</span>\r\n            </button>\r\n        </div>\r\n    </form>\r\n</ng-template>\r\n<ng-template #filterPopup let-c=\"close\" let-d=\"dismiss\">\r\n    <div class=\"modal-header\">\r\n        <h4 class=\"modal-title popup-header-txt\" id=\"myModalLabel2\">Filter</h4>\r\n        <button type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"closeFilterPopup()\">\r\n            <span aria-hidden=\"true\">&times;</span>\r\n        </button>\r\n    </div>\r\n    <form [formGroup]=\"filterFormData\" (ngSubmit)=\"submitFilterForm(filterFormData)\" autocomplete=\"off\"\r\n        class=\"needs-validation\">\r\n        <div class=\"modal-body p-2\" style=\"height: calc(100vh - 14vh);\">\r\n            <perfect-scrollbar>\r\n                <div class=\"row m-b-0\">\r\n                    <label for=\"branch\" class=\"col-sm-12 col-form-label filter-label\">Plant</label>\r\n                    <div class=\"col-sm-12\">\r\n                        <ng-multiselect-dropdown name=\"branch\" id=\"branch\"\r\n                            class=\"custom-multiSelection assessmentdropDown customWidthForRport\"\r\n                            [placeholder]=\"'Select Plant'\" [settings]=\"SingleDropdownSettings\" formControlName=\"branch\"\r\n                            [data]=\"getSortFunction(branchAccessList,'plant')\" [disabled]=\"false\"\r\n                            [(ngModel)]=\"selectedBranch.branch\" (onSelect)=\"onChange($event,'Plant')\"\r\n                            (onDeSelect)=\"onChange(false,'Plant')\">\r\n                        </ng-multiselect-dropdown>\r\n                        <div *ngIf=\"submitAttempted  && filterFormData.controls['branch'].invalid && (filterFormData.controls['branch'].touched || filterFormData.controls['branch'].dirty)\"\r\n                            class=\"custom-errorMsg\" style=\"padding-left: 15px;\">\r\n                            <div *ngIf=\"filterFormData.controls['branch'].errors.required\">\r\n                                Please select plant\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row m-b-0\">\r\n                    <label for=\"opt\" class=\"col-sm-12 col-form-label filter-label\">Department</label>\r\n                    <div class=\"col-sm-12\">\r\n                        <ng-multiselect-dropdown name=\"dept\" id=\"dept\"\r\n                            class=\"custom-multiSelection assessmentdropDown customWidthForRport\"\r\n                            [placeholder]=\"'Select Department'\" [settings]=\"SingleDropdownSettings\"\r\n                            formControlName=\"dept\" [data]=\"getSortFunction(searchDet.deptList,'dept')\"\r\n                            [disabled]=\"false\" [(ngModel)]=\"selectedBranch.dept\" (onSelect)=\"onChange($event,'dept')\"\r\n                            (onDeSelect)=\"onChange(false,'dept')\">\r\n                        </ng-multiselect-dropdown>\r\n                        <div *ngIf=\"submitAttempted  && filterFormData.controls['dept'].invalid && (filterFormData.controls['dept'].touched || filterFormData.controls['dept'].dirty)\"\r\n                            class=\"custom-errorMsg\" style=\"padding-left: 15px;\">\r\n                            <div *ngIf=\"filterFormData.controls['dept'].errors.required\">\r\n                                Please select department\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row m-b-0\">\r\n                    <label for=\"opt\" class=\"col-sm-12 col-form-label filter-label\">Cell/Line</label>\r\n                    <div class=\"col-sm-12\">\r\n                        <ng-multiselect-dropdown name=\"cell\" id=\"cell\"\r\n                            class=\"custom-multiSelection assessmentdropDown customWidthForRport\"\r\n                            [placeholder]=\"'Select Cell/Line'\" [settings]=\"multipleDropdownSettings\"\r\n                            formControlName=\"cell\" [data]=\"getSortFunction(cellLevelList,'cell')\" [disabled]=\"false\"\r\n                            [(ngModel)]=\"selectedBranch.cell\">\r\n                        </ng-multiselect-dropdown>\r\n                        <div *ngIf=\"submitAttempted  && filterFormData.controls['cell'].invalid && (filterFormData.controls['cell'].touched || filterFormData.controls['cell'].dirty)\"\r\n                            class=\"custom-errorMsg\" style=\"padding-left: 15px;\">\r\n                            <div *ngIf=\"filterFormData.controls['cell'].errors.required\">\r\n                                Please select cell\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </perfect-scrollbar>\r\n        </div>\r\n        <div class=\"modal-footer footerBlock text-right\">\r\n            <button class=\"btn submitBtn event-btn\" type=\"submit\">\r\n                <span *ngIf=\"submitSpinner\" class=\"spinner-grow spinner-grow-sm\" role=\"status\"></span>\r\n                <span *ngIf=\"submitSpinner\" class=\"load-text\"> Loading...</span>\r\n                <span *ngIf=\"!submitSpinner\" class=\"btn-text\">Apply Filter</span>\r\n            </button>\r\n            <!-- <button type=\"button\" class=\"btn cancelBtn\" aria-label=\"Close\" (click)=\"closeFilterPopup()\">Cancel\r\n            </button> -->\r\n        </div>\r\n    </form>\r\n</ng-template>";
+      __webpack_exports__["default"] = "<div class=\"row m-0\">\r\n    <!-- <div class=\"col-8 m-auto\">\r\n        <app-topBar title=\"Workstation\"></app-topBar>\r\n    </div> -->     \r\n    <div class=\"col-8 p-r-5 p-l-15\" style=\"padding-top: 10px; padding-bottom: 10px;\">                \r\n        <div class=\"performanceBg\">\r\n            <div class=\"main-tab-switcher\">\r\n                <div class=\"main-tab-switch\" [ngClass]=\"{'mainActiveSwitch': selectedTab === 'workStation'}\"\r\n                    (click)=\"selectTab('workStation')\">\r\n                Workstation\r\n                </div>\r\n                <div class=\"main-tab-switch\"\r\n                [ngClass]=\"{'mainActiveSwitch': selectedTab === 'workStationMapping'}\" (click)=\"selectTab('workStationMapping')\">\r\n                Workstation Mapping\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"col-3 m-auto\">\r\n        <!-- <app-loginInfo></app-loginInfo> -->\r\n    </div>\r\n    <div class=\"col-1 p-0 m-auto text-center\" [style.visibility]=\"isVisible ? 'visible' : 'hidden'\">\r\n        <!-- <button class=\"btn btn-default filter-btn\" title=\"Filter\" (click)=\"filterModalOpen(filterPopup)\">\r\n            <i class=\"fa fa-filter filter-icon\" aria-hidden=\"true\"></i>\r\n        </button> -->\r\n        <div class=\"btn-filter-wrap\">\r\n            <button class=\"btn btn-default filter-btn\" [ngClass]=\"{'applied' : searchDet.filterFlag}\" title=\"Filter\"\r\n                (click)=\"filterModalOpen(filterPopup)\">\r\n                <i class=\"fa fa-filter filter-icon\" aria-hidden=\"true\"></i>\r\n            </button>\r\n            <div class=\"btn-clear-filter\" *ngIf=\"searchDet.filterFlag\" (click)=\"removeFilter();\">x</div>\r\n            <div class=\"lbl-filter-applied\" *ngIf=\"searchDet.filterFlag\">Filter Applied</div>\r\n        </div>\r\n    </div>\r\n</div>\r\n<div class=\"homepage-block bg-Transperant p-l-15 p-r-15\">\r\n    <div class=\"extraContent\">\r\n        <div class=\"row m-0\">\r\n            <div class=\"p-l-0 p-r-5 col-4\" [style.visibility]=\"isVisible ? 'visible' : 'hidden'\">\r\n                <div class=\"row m-0\">\r\n                    <!-- <div class=\"p-l-0 p-r-5\" [ngClass]=\"(searchDet.filterFlag)?'col-6':'col-12'\"> -->\r\n                    <div class=\"col-12\">\r\n                        <div class=\"form-group has-search\">\r\n                            <span *ngIf=\"!searchDet.searchData\" class=\"fa fa-search form-control-feedback\"\r\n                                (click)=\"getSearchList(true)\"></span>\r\n                            <span *ngIf=\"searchDet.searchData\" class=\"fa fa-times-circle form-control-clear\"\r\n                                (click)=\"getSearchList(false)\"></span>\r\n                            <input style=\"border-bottom: 1px solid #7044cd;overflow-y: auto; white-space: pre-wrap;\"\r\n                                type=\"text\" class=\"form-control\" name=\"searchInput\"\r\n                                placeholder=\"Search by workstation and line\" [(ngModel)]=\"searchDet.searchInput\"\r\n                                (keyup)=\"$event.keyCode == 13 ? getSearchList(true) : ''\" autocomplete=\"off\"  (ngModelChange)=\"searchDet.searchInput = searchDet.searchInput.trim()\"/>\r\n                        </div>\r\n                    </div>\r\n                    <!-- <div class=\"col-6 p-r-5 p-l-5\" *ngIf=\"searchDet.filterFlag\">\r\n                        <div class=\"filterDiv\">\r\n                            <button class=\"clearFilter\" (click)=\"removeFilter()\">Clear filter</button>\r\n                            &nbsp;\r\n                            <span style=\"color: green;font-size: 12px; font-weight: 500;\">Filter\r\n                                applied</span>\r\n                        </div>\r\n                    </div> -->\r\n                </div>\r\n            </div>\r\n            <div class=\"col-4 p-r-5 p-l-5 form-group\"></div>\r\n            <div class=\"col-4 p-0\" *ngIf=\"selectedTab === 'workStation'\">\r\n                <div class=\"addRegDiv\">\r\n                    <button class=\"btn addRegBtn m-0\" type=\"button\" (click)=\"modalOpen(workStation,'top')\"><i\r\n                            class=\"fa fa-plus m-r-10\"></i>Add Workstation</button>\r\n                </div>\r\n            </div>\r\n            <div class=\"col-12 p-0\" *ngIf=\"selectedTab === 'workStationMapping'\">\r\n                <div class=\"addRegDiv\">\r\n                    <button class=\"btn addRegBtn m-0\" type=\"button\" (click)=\"modalOpen(workstationMappingTemplate,'top')\"><i\r\n                            class=\"fa fa-plus m-r-10\"></i>Add Mapping</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"table-block\" *ngIf=\"selectedTab === 'workStation'\">\r\n        <div class=\"table-responsive tableFixHead\">\r\n            <table class=\"table\" matSort (matSortChange)=\"sortData($event)\">\r\n                <thead>\r\n                    <tr>\r\n                        <th class=\"fixedColumn\" mat-sort-header=\"BranchName\">Plant</th>\r\n                        <th mat-sort-header=\"DeptName\">Department</th>\r\n                        <th mat-sort-header=\"Line\">Cell/Line</th>\r\n                        <th mat-sort-header=\"Workstation\">Workstation</th>\r\n                        <th mat-sort-header=\"MachineIndex\">Machine Index</th>\r\n                        <th mat-sort-header=\"MachineCount\">Machine Count</th>\r\n                        <th mat-sort-header=\"LevelName\">Required Skill Level</th>\r\n                        <th mat-sort-header=\"RequiredWorkforce\">Required Workforce</th>\r\n                        <!-- <th>Tolerance(%)</th> -->\r\n                        <th class=\"actionTh fixedColumn\">Action</th>\r\n                    </tr>\r\n                </thead>\r\n                <tbody>\r\n                    <tr *ngFor=\"let data of workstationData\">\r\n                        <td class=\"actionTh fixedColumn\">{{data.branchName || 'NA'}}</td>\r\n                        <td>{{data.deptName}}</td>\r\n                        <td>{{data.lineName}}</td>\r\n                        <td>{{data.workstation}}</td>\r\n                        <td>{{data.machineIndex}}</td>\r\n                        <td>{{data.machineCount}}</td>\r\n                        <td>{{data.levelName}}</td>\r\n                        <td>{{data.requiredWorkforce}}</td>\r\n                        <!-- <td></td> -->\r\n                        <td class=\"actionTd fixedColumn text-left\">\r\n                            <i class=\"fa fa-edit editIcon\" (click)=\"updateWorkstationForm(workStation, data)\"></i>\r\n                            &nbsp; &nbsp;\r\n                            <i class=\"fas fa-trash-alt deleteIcon\"\r\n                                (click)=\"deactivateWorkstationDetails(data)\"></i>&nbsp; &nbsp;\r\n                        </td>\r\n                    </tr>\r\n                    <tr *ngIf=\"(workstationData == null || workstationData.length == 0)\">\r\n                        <td colspan=\"11\" class=\"text-center no-record-found\" *ngIf=\"!listLoading\">\r\n                            Data not found\r\n                        </td>\r\n                        <td colspan=\"11\" class=\"text-center loading-div\" *ngIf=\"listLoading\">\r\n                            <app-loading></app-loading>\r\n                        </td>\r\n                    </tr>\r\n                </tbody>\r\n            </table>\r\n        </div>\r\n        <app-pagination [staticPagination]=\"staticPagination\" (paginationData)=\"loadMore($event)\"></app-pagination>\r\n    </div>\r\n    <div class=\"table-block\" *ngIf=\"selectedTab === 'workStationMapping'\">\r\n        <div class=\"table-responsive tableFixHead\">\r\n            <table class=\"table\" matSort (matSortChange)=\"sortData($event)\">\r\n                <thead>\r\n                    <tr>\r\n                        <th class=\"fixedColumn\" mat-sort-header=\"BranchName\">Plant</th>\r\n                        <th mat-sort-header=\"DeptName\">Master Workstation</th>\r\n                        <th mat-sort-header=\"Line\">Linked Workstation</th>\r\n                        <!-- <th>Tolerance(%)</th> -->\r\n                        <th class=\"actionTh fixedColumn\" width=\"90px\">Action</th>\r\n                    </tr>\r\n                </thead>\r\n                <tbody>\r\n                    <tr *ngFor=\"let data of mappingStationData\">\r\n                        <td class=\"actionTh fixedColumn\">{{data.branchName || 'NA'}}</td>\r\n                        <td>{{data.parentWorkstationName}}</td>\r\n                        <td>\r\n                            <span *ngFor=\"let child of data.childWorkstations; let last = last\">\r\n                                {{child.childWorkstationName}}{{!last ? ', ' : ''}}\r\n                            </span>\r\n                        </td>\r\n                        <td class=\"actionTd fixedColumn\">\r\n                            <i class=\"fa fa-edit editIcon\" (click)=\"updateWorkstationMappingForm(workstationMappingTemplate, data)\"></i>\r\n                            &nbsp; &nbsp;\r\n                            <i class=\"fas fa-trash-alt deleteIcon\"\r\n                                (click)=\"onDeleteWorkstationMapping(data)\"></i>&nbsp; &nbsp;\r\n                        </td>\r\n                    </tr>\r\n                    <tr *ngIf=\"(mappingStationData == null || mappingStationData.length == 0)\">\r\n                        <td colspan=\"11\" class=\"text-center no-record-found\" *ngIf=\"!listLoading\">\r\n                            Data not found\r\n                        </td>\r\n                        <td colspan=\"11\" class=\"text-center loading-div\" *ngIf=\"listLoading\">\r\n                            <app-loading></app-loading>\r\n                        </td>\r\n                    </tr>\r\n                </tbody>\r\n            </table>\r\n        </div>\r\n        <app-pagination [staticPagination]=\"staticPagination\" (paginationData)=\"loadMore($event)\"></app-pagination>\r\n    </div>\r\n</div>\r\n<!-- Top Modal -->\r\n<ng-template #workStation let-c=\"close\" let-d=\"dismiss\">\r\n\r\n    <div class=\"modal-header\">\r\n        <h4 class=\"modal-title\" id=\"myModalLabel2\">{{modalTital}}</h4>\r\n        <button type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"closeFilterPopup()\">\r\n            <span aria-hidden=\"true\">&times;</span>\r\n        </button>\r\n    </div>\r\n    <form [formGroup]=\"formdata\" (ngSubmit)=\"addOrUpdateWorkstation(formdata)\" autocomplete=\"off\">\r\n        <div class=\"modal-body p-0\">\r\n            <div class=\"form-group row\" style=\"padding-left: 15px;\">\r\n                <label for=\"branch\" class=\"col-sm-4 col-form-label\">Plant &nbsp;<span class=\"astrik\">*</span></label>\r\n                <div class=\"col-sm-8\">\r\n                    <ng-multiselect-dropdown name=\"branch\" class=\"custom-multiSelection customWidthForInter\"\r\n                        [placeholder]=\"'Select Plant'\" [settings]=\"SingleDropdownSettings\" formControlName=\"branch\"\r\n                        [data]=\"getSortFunction(branchAccessList,'plant')\" (onSelect)=\"onChange($event,'Plant')\"\r\n                        (onDeSelect)=\"onChange(false,'Plant')\" [disabled]=\"isEditing && formdata.get('branch').value\">\r\n                    </ng-multiselect-dropdown>\r\n                    <div *ngIf=\"formdata.controls['branch'].invalid && (formdata.controls['branch'].touched || formdata.controls['branch'].dirty)\"\r\n                        class=\"custom-errorMsg\" style=\"padding-left: 15px;\">\r\n                        <div *ngIf=\"formdata.controls['branch'].errors.required\">\r\n                            Please select plant\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group row\" style=\"padding-left: 15px;\">\r\n                <label for=\"dept\" class=\"col-sm-4 col-form-label\">Department &nbsp;<span class=\"astrik\">*</span></label>\r\n                <div class=\"col-sm-8\">\r\n                    <ng-multiselect-dropdown name=\"dept\" class=\"custom-multiSelection customWidthForInter\"\r\n                        [placeholder]=\"'Select Department'\" [settings]=\"SingleDropdownSettings\" formControlName=\"dept\"\r\n                        [data]=\"getSortFunction(deparmentList,'dept')\"\r\n                        [disabled]=\"isEditing && formdata.get('dept').value\" (onSelect)=\"onChange($event,'dept')\"\r\n                        (onDeSelect)=\"onChange(false,'dept')\">\r\n                    </ng-multiselect-dropdown>\r\n                    <div *ngIf=\"formdata.controls['dept'].invalid && (formdata.controls['dept'].touched || formdata.controls['dept'].dirty)\"\r\n                        class=\"custom-errorMsg\" style=\"padding-left: 15px;\">\r\n                        <div *ngIf=\"formdata.controls['dept'].errors.required\">\r\n                            Please select department\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group row\" style=\"padding-left: 15px;\">\r\n                <label for=\"cell\" class=\"col-sm-4 col-form-label\">Cell/Line &nbsp;<span class=\"astrik\">*</span></label>\r\n                <div class=\"col-sm-8\">\r\n                    <ng-multiselect-dropdown name=\"cell\" class=\"custom-multiSelection customWidthForInter\"\r\n                        [placeholder]=\"'Select Cell/Line'\" [settings]=\"SingleDropdownSettings\" formControlName=\"cell\"\r\n                        [data]=\"getSortFunction(cellLevelList,'cell')\"\r\n                        [disabled]=\"isEditing && formdata.get('cell').value\">\r\n                    </ng-multiselect-dropdown>\r\n                    <div *ngIf=\"isSubmit && formdata.controls['cell'].invalid && (formdata.controls['cell'].touched || formdata.controls['cell'].dirty)\"\r\n                        class=\"custom-errorMsg\" style=\"padding-left: 15px;\">\r\n                        <div *ngIf=\"formdata.controls['cell'].errors.required\">\r\n                            Please select cell/line\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group row\" style=\"padding-left: 15px;\">\r\n                <label for=\"workstation\" class=\"col-sm-4 col-form-label\">Workstation &nbsp;<span\r\n                        class=\"astrik\">*</span></label>\r\n                <div class=\"col-sm-8\">\r\n                    <input style=\"padding: 6px 12px;\" id=\"workstation\" name=\"workstation\" type=\"text\"\r\n                        placeholder=\"Enter Workstation\" formControlName=\"workstation\">\r\n                    <div *ngIf=\"formdata.controls['workstation'].invalid && (formdata.controls['workstation'].touched || formdata.controls['workstation'].dirty)\"\r\n                        class=\"custom-errorMsg\" style=\"padding-left: 15px;\">\r\n                        <div *ngIf=\"formdata.controls['workstation'].errors.required\">\r\n                            Enter workstation\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group row\" style=\"padding-left: 15px;\">\r\n                <label for=\"machineIndex\" class=\"col-sm-4 col-form-label\">Machine Index &nbsp;<span\r\n                        class=\"astrik\">*</span></label>\r\n                <div class=\"col-sm-8\">\r\n                    <input style=\"padding: 6px 12px;\" type=\"text\" placeholder=\"Enter Machine Index\" id=\"machineIndex\"\r\n                        name=\"machineIndex\" formControlName=\"machineIndex\">\r\n                    <div *ngIf=\"formdata.controls['machineIndex'].invalid && (formdata.controls['machineIndex'].touched || formdata.controls['machineIndex'].dirty)\"\r\n                        class=\"custom-errorMsg\" style=\"padding-left: 15px;\">\r\n                        <div *ngIf=\"formdata.controls['machineIndex'].errors.required\">\r\n                            Enter machine index\r\n                        </div>\r\n                        <div *ngIf=\"formdata.get('machineIndex').hasError('invalidInput')\">\r\n                            Invalid input. Please enter a valid number.\r\n                        </div>\r\n\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group row\" style=\"padding-left: 15px;\">\r\n                <label for=\"machineCount\" class=\"col-sm-4 col-form-label\">Machine Count &nbsp;<span\r\n                        class=\"astrik\">*</span></label>\r\n                <div class=\"col-sm-8\">\r\n                        <input style=\"padding: 6px 12px;\" type=\"text\" placeholder=\"Enter Machine Count\" id=\"machineCount\" \r\n                        name=\"machineCount\" formControlName=\"machineCount\"  maxlength=\"3\" />\r\n\r\n                    <div *ngIf=\"formdata.controls['machineCount'].invalid && (formdata.controls['machineCount'].touched || formdata.controls['machineCount'].dirty)\"\r\n                        class=\"custom-errorMsg\" style=\"padding-left: 15px;\">\r\n                        <div *ngIf=\"formdata.controls['machineCount'].errors.required\">\r\n                            Enter machine count\r\n                        </div>\r\n                        <div *ngIf=\"formdata.get('machineCount').hasError('invalidInput')\">\r\n                            Invalid input. Please enter a valid number.\r\n                        </div>\r\n                        <div *ngIf=\"formdata.get('machineCount')?.errors?.lessThanOrEqualToZero\">\r\n                            Value must be greater than zero.\r\n                          </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group row\" style=\"padding-left: 15px;\">\r\n                <label for=\"reqWorkforce\" class=\"col-sm-4 col-form-label \">Required Workforce<span\r\n                        class=\"astrik\">*</span></label>\r\n\r\n                <div class=\"col-sm-8\">\r\n                    <input style=\"padding: 6px 12px; width: 70%;\" id=\"reqWorkforce\" name=\"reqWorkforce\" type=\"text\"\r\n                        placeholder=\"Enter Required Workforce\" formControlName=\"reqWorkforce\" required>\r\n                    <div *ngIf=\"formdata.controls['reqWorkforce'].invalid && (formdata.controls['reqWorkforce'].touched || formdata.controls['reqWorkforce'].dirty)\"\r\n                        class=\"custom-errorMsg\" style=\"padding-left: 15px;\">\r\n                        <div *ngIf=\"formdata.controls['reqWorkforce'].errors.required\">\r\n                            Enter required workforce\r\n                        </div>\r\n                        <div *ngIf=\"formdata.get('reqWorkforce').hasError('invalidInput')\">\r\n                            Invalid input. Please enter a valid number.\r\n                        </div>\r\n\r\n                    </div>\r\n                </div>\r\n            </div>\r\n\r\n            <div class=\"form-group row\" style=\"padding-left: 15px;border-bottom:none;\">\r\n                <label for=\"reqSkillLvl\" class=\"col-sm-4 col-form-label label-with-asterisk\">Required Skill Level<span\r\n                        class=\"astrik\">*</span></label>\r\n                <div class=\"col-sm-8\">\r\n                    <ng-multiselect-dropdown name=\"reqSkillLvl\" class=\"custom-multiSelection customWidthForInter\"\r\n                        [placeholder]=\"'Select Required Skill Level'\" [settings]=\"SingleDropdownSettings\"\r\n                        formControlName=\"reqSkillLvl\" id=\"reqSkillLvl\" [data]=\"skillLevelList\" [disabled]=\"false\">\r\n                    </ng-multiselect-dropdown>\r\n                    <div *ngIf=\"formdata.controls['reqSkillLvl'].invalid && (formdata.controls['reqSkillLvl'].touched || formdata.controls['reqSkillLvl'].dirty)\"\r\n                        class=\"custom-errorMsg\" style=\"padding-left: 15px;\">\r\n                        <div *ngIf=\"formdata.controls['reqSkillLvl'].errors.required\">\r\n                            Please select required skill level\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n\r\n        </div>\r\n        <!-- <div class=\"footerDiv\"></div> -->\r\n        <div class=\"footerBtn\">\r\n            <button class=\"btn btn-lg submitBtn event-btn\" type=\"submit\" [disabled]=\"submitSpinner\">\r\n                <span *ngIf=\"submitSpinner\" class=\"spinner-grow spinner-grow-sm\" role=\"status\"></span>\r\n                <span *ngIf=\"submitSpinner\" class=\"load-text\"> Loading...</span>\r\n                <span *ngIf=\"!submitSpinner\" class=\"btn-text\">Submit</span>\r\n            </button>\r\n        </div>\r\n    </form>\r\n</ng-template>\r\n<ng-template #filterPopup let-c=\"close\" let-d=\"dismiss\">\r\n    <div class=\"modal-header\">\r\n        <h4 class=\"modal-title popup-header-txt\" id=\"myModalLabel2\">Filter</h4>\r\n        <button type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"closeFilterPopup()\">\r\n            <span aria-hidden=\"true\">&times;</span>\r\n        </button>\r\n    </div>\r\n    <form [formGroup]=\"filterFormData\" (ngSubmit)=\"submitFilterForm(filterFormData)\" autocomplete=\"off\"\r\n        class=\"needs-validation\">\r\n        <div class=\"modal-body p-2\" style=\"height: calc(100vh - 14vh);\">\r\n            <perfect-scrollbar>\r\n                <div class=\"row m-b-0\">\r\n                    <label for=\"branch\" class=\"col-sm-12 col-form-label filter-label\">Plant</label>\r\n                    <div class=\"col-sm-12\">\r\n                        <ng-multiselect-dropdown name=\"branch\" id=\"branch\"\r\n                            class=\"custom-multiSelection assessmentdropDown customWidthForRport\"\r\n                            [placeholder]=\"'Select Plant'\" [settings]=\"SingleDropdownSettings\" formControlName=\"branch\"\r\n                            [data]=\"getSortFunction(branchAccessList,'plant')\" [disabled]=\"false\"\r\n                            [(ngModel)]=\"selectedBranch.branch\" (onSelect)=\"onChange($event,'Plant')\"\r\n                            (onDeSelect)=\"onChange(false,'Plant')\">\r\n                        </ng-multiselect-dropdown>\r\n                        <div *ngIf=\"submitAttempted  && filterFormData.controls['branch'].invalid && (filterFormData.controls['branch'].touched || filterFormData.controls['branch'].dirty)\"\r\n                            class=\"custom-errorMsg\" style=\"padding-left: 15px;\">\r\n                            <div *ngIf=\"filterFormData.controls['branch'].errors.required\">\r\n                                Please select plant\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row m-b-0\">\r\n                    <label for=\"opt\" class=\"col-sm-12 col-form-label filter-label\">Department</label>\r\n                    <div class=\"col-sm-12\">\r\n                        <ng-multiselect-dropdown name=\"dept\" id=\"dept\"\r\n                            class=\"custom-multiSelection assessmentdropDown customWidthForRport\"\r\n                            [placeholder]=\"'Select Department'\" [settings]=\"SingleDropdownSettings\"\r\n                            formControlName=\"dept\" [data]=\"getSortFunction(searchDet.deptList,'dept')\"\r\n                            [disabled]=\"false\" [(ngModel)]=\"selectedBranch.dept\" (onSelect)=\"onChange($event,'dept')\"\r\n                            (onDeSelect)=\"onChange(false,'dept')\">\r\n                        </ng-multiselect-dropdown>\r\n                        <div *ngIf=\"submitAttempted  && filterFormData.controls['dept'].invalid && (filterFormData.controls['dept'].touched || filterFormData.controls['dept'].dirty)\"\r\n                            class=\"custom-errorMsg\" style=\"padding-left: 15px;\">\r\n                            <div *ngIf=\"filterFormData.controls['dept'].errors.required\">\r\n                                Please select department\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row m-b-0\">\r\n                    <label for=\"opt\" class=\"col-sm-12 col-form-label filter-label\">Cell/Line</label>\r\n                    <div class=\"col-sm-12\">\r\n                        <ng-multiselect-dropdown name=\"cell\" id=\"cell\"\r\n                            class=\"custom-multiSelection assessmentdropDown customWidthForRport\"\r\n                            [placeholder]=\"'Select Cell/Line'\" [settings]=\"multipleDropdownSettings\"\r\n                            formControlName=\"cell\" [data]=\"getSortFunction(cellLevelList,'cell')\" [disabled]=\"false\"\r\n                            [(ngModel)]=\"selectedBranch.cell\">\r\n                        </ng-multiselect-dropdown>\r\n                        <div *ngIf=\"submitAttempted  && filterFormData.controls['cell'].invalid && (filterFormData.controls['cell'].touched || filterFormData.controls['cell'].dirty)\"\r\n                            class=\"custom-errorMsg\" style=\"padding-left: 15px;\">\r\n                            <div *ngIf=\"filterFormData.controls['cell'].errors.required\">\r\n                                Please select cell\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </perfect-scrollbar>\r\n        </div>\r\n        <div class=\"modal-footer footerBlock text-right\">\r\n            <button class=\"btn submitBtn event-btn\" type=\"submit\">\r\n                <span *ngIf=\"submitSpinner\" class=\"spinner-grow spinner-grow-sm\" role=\"status\"></span>\r\n                <span *ngIf=\"submitSpinner\" class=\"load-text\"> Loading...</span>\r\n                <span *ngIf=\"!submitSpinner\" class=\"btn-text\">Apply Filter</span>\r\n            </button>\r\n            <!-- <button type=\"button\" class=\"btn cancelBtn\" aria-label=\"Close\" (click)=\"closeFilterPopup()\">Cancel\r\n            </button> -->\r\n        </div>\r\n    </form>\r\n</ng-template>\r\n\r\n<ng-template #workstationMappingTemplate let-c=\"close\" let-d=\"dismiss\">\r\n    <div class=\"modal-header\">\r\n        <h4 class=\"modal-title\" id=\"myModalLabel2\">{{modalTital}}</h4>\r\n        <button type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"closeFilterPopup()\">\r\n            <span aria-hidden=\"true\">&times;</span>\r\n        </button>\r\n    </div>\r\n    <form [formGroup]=\"workstationMappingForm\" (ngSubmit)=\"submitWorkstationMapping(workstationMappingForm)\" autocomplete=\"off\">\r\n        <div class=\"modal-body p-0\">\r\n            <div class=\"form-group row\" style=\"padding-left: 15px;\">\r\n                <label for=\"branch\" class=\"col-sm-4 col-form-label\">Plant &nbsp;<span class=\"astrik\">*</span></label>\r\n                <div class=\"col-sm-8\">\r\n                    <ng-multiselect-dropdown name=\"branch\" class=\"custom-multiSelection customWidthForInter\"\r\n                        [placeholder]=\"'Select Plant'\" [settings]=\"SingleDropdownSettings\" formControlName=\"branch\"\r\n                        [data]=\"getSortFunction(branchAccessList,'plant')\" (onSelect)=\"onChangeMappingPlant($event)\"\r\n                        (onDeSelect)=\"onChangeMappingPlant(false)\" [disabled]=\"isEditing && workstationMappingForm.get('branch').value\">\r\n                    </ng-multiselect-dropdown>\r\n                    <div *ngIf=\"workstationMappingForm.controls['branch']?.invalid && (workstationMappingForm.controls['branch'].touched || workstationMappingForm.controls['branch'].dirty)\"\r\n                        class=\"custom-errorMsg\" style=\"padding-left: 15px;\">\r\n                        <div *ngIf=\"workstationMappingForm.controls['branch'].errors?.required\">\r\n                            Please select plant\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group row\" style=\"padding-left: 15px;\">\r\n                <label for=\"masterWorkstation\" class=\"col-sm-4 col-form-label\">Master Workstation &nbsp;<span class=\"astrik\">*</span></label>\r\n                <div class=\"col-sm-8\">\r\n                    <ng-multiselect-dropdown name=\"masterWorkstation\" class=\"custom-multiSelection customWidthForInter\"\r\n                        [placeholder]=\"'Select Master Workstation'\" [settings]=\"SingleDropdownSettings\" formControlName=\"masterWorkstation\"\r\n                        [data]=\"filteredWorkstationList\"\r\n                        [disabled]=\"isEditing && workstationMappingForm.get('masterWorkstation').value\" (onSelect)=\"onMasterWorkstationSelect($event)\"\r\n                        (onDeSelect)=\"onMasterWorkstationDeselect()\">\r\n                    </ng-multiselect-dropdown>\r\n                    <div *ngIf=\"workstationMappingForm.controls['masterWorkstation']?.invalid && (workstationMappingForm.controls['masterWorkstation'].touched || workstationMappingForm.controls['masterWorkstation'].dirty)\"\r\n                        class=\"custom-errorMsg\" style=\"padding-left: 15px;\">\r\n                        <div *ngIf=\"workstationMappingForm.controls['masterWorkstation'].errors?.required\">\r\n                            Please select master workstation\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group row\" style=\"padding-left: 15px;\">\r\n                <label for=\"mappingWorkstations\" class=\"col-sm-4 col-form-label\">Workstation For Mapping &nbsp;<span class=\"astrik\">*</span></label>\r\n                <div class=\"col-sm-8\">\r\n                  <ng-multiselect-dropdown name=\"mappingWorkstations\" class=\"custom-multiSelection customWidthForInter\"\r\n                    [placeholder]=\"'Select Workstations For Mapping'\" [settings]=\"multipleDropdownSettings\" formControlName=\"mappingWorkstations\"\r\n                    [data]=\"filteredWorkstationList\">\r\n                  </ng-multiselect-dropdown>\r\n                  <div *ngIf=\"workstationMappingForm.controls['mappingWorkstations']?.invalid && (workstationMappingForm.controls['mappingWorkstations'].touched || workstationMappingForm.controls['mappingWorkstations'].dirty)\"\r\n                    class=\"custom-errorMsg\" style=\"padding-left: 15px;\">\r\n                    <div *ngIf=\"workstationMappingForm.controls['mappingWorkstations'].errors?.required\">\r\n                      Please select workstations for mapping\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n        </div> \r\n        <div class=\"footerBtn\">\r\n            <button class=\"btn btn-lg submitBtn event-btn\" type=\"submit\" [disabled]=\"submitSpinner\">\r\n                <span *ngIf=\"submitSpinner\" class=\"spinner-grow spinner-grow-sm\" role=\"status\"></span>\r\n                <span *ngIf=\"submitSpinner\" class=\"load-text\"> Loading...</span>\r\n                <span *ngIf=\"!submitSpinner\" class=\"btn-text\">Submit</span>\r\n            </button>\r\n        </div>\r\n    </form>\r\n</ng-template>";
       /***/
     },
 
@@ -2054,6 +2086,7 @@
           this.branchAccessList = [];
           this.deptList = [];
           this.workstationData = [];
+          this.mappingStationData = [];
           this.formSubmitLoader = false;
           this.SingleDropdownSettings = {};
           this.submitAttempted = false;
@@ -2077,6 +2110,9 @@
           this.cellLevelList = [];
           this.isSubmit = false;
           this.modalTital = "";
+          this.isVisible = false;
+          this.workstationList = []; // For workstation mapping 
+
           modalConfig.backdrop = 'static';
           modalConfig.keyboard = false;
         }
@@ -2116,11 +2152,18 @@
               reqWorkforce: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required, this.floatValidator()]],
               reqSkillLvl: new _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormControl"]('', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required)
             });
+            this.workstationMappingForm = this.fb.group({
+              branch: new _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormControl"]('', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required),
+              masterWorkstation: new _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormControl"]('', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required),
+              mappingWorkstations: new _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormControl"]('', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required)
+            });
             this.filterFormData = this.fb.group({
               branch: new _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormControl"]('', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required),
               dept: new _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormControl"](''),
               cell: new _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormControl"]('')
             });
+            this.selectTab('workStation');
+            this.getMappingList();
           }
           /* gets Branch access list on employee
             @Author Jayshri Kolase
@@ -2540,7 +2583,7 @@
               }
             });
           }
-          /* Common function For Searching
+          /* Common function For Searching
           @Author Saurabh salunke
           * @Date August 31, 2023*/
 
@@ -2560,7 +2603,7 @@
               this.getWorkstationList();
             }
           }
-          /* To clear pagination
+          /* To clear pagination
           @Author Saurabh salunke
           * @Date Oct 12, 2023*/
 
@@ -2672,10 +2715,11 @@
           value: function modalOpen(modal, popupClass) {
             this.isEditing = false;
             this.selctedWorkstationId = 0;
-            this.resetData(); // this.deparmentList = [];
+            this.resetData();
+            this.workstationMappingForm.reset(); // this.deparmentList = [];
             // this.cellLevelList = [];
 
-            this.modalTital = "Add Workstation";
+            this.modalTital = this.isVisible ? "Add Workstation" : "Add Workstation Mapping";
             var screenWidth = window.innerWidth;
             var modifiedPopupClass = popupClass;
 
@@ -2974,6 +3018,328 @@
 
             return array;
           }
+        }, {
+          key: "selectTab",
+          value: function selectTab(tab) {
+            this.selectedTab = tab;
+            this.isVisible = tab === 'workStation' ? true : false;
+            this.staticPagination = {
+              total: 0,
+              page: 1,
+              maxSize: 5,
+              itemsPerPage: 10,
+              totalPages: 0,
+              listLength: 0
+            };
+          }
+        }, {
+          key: "onChangeMappingPlant",
+          value: function onChangeMappingPlant(event) {
+            if (event) {
+              this.workstationMappingForm.patchValue({
+                masterWorkstation: '',
+                mappingWorkstations: ''
+              });
+              this.getListForMapping(event.id);
+            } else {
+              this.workstationList = [];
+              this.filteredWorkstationList = [];
+              this.workstationMappingForm.patchValue({
+                masterWorkstation: '',
+                mappingWorkstations: ''
+              });
+            }
+          }
+          /* Get workstation list for mapping */
+
+        }, {
+          key: "getListForMapping",
+          value: function getListForMapping(branchId) {
+            var _this19 = this;
+
+            this.submitSpinner = true;
+            var getReq = {
+              "orgId": this.userDet.organization.orgId,
+              "branchId": branchId || this.userDet.branch.branchId
+            };
+            this.skillMatrixService.getWorkstationList('apis/sm/getWorkstationList', getReq).subscribe(function (response) {
+              _this19.submitSpinner = false;
+
+              if (response.result && response.dataList != null && response.dataList.length > 0) {
+                _this19.workstationList = response.dataList.filter(function (item) {
+                  return item.isActive === true;
+                });
+                _this19.filteredWorkstationList = _this19.setArray(_this19.workstationList, 'id', 'workstation');
+              } else {
+                _this19.workstationList = [];
+                _this19.filteredWorkstationList = [];
+              }
+            }, function (error) {
+              _this19.submitSpinner = false;
+              _this19.workstationList = [];
+              _this19.filteredWorkstationList = [];
+            });
+          }
+        }, {
+          key: "onMasterWorkstationSelect",
+          value: function onMasterWorkstationSelect(event) {
+            this.updateFilteredWorkstationList();
+          }
+        }, {
+          key: "onMasterWorkstationDeselect",
+          value: function onMasterWorkstationDeselect() {
+            this.updateFilteredWorkstationList();
+          }
+        }, {
+          key: "updateFilteredWorkstationList",
+          value: function updateFilteredWorkstationList() {
+            var selectedMaster = this.workstationMappingForm.get('masterWorkstation').value;
+
+            if (selectedMaster && selectedMaster.length > 0) {
+              // Clear the mappingWorkstations field
+              this.workstationMappingForm.get('mappingWorkstations').reset(); // Filter out the selected master workstation
+
+              this.filteredWorkstationList = this.workstationList.filter(function (item) {
+                return item.id !== selectedMaster[0].id;
+              });
+            } else {
+              this.filteredWorkstationList = _toConsumableArray(this.workstationList);
+            }
+          }
+        }, {
+          key: "getMappingList",
+          value: function getMappingList() {
+            var _this20 = this;
+
+            this.listLoading = true;
+            this.submitSpinner = true;
+
+            if (this.staticPagination.page == 1) {
+              this.staticPagination.offset = 0;
+            } else {
+              this.staticPagination.offset = (this.staticPagination.page - 1) * this.staticPagination.itemsPerPage;
+            }
+
+            var getReq = {
+              "orgId": this.userDet.organization.orgId,
+              'offset': this.staticPagination.offset,
+              'limit': this.staticPagination.itemsPerPage
+            };
+
+            if (this.getIDsArray(this.selectedBranch.cell) != null && this.getIDsArray(this.selectedBranch.cell).length > 0) {
+              for (var i = 0; i < this.getIDsArray(this.selectedBranch.cell).length; i++) {
+                getReq.lineIds = this.getIDsArray(this.selectedBranch.cell);
+              }
+            }
+
+            if (this.selectedBranch.branch != null && this.selectedBranch.branch.length > 0) {
+              for (var _i4 = 0; _i4 < this.selectedBranch.branch.length; _i4++) {
+                getReq.branchId = this.selectedBranch.branch[0].id;
+              }
+            } else {
+              getReq.branchId = this.userDet.branch.branchId;
+            }
+
+            if (this.selectedBranch.dept != null && this.selectedBranch.dept.length > 0) {
+              for (var _i5 = 0; _i5 < this.selectedBranch.dept.length; _i5++) {
+                getReq.deptId = this.selectedBranch.dept[0].id;
+              }
+            }
+
+            if (this.sorting) {
+              if (this.sorting.direction != "") {
+                getReq.colName = this.sorting.active, getReq.orderType = this.sorting.direction.toUpperCase();
+              }
+            }
+
+            if (this.searchDet.searchData && this.searchDet.searchInput && this.searchDet.searchInput != '') {
+              getReq.search = this.searchDet.searchInput;
+            }
+
+            this.skillMatrixService.getWorkstationMappingList('apis/sm/getAllWorkstationMapping').subscribe(function (response) {
+              _this20.submitSpinner = false;
+              _this20.listLoading = false;
+
+              if (response.result) {
+                if (_this20.staticPagination.page == 1) {
+                  _this20.staticPagination.total = response.totalCount;
+                  _this20.staticPagination.totalPages = Math.ceil(_this20.mappingStationData.totalCount / _this20.staticPagination.itemsPerPage);
+                }
+
+                if (response.dataList != null && response.dataList.length > 0) {
+                  _this20.mappingStationData = response.dataList.filter(function (item) {
+                    return item.isActive === true;
+                  });
+                  _this20.staticPagination.listLength = _this20.mappingStationData.length;
+
+                  _this20.modalService.dismissAll();
+                } else {
+                  _this20.mappingStationData = [];
+                  _this20.staticPagination.listLength = _this20.mappingStationData.length;
+                }
+              } else {
+                _this20.mappingStationData = []; // this.modalService.dismissAll();
+
+                _this20.staticPagination.listLength = _this20.mappingStationData.length;
+              }
+            }, function (error) {
+              _this20.mappingStationData = [];
+              _this20.listLoading = false;
+            });
+          }
+        }, {
+          key: "submitWorkstationMapping",
+          value: function submitWorkstationMapping(form) {
+            var _this21 = this;
+
+            if (form.invalid) {
+              Object.keys(form.controls).forEach(function (key) {
+                form.get(key).markAsTouched();
+              });
+              return;
+            }
+
+            this.submitSpinner = true; // Get the selected master workstation to extract deptId and lineId
+
+            var selectedMasterWorkstationId = form.value.masterWorkstation[0].id; // Find the corresponding entry in workstationList to get deptId and lineId
+
+            var masterWorkstation = this.workstationList.find(function (item) {
+              return item.id === selectedMasterWorkstationId;
+            });
+            var mappingData = {
+              orgId: this.userDet.organization.orgId,
+              branchId: form.value.branch[0].id,
+              parentWorkstationId: selectedMasterWorkstationId,
+              childWorkstationId: this.getIDsArray(form.value.mappingWorkstations),
+              isActive: true,
+              deptId: masterWorkstation ? masterWorkstation.deptId : null,
+              lineId: masterWorkstation ? masterWorkstation.lineId : null
+            };
+
+            if (this.isEditing) {
+              // Update existing mapping
+              this.skillMatrixService.updateWorkstationMapping('apis/sm/workstation-mapping/update', mappingData).subscribe(function (response) {
+                _this21.submitSpinner = false;
+
+                if (response.result) {
+                  _this21.alertService.success("Workstation mapping updated successfully.");
+
+                  _this21.workstationMappingForm.reset();
+
+                  _this21.modalService.dismissAll();
+
+                  _this21.getMappingList(); // Refresh the list after update
+
+                } else {
+                  _this21.alertService.error('Error occurred while updating mapping. Please try again');
+                }
+              }, function (error) {
+                _this21.submitSpinner = false;
+
+                _this21.alertService.error('Error occurred while updating mapping. Please try again');
+              });
+            } else {
+              // Create new mapping
+              this.skillMatrixService.saveWorkstationMapping('apis/sm/workstation-mapping/save', mappingData).subscribe(function (response) {
+                _this21.submitSpinner = false;
+
+                if (response.result) {
+                  _this21.alertService.success("Workstation mapping saved successfully.");
+
+                  _this21.workstationMappingForm.reset();
+
+                  _this21.modalService.dismissAll();
+
+                  _this21.getMappingList(); // Refresh the list after save
+
+                } else {
+                  _this21.alertService.error('Error occurred while saving mapping. Please try again');
+                }
+              }, function (error) {
+                _this21.submitSpinner = false;
+
+                _this21.alertService.error('Error occurred while saving mapping. Please try again');
+              });
+            }
+          }
+        }, {
+          key: "onDeleteWorkstationMapping",
+          value: function onDeleteWorkstationMapping(data) {
+            var _this22 = this;
+
+            sweetalert2__WEBPACK_IMPORTED_MODULE_8___default.a.fire({
+              title: 'Are You Sure!',
+              text: 'Do you want to remove this workstation mapping?',
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#7044cd',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Yes, Remove It',
+              allowOutsideClick: false,
+              allowEscapeKey: false,
+              allowEnterKey: false
+            }).then(function (result) {
+              _this22.dataSpinner[data] = true;
+
+              if (result.isConfirmed) {
+                var deletePayload = {
+                  parentWorkstationId: data.parentWorkstationId,
+                  branchId: data.branchId
+                };
+
+                _this22.skillMatrixService.deleteWorkstationMapping('apis/sm/workstation-mapping/delete-by-parent', deletePayload).subscribe(function (response) {
+                  _this22.dataSpinner[data.id] = false;
+
+                  if (response.result) {
+                    _this22.alertService.success("Workstation mapping removed successfully");
+
+                    _this22.getMappingList();
+                  } else {
+                    if (response.statusCode == 100) {
+                      _this22.alertService.error(response.reason);
+                    } else {
+                      _this22.alertService.error('Error occurred while removing mapping. Please try again');
+                    }
+                  }
+                });
+              } else {
+                _this22.dataSpinner[data.id] = false;
+              }
+            });
+          }
+        }, {
+          key: "updateWorkstationMappingForm",
+          value: function updateWorkstationMappingForm(modal, data) {
+            this.isEditing = true;
+            console.log(data);
+            this.modalTital = "Update Workstation Mapping"; // Get the branch details
+
+            var branch = this.branchAccessList.find(function (b) {
+              return b.name === data.branchName;
+            }); // Get the master workstation details
+
+            var masterWorkstation = {
+              id: data.parentWorkstationId,
+              name: data.parentWorkstationName
+            }; // Get the child workstations
+
+            var childWorkstations = data.childWorkstations.map(function (child) {
+              return {
+                id: child.childWorkstationId,
+                name: child.childWorkstationName
+              };
+            });
+            this.workstationMappingForm.patchValue({
+              branch: [branch],
+              masterWorkstation: [masterWorkstation],
+              mappingWorkstations: childWorkstations
+            }); // Get the workstation list for the selected branch
+
+            this.getListForMapping(branch.id);
+            this.modalService.open(modal, {
+              windowClass: 'top'
+            });
+          }
         }]);
 
         return WorkStationComponent;
@@ -2993,6 +3359,12 @@
         }];
       };
 
+      WorkStationComponent.propDecorators = {
+        workstationMappingTemplate: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["ViewChild"],
+          args: ['workstationMappingTemplate']
+        }]
+      };
       WorkStationComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
         selector: 'app-work-station',
         template: _raw_loader_work_station_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
@@ -3216,23 +3588,23 @@
         }, {
           key: "getMasterUsertypeList",
           value: function getMasterUsertypeList() {
-            var _this19 = this;
+            var _this23 = this;
 
             this.apiService.getMasterUserType("apis/sm/getMasterUserType").subscribe(function (res) {
               if (res.result) {
                 if (res.dataList != null && res.dataList.length > 0) {
                   /* Use For Add Screen */
-                  _this19.masterUserTypes = _this19.setArray(res.dataList, "id", "userType");
+                  _this23.masterUserTypes = _this23.setArray(res.dataList, "id", "userType");
                   /* Use For Filter */
 
-                  _this19.searchDet.masterUserTypes = _this19.setArray(res.dataList, "id", "userType"); // this.searchDet.userTypeIds = this.searchDet.masterUserTypes;
+                  _this23.searchDet.masterUserTypes = _this23.setArray(res.dataList, "id", "userType"); // this.searchDet.userTypeIds = this.searchDet.masterUserTypes;
                 } else {
-                  _this19.masterUserTypes = [];
-                  _this19.searchDet.masterUserTypes = [];
+                  _this23.masterUserTypes = [];
+                  _this23.searchDet.masterUserTypes = [];
                 }
               } else {
-                _this19.masterUserTypes = [];
-                _this19.searchDet.masterUserTypes = [];
+                _this23.masterUserTypes = [];
+                _this23.searchDet.masterUserTypes = [];
               }
             });
           }
@@ -3245,29 +3617,29 @@
         }, {
           key: "getDepartmentList",
           value: function getDepartmentList(branch) {
-            var _this20 = this;
+            var _this24 = this;
 
             this.apiService.getDepartmentByBranch("getdepartmentlistbybranchid/" + branch).subscribe(function (res) {
               if (res.result) {
                 if (res.deptList != null && res.deptList.length > 0) {
                   /* Use For Add Screen */
-                  _this20.departmentList = _this20.setArray(res.deptList, "deptId", "deptName");
+                  _this24.departmentList = _this24.setArray(res.deptList, "deptId", "deptName");
 
-                  if (!_this20.searchDet.addForm) {
+                  if (!_this24.searchDet.addForm) {
                     /* Use For Filter */
-                    _this20.searchDet.departmentList = _this20.setArray(res.deptList, "deptId", "deptName"); // this.searchDet.deptIds = this.searchDet.departmentList;
+                    _this24.searchDet.departmentList = _this24.setArray(res.deptList, "deptId", "deptName"); // this.searchDet.deptIds = this.searchDet.departmentList;
                   }
 
-                  if (_this20.stakeholderList == null || _this20.stakeholderList.length == 0) {
-                    _this20.getStakeholdersList();
+                  if (_this24.stakeholderList == null || _this24.stakeholderList.length == 0) {
+                    _this24.getStakeholdersList();
                   }
                 } else {
-                  _this20.masterUserTypes = [];
-                  _this20.searchDet.departmentList = [];
+                  _this24.masterUserTypes = [];
+                  _this24.searchDet.departmentList = [];
                 }
               } else {
-                _this20.masterUserTypes = [];
-                _this20.searchDet.departmentList = [];
+                _this24.masterUserTypes = [];
+                _this24.searchDet.departmentList = [];
               }
             });
           }
@@ -3280,40 +3652,40 @@
         }, {
           key: "getAccessiblePlantList",
           value: function getAccessiblePlantList() {
-            var _this21 = this;
+            var _this25 = this;
 
             this.apiService.getBranchAccessList("getBranchAccessSetupByEmpId/" + this.userDet.organization.orgId + "/" + this.userDet.empId).subscribe(function (res) {
               if (res.result) {
                 if (res.branchAccessList != null && res.branchAccessList.length > 0) {
                   /* Use For Add Screen */
-                  _this21.plantList = _this21.setArray(res.branchAccessList, "branchId", "branchName");
+                  _this25.plantList = _this25.setArray(res.branchAccessList, "branchId", "branchName");
                   /* Use For Filter */
 
-                  _this21.searchDet.plantList = _this21.setArray(res.branchAccessList, "branchId", "branchName");
+                  _this25.searchDet.plantList = _this25.setArray(res.branchAccessList, "branchId", "branchName");
                 } else {
                   /* Use For Add Screen */
-                  _this21.plantList = [{
-                    id: _this21.userDet.branch.branchId,
-                    name: _this21.userDet.branch.name
+                  _this25.plantList = [{
+                    id: _this25.userDet.branch.branchId,
+                    name: _this25.userDet.branch.name
                   }];
                   /* Use For Filter */
 
-                  _this21.searchDet.plantList = [{
-                    id: _this21.userDet.branch.branchId,
-                    name: _this21.userDet.branch.name
+                  _this25.searchDet.plantList = [{
+                    id: _this25.userDet.branch.branchId,
+                    name: _this25.userDet.branch.name
                   }];
                 }
               } else {
                 /* Use For Add Screen */
-                _this21.plantList = [{
-                  id: _this21.userDet.branch.branchId,
-                  name: _this21.userDet.branch.name
+                _this25.plantList = [{
+                  id: _this25.userDet.branch.branchId,
+                  name: _this25.userDet.branch.name
                 }];
                 /* Use For Filter */
 
-                _this21.searchDet.plantList = [{
-                  id: _this21.userDet.branch.branchId,
-                  name: _this21.userDet.branch.name
+                _this25.searchDet.plantList = [{
+                  id: _this25.userDet.branch.branchId,
+                  name: _this25.userDet.branch.name
                 }];
               } // this.branchId = [this.searchDet.plantList[0]];
               // this.getDepartmentList(this.branchId[0]);
@@ -3323,7 +3695,7 @@
         }, {
           key: "getCellList",
           value: function getCellList(ev) {
-            var _this22 = this;
+            var _this26 = this;
 
             console.log(ev);
             this.reportBodyCell = {
@@ -3336,18 +3708,18 @@
               if (res.result) {
                 if (res.dataList != null && res.dataList.length > 0) {
                   /* Use For Add Screen */
-                  _this22.cellList = _this22.setArray(res.dataList, "lineId", "lineName");
-                  console.log(_this22.cellList);
+                  _this26.cellList = _this26.setArray(res.dataList, "lineId", "lineName");
+                  console.log(_this26.cellList);
                   /* Use For Filter */
 
-                  _this22.searchDet.cellList = _this22.setArray(res.dataList, "lineId", "lineName");
+                  _this26.searchDet.cellList = _this26.setArray(res.dataList, "lineId", "lineName");
 
-                  if (_this22.stakeholderList == null || _this22.stakeholderList.length == 0) {
-                    _this22.getEmployeeData();
+                  if (_this26.stakeholderList == null || _this26.stakeholderList.length == 0) {
+                    _this26.getEmployeeData();
                   }
                 } else {
-                  _this22.cellList = [];
-                  _this22.searchDet.cellList = [];
+                  _this26.cellList = [];
+                  _this26.searchDet.cellList = [];
                 }
               } else {// this.cellList = [];
                 // this.searchDet.cellList = [];
@@ -3359,7 +3731,7 @@
         }, {
           key: "getEmployeeData",
           value: function getEmployeeData() {
-            var _this23 = this;
+            var _this27 = this;
 
             this.employeeList = [];
             console.log(this.employeeList);
@@ -3410,21 +3782,21 @@
                   }
 
                   if (tmpArray != null && tmpArray.length > 0) {
-                    _this23.employeeList = tmpArray;
+                    _this27.employeeList = tmpArray;
                   } else {
                     console.log("list1");
-                    _this23.employeeList = [];
+                    _this27.employeeList = [];
                   }
                 } else {
                   console.log("list2");
-                  _this23.employeeList = [];
+                  _this27.employeeList = [];
                 }
               } else {
                 console.log("list3");
-                _this23.employeeList = [];
+                _this27.employeeList = [];
               }
             }, function (error) {
-              _this23.employeeList = [];
+              _this27.employeeList = [];
             });
           }
           /*
@@ -3436,7 +3808,7 @@
         }, {
           key: "getStakeholdersList",
           value: function getStakeholdersList() {
-            var _this24 = this;
+            var _this28 = this;
 
             this.masterLoader = true;
             this.stakeholderList = [];
@@ -3462,7 +3834,7 @@
             }
 
             if (this.searchDet.deptIds != null && this.searchDet.deptIds.length > 0) {
-              for (var _i4 = 0; _i4 < this.searchDet.deptIds.length; _i4++) {
+              for (var _i6 = 0; _i6 < this.searchDet.deptIds.length; _i6++) {
                 console.log(this.searchDet.deptIds);
                 req.deptId = this.searchDet.deptIds[0].id;
               }
@@ -3492,28 +3864,28 @@
             }
 
             this.apiService.getStakeholderList("apis/sm/getUserTypeList", req).subscribe(function (res) {
-              _this24.masterLoader = false;
+              _this28.masterLoader = false;
 
               if (res.result) {
-                if (_this24.staticPagination.page == 1) {
-                  _this24.staticPagination.total = res.totalCount;
-                  _this24.staticPagination.totalPages = Math.ceil(res.totalCount / _this24.staticPagination.itemsPerPage);
+                if (_this28.staticPagination.page == 1) {
+                  _this28.staticPagination.total = res.totalCount;
+                  _this28.staticPagination.totalPages = Math.ceil(res.totalCount / _this28.staticPagination.itemsPerPage);
                 }
 
                 if (res.dataList != null && res.dataList.length > 0) {
-                  _this24.stakeholderList = res.dataList;
-                  console.log(_this24.stakeholderList);
-                  _this24.staticPagination.listLength = _this24.stakeholderList.length;
+                  _this28.stakeholderList = res.dataList;
+                  console.log(_this28.stakeholderList);
+                  _this28.staticPagination.listLength = _this28.stakeholderList.length;
                 } else {
-                  _this24.stakeholderList = [];
-                  _this24.staticPagination.listLength = _this24.stakeholderList.length;
+                  _this28.stakeholderList = [];
+                  _this28.staticPagination.listLength = _this28.stakeholderList.length;
                 }
               } else {
-                _this24.stakeholderList = [];
+                _this28.stakeholderList = [];
               }
             }, function (error) {
-              _this24.stakeholderList = [];
-              _this24.masterLoader = false;
+              _this28.stakeholderList = [];
+              _this28.masterLoader = false;
             });
           }
           /*
@@ -3525,7 +3897,7 @@
         }, {
           key: "addStakeholder",
           value: function addStakeholder(modal) {
-            var _this25 = this;
+            var _this29 = this;
 
             this.isEditing = false;
             this.formSubmitLoader = false;
@@ -3551,7 +3923,7 @@
               console.log("Closed with:" + reason);
 
               if (reason == "Cross click") {
-                _this25.searchDet.addForm = false;
+                _this29.searchDet.addForm = false;
               } //this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
 
             });
@@ -3559,7 +3931,7 @@
         }, {
           key: "submitStakeholderForm",
           value: function submitStakeholderForm(form) {
-            var _this26 = this;
+            var _this30 = this;
 
             console.log(form);
             this.formSubmitLoader = true;
@@ -3613,27 +3985,27 @@
 
             if (url) {
               this.apiService.saveStakeholderData(url, req).subscribe(function (res) {
-                _this26.formSubmitLoader = false;
+                _this30.formSubmitLoader = false;
 
                 if (res.result) {
-                  _this26.alertService.success(msg);
+                  _this30.alertService.success(msg);
 
-                  _this26.searchDet.addForm = false;
+                  _this30.searchDet.addForm = false;
 
-                  _this26.modalService.dismissAll();
+                  _this30.modalService.dismissAll();
 
-                  _this26.getStakeholdersList();
+                  _this30.getStakeholdersList();
                 } else {
                   if (res.statusCode == 100) {
-                    _this26.alertService.error(res.reason);
+                    _this30.alertService.error(res.reason);
                   } else {
-                    _this26.alertService.error("Error occurred while submitting data. Please try again.");
+                    _this30.alertService.error("Error occurred while submitting data. Please try again.");
                   }
                 }
               }, function (error) {
-                _this26.alertService.error(error);
+                _this30.alertService.error(error);
 
-                _this26.formSubmitLoader = false;
+                _this30.formSubmitLoader = false;
               });
             } else {
               this.formSubmitLoader = false;
@@ -3729,7 +4101,7 @@
         }, {
           key: "filterModalOpen",
           value: function filterModalOpen(modal) {
-            var _this27 = this;
+            var _this31 = this;
 
             this.searchDet.filterPopupOpen = true;
             this.clearPagination();
@@ -3752,8 +4124,8 @@
               console.log("Closed with:" + reason);
 
               if (reason == "Cross click") {
-                _this27.searchDet.filterFlag = false;
-                _this27.searchDet.filterPopupOpen = false; // this.getStakeholdersList();
+                _this31.searchDet.filterFlag = false;
+                _this31.searchDet.filterPopupOpen = false; // this.getStakeholdersList();
               } //this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
 
             });
@@ -3856,7 +4228,7 @@
         }, {
           key: "deleteStakeholder",
           value: function deleteStakeholder(rec) {
-            var _this28 = this;
+            var _this32 = this;
 
             sweetalert2__WEBPACK_IMPORTED_MODULE_8___default.a.fire({
               title: "Are You Sure!",
@@ -3875,16 +4247,16 @@
                   id: rec.id
                 };
 
-                _this28.apiService.deleteWorkstationDetails("apis/sm/deleteUserType", reqbody).subscribe(function (res) {
+                _this32.apiService.deleteWorkstationDetails("apis/sm/deleteUserType", reqbody).subscribe(function (res) {
                   if (res.result) {
-                    _this28.alertService.success("Stakeholder removed successfully");
+                    _this32.alertService.success("Stakeholder removed successfully");
 
-                    _this28.getStakeholdersList();
+                    _this32.getStakeholdersList();
                   } else {
                     if (res.statusCode == 100) {
-                      _this28.alertService.error(res.reason);
+                      _this32.alertService.error(res.reason);
                     } else {
-                      _this28.alertService.error("Error occurred while removing data. Please try again");
+                      _this32.alertService.error("Error occurred while removing data. Please try again");
                     }
                   }
                 });
