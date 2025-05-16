@@ -3,7 +3,7 @@
 // var appDomain = "http://gtdev.greentinsolutions.com:8080/GGRLocService/";
 // var appDomain = "https://api.myenovation.com/enovation-trial/"; //UAT
 // var appDomain = "http://e45a-2409-4064-258a-e103-5d23-a11b-cc97-a1c6.ngrok.io/";
-var apiUrl= 'http://91.108.110.98:8080/';
+var apiUrl= 'http://91.108.110.98:8080/spicer/'; //API URL
 var appDebug = true; //for enable right click
 var checkDomain = false; // check user domain and cmpny domain
 var appVersion = "5.2.1";
