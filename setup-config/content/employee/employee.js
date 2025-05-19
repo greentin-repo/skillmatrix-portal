@@ -1849,7 +1849,10 @@ var ctrl = app.controller("employeeCtrl", ['$scope', '$filter', 'appService', '$
                         req.data[0].SKILLMATRIX.push({
                             "id": skillMatrixData.surveyId,
                             "empId": $scope.transferFunDet.empData.empId,
-                            "transferTo": skillMatrixData.empData.empId
+                            "transferTo": skillMatrixData.empData.empId,
+                            "stageId": skillMatrixData.stageId,
+                            "skillingId": skillMatrixData.skillingId,
+                            "ojtRegistrationId": skillMatrixData.ojtRegistrationId
                         })
                     }
                 }
