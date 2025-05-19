@@ -1852,7 +1852,7 @@ var ctrl = app.controller("employeeCtrl", ['$scope', '$filter', 'appService', '$
                             "transferTo": skillMatrixData.empData.empId,
                             "stageId": skillMatrixData.stageId,
                             "skillingId": skillMatrixData.skillingId,
-                            "ojtRegistrationId": skillMatrixData.ojtRegistrationId
+                            "ojtRegistrationId": skillMatrixData.ojtRegisId
                         })
                     }
                 }
