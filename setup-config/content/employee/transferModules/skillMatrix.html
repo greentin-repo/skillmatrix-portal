@@ -1,0 +1,89 @@
+<div>
+    <!-- Add tabs section -->
+    <div class="skill-matrix-tabs">
+        <ul class="nav nav-tabs">
+          <li ng-class="{'active': selectedUserType === 'TRAINER'}" ng-click="filterByUserType('TRAINER')">
+            <a href="javascript:void(0)">
+              TRAINER<span> ({{getUserTypeCount('TRAINER')}})</span>
+            </a>
+          </li>
+          <li ng-class="{'active': selectedUserType === 'QA'}" ng-click="filterByUserType('QA')">
+            <a href="javascript:void(0)">
+              QA<span> ({{getUserTypeCount('QA')}})</span>
+            </a>
+          </li>
+          <li ng-class="{'active': selectedUserType === 'TL'}" ng-click="filterByUserType('TL')">
+            <a href="javascript:void(0)">
+              TL<span> ({{getUserTypeCount('TL')}})</span>
+            </a>
+          </li>
+        </ul>
+    </div>
+
+    <div ng-if="listAPILoading" class="loadingIndicatorContainer ldng-ind-sm" style="margin-top: 10px;border: 2px solid lightgray;width: 259px;">
+        <i class="fa fa-building-o fa-2x" aria-hidden="true"></i>
+        <div class="msg"> Please wait list is loading</div>
+        <div style="width: 100px; margin:0 auto;" class="lineLoaderRelative"></div>
+    </div>
+    <div class="table-responsive" ng-if="!listAPILoading" ng-if="transferFuncationalityMenu[10].skillmatrixPendingList != null && transferFuncationalityMenu[10].skillmatrixPendingList.length > 0">
+        <table class="table table-striped table-hover tableBodyScroll">
+            <thead>
+                <tr>
+                    <th class="srClass" ng-click="transferFunDet.selectedMenu.checkAllData = (transferFunDet.selectedMenu.checkAllData) ? false : true;checkUncheckAll()">
+                        <i class="fa" aria-hidden="true" ng-class="transferFunDet.selectedMenu.checkAllData ? 'fa-check-square-o' :'fa-square-o'"></i>
+                    </th>
+                    <th scope="col">Emp ID</th>
+                    <th scope="col">Emp Name</th>
+                    <th scope="col">Department</th>
+                    <th scope="col">Cell/Line</th>
+                    <th scope="col">Workstation</th>
+                    <th scope="col" class="actionClass">
+                        <ui-select ng-model="transferFunDet.selectedMenu.allDataEmp" theme="selectize" class="customUISelect" style="position: relative;width: 100%;" on-select="onAllEmpSelected($item)">
+                            <ui-select-match placeholder="Select or search a Employee...">
+                                <span class="selectedName">{{$select.selected.empName}}</span>
+                                <button type="button" class="clear" ng-click="$event.stopPropagation();transferFunDet.selectedMenu.allDataEmp=undefined;" style="position: absolute;right: 2em;top: 5px;">X</button>
+                            </ui-select-match>
+                            <ui-select-choices group-by="'branchName'" repeat="item in empList | filter: $select.search">
+                                <span ng-bind-html="item.empName |highlight: $select.search"></span>
+                            </ui-select-choices>
+                            <ui-select-no-choice ng-style="!$select.open && {'display':'none'}">
+                                Sorry! No Record found!!
+                            </ui-select-no-choice>
+                        </ui-select>
+                    </th>
+                </tr>
+            </thead>
+            <tbody ng-scrollbars ng-style="transferDataTbodyModalHeight()">
+                <tr ng-repeat="x in getFilteredSkillMatrixList() |startFrom:(transferListPagination.current-1)*transferListPagination.perPage | limitTo:transferListPagination.perPage">
+                    <td class="srClass" ng-click="x.isChecked = (x.isChecked) ? false : true;checkUncheck();x.empData = (!x.isChecked) ? undefined : x.empData;">
+                        <i class="fa " aria-hidden="true" ng-class="(x.isChecked) ? 'fa-check-square-o' : 'fa-square-o'"></i>
+                    </td>
+                    <td>{{x.empId || ''}}</td>
+                    <td>{{x.empName || ''}}</td>
+                    <td>{{x.department || ''}}</td>
+                    <td>{{x.cell || ''}}</td>
+                    <td>{{x.workstation || ''}}</td>
+                    <td class="actionClass">
+                        <ui-select ng-model="x.empData" theme="selectize" class="customUISelect" style="position: relative;width: 100%;" ng-disabled="transferFunDet.selectedMenu.allDataEmp && transferFunDet.selectedMenu.allDataEmp != undefined" on-select="onSingleEmpSelected($item)">
+                            <ui-select-match placeholder="Select or search a Employee...">
+                                <span class="selectedName">{{$select.selected.empName}}</span>
+                                <button type="button" class="clear" ng-click=" $event.stopPropagation();x.empData=undefined;" style="position: absolute;right: 2em;top: 5px;" ng-if="!transferFunDet.selectedMenu.allDataEmp || transferFunDet.selectedMenu.allDataEmp == undefined">X</button>
+                            </ui-select-match>
+                            <ui-select-choices group-by="'branchName'" repeat="item in skillMatrixEmpList | filter: {userType: selectedUserType} | filter: $select.search">
+                                <span ng-bind-html="item.empName |highlight: $select.search"></span>
+                            </ui-select-choices>
+                            <ui-select-no-choice ng-style="!$select.open && {'display':'none'}">
+                                Sorry! No Record found!!
+                            </ui-select-no-choice>
+                        </ui-select>
+                    </td>
+                </tr>
+                <tr ng-if="(getFilteredSkillMatrixList() == null || getFilteredSkillMatrixList().length == 0) && !listAPILoading">
+                    <td colspan="7" style="text-align: center;">
+                        Data not found.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

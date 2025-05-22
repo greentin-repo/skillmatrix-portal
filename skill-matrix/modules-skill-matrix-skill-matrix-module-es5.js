@@ -4412,6 +4412,14 @@
           key: "getOJTRegistrationDetails",
           value: function getOJTRegistrationDetails(url) {
             return this.httpService.getMethod(url);
+          } // getWorkforceList(req: any) {
+          //   return this.httpService.postMethod('apis/sm/getWorkForceDeploymentList', req); 
+          // }
+
+        }, {
+          key: "deletePendingOJTPlan",
+          value: function deletePendingOJTPlan(url, payload) {
+            return this.httpService.postMethod(url, payload);
           }
         }]);
 
@@ -5203,7 +5211,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = ".tableFixHead table .fixedColumn {\n  position: sticky;\n  top: 0px;\n  z-index: 2;\n  border-left: none;\n  border-right: none;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXC4uXFwuLlxcYWN0aW9ucy5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGdCQUFBO0VBQ0EsUUFBQTtFQUNBLFVBQUE7RUFDQSxpQkFBQTtFQUNBLGtCQUFBO0FBQ0oiLCJmaWxlIjoiYWN0aW9ucy5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi50YWJsZUZpeEhlYWQgdGFibGUgLmZpeGVkQ29sdW1uIHtcclxuICAgIHBvc2l0aW9uOiBzdGlja3k7XHJcbiAgICB0b3A6IDBweDtcclxuICAgIHotaW5kZXg6IDI7IFxyXG4gICAgYm9yZGVyLWxlZnQ6IG5vbmU7XHJcbiAgICBib3JkZXItcmlnaHQ6IG5vbmU7XHJcbn0iXX0= */";
+      __webpack_exports__["default"] = ".tableFixHead table .fixedColumn {\n  position: sticky;\n  top: 0px;\n  z-index: 2;\n  border-left: none;\n  border-right: none;\n}\n\n.btn-excel-export {\n  cursor: pointer;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXC4uXFwuLlxcYWN0aW9ucy5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGdCQUFBO0VBQ0EsUUFBQTtFQUNBLFVBQUE7RUFDQSxpQkFBQTtFQUNBLGtCQUFBO0FBQ0o7O0FBRUE7RUFDSSxlQUFBO0FBQ0oiLCJmaWxlIjoiYWN0aW9ucy5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi50YWJsZUZpeEhlYWQgdGFibGUgLmZpeGVkQ29sdW1uIHtcclxuICAgIHBvc2l0aW9uOiBzdGlja3k7XHJcbiAgICB0b3A6IDBweDtcclxuICAgIHotaW5kZXg6IDI7IFxyXG4gICAgYm9yZGVyLWxlZnQ6IG5vbmU7XHJcbiAgICBib3JkZXItcmlnaHQ6IG5vbmU7XHJcbn1cclxuXHJcbi5idG4tZXhjZWwtZXhwb3J0IHtcclxuICAgIGN1cnNvcjogcG9pbnRlcjtcclxufSJdfQ== */";
       /***/
     },
 
@@ -5904,6 +5912,26 @@
 
 
       var moment__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_7__);
+      /* harmony import */
+
+
+      var exceljs__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+      /*! exceljs */
+      "6K47");
+      /* harmony import */
+
+
+      var exceljs__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(exceljs__WEBPACK_IMPORTED_MODULE_8__);
+      /* harmony import */
+
+
+      var file_saver__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+      /*! file-saver */
+      "Iab2");
+      /* harmony import */
+
+
+      var file_saver__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(file_saver__WEBPACK_IMPORTED_MODULE_9__);
 
       var ActionsComponent = /*#__PURE__*/function () {
         function ActionsComponent(skillingService, modalService, fb) {
@@ -5935,6 +5963,7 @@
             totalPages: 0,
             listLength: 0
           };
+          this.exportLoading = false;
           /* get skill mtrix action list
              Author : simran
              created date : 14/09/2023
@@ -5950,9 +5979,9 @@
             }
 
             var req = {
-              'orgId': this.loggedInEmpDet.organization.orgId,
-              'offset': this.staticPagination.offset,
-              'limit': this.staticPagination.itemsPerPage
+              orgId: this.loggedInEmpDet.organization.orgId,
+              offset: this.staticPagination.offset,
+              limit: this.staticPagination.itemsPerPage
             };
             console.log(this.searchDet.branchId);
 
@@ -5982,7 +6011,7 @@
               req.skillLevelId = this.searchDet.skillLvlId[0].id;
             }
 
-            if (this.searchDet.searchInput && this.searchDet.searchInput != '') {
+            if (this.searchDet.searchInput && this.searchDet.searchInput != "") {
               req.search = this.searchDet.searchInput;
             }
 
@@ -5993,7 +6022,7 @@
               }
             }
 
-            this.skillingService.getSkillMatrixActionList('apis/sm/getSkillMatrixActionList', req).subscribe(function (response) {
+            this.skillingService.getSkillMatrixActionList("apis/sm/getSkillMatrixActionList", req).subscribe(function (response) {
               if (response.result) {
                 if (_this28.staticPagination.page == 1) {
                   _this28.staticPagination.total = response.totalCount;
@@ -6021,19 +6050,19 @@
         _createClass(ActionsComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            this.loggedInEmpDet = JSON.parse(localStorage.getItem('userDet'));
+            this.loggedInEmpDet = JSON.parse(localStorage.getItem("userDet"));
             this.filterFormData = this.fb.group({
-              branch: new _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormControl"]('', _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required),
-              dept: new _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormControl"](''),
-              lineIds: new _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormControl"](''),
+              branch: new _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormControl"]("", _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required),
+              dept: new _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormControl"](""),
+              lineIds: new _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormControl"](""),
               fromDate: new _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormControl"](""),
               toDate: new _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormControl"](""),
-              skillLvlId: new _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormControl"]('')
+              skillLvlId: new _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormControl"]("")
             });
             this.SingleDropdownSettings = {
               singleSelection: true,
-              idField: 'id',
-              textField: 'name',
+              idField: "id",
+              textField: "name",
               allowSearchFilter: true,
               closeDropDownOnSelection: true
             };
@@ -6089,10 +6118,10 @@
           value: function getBranchAccessList() {
             var _this29 = this;
 
-            this.skillingService.getBranchAccessList('getBranchAccessSetupByEmpId/' + this.loggedInEmpDet.organization.orgId + "/" + this.loggedInEmpDet.empId).subscribe(function (res) {
+            this.skillingService.getBranchAccessList("getBranchAccessSetupByEmpId/" + this.loggedInEmpDet.organization.orgId + "/" + this.loggedInEmpDet.empId).subscribe(function (res) {
               if (res.result) {
                 if (res.branchAccessList != null && res.branchAccessList.length > 0) {
-                  _this29.plantList = _this29.setArray(res.branchAccessList, 'branchId', 'branchName');
+                  _this29.plantList = _this29.setArray(res.branchAccessList, "branchId", "branchName");
                 } else {
                   _this29.plantList = [{
                     id: _this29.loggedInEmpDet.branch.branchId,
@@ -6128,10 +6157,10 @@
           value: function getDeptList(branch) {
             var _this30 = this;
 
-            this.skillingService.getdepartmentlistbybranchid('getdepartmentlistbybranchid/' + branch.id).subscribe(function (response) {
+            this.skillingService.getdepartmentlistbybranchid("getdepartmentlistbybranchid/" + branch.id).subscribe(function (response) {
               if (response.result) {
                 if (response.deptList != null && response.deptList.length > 0) {
-                  _this30.masterDeptList = _this30.setArray(response.deptList, 'deptId', 'deptName');
+                  _this30.masterDeptList = _this30.setArray(response.deptList, "deptId", "deptName");
                   console.log(_this30.masterDeptList); // this.searchDet.skillLvlId = [this.masterLevelList[0]];
                 } else {
                   _this30.masterDeptList = [];
@@ -6339,10 +6368,10 @@
           value: function getMasterSkillLevelList() {
             var _this31 = this;
 
-            this.skillingService.getMasterLevelList('apis/sm/getLevelList').subscribe(function (res) {
+            this.skillingService.getMasterLevelList("apis/sm/getLevelList").subscribe(function (res) {
               if (res.result) {
                 if (res.dataList != null && res.dataList.length > 0) {
-                  _this31.masterLevelList = _this31.setArray(res.dataList, 'id', 'levelName'); // this.searchDet.skillLvlId = [this.masterLevelList[0]];
+                  _this31.masterLevelList = _this31.setArray(res.dataList, "id", "levelName"); // this.searchDet.skillLvlId = [this.masterLevelList[0]];
                 } else {
                   _this31.masterLevelList = [];
                 }
@@ -6381,9 +6410,9 @@
           key: "onChangeAll",
           value: function onChangeAll(ev, type) {
             if (ev) {
-              console.log('Select All action');
+              console.log("Select All action");
             } else {
-              console.log('Unselect All action');
+              console.log("Unselect All action");
             }
           }
         }, {
@@ -6408,6 +6437,177 @@
             }
 
             return tmp;
+          } // Initiate the API call to fetch all records
+
+        }, {
+          key: "getAllActionList",
+          value: function getAllActionList() {
+            var _this33 = this;
+
+            this.exportLoading = true; // Create request with current filters but no pagination limits
+
+            var req = {
+              orgId: this.loggedInEmpDet.organization.orgId
+            }; // Apply filters from searchDet
+
+            if (this.searchDet.branchId != null && this.searchDet.branchId.length > 0) {
+              req.branchId = this.searchDet.branchId[0].id;
+            } else {
+              req.branchId = this.loggedInEmpDet.branch.branchId;
+            }
+
+            if (this.searchDet.deptId != null && this.searchDet.deptId.length > 0) {
+              req.deptId = this.searchDet.deptId[0].id;
+            }
+
+            if (this.searchDet.lineIds != null && this.searchDet.lineIds.length > 0) {
+              req.lineIds = this.getIDsArray(this.searchDet.lineIds);
+            }
+
+            if (this.searchDet.fromDate != null) {
+              req.fromDt = moment__WEBPACK_IMPORTED_MODULE_7__(this.searchDet.fromDate).format("YYYY-MM-DD");
+            }
+
+            if (this.searchDet.toDate != null) {
+              req.toDate = moment__WEBPACK_IMPORTED_MODULE_7__(this.searchDet.toDate).format("YYYY-MM-DD");
+            }
+
+            if (this.searchDet.skillLvlId != null && this.searchDet.skillLvlId.length > 0) {
+              req.skillLevelId = this.searchDet.skillLvlId[0].id;
+            }
+
+            if (this.searchDet.searchInput && this.searchDet.searchInput != "") {
+              req.search = this.searchDet.searchInput;
+            }
+
+            if (this.sorting) {
+              if (this.sorting.direction != "") {
+                req.colName = this.sorting.active;
+                req.orderType = this.sorting.direction.toUpperCase();
+              }
+            }
+
+            this.skillingService.getSkillMatrixActionList("apis/sm/getSkillMatrixActionList", req).subscribe(function (response) {
+              _this33.exportLoading = false;
+
+              if (response.result && response.smActionList != null && response.smActionList.length > 0) {
+                _this33.exportReport(response.smActionList);
+              } else {
+                alert("No data available to export.");
+              }
+            }, function (error) {
+              _this33.exportLoading = false;
+              console.error("Error fetching data:", error);
+              alert("Failed to fetch data for export.");
+            });
+          }
+        }, {
+          key: "exportReport",
+          value: function exportReport(response) {
+            // Create a new workbook and worksheet
+            var workbook = new exceljs__WEBPACK_IMPORTED_MODULE_8__["Workbook"]();
+            var worksheet = workbook.addWorksheet("Report"); // Define columns for the worksheet - using the keys from your sample data
+
+            worksheet.columns = [{
+              header: "Branch Name",
+              key: "branchName",
+              width: 15
+            }, {
+              header: "Assigned Employee ID",
+              key: "assignedEmpId",
+              width: 20
+            }, {
+              header: "Assigned Employee Name",
+              key: "assignedEmpName",
+              width: 30
+            }, {
+              header: "Company Employee ID",
+              key: "cmpyEmpId",
+              width: 20
+            }, {
+              header: "OE Employee Name",
+              key: "oeEmpName",
+              width: 25
+            }, {
+              header: "Department Name",
+              key: "deptName",
+              width: 25
+            }, {
+              header: "Line Name",
+              key: "lineName",
+              width: 30
+            }, {
+              header: "Workstation",
+              key: "workstation",
+              width: 20
+            }, {
+              header: "Current Skill Level",
+              key: "currentSkillLevel",
+              width: 15
+            }, {
+              header: "Activity Date",
+              key: "activityDate",
+              width: 20
+            }, {
+              header: "Activity",
+              key: "activity",
+              width: 20
+            }, {
+              header: "Status",
+              key: "status",
+              width: 15
+            }]; // Style the header row
+
+            worksheet.getRow(1).font = {
+              bold: true
+            };
+            worksheet.getRow(1).fill = {
+              type: "pattern",
+              pattern: "solid",
+              fgColor: {
+                argb: "FFD3D3D3"
+              }
+            }; // Process and add the data rows
+
+            response.forEach(function (record) {
+              // Format dates if needed before adding to worksheet
+              if (record.activityDate) {
+                var date = new Date(record.activityDate);
+
+                if (!isNaN(date.getTime())) {
+                  // Check if date is valid
+                  record = Object.assign(Object.assign({}, record), {
+                    activityDate: moment__WEBPACK_IMPORTED_MODULE_7__(record.activityDate).format("DD-MM-YYYY")
+                  });
+                }
+              }
+
+              worksheet.addRow(record);
+            }); // Auto-fit columns
+
+            worksheet.columns.forEach(function (column) {
+              var _a;
+
+              var lengths = (_a = column.values) === null || _a === void 0 ? void 0 : _a.filter(function (v) {
+                return v !== undefined;
+              }).map(function (v) {
+                return v.toString().length;
+              });
+
+              if (lengths && lengths.length > 0) {
+                var maxLength = Math.max.apply(Math, _toConsumableArray(lengths));
+                column.width = maxLength < 10 ? 10 : maxLength;
+              }
+            }); // Generate the Excel file with a more descriptive filename
+
+            workbook.xlsx.writeBuffer().then(function (buffer) {
+              var blob = new Blob([buffer], {
+                type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+              });
+              var today = new Date().toISOString().split("T")[0];
+              var filename = "Skill_Matrix_Action_List".concat(today);
+              file_saver__WEBPACK_IMPORTED_MODULE_9__["saveAs"](blob, "".concat(filename, ".xlsx"));
+            });
           }
         }]);
 
@@ -6425,7 +6625,7 @@
       };
 
       ActionsComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
-        selector: 'app-actions',
+        selector: "app-actions",
         template: _raw_loader_actions_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
         styles: [_actions_component_scss__WEBPACK_IMPORTED_MODULE_2__["default"]]
       }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_skilling_service__WEBPACK_IMPORTED_MODULE_4__["SkillingService"], _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_5__["NgbModal"], _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormBuilder"]])], ActionsComponent);
@@ -6448,7 +6648,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<div class=\"row m-0\">\r\n    <div class=\"col-11 m-auto\">\r\n        <app-topBar title=\"Actions\"></app-topBar>\r\n    </div>\r\n    <!-- <div class=\"col-3 m-auto\">\r\n        <app-loginInfo></app-loginInfo>\r\n    </div> -->\r\n    <!-- <div class=\"col-1 p-0 m-auto text-center\">\r\n        <button class=\"btn btn-default filter-btn\" title=\"Filter\" (click)=\"filterModalOpen(filterPopup)\">\r\n            <i class=\"fa fa-filter filter-icon\" aria-hidden=\"true\"></i>\r\n        </button>\r\n    </div> -->\r\n    <div class=\"col-1 p-0 m-auto text-center\">\r\n        <div class=\"btn-filter-wrap\">\r\n            <button class=\"btn btn-default filter-btn\" [ngClass]=\"{'applied' : isAppliedFilter}\" title=\"Filter\"\r\n                (click)=\"filterModalOpen(filterPopup)\">\r\n                <i class=\"fa fa-filter filter-icon\" aria-hidden=\"true\"></i>\r\n            </button>\r\n            <div class=\"btn-clear-filter\" *ngIf=\"isAppliedFilter\" (click)=\"removeFilter();\">x</div>\r\n            <div class=\"lbl-filter-applied\" *ngIf=\"isAppliedFilter\">Filter Applied</div>\r\n        </div>\r\n    </div>\r\n</div>\r\n<div class=\"homepage-block bg-Transperant p-l-15 p-r-15\">\r\n    <div class=\"extraContent\">\r\n        <div class=\"row m-0\">\r\n            <div class=\"p-l-0 p-r-5 col-4\">\r\n                <div class=\"row m-0\">\r\n                    <div class=\"p-l-0 p-r-5\" [ngClass]=\"(filterFlag)?'col-6':'col-12'\">\r\n                        <div class=\"form-group has-search\">\r\n                            <span class=\"fa fa-search form-control-feedback\" *ngIf=\"!searchDet.searchData\"\r\n                                (click)=\"getSearchList(true)\"></span>\r\n                            <span *ngIf=\"searchDet.searchData\" class=\"fa fa-times-circle form-control-clear\"\r\n                                (click)=\"getSearchList(false)\"></span>\r\n                            <input style=\"border-bottom: 1px solid #7044cd;\" type=\"text\" class=\"form-control\"\r\n                                name=\"searchInput\" placeholder=\"Search here..\" [(ngModel)]=\"searchDet.searchInput\"\r\n                                (keyup)=\"$event.keyCode == 13 ? getSearchList(true) : ''\" autocomplete=\"off\" />\r\n                        </div>\r\n                    </div>\r\n                    <!-- <div class=\"col-6 p-r-5 p-l-5\" *ngIf=\"filterFlag\">\r\n                        <div class=\"filterDiv\">\r\n                            <button class=\"clearFilter\" (click)=\"removeFilter()\">Clear filter</button>\r\n                            &nbsp;\r\n                            <span style=\"color: green;font-size: 12px; font-weight: 500;\">Filter\r\n                                Applied</span>\r\n                        </div>\r\n                    </div> -->\r\n                </div>\r\n            </div>\r\n            <div class=\"col-4 p-r-5 p-l-5 form-group\">\r\n\r\n            </div>\r\n            <div class=\"col-4 p-0\">\r\n                <!-- <div class=\"addRegDiv\" style=\"bottom: -0.1rem;\">\r\n                    <button class=\"btn addRegBtn m-0\" type=\"button\" (click)=\"modalOpen(workStation,'top')\"><i\r\n                            class=\"fa fa-plus m-r-10\"></i>Add\r\n                        Workstation</button>\r\n                </div> -->\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"table-block\">\r\n        <div class=\"table-responsive tableFixHead\">\r\n            <table datatable class=\"table\" matSort (matSortChange)=\"sortData($event)\">\r\n                <thead>\r\n                    <tr>\r\n                        <th class=\"fixedColumn\" mat-sort-header=\"BranchName\">Plant</th>\r\n                        <th class=\"\" mat-sort-header=\"AssignedEmpId\"> Assigned Emp ID</th>\r\n                        <th class=\"\" mat-sort-header=\"AssignedEmpName\">Assigned Name</th>\r\n                        <th class=\"\" mat-sort-header=\"CmpyEmpId\">Emp ID</th>\r\n                        <th class=\"\" mat-sort-header=\"EmpName\">Emp Name</th>\r\n                        <th class=\"\" mat-sort-header=\"DeptName\">Department</th>\r\n                        <th class=\"\" mat-sort-header=\"Line\">Cell/Line</th>\r\n                        <th class=\"\" mat-sort-header=\"Workstation\">Workstation</th>\r\n                        <th class=\"\" mat-sort-header=\"LevelName\">Level</th>\r\n                        <th class=\"\" mat-sort-header=\"ActivityDate\">Assigned Date</th>\r\n                        <!-- <th class=\"\" mat-sort-header=\"ActivityDate\"> Activity Due Date</th> -->\r\n                        <th class=\"\" mat-sort-header=\"Activity\">Activity</th>\r\n                        <th class=\"pending fixedColumn\" mat-sort-header=\"status\">Status</th>\r\n                    </tr>\r\n                </thead>\r\n                <tbody>\r\n                    <tr *ngFor=\"let x of actionList\">\r\n                        <td class=\"actionTd fixedColumn\">{{x.branchName}}</td>\r\n                        <td>{{x.assignedEmpId}}</td>\r\n                        <td>{{x.assignedEmpName}}</td>\r\n                        <td>{{x.cmpyEmpId}}</td>\r\n                        <td>{{x.oeEmpName}}</td>\r\n                        <td>{{x.deptName}}</td>\r\n                        <td>{{x.lineName}}</td>\r\n                        <td>{{x.workstation}}</td>\r\n                        <td>{{x.currentSkillLevel}}</td>\r\n                        <td>{{(x.activityDate) ? (x.activityDate | date:'dd-MM-yyyy') : 'N/A'}}</td>\r\n                        <!-- <td>{{x.activityDueDate}}</td> -->\r\n                        <td>{{x.activity}}</td>\r\n                        <td class=\"actionTd fixedColumn\"\r\n                            [ngClass]=\"{'completed':x.status == 'COMPLETED','pending':x.status == 'PENDING'}\">\r\n                            {{x.status}}</td>\r\n                    </tr>\r\n                    <tr *ngIf=\"(actionList == null || actionList.length == 0)\">\r\n                        <td colspan=\"8\" class=\"text-center no-record-found\" *ngIf=\"!listLoading\">\r\n                            Data not found\r\n                        </td>\r\n                        <td colspan=\"8\" class=\"text-center loading-div\" *ngIf=\"listLoading\">\r\n                            <app-loading></app-loading>\r\n                        </td>\r\n                    </tr>\r\n                </tbody>\r\n            </table>\r\n        </div>\r\n    </div>\r\n    <app-pagination [staticPagination]=\"staticPagination\" (paginationData)=\"loadMore($event)\"></app-pagination>\r\n</div>\r\n<ng-template #filterPopup let-c=\"close\" let-d=\"dismiss\">\r\n    <div class=\"modal-header\">\r\n        <h4 class=\"modal-title popup-header-txt\" id=\"myModalLabel2\">Filter</h4>\r\n        <button type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"d('Cross click')\">\r\n            <span aria-hidden=\"true\">&times;</span>\r\n        </button>\r\n    </div>\r\n    <form [formGroup]=\"filterFormData\" (ngSubmit)=\"submitFilterForm(filterFormData)\" autocomplete=\"off\"\r\n        class=\"needs-validation\">\r\n        <div class=\"modal-body p-2\" style=\"height: calc(100vh - 14vh);\">\r\n            <perfect-scrollbar>\r\n                <div class=\"row m-b-0\">\r\n                    <label for=\"branch\" class=\"col-sm-12 col-form-label filter-label\">Plant</label>\r\n                    <div class=\"col-sm-12\">\r\n                        <ng-multiselect-dropdown name=\"branch\" id=\"branch\"\r\n                            class=\"custom-multiSelection assessmentdropDown customWidthForRport\"\r\n                            [placeholder]=\"'Select Plant'\" [settings]=\"SingleDropdownSettings\" formControlName=\"branch\"\r\n                            [data]=\"getSortFunction(plantList,'plant')\" [disabled]=\"false\"\r\n                            [(ngModel)]=\"searchDet.branchId\" (onSelect)=\"onChange($event,'plant')\"\r\n                            (onDeSelect)=\"onChange(false,'plant')\">\r\n                        </ng-multiselect-dropdown>\r\n                        <div *ngIf=\" submitAttempted && filterFormData.controls['branch'].invalid && (filterFormData.controls['branch'].touched || filterFormData.controls['branch'].dirty)\"\r\n                            class=\"custom-errorMsg\" style=\"padding-left: 15px;z-index: 10;\">\r\n                            <div *ngIf=\"filterFormData.controls['branch'].errors.required\">\r\n                                Please Select Plant\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row m-b-0\">\r\n                    <label for=\"opt\" class=\"col-sm-12 col-form-label filter-label\">Department</label>\r\n                    <div class=\"col-sm-12\">\r\n                        <ng-multiselect-dropdown name=\"dept\" id=\"dept\"\r\n                            class=\"custom-multiSelection assessmentdropDown customWidthForRport\"\r\n                            [placeholder]=\"'Select Department'\" [settings]=\"SingleDropdownSettings\"\r\n                            formControlName=\"dept\" [data]=\"getSortFunction(masterDeptList,'dept')\" [disabled]=\"false\"\r\n                            [(ngModel)]=\"searchDet.deptId\" (onSelect)=\"onChange($event,'dept')\"\r\n                            (onDeSelect)=\"onChange(false,'dept')\">\r\n                        </ng-multiselect-dropdown>\r\n                        <!-- <div *ngIf=\"submitAttempted && filterFormData.controls['dept'].invalid && (filterFormData.controls['dept'].touched || filterFormData.controls['dept'].dirty)\"\r\n                            class=\"custom-errorMsg\">\r\n                            <div *ngIf=\"filterFormData.controls['dept'].errors.required\">\r\n                                Please select department\r\n                            </div>\r\n                        </div> -->\r\n                    </div>\r\n                </div>\r\n                <div class=\"row m-b-0\">\r\n                    <label for=\"opt\" class=\"col-sm-12 col-form-label filter-label\">Cell/Line</label>\r\n                    <div class=\"col-sm-12\">\r\n                        <ng-multiselect-dropdown name=\"opt\"\r\n                            class=\"custom-multiSelection assessmentdropDown customWidthForRport\"\r\n                            [placeholder]=\"'Select Cell/Line'\" [settings]=\"multipleDropdownSettings\"\r\n                            [data]=\"getSortFunction(cellList,'cell')\" formControlName=\"lineIds\"\r\n                            [(ngModel)]=\"searchDet.lineIds\" (onSelect)=\"onChange($event,'line')\"\r\n                            (onSelectAll)=\"onChangeAll($event,'dept')\">\r\n                        </ng-multiselect-dropdown>\r\n                        <!-- <div *ngIf=\"submitAttempted && filterData.controls['lineIds'].invalid && (filterData.controls['lineIds'].touched || filterData.controls['lineIds'].dirty)\"\r\n                            class=\"custom-errorMsg\" style=\"padding-left: 15px;\">\r\n                            <div *ngIf=\"filterData.controls['lineIds'].errors.required\">\r\n                                Please select Cell/Line\r\n                            </div>\r\n                        </div> -->\r\n\r\n                    </div>\r\n                </div>\r\n\r\n                <div class=\"row m-b-0\">\r\n                    <label for=\"skillLvlId\" class=\"col-sm-12 col-form-label filter-label p-b-0\">Level</label>\r\n                    <div class=\"col-sm-12\">\r\n                        <ng-multiselect-dropdown name=\"skillLvlId\" id=\"skillLvlId\"\r\n                            class=\"custom-multiSelection customWidthForInter assessmentdropDown\"\r\n                            [placeholder]=\"'Select Level'\" [settings]=\"SingleDropdownSettings\" [data]=\"masterLevelList\"\r\n                            formControlName=\"skillLvlId\" [(ngModel)]=\"searchDet.skillLvlId\"\r\n                            (onSelect)=\"onChange($event,'skillLvlId')\" (onDeSelect)=\"onChange(false,'skillLvlId')\">\r\n                        </ng-multiselect-dropdown>\r\n                        <!-- <div *ngIf=\"submitAttempted && filterData.controls['skillLvlId'].invalid && (filterData.controls['skillLvlId'].touched || filterData.controls['skillLvlId'].dirty)\"\r\n                            class=\"custom-errorMsg\">\r\n                            <div *ngIf=\"filterData.controls['skillLvlId'].errors.required\">\r\n                                Please select level\r\n                            </div>\r\n                        </div> -->\r\n                    </div>\r\n                </div>\r\n                <div class=\"row m-b-0\">\r\n                    <label for=\"opt\" class=\"col-sm-12 col-form-label filter-label\">From Date</label>\r\n                    <div class=\"col-sm-12\">\r\n                        <div class=\"input-group m-0 custom-Input-Group\" (click)=\"startDatePicker.open()\">\r\n                            <div class=\"input-group-prepend\">\r\n                                <div class=\"input-group-text\">\r\n                                    <i class=\"feather icon-calendar\"></i>\r\n                                </div>\r\n                            </div>\r\n                            <input matInput [(ngModel)]=\"searchDet.fromDate\" [max]=\"maxDate\"\r\n                                [matDatepicker]=\"startDatePicker\" class=\"form-control datePickInput\"\r\n                                placeholder=\"From Date\" (keydown)=\"false\" (dateChange)=\"selectCustomDate($event,'')\"\r\n                                formControlName=\"fromDate\" name=\"opt\">\r\n                            <mat-datepicker #startDatePicker></mat-datepicker>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row m-b-0\">\r\n                    <label for=\"opt\" class=\"col-sm-12 col-form-label filter-label\">To Date</label>\r\n                    <div class=\"col-sm-12\">\r\n                        <div class=\"input-group m-0 custom-Input-Group\" (click)=\"toDatePicker.open()\">\r\n                            <div class=\"input-group-prepend\">\r\n                                <div class=\"input-group-text\">\r\n                                    <i class=\"feather icon-calendar\"></i>\r\n                                </div>\r\n                            </div>\r\n                            <input matInput [(ngModel)]=\"searchDet.toDate\" [min]=\"searchDet.fromDate\" [max]=\"maxDate\"\r\n                                [matDatepicker]=\"toDatePicker\" class=\"form-control datePickInput\" placeholder=\"To Date\"\r\n                                (keydown)=\"false\" (dateChange)=\"selectCustomDate('', $event)\" formControlName=\"toDate\"\r\n                                name=\"opt\">\r\n                            <mat-datepicker #toDatePicker></mat-datepicker>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </perfect-scrollbar>\r\n        </div>\r\n        <div class=\"modal-footer footerBlock text-right\">\r\n            <button class=\"btn submitBtn event-btn\" type=\"submit\">\r\n                <span *ngIf=\"submitSpinner\" class=\"spinner-grow spinner-grow-sm\" role=\"status\"></span>\r\n                <span *ngIf=\"submitSpinner\" class=\"load-text\"> Loading...</span>\r\n                <span *ngIf=\"!submitSpinner\" class=\"btn-text\">Apply Filter</span>\r\n            </button>\r\n            <!-- <button type=\"button\" class=\"btn cancelBtn\" aria-label=\"Close\" (click)=\"d('Cross click')\">Cancel\r\n            </button> -->\r\n        </div>\r\n    </form>\r\n</ng-template>";
+      __webpack_exports__["default"] = "<div class=\"row m-0\">\r\n    <div class=\"col-11 m-auto\">\r\n        <app-topBar title=\"Actions\"></app-topBar>\r\n    </div>\r\n    <!-- <div class=\"col-3 m-auto\">\r\n        <app-loginInfo></app-loginInfo>\r\n    </div> -->\r\n    <!-- <div class=\"col-1 p-0 m-auto text-center\">\r\n        <button class=\"btn btn-default filter-btn\" title=\"Filter\" (click)=\"filterModalOpen(filterPopup)\">\r\n            <i class=\"fa fa-filter filter-icon\" aria-hidden=\"true\"></i>\r\n        </button>\r\n    </div> -->\r\n    <div class=\"col-1 p-0 m-auto text-center\" style=\"display: flex; gap: 30px; flex-direction: row; \"> \r\n        <div class=\"btn-filter-wrap\">\r\n            <button class=\"btn btn-default filter-btn\" [ngClass]=\"{'applied' : isAppliedFilter}\" title=\"Filter\"\r\n                (click)=\"filterModalOpen(filterPopup)\">\r\n                <i class=\"fa fa-filter filter-icon\" aria-hidden=\"true\"></i>\r\n            </button>\r\n            <div class=\"btn-clear-filter\" *ngIf=\"isAppliedFilter\" (click)=\"removeFilter();\">x</div>\r\n            <div class=\"lbl-filter-applied\" *ngIf=\"isAppliedFilter\">Filter Applied</div>\r\n        </div> \r\n        <img src=\"assets/images/ic_excel.png\" style=\"height: 37px; width: 30px;\" alt=\"\" class=\"img-fluid btn-excel-export\" (click)=\"getAllActionList()\">\r\n    </div>\r\n</div>\r\n<div class=\"homepage-block bg-Transperant p-l-15 p-r-15\">\r\n    <div class=\"extraContent\">\r\n        <div class=\"row m-0\">\r\n            <div class=\"p-l-0 p-r-5 col-4\">\r\n                <div class=\"row m-0\">\r\n                    <div class=\"p-l-0 p-r-5\" [ngClass]=\"(filterFlag)?'col-6':'col-12'\">\r\n                        <div class=\"form-group has-search\">\r\n                            <span class=\"fa fa-search form-control-feedback\" *ngIf=\"!searchDet.searchData\"\r\n                                (click)=\"getSearchList(true)\"></span>\r\n                            <span *ngIf=\"searchDet.searchData\" class=\"fa fa-times-circle form-control-clear\"\r\n                                (click)=\"getSearchList(false)\"></span>\r\n                            <input style=\"border-bottom: 1px solid #7044cd;\" type=\"text\" class=\"form-control\"\r\n                                name=\"searchInput\" placeholder=\"Search here..\" [(ngModel)]=\"searchDet.searchInput\"\r\n                                (keyup)=\"$event.keyCode == 13 ? getSearchList(true) : ''\" autocomplete=\"off\" />\r\n                        </div>\r\n                    </div>\r\n                    <!-- <div class=\"col-6 p-r-5 p-l-5\" *ngIf=\"filterFlag\">\r\n                        <div class=\"filterDiv\">\r\n                            <button class=\"clearFilter\" (click)=\"removeFilter()\">Clear filter</button>\r\n                            &nbsp;\r\n                            <span style=\"color: green;font-size: 12px; font-weight: 500;\">Filter\r\n                                Applied</span>\r\n                        </div>\r\n                    </div> -->\r\n                </div>\r\n            </div>\r\n            <div class=\"col-4 p-r-5 p-l-5 form-group\">\r\n\r\n            </div>\r\n            <div class=\"col-4 p-0\">\r\n                <!-- <div class=\"addRegDiv\" style=\"bottom: -0.1rem;\">\r\n                    <button class=\"btn addRegBtn m-0\" type=\"button\" (click)=\"modalOpen(workStation,'top')\"><i\r\n                            class=\"fa fa-plus m-r-10\"></i>Add\r\n                        Workstation</button>\r\n                </div> -->\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"table-block\">\r\n        <div class=\"table-responsive tableFixHead\">\r\n            <table datatable class=\"table\" matSort (matSortChange)=\"sortData($event)\">\r\n                <thead>\r\n                    <tr>\r\n                        <th class=\"fixedColumn\" mat-sort-header=\"BranchName\">Plant</th>\r\n                        <th class=\"\" mat-sort-header=\"AssignedEmpId\"> Assigned Emp ID</th>\r\n                        <th class=\"\" mat-sort-header=\"AssignedEmpName\">Assigned Name</th>\r\n                        <th class=\"\" mat-sort-header=\"CmpyEmpId\">Emp ID</th>\r\n                        <th class=\"\" mat-sort-header=\"EmpName\">Emp Name</th>\r\n                        <th class=\"\" mat-sort-header=\"DeptName\">Department</th>\r\n                        <th class=\"\" mat-sort-header=\"Line\">Cell/Line</th>\r\n                        <th class=\"\" mat-sort-header=\"Workstation\">Workstation</th>\r\n                        <th class=\"\" mat-sort-header=\"LevelName\">Level</th>\r\n                        <th class=\"\" mat-sort-header=\"ActivityDate\">Assigned Date</th>\r\n                        <!-- <th class=\"\" mat-sort-header=\"ActivityDate\"> Activity Due Date</th> -->\r\n                        <th class=\"\" mat-sort-header=\"Activity\">Pending Stage</th>\r\n                        <th class=\"pending fixedColumn\" mat-sort-header=\"status\">Status</th>\r\n                    </tr>\r\n                </thead>\r\n                <tbody>\r\n                    <tr *ngFor=\"let x of actionList\">\r\n                        <td class=\"actionTd fixedColumn\">{{x.branchName}}</td>\r\n                        <td>{{x.assignedEmpId}}</td>\r\n                        <td>{{x.assignedEmpName}}</td>\r\n                        <td>{{x.cmpyEmpId}}</td>\r\n                        <td>{{x.oeEmpName}}</td>\r\n                        <td>{{x.deptName}}</td>\r\n                        <td>{{x.lineName}}</td>\r\n                        <td>{{x.workstation}}</td>\r\n                        <td>{{x.currentSkillLevel}}</td>\r\n                        <td>{{(x.activityDate) ? (x.activityDate | date:'dd-MM-yyyy') : 'N/A'}}</td>\r\n                        <!-- <td>{{x.activityDueDate}}</td> -->\r\n                        <td>{{x.activity}}</td>\r\n                        <td class=\"actionTd fixedColumn\"\r\n                            [ngClass]=\"{'completed':x.status == 'COMPLETED','pending':x.status == 'PENDING'}\">\r\n                            {{x.status}}</td>\r\n                    </tr>\r\n                    <tr *ngIf=\"(actionList == null || actionList.length == 0)\">\r\n                        <td colspan=\"8\" class=\"text-center no-record-found\" *ngIf=\"!listLoading\">\r\n                            Data not found\r\n                        </td>\r\n                        <td colspan=\"8\" class=\"text-center loading-div\" *ngIf=\"listLoading\">\r\n                            <app-loading></app-loading>\r\n                        </td>\r\n                    </tr>\r\n                </tbody>\r\n            </table>\r\n        </div>\r\n    </div>\r\n    <app-pagination [staticPagination]=\"staticPagination\" (paginationData)=\"loadMore($event)\"></app-pagination>\r\n</div>\r\n<ng-template #filterPopup let-c=\"close\" let-d=\"dismiss\">\r\n    <div class=\"modal-header\">\r\n        <h4 class=\"modal-title popup-header-txt\" id=\"myModalLabel2\">Filter</h4>\r\n        <button type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"d('Cross click')\">\r\n            <span aria-hidden=\"true\">&times;</span>\r\n        </button>\r\n    </div>\r\n    <form [formGroup]=\"filterFormData\" (ngSubmit)=\"submitFilterForm(filterFormData)\" autocomplete=\"off\"\r\n        class=\"needs-validation\">\r\n        <div class=\"modal-body p-2\" style=\"height: calc(100vh - 14vh);\">\r\n            <perfect-scrollbar>\r\n                <div class=\"row m-b-0\">\r\n                    <label for=\"branch\" class=\"col-sm-12 col-form-label filter-label\">Plant</label>\r\n                    <div class=\"col-sm-12\">\r\n                        <ng-multiselect-dropdown name=\"branch\" id=\"branch\"\r\n                            class=\"custom-multiSelection assessmentdropDown customWidthForRport\"\r\n                            [placeholder]=\"'Select Plant'\" [settings]=\"SingleDropdownSettings\" formControlName=\"branch\"\r\n                            [data]=\"getSortFunction(plantList,'plant')\" [disabled]=\"false\"\r\n                            [(ngModel)]=\"searchDet.branchId\" (onSelect)=\"onChange($event,'plant')\"\r\n                            (onDeSelect)=\"onChange(false,'plant')\">\r\n                        </ng-multiselect-dropdown>\r\n                        <div *ngIf=\" submitAttempted && filterFormData.controls['branch'].invalid && (filterFormData.controls['branch'].touched || filterFormData.controls['branch'].dirty)\"\r\n                            class=\"custom-errorMsg\" style=\"padding-left: 15px;z-index: 10;\">\r\n                            <div *ngIf=\"filterFormData.controls['branch'].errors.required\">\r\n                                Please Select Plant\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row m-b-0\">\r\n                    <label for=\"opt\" class=\"col-sm-12 col-form-label filter-label\">Department</label>\r\n                    <div class=\"col-sm-12\">\r\n                        <ng-multiselect-dropdown name=\"dept\" id=\"dept\"\r\n                            class=\"custom-multiSelection assessmentdropDown customWidthForRport\"\r\n                            [placeholder]=\"'Select Department'\" [settings]=\"SingleDropdownSettings\"\r\n                            formControlName=\"dept\" [data]=\"getSortFunction(masterDeptList,'dept')\" [disabled]=\"false\"\r\n                            [(ngModel)]=\"searchDet.deptId\" (onSelect)=\"onChange($event,'dept')\"\r\n                            (onDeSelect)=\"onChange(false,'dept')\">\r\n                        </ng-multiselect-dropdown>\r\n                        <!-- <div *ngIf=\"submitAttempted && filterFormData.controls['dept'].invalid && (filterFormData.controls['dept'].touched || filterFormData.controls['dept'].dirty)\"\r\n                            class=\"custom-errorMsg\">\r\n                            <div *ngIf=\"filterFormData.controls['dept'].errors.required\">\r\n                                Please select department\r\n                            </div>\r\n                        </div> -->\r\n                    </div>\r\n                </div>\r\n                <div class=\"row m-b-0\">\r\n                    <label for=\"opt\" class=\"col-sm-12 col-form-label filter-label\">Cell/Line</label>\r\n                    <div class=\"col-sm-12\">\r\n                        <ng-multiselect-dropdown name=\"opt\"\r\n                            class=\"custom-multiSelection assessmentdropDown customWidthForRport\"\r\n                            [placeholder]=\"'Select Cell/Line'\" [settings]=\"multipleDropdownSettings\"\r\n                            [data]=\"getSortFunction(cellList,'cell')\" formControlName=\"lineIds\"\r\n                            [(ngModel)]=\"searchDet.lineIds\" (onSelect)=\"onChange($event,'line')\"\r\n                            (onSelectAll)=\"onChangeAll($event,'dept')\">\r\n                        </ng-multiselect-dropdown>\r\n                        <!-- <div *ngIf=\"submitAttempted && filterData.controls['lineIds'].invalid && (filterData.controls['lineIds'].touched || filterData.controls['lineIds'].dirty)\"\r\n                            class=\"custom-errorMsg\" style=\"padding-left: 15px;\">\r\n                            <div *ngIf=\"filterData.controls['lineIds'].errors.required\">\r\n                                Please select Cell/Line\r\n                            </div>\r\n                        </div> -->\r\n\r\n                    </div>\r\n                </div>\r\n\r\n                <div class=\"row m-b-0\">\r\n                    <label for=\"skillLvlId\" class=\"col-sm-12 col-form-label filter-label p-b-0\">Level</label>\r\n                    <div class=\"col-sm-12\">\r\n                        <ng-multiselect-dropdown name=\"skillLvlId\" id=\"skillLvlId\"\r\n                            class=\"custom-multiSelection customWidthForInter assessmentdropDown\"\r\n                            [placeholder]=\"'Select Level'\" [settings]=\"SingleDropdownSettings\" [data]=\"masterLevelList\"\r\n                            formControlName=\"skillLvlId\" [(ngModel)]=\"searchDet.skillLvlId\"\r\n                            (onSelect)=\"onChange($event,'skillLvlId')\" (onDeSelect)=\"onChange(false,'skillLvlId')\">\r\n                        </ng-multiselect-dropdown>\r\n                        <!-- <div *ngIf=\"submitAttempted && filterData.controls['skillLvlId'].invalid && (filterData.controls['skillLvlId'].touched || filterData.controls['skillLvlId'].dirty)\"\r\n                            class=\"custom-errorMsg\">\r\n                            <div *ngIf=\"filterData.controls['skillLvlId'].errors.required\">\r\n                                Please select level\r\n                            </div>\r\n                        </div> -->\r\n                    </div>\r\n                </div>\r\n                <div class=\"row m-b-0\">\r\n                    <label for=\"opt\" class=\"col-sm-12 col-form-label filter-label\">From Date</label>\r\n                    <div class=\"col-sm-12\">\r\n                        <div class=\"input-group m-0 custom-Input-Group\" (click)=\"startDatePicker.open()\">\r\n                            <div class=\"input-group-prepend\">\r\n                                <div class=\"input-group-text\">\r\n                                    <i class=\"feather icon-calendar\"></i>\r\n                                </div>\r\n                            </div>\r\n                            <input matInput [(ngModel)]=\"searchDet.fromDate\" [max]=\"maxDate\"\r\n                                [matDatepicker]=\"startDatePicker\" class=\"form-control datePickInput\"\r\n                                placeholder=\"From Date\" (keydown)=\"false\" (dateChange)=\"selectCustomDate($event,'')\"\r\n                                formControlName=\"fromDate\" name=\"opt\">\r\n                            <mat-datepicker #startDatePicker></mat-datepicker>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row m-b-0\">\r\n                    <label for=\"opt\" class=\"col-sm-12 col-form-label filter-label\">To Date</label>\r\n                    <div class=\"col-sm-12\">\r\n                        <div class=\"input-group m-0 custom-Input-Group\" (click)=\"toDatePicker.open()\">\r\n                            <div class=\"input-group-prepend\">\r\n                                <div class=\"input-group-text\">\r\n                                    <i class=\"feather icon-calendar\"></i>\r\n                                </div>\r\n                            </div>\r\n                            <input matInput [(ngModel)]=\"searchDet.toDate\" [min]=\"searchDet.fromDate\" [max]=\"maxDate\"\r\n                                [matDatepicker]=\"toDatePicker\" class=\"form-control datePickInput\" placeholder=\"To Date\"\r\n                                (keydown)=\"false\" (dateChange)=\"selectCustomDate('', $event)\" formControlName=\"toDate\"\r\n                                name=\"opt\">\r\n                            <mat-datepicker #toDatePicker></mat-datepicker>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </perfect-scrollbar>\r\n        </div>\r\n        <div class=\"modal-footer footerBlock text-right\">\r\n            <button class=\"btn submitBtn event-btn\" type=\"submit\">\r\n                <span *ngIf=\"submitSpinner\" class=\"spinner-grow spinner-grow-sm\" role=\"status\"></span>\r\n                <span *ngIf=\"submitSpinner\" class=\"load-text\"> Loading...</span>\r\n                <span *ngIf=\"!submitSpinner\" class=\"btn-text\">Apply Filter</span>\r\n            </button>\r\n            <!-- <button type=\"button\" class=\"btn cancelBtn\" aria-label=\"Close\" (click)=\"d('Cross click')\">Cancel\r\n            </button> -->\r\n        </div>\r\n    </form>\r\n</ng-template>\r\n<div *ngIf=\"exportLoading\">\r\n    <app-loading></app-loading>\r\n</div>\r\n";
       /***/
     }
   }]);

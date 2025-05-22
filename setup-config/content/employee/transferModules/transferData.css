@@ -400,3 +400,43 @@ display: inline-block;
 .srClass{
     cursor: pointer;
 }
+
+.skill-matrix-tabs {
+  margin: 16px 5px;
+  background: #fff;
+  border-radius: 32px;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.15);
+  display: inline-block;
+}
+
+.skill-matrix-tabs .nav-tabs {
+  border: none;
+  display: flex;
+  background: transparent;
+}
+
+.skill-matrix-tabs .nav-tabs li {
+  border: none;
+  margin: 0;
+}
+
+.skill-matrix-tabs .nav-tabs li a {
+  display: inline-block;
+  border-radius: 999px;
+  padding: 8px 16px;
+  border: none;
+  background: transparent;
+  color: #333;
+  text-decoration: none;
+  box-shadow: none;
+  letter-spacing: 0.045rem;
+}
+
+.skill-matrix-tabs .nav-tabs li.active a,
+.skill-matrix-tabs .nav-tabs li a:focus,
+.skill-matrix-tabs .nav-tabs li a:active {
+  background: #7044CD;
+  color: #fff;
+  border: none;
+  box-shadow: 2px 2px 8px rgba(112,68,205,0.08);
+}

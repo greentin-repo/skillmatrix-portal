@@ -1486,7 +1486,8 @@ var ctrl = app.controller("employeeCtrl", ['$scope', '$filter', 'appService', '$
         { id: 7, menuName: 'Skill Book', class: '', isActive: true, count: 0, list: [], skillBookPendingList: [] },
         { id: 8, menuName: 'PMS', class: '', isActive: true, count: 0, list: [], pmsPendingList: [] },
         { id: 9, menuName: 'Concern', class: '', isActive: true, count: 0, list: [], concernPendingList: [] },
-        { id: 10, menuName: 'Survey', class: '', isActive: true, count: 0, list: [], surveyPendingList: [] }
+        { id: 10, menuName: 'Survey', class: '', isActive: true, count: 0, list: [], surveyPendingList: [] },
+        { id: 11, menuName: 'Skill Matrix', class: '', isActive: true, count: 0, list: [], skillmatrixPendingList: [] }
     ];
     $scope.transferFunDet.selectedMenu = $scope.transferFuncationalityMenu[0];
     $scope.closeModal = function (modal) {
@@ -1626,7 +1627,11 @@ var ctrl = app.controller("employeeCtrl", ['$scope', '$filter', 'appService', '$
                     $scope.transferFuncationalityMenu[index].count = $scope.getCountNArray('count', 'surveyCount');
                     $scope.transferFuncationalityMenu[index].list = $scope.getCountNArray('list', 'surveyPendingList');
                     $scope.transferFuncationalityMenu[index].surveyPendingList = $scope.getCountNArray('list', 'surveyPendingList');
-                }
+                } else if ($scope.transferFuncationalityMenu[index].menuName == 'Skill Matrix') {
+                    $scope.transferFuncationalityMenu[index].count = $scope.getCountNArray('count', 'skillmatrixCount');
+                    $scope.transferFuncationalityMenu[index].list = $scope.getCountNArray('list', 'skillmatrixPendingList');
+                    $scope.transferFuncationalityMenu[index].skillmatrixPendingList = $scope.getCountNArray('list', 'skillmatrixPendingList');
+                } 
                 $scope.transferFuncationalityMenu[index].isActive = ($scope.transferFuncationalityMenu[index].count > 0);
             }
         }
@@ -1647,6 +1652,7 @@ var ctrl = app.controller("employeeCtrl", ['$scope', '$filter', 'appService', '$
             if (response.result) {
                 if (response.empDto.actionPendingWithEmp) {
                     $scope.transferFunDet.response = response.empDto;
+                    $scope.transferFunDet.response.skillmatrixCount = $scope.transferFunDet.response.skillmatrixPendingList.length;
                     $scope.setListNCount();
                 } else {
                     $("#transferPopup")
@@ -1670,10 +1676,38 @@ var ctrl = app.controller("employeeCtrl", ['$scope', '$filter', 'appService', '$
             }
         })
     }
+    $scope.getUserTypeList = function(branchId) {
+        var req = {
+            orgId: $rootScope.empDetails.organization.orgId,
+            offset: 0,
+            branchId: branchId
+        };
+        appService.httpPost(req, 'apis/sm/getUserTypeList').then(function(response) {
+            if (response.result) {
+                $scope.skillMatrixEmpList = response.dataList.map(function(item) {
+                    return {
+                        empId: item.empId,
+                        empName: item.empName,
+                        branchName: item.branchName,
+                        userType: item.userType
+                    };
+                });
+            } else {
+                $scope.skillMatrixEmpList = [];
+                if (response.statusCode == 100) {
+                    snackbar.create(response.reason, 3000, 'error');
+                } else {
+                    snackbar.create('Error occurred while fetching user type list', 3000, 'error');
+                }
+            }
+        });
+    };
+
     $scope.openTransferPopup = function (x) {
         $scope.transferFunDet.empData = x;
         $scope.getEmpList();
         $scope.getTransferPendingActions();
+        $scope.getUserTypeList(x.branch.branchId);
     }
     $scope.isEmptyArray = function (array) {
         return (array == null || array.length == 0);
@@ -1693,7 +1727,8 @@ var ctrl = app.controller("employeeCtrl", ['$scope', '$filter', 'appService', '$
                 SKILLBOOK: [],
                 PMS: [],
                 CONCERN: [],
-                SURVEY: []
+                SURVEY: [],
+                SKILLMATRIX: []
             }]
         };
         for (let index = 0; index < $scope.transferFuncationalityMenu.length; index++) {
@@ -1807,10 +1842,24 @@ var ctrl = app.controller("employeeCtrl", ['$scope', '$filter', 'appService', '$
                         })
                     }
                 }
+            } else if ($scope.transferFuncationalityMenu[index].skillmatrixPendingList != null && $filter('filter')($scope.transferFuncationalityMenu[index].skillmatrixPendingList, { isChecked: true, empData: '!undefined' }).length > 0) {
+                for (let i = 0; i < $scope.transferFuncationalityMenu[index].skillmatrixPendingList.length; i++) {
+                    var skillMatrixData = $scope.transferFuncationalityMenu[index].skillmatrixPendingList[i];
+                    if ($scope.transferFuncationalityMenu[index].skillmatrixPendingList[i].isChecked && $scope.transferFuncationalityMenu[index].skillmatrixPendingList[i].empData != undefined && !$scope.isEmpty($scope.transferFuncationalityMenu[index].skillmatrixPendingList[i].empData)) {
+                        req.data[0].SKILLMATRIX.push({
+                            "id": skillMatrixData.surveyId,
+                            "empId": $scope.transferFunDet.empData.empId,
+                            "transferTo": skillMatrixData.empData.empId,
+                            "stageId": skillMatrixData.stageId,
+                            "skillingId": skillMatrixData.skillingId,
+                            "ojtRegistrationId": skillMatrixData.ojtRegisId
+                        })
+                    }
+                }
             }
         }
         console.log(req);
-        if ($scope.isEmptyArray(req.data[0].SUGGESTION) && $scope.isEmptyArray(req.data[0].AUDIT) && $scope.isEmptyArray(req.data[0].KUBER) && $scope.isEmptyArray(req.data[0].NEARMISS) && $scope.isEmptyArray(req.data[0].DWM) && $scope.isEmptyArray(req.data[0].TPM) && $scope.isEmptyArray(req.data[0].SKILLBOOK) && $scope.isEmptyArray(req.data[0].PMS) && $scope.isEmptyArray(req.data[0].CONCERN) && $scope.isEmptyArray(req.data[0].SURVEY)) {
+        if ($scope.isEmptyArray(req.data[0].SUGGESTION) && $scope.isEmptyArray(req.data[0].AUDIT) && $scope.isEmptyArray(req.data[0].KUBER) && $scope.isEmptyArray(req.data[0].NEARMISS) && $scope.isEmptyArray(req.data[0].DWM) && $scope.isEmptyArray(req.data[0].TPM) && $scope.isEmptyArray(req.data[0].SKILLBOOK) && $scope.isEmptyArray(req.data[0].PMS) && $scope.isEmptyArray(req.data[0].CONCERN) && $scope.isEmptyArray(req.data[0].SURVEY) && $scope.isEmptyArray(req.data[0].SKILLMATRIX)) {
             snackbar.create('Please select pending action', 3000, 'error')
             $scope.pendingActionLoader = false;
             return;
@@ -1982,6 +2031,31 @@ var ctrl = app.controller("employeeCtrl", ['$scope', '$filter', 'appService', '$
             title: "Sample File"
         });
     });
+
+    $scope.selectedUserType = 'TRAINER'; // Default selected tab
+
+    $scope.filterByUserType = function(userType) {
+        $scope.selectedUserType = userType;
+        $scope.transferListPagination.current = 1; // Reset to first page when changing filter
+    };
+
+    $scope.getUserTypeCount = function(userType) {
+        if (!$scope.transferFuncationalityMenu[10].skillmatrixPendingList) {
+            return 0;
+        }
+        return $scope.transferFuncationalityMenu[10].skillmatrixPendingList.filter(function(item) {
+            return item.userType === userType;
+        }).length;
+    };
+
+    $scope.getFilteredSkillMatrixList = function() {
+        if (!$scope.transferFuncationalityMenu[10].skillmatrixPendingList) {
+            return [];
+        }
+        return $scope.transferFuncationalityMenu[10].skillmatrixPendingList.filter(function(item) {
+            return item.userType === $scope.selectedUserType;
+        });
+    };
 
 }]);
 
