@@ -2054,6 +2054,16 @@ var ctrl = app.controller("employeeCtrl", ['$scope', '$filter', 'appService', '$
     $scope.filterByUserType = function(userType) {
         $scope.selectedUserType = userType;
         $scope.transferListPagination.current = 1; // Reset to first page when changing filter
+        
+        // Clear all selections when switching tabs
+        if ($scope.transferFunDet.selectedMenu && $scope.transferFunDet.selectedMenu.list) {
+            $scope.transferFunDet.selectedMenu.list.forEach(function(item) {
+                item.isChecked = false;
+                item.empData = undefined;
+            });
+            $scope.transferFunDet.selectedMenu.checkAllData = false;
+            $scope.transferFunDet.selectedMenu.allDataEmp = undefined;
+        }
     };
 
     // Add this to your existing code that handles page/component initialization
