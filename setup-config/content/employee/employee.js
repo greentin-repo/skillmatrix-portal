@@ -2053,17 +2053,10 @@ var ctrl = app.controller("employeeCtrl", ['$scope', '$filter', 'appService', '$
 
     $scope.filterByUserType = function(userType) {
         $scope.selectedUserType = userType;
-        $scope.transferListPagination.current = 1; // Reset to first page when changing filter
-        
-        // Clear all selections when switching tabs
-        if ($scope.transferFunDet.selectedMenu && $scope.transferFunDet.selectedMenu.list) {
-            $scope.transferFunDet.selectedMenu.list.forEach(function(item) {
-                item.isChecked = false;
-                item.empData = undefined;
-            });
-            $scope.transferFunDet.selectedMenu.checkAllData = false;
-            $scope.transferFunDet.selectedMenu.allDataEmp = undefined;
-        }
+        // Reset pagination to first page when switching tabs
+        $scope.transferListPagination.current = 1;
+        // Update total items count for pagination
+        $scope.transferFunDet.selectedMenu.count = $scope.getFilteredSkillMatrixList().length;
     };
 
     // Add this to your existing code that handles page/component initialization
@@ -2084,7 +2077,7 @@ var ctrl = app.controller("employeeCtrl", ['$scope', '$filter', 'appService', '$
         if (!$scope.transferFuncationalityMenu[10].skillmatrixPendingList) {
             return [];
         }
-        // Only filter by userType/role, do not remove duplicates
+        // Filter by userType/role
         return $scope.transferFuncationalityMenu[10].skillmatrixPendingList.filter(function(item) {
             return item.role === $scope.selectedUserType;
         });
