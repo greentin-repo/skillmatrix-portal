@@ -1677,37 +1677,46 @@ var ctrl = app.controller("employeeCtrl", ['$scope', '$filter', 'appService', '$
         })
     }
     $scope.getUserTypeList = function(branchId) {
-        var req = {
-            orgId: $rootScope.empDetails.organization.orgId,
-            offset: 0,
-            branchId: branchId
-        };
-        appService.httpPost(req, 'apis/sm/getUserTypeList').then(function(response) {
-            if (response.result) {
-                $scope.skillMatrixEmpList = response.dataList.map(function(item) {
-                    return {
+    var req = {
+        orgId: $rootScope.empDetails.organization.orgId,
+        offset: 0,
+        branchId: branchId
+    };
+    appService.httpPost(req, 'apis/sm/getUserTypeList').then(function(response) {
+        if (response.result) {
+            // Map to store unique empId entries
+            var uniqueEmpMap = {};
+
+            $scope.skillMatrixEmpList = response.dataList.reduce(function(acc, item) {
+                if (!uniqueEmpMap[item.empId]) {
+                    uniqueEmpMap[item.empId] = true;
+                    acc.push({
                         empId: item.empId,
                         empName: item.empName,
                         branchName: item.branchName,
                         userType: item.userType
-                    };
-                });
-            } else {
-                $scope.skillMatrixEmpList = [];
-                if (response.statusCode == 100) {
-                    snackbar.create(response.reason, 3000, 'error');
-                } else {
-                    snackbar.create('Error occurred while fetching user type list', 3000, 'error');
+                    });
                 }
+                return acc;
+            }, []);
+        } else {
+            $scope.skillMatrixEmpList = [];
+            if (response.statusCode == 100) {
+                snackbar.create(response.reason, 3000, 'error');
+            } else {
+                snackbar.create('Error occurred while fetching user type list', 3000, 'error');
             }
-        });
-    };
+        }
+    });
+};
+
 
     $scope.openTransferPopup = function (x) {
         $scope.transferFunDet.empData = x;
         $scope.getEmpList();
         $scope.getTransferPendingActions();
         $scope.getUserTypeList(x.branch.branchId);
+        $scope.selectedUserType = 'Trainer';
     }
     $scope.isEmptyArray = function (array) {
         return (array == null || array.length == 0);
@@ -2032,19 +2041,32 @@ var ctrl = app.controller("employeeCtrl", ['$scope', '$filter', 'appService', '$
         });
     });
 
-    $scope.selectedUserType = 'TRAINER'; // Default selected tab
+    $scope.selectedUserType = 'Trainer'; // Default selected tab
+
+    $scope.initializeSkillMatrixView = function() {
+        $scope.selectedUserType = 'Trainer';
+        $scope.transferListPagination.current = 1;
+    };
+
+    // Call initialize when the page loads
+    $scope.initializeSkillMatrixView();
 
     $scope.filterByUserType = function(userType) {
         $scope.selectedUserType = userType;
         $scope.transferListPagination.current = 1; // Reset to first page when changing filter
     };
 
+    // Add this to your existing code that handles page/component initialization
+    $scope.$on('$viewContentLoaded', function() {
+        $scope.initializeSkillMatrixView();
+    });
+
     $scope.getUserTypeCount = function(userType) {
         if (!$scope.transferFuncationalityMenu[10].skillmatrixPendingList) {
             return 0;
         }
         return $scope.transferFuncationalityMenu[10].skillmatrixPendingList.filter(function(item) {
-            return item.userType === userType;
+            return item.role === userType;
         }).length;
     };
 
@@ -2052,9 +2074,16 @@ var ctrl = app.controller("employeeCtrl", ['$scope', '$filter', 'appService', '$
         if (!$scope.transferFuncationalityMenu[10].skillmatrixPendingList) {
             return [];
         }
+        // Only filter by userType/role, do not remove duplicates
         return $scope.transferFuncationalityMenu[10].skillmatrixPendingList.filter(function(item) {
-            return item.userType === $scope.selectedUserType;
+            return item.role === $scope.selectedUserType;
         });
+    };
+
+    $scope.onEmployeeSelect = function(employee) {
+        // Reset tab selection to TRAINER
+        $scope.selectedUserType = 'Trainer';
+        // Rest of your existing onEmployeeSelect code
     };
 
 }]);
