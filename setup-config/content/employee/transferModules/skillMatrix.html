@@ -2,9 +2,9 @@
     <!-- Add tabs section -->
     <div class="skill-matrix-tabs">
         <ul class="nav nav-tabs">
-          <li ng-class="{'active': selectedUserType === 'Trainer'}" ng-click="filterByUserType('Trainer')">
+          <li ng-class="{'active': selectedUserType === 'TRAINER'}" ng-click="filterByUserType('TRAINER')">
             <a href="javascript:void(0)">
-              TRAINER<span> ({{getUserTypeCount('Trainer')}})</span>
+              TRAINER<span> ({{getUserTypeCount('TRAINER')}})</span>
             </a>
           </li>
           <li ng-class="{'active': selectedUserType === 'QA'}" ng-click="filterByUserType('QA')">
@@ -40,7 +40,7 @@
                     <th scope="col">Level</th>
                     <th scope="col">Activity</th>
                     <th scope="col" class="actionClass">
-                        <ui-select ng-model="transferFunDet.selectedMenu.allDataEmp" theme="selectize" class="customUISelect" style="position: relative;width: 100%;" on-select="onAllEmpSelected($item)">
+                        <ui-select ng-model="transferFunDet.selectedMenu.allDataEmp" theme="selectize" class="customUISelect" style="position: relative;width: 100%;" on-select="onAllEmpSelected($item)" ui-select-scroll-fix>
                             <ui-select-match placeholder="Select or search a Employee...">
                                 <span class="selectedName">{{$select.selected.empName}}</span>
                                 <button type="button" class="clear" ng-click="$event.stopPropagation();transferFunDet.selectedMenu.allDataEmp=undefined;" style="position: absolute;right: 2em;top: 5px;">X</button>
@@ -68,7 +68,7 @@
                     <td>{{x.level || ''}}</td>
                     <td>{{x.activity || ''}}</td>
                     <td class="actionClass">
-                        <ui-select ng-model="x.empData" theme="selectize" class="customUISelect" style="position: relative;width: 100%;" ng-disabled="transferFunDet.selectedMenu.allDataEmp && transferFunDet.selectedMenu.allDataEmp != undefined" on-select="onSingleEmpSelected($item)">
+                        <ui-select ng-model="x.empData" theme="selectize" class="customUISelect" style="position: relative;width: 100%;" ng-disabled="transferFunDet.selectedMenu.allDataEmp && transferFunDet.selectedMenu.allDataEmp != undefined" on-select="onSingleEmpSelected($item)" ui-select-scroll-fix>
                             <ui-select-match placeholder="Select or search a Employee...">
                                 <span class="selectedName">{{$select.selected.empName}}</span>
                                 <button type="button" class="clear" ng-click=" $event.stopPropagation();x.empData=undefined;" style="position: absolute;right: 2em;top: 5px;" ng-if="!transferFunDet.selectedMenu.allDataEmp || transferFunDet.selectedMenu.allDataEmp == undefined">X</button>
