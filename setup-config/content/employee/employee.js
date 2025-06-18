@@ -1677,37 +1677,48 @@ var ctrl = app.controller("employeeCtrl", ['$scope', '$filter', 'appService', '$
         })
     }
     $scope.getUserTypeList = function(branchId) {
-        var req = {
-            orgId: $rootScope.empDetails.organization.orgId,
-            offset: 0,
-            branchId: branchId
-        };
-        appService.httpPost(req, 'apis/sm/getUserTypeList').then(function(response) {
-            if (response.result) {
-                $scope.skillMatrixEmpList = response.dataList.map(function(item) {
-                    return {
+    var req = {
+        orgId: $rootScope.empDetails.organization.orgId,
+        offset: 0,
+        branchId: branchId
+    };
+    appService.httpPost(req, 'apis/sm/getUserTypeList').then(function(response) {
+        if (response.result) {
+            // Map to store unique empId + userType combinations
+            var uniqueEmpTypeMap = {};
+
+            $scope.skillMatrixEmpList = response.dataList.reduce(function(acc, item) {
+                // Create unique key combining empId and userType
+                var uniqueKey = item.empId + '_' + item.userType;
+                if (!uniqueEmpTypeMap[uniqueKey]) {
+                    uniqueEmpTypeMap[uniqueKey] = true;
+                    acc.push({
                         empId: item.empId,
                         empName: item.empName,
                         branchName: item.branchName,
                         userType: item.userType
-                    };
-                });
-            } else {
-                $scope.skillMatrixEmpList = [];
-                if (response.statusCode == 100) {
-                    snackbar.create(response.reason, 3000, 'error');
-                } else {
-                    snackbar.create('Error occurred while fetching user type list', 3000, 'error');
+                    });
                 }
+                return acc;
+            }, []);
+        } else {
+            $scope.skillMatrixEmpList = [];
+            if (response.statusCode == 100) {
+                snackbar.create(response.reason, 3000, 'error');
+            } else {
+                snackbar.create('Error occurred while fetching user type list', 3000, 'error');
             }
-        });
-    };
+        }
+    });
+};
+
 
     $scope.openTransferPopup = function (x) {
         $scope.transferFunDet.empData = x;
         $scope.getEmpList();
         $scope.getTransferPendingActions();
         $scope.getUserTypeList(x.branch.branchId);
+        $scope.selectedUserType = 'TRAINER';
     }
     $scope.isEmptyArray = function (array) {
         return (array == null || array.length == 0);
@@ -2032,19 +2043,39 @@ var ctrl = app.controller("employeeCtrl", ['$scope', '$filter', 'appService', '$
         });
     });
 
-    $scope.selectedUserType = 'TRAINER'; // Default selected tab
+    $scope.selectedUserType = 'TRAINER'; // Default selected tab - match the API response case
+
+    $scope.initializeSkillMatrixView = function() {
+        $scope.selectedUserType = 'TRAINER';
+        $scope.transferListPagination.current = 1;
+    };
+
+    // Call initialize when the page loads
+    $scope.initializeSkillMatrixView();
 
     $scope.filterByUserType = function(userType) {
         $scope.selectedUserType = userType;
-        $scope.transferListPagination.current = 1; // Reset to first page when changing filter
+        // Reset pagination to first page when switching tabs
+        $scope.transferListPagination.current = 1;
     };
+
+    // Add this to your existing code that handles page/component initialization
+    $scope.$on('$viewContentLoaded', function() {
+        $scope.initializeSkillMatrixView();
+    });
 
     $scope.getUserTypeCount = function(userType) {
         if (!$scope.transferFuncationalityMenu[10].skillmatrixPendingList) {
             return 0;
         }
         return $scope.transferFuncationalityMenu[10].skillmatrixPendingList.filter(function(item) {
-            return item.userType === userType;
+            // Map the userType to match the role field in skillmatrixPendingList
+            var roleMapping = {
+                'TRAINER': 'Trainer',
+                'QA': 'QA',
+                'TL': 'TL' // Note: TL might not exist in skillmatrixPendingList
+            };
+            return item.role === roleMapping[userType];
         }).length;
     };
 
@@ -2052,11 +2083,175 @@ var ctrl = app.controller("employeeCtrl", ['$scope', '$filter', 'appService', '$
         if (!$scope.transferFuncationalityMenu[10].skillmatrixPendingList) {
             return [];
         }
+        // Filter by userType/role with proper mapping
+        var roleMapping = {
+            'TRAINER': 'Trainer',
+            'QA': 'QA',
+            'TL': 'TL' // Note: TL might not exist in skillmatrixPendingList
+        };
         return $scope.transferFuncationalityMenu[10].skillmatrixPendingList.filter(function(item) {
-            return item.userType === $scope.selectedUserType;
+            return item.role === roleMapping[$scope.selectedUserType];
         });
     };
+
+    $scope.onEmployeeSelect = function(employee) {
+        // Reset tab selection to TRAINER
+        $scope.selectedUserType = 'TRAINER';
+        // Rest of your existing onEmployeeSelect code
+    };
+
+    // Fix ui-select scrolling issues
+    $scope.fixUISelectScrolling = function() {
+        // Prevent outer scroll when ui-select dropdown is being scrolled
+        $(document).on('wheel', '.ui-select-choices-content, .selectize-dropdown', function(e) {
+            e.stopPropagation();
+        });
+
+        // Prevent outer scroll when ui-select dropdown is being scrolled (touch devices)
+        $(document).on('touchmove', '.ui-select-choices-content, .selectize-dropdown', function(e) {
+            e.stopPropagation();
+        });
+
+        // Add class to table when ui-select is open to prevent table scroll
+        $(document).on('click', '.ui-select-container', function() {
+            var $table = $(this).closest('.tableBodyScroll');
+            if ($table.length) {
+                $table.addClass('ui-select-open');
+            }
+        });
+
+        // Remove class when ui-select is closed
+        $(document).on('click', function(e) {
+            if (!$(e.target).closest('.ui-select-container').length) {
+                $('.tableBodyScroll').removeClass('ui-select-open');
+            }
+        });
+
+        // Handle ui-select dropdown open/close events
+        $(document).on('ui-select:open', function() {
+            $('.tableBodyScroll').addClass('ui-select-open');
+        });
+
+        $(document).on('ui-select:close', function() {
+            $('.tableBodyScroll').removeClass('ui-select-open');
+        });
+    };
+
+    // Call the fix function when controller initializes
+    $scope.fixUISelectScrolling();
 
 }]);
 
 ctrl.$inject = ['$scope', 'sharedService'];
+
+// Fix ui-select scrolling issues - add this outside the controller
+$(document).ready(function() {
+    // Prevent outer scroll when ui-select dropdown is being scrolled
+    $(document).on('wheel', '.ui-select-choices-content, .selectize-dropdown', function(e) {
+        e.stopPropagation();
+    });
+
+    // Prevent outer scroll when ui-select dropdown is being scrolled (touch devices)
+    $(document).on('touchmove', '.ui-select-choices-content, .selectize-dropdown', function(e) {
+        e.stopPropagation();
+    });
+
+    // Add class to table when ui-select is open to prevent table scroll
+    $(document).on('click', '.ui-select-container', function() {
+        var $table = $(this).closest('.tableBodyScroll');
+        if ($table.length) {
+            $table.addClass('ui-select-open');
+        }
+    });
+
+    // Remove class when ui-select is closed
+    $(document).on('click', function(e) {
+        if (!$(e.target).closest('.ui-select-container').length) {
+            $('.tableBodyScroll').removeClass('ui-select-open');
+        }
+    });
+});
+
+// Add directive to handle ui-select scrolling
+app.directive('uiSelectScrollFix', function() {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            // Only apply to tableBodyScroll tables
+            if (element.closest('.tableBodyScroll').length) {
+                // Prevent scroll propagation on ui-select dropdowns
+                element.on('wheel', function(e) {
+                    e.stopPropagation();
+                });
+                
+                element.on('touchmove', function(e) {
+                    e.stopPropagation();
+                });
+                
+                // Prevent scroll on parent containers when dropdown is open
+                element.on('click', function() {
+                    var $table = $(this).closest('.tableBodyScroll');
+                    if ($table.length) {
+                        $table.addClass('ui-select-open');
+                    }
+                });
+            }
+        }
+    };
+});
+
+// Fix ui-select scrolling issues - add this outside the controller
+$(document).ready(function() {
+    // Prevent outer scroll when ui-select dropdown is being scrolled (only for skill matrix)
+    $(document).on('wheel', '.skill-matrix-table .ui-select-choices-content, .skill-matrix-table .selectize-dropdown', function(e) {
+        e.stopPropagation();
+    });
+
+    // Prevent outer scroll when ui-select dropdown is being scrolled (touch devices - only for skill matrix)
+    $(document).on('touchmove', '.skill-matrix-table .ui-select-choices-content, .skill-matrix-table .selectize-dropdown', function(e) {
+        e.stopPropagation();
+    });
+
+    // Add class to table when ui-select is open to prevent table scroll (only for skill matrix)
+    $(document).on('click', '.skill-matrix-table .ui-select-container', function() {
+        var $table = $(this).closest('.skill-matrix-table');
+        if ($table.length) {
+            $table.addClass('ui-select-open');
+        }
+    });
+
+    // Remove class when ui-select is closed (only for skill matrix)
+    $(document).on('click', function(e) {
+        if (!$(e.target).closest('.skill-matrix-table .ui-select-container').length) {
+            $('.skill-matrix-table').removeClass('ui-select-open');
+        }
+    });
+});
+
+// Fix ui-select scrolling issues - add this outside the controller
+$(document).ready(function() {
+    // Prevent outer scroll when ui-select dropdown is being scrolled
+    $(document).on('wheel', '.tableBodyScroll .ui-select-choices-content, .tableBodyScroll .selectize-dropdown', function(e) {
+        e.stopPropagation();
+    });
+
+    // Prevent outer scroll when ui-select dropdown is being scrolled (touch devices)
+    $(document).on('touchmove', '.tableBodyScroll .ui-select-choices-content, .tableBodyScroll .selectize-dropdown', function(e) {
+        e.stopPropagation();
+    });
+
+    // Add class to table when ui-select is open to prevent table scroll
+    $(document).on('click', '.tableBodyScroll .ui-select-container', function() {
+        var $table = $(this).closest('.tableBodyScroll');
+        if ($table.length) {
+            $table.addClass('ui-select-open');
+        }
+    });
+
+    // Remove class when ui-select is closed
+    $(document).on('click', function(e) {
+        if (!$(e.target).closest('.tableBodyScroll .ui-select-container').length) {
+            $('.tableBodyScroll').removeClass('ui-select-open');
+        }
+    });
+});

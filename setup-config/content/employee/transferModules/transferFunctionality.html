@@ -39,8 +39,17 @@
                                 <div class="modal-footer pr" style="padding: 15px;">
                                     <div class="row">
                                         <div class="col-md-8 text-left">
-                                            <ul ng-if="transferFunDet.selectedMenu.count>10" uib-pagination total-items="transferFunDet.selectedMenu.count" ng-model="transferListPagination.current" class="pagination customPagination pagination-sm" max-size="transferListPagination.maxsize" class="pagination-sm"
-                                                boundary-link-numbers="true" rotate="false" previous-text="&#xf060;" next-text="&#xf061;" ng-if="(transferFunDet.selectedMenu.count != null && transferFunDet.selectedMenu.count > 0)" ng-change="onPageChange(transferListPagination.current)">
+                                            <ul ng-if="transferFunDet.selectedMenu.id == 11 && getFilteredSkillMatrixList().length > 10 || transferFunDet.selectedMenu.id != 11 && transferFunDet.selectedMenu.count > 10" 
+                                                uib-pagination 
+                                                total-items="transferFunDet.selectedMenu.id == 11 ? getFilteredSkillMatrixList().length : transferFunDet.selectedMenu.count" 
+                                                ng-model="transferListPagination.current" 
+                                                class="pagination customPagination pagination-sm" 
+                                                max-size="transferListPagination.maxsize" 
+                                                boundary-link-numbers="true" 
+                                                rotate="false" 
+                                                previous-text="&#xf060;" 
+                                                next-text="&#xf061;" 
+                                                ng-change="onPageChange(transferListPagination.current)">
                                             </ul>
                                         </div>
                                         <div class="col-md-4 text-right" style="margin:10px 0px;">
